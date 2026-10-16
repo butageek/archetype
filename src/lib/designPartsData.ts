@@ -1865,9 +1865,7 @@ export const DEFAULT_DESIGN_PARTS: DesignPartsSelection = {
 export function generateCombinedMasterPrompt(selection: DesignPartsSelection): string {
   const { palette, font, surface, components, accent } = selection;
 
-  return `Apply this visual design system to the interface:
-
-## Aesthetic Archetype: ${palette.name} + ${font.name} + ${surface.name} + ${components.name}
+  return `## Aesthetic Archetype: ${palette.name} + ${font.name} + ${surface.name} + ${components.name}
 
 ${palette.promptSnippet}
 
