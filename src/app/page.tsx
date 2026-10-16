@@ -227,86 +227,15 @@ export default function ArchetypeSynthesizerPage() {
               {/* TAB 2: SYNTHESIZED AGENT MASTER PROMPT VIEW */}
               {leftTab === 'prompt' && (
                 <div className="space-y-3 animate-in fade-in duration-150">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    {/* Quick Category Copy Chips */}
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider">
-                        Copy Part:
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard.writeText(selection.palette.promptSnippet);
-                          showToast(`Copied Palette tokens (${selection.palette.name})!`);
-                        }}
-                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
-                        title="Copy only color palette tokens"
-                      >
-                        🎨 Palette
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard.writeText(selection.font.promptSnippet);
-                          showToast(`Copied Typography rules (${selection.font.name})!`);
-                        }}
-                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
-                        title="Copy only typography rules"
-                      >
-                        🔤 Typography
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard.writeText(selection.surface.promptSnippet);
-                          showToast(`Copied Surface specifications (${selection.surface.name})!`);
-                        }}
-                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
-                        title="Copy only surface and elevation styles"
-                      >
-                        📐 Surface
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard.writeText(selection.components.promptSnippet);
-                          showToast(`Copied UI Controls specification (${selection.components.name})!`);
-                        }}
-                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
-                        title="Copy only UI component and control styles"
-                      >
-                        🧩 Controls
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard.writeText(selection.accent.promptSnippet);
-                          showToast(`Copied Accent style (${selection.accent.name})!`);
-                        }}
-                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
-                        title="Copy only signature graphic accent styles"
-                      >
-                        ✨ Accent
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const themeBlock = `@theme {\n  --color-primary: ${selection.palette.primary};\n  --color-secondary: ${selection.palette.secondary};\n  --color-accent: ${selection.palette.accent};\n  --color-background: ${selection.palette.background};\n  --color-surface: ${selection.palette.surface};\n  --color-border: ${selection.palette.border};\n  --color-text-primary: ${selection.palette.text};\n  --color-text-muted: ${selection.palette.textMuted};\n  --radius-card: ${selection.surface.radius};\n}`;
-                          navigator.clipboard.writeText(themeBlock);
-                          showToast('Copied Tailwind CSS v4 @theme block!');
-                        }}
-                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
-                        title="Copy only Tailwind CSS v4 @theme block"
-                      >
-                        ⚡ @theme
-                      </button>
-                    </div>
-
-                    {/* Copy Full Prompt Button */}
+                  {/* Row 1: Directives label and Copy Full Prompt button */}
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs text-stone-500 font-medium truncate">
+                      Plain-text design directives + Tailwind CSS v4 @theme block:
+                    </span>
                     <button
                       type="button"
                       onClick={handleCopyCompletePrompt}
-                      className="px-3.5 py-1.5 text-xs font-bold text-stone-900 bg-stone-100 hover:bg-stone-200 border border-stone-300 rounded-xl flex items-center gap-1.5 transition-transform active:scale-95 cursor-pointer shadow-xs ml-auto"
+                      className="px-3.5 py-1.5 text-xs font-bold text-stone-900 bg-stone-100 hover:bg-stone-200 border border-stone-300 rounded-xl flex items-center gap-1.5 transition-transform active:scale-95 cursor-pointer shadow-xs flex-shrink-0"
                       title="Copy the complete synthesized prompt"
                     >
                       {copiedCombined ? (
@@ -315,6 +244,80 @@ export default function ArchetypeSynthesizerPage() {
                         <Copy className="w-3.5 h-3.5 text-stone-700" />
                       )}
                       <span>{copiedCombined ? 'Copied Full Prompt!' : 'Copy Full Prompt'}</span>
+                    </button>
+                  </div>
+
+                  {/* Row 2: Dedicated Category Part Copy Chips */}
+                  <div className="flex items-center gap-1.5 flex-wrap pt-1 border-t border-stone-100">
+                    <span className="text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider mr-0.5">
+                      Copy Part:
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(selection.palette.promptSnippet);
+                        showToast(`Copied Palette tokens (${selection.palette.name})!`);
+                      }}
+                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                      title="Copy only color palette tokens"
+                    >
+                      <span>🎨</span> <span>Palette</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(selection.font.promptSnippet);
+                        showToast(`Copied Typography rules (${selection.font.name})!`);
+                      }}
+                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                      title="Copy only typography rules"
+                    >
+                      <span>🔤</span> <span>Typography</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(selection.surface.promptSnippet);
+                        showToast(`Copied Surface specifications (${selection.surface.name})!`);
+                      }}
+                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                      title="Copy only surface and elevation styles"
+                    >
+                      <span>📐</span> <span>Surface</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(selection.components.promptSnippet);
+                        showToast(`Copied UI Controls specification (${selection.components.name})!`);
+                      }}
+                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                      title="Copy only UI component and control styles"
+                    >
+                      <span>🧩</span> <span>Controls</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(selection.accent.promptSnippet);
+                        showToast(`Copied Accent style (${selection.accent.name})!`);
+                      }}
+                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                      title="Copy only signature graphic accent styles"
+                    >
+                      <span>✨</span> <span>Accent</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const themeBlock = `@theme {\n  --color-primary: ${selection.palette.primary};\n  --color-secondary: ${selection.palette.secondary};\n  --color-accent: ${selection.palette.accent};\n  --color-background: ${selection.palette.background};\n  --color-surface: ${selection.palette.surface};\n  --color-border: ${selection.palette.border};\n  --color-text-primary: ${selection.palette.text};\n  --color-text-muted: ${selection.palette.textMuted};\n  --radius-card: ${selection.surface.radius};\n}`;
+                        navigator.clipboard.writeText(themeBlock);
+                        showToast('Copied Tailwind CSS v4 @theme block!');
+                      }}
+                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                      title="Copy only Tailwind CSS v4 @theme block"
+                    >
+                      <span>⚡</span> <span>@theme</span>
                     </button>
                   </div>
 
