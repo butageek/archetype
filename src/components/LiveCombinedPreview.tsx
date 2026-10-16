@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import {
   Activity,
   ArrowRight,
+  Check,
+  ChevronDown,
   Cpu,
   Search,
   Sparkles,
@@ -30,6 +32,20 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
   const [activeTab, setActiveTab] = useState<'overview' | 'telemetry' | 'controls'>('overview');
   const [engineOnline, setEngineOnline] = useState<boolean>(true);
   const [throughput, setThroughput] = useState<number>(1842);
+
+  // New interactive states for form components
+  const [checkbox1, setCheckbox1] = useState<boolean>(true);
+  const [checkbox2, setCheckbox2] = useState<boolean>(false);
+  const [selectedRadio, setSelectedRadio] = useState<'standard' | 'turbo' | 'isolated'>('turbo');
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [selectedDropdown, setSelectedDropdown] = useState<string>('US-East (Virginia) // Primary');
+
+  const dropdownOptions = [
+    { id: 'us-east', label: 'US-East (Virginia) // Primary', meta: '99.99% SLA • 12ms' },
+    { id: 'eu-west', label: 'EU-West (Frankfurt) // Edge', meta: 'GDPR Secured • 24ms' },
+    { id: 'ap-east', label: 'AP-East (Tokyo) // High-Speed', meta: 'Direct Fiber • 18ms' },
+    { id: 'sa-east', label: 'SA-East (São Paulo) // Fallback', meta: 'Georedundant • 45ms' },
+  ];
 
   // Derive card styles
   const cardStyle: React.CSSProperties = {
@@ -719,6 +735,242 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
                     }}
                     className="w-full h-2 rounded-lg cursor-pointer"
                   />
+                </div>
+              </div>
+            </div>
+
+            {/* Interactive Form Controls: Dropdown Select, Radio Group & Checkboxes */}
+            <div className="space-y-3 pt-2 relative z-10">
+              {/* Row: Dropdown Select List & Radio Channel Selector */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* 1. Custom Interactive Dropdown Select List */}
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[10px] font-mono font-bold uppercase tracking-wider opacity-75">
+                      Cluster Gateway
+                    </label>
+                    <span className="text-[9px] font-mono opacity-50">Dropdown List</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="w-full p-2.5 border flex items-center justify-between text-left text-xs transition-all cursor-pointer relative"
+                    style={{
+                      backgroundColor: palette.background,
+                      borderColor: dropdownOpen ? palette.primary : `${palette.border}77`,
+                      color: palette.text,
+                      borderRadius: surface.radius === '9999px' ? '9999px' : surface.radius === '0px' ? '0px' : '8px',
+                      boxShadow: dropdownOpen
+                        ? surface.id.includes('neobrutalist')
+                          ? `3px 3px 0px ${palette.primary}`
+                          : `0 0 0 2px ${palette.primary}44`
+                        : 'none',
+                      fontFamily: font.fontFamily,
+                    }}
+                  >
+                    <div className="flex items-center gap-2 truncate">
+                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: palette.primary }} />
+                      <span className="truncate font-semibold">{selectedDropdown}</span>
+                    </div>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 flex-shrink-0 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                      style={{ color: dropdownOpen ? palette.primary : `${palette.text}88` }}
+                    />
+                  </button>
+
+                  {/* Dropdown Floating Options Menu */}
+                  {dropdownOpen && (
+                    <>
+                      <div
+                        className="fixed inset-0 z-40"
+                        onClick={() => setDropdownOpen(false)}
+                      />
+                      <div
+                        className="absolute top-full left-0 right-0 mt-1 border overflow-hidden z-50 p-1 space-y-0.5 animate-in fade-in zoom-in-95 duration-100 shadow-2xl"
+                        style={{
+                          backgroundColor: palette.surface,
+                          borderColor: palette.border,
+                          borderRadius: surface.radius === '9999px' ? '14px' : surface.radius === '0px' ? '0px' : '8px',
+                          boxShadow: surface.shadow !== 'none' ? surface.shadow : '0 12px 28px -4px rgba(0,0,0,0.3)',
+                          fontFamily: font.fontFamily,
+                        }}
+                      >
+                        {dropdownOptions.map((opt) => {
+                          const isSelected = selectedDropdown === opt.label;
+                          return (
+                            <button
+                              key={opt.id}
+                              type="button"
+                              onClick={() => {
+                                setSelectedDropdown(opt.label);
+                                setDropdownOpen(false);
+                                setActionMessage(`Selected Gateway: ${opt.label}`);
+                                setTimeout(() => setActionMessage(null), 1800);
+                              }}
+                              className="w-full px-2.5 py-1.5 text-xs text-left flex items-center justify-between rounded cursor-pointer transition-colors"
+                              style={{
+                                backgroundColor: isSelected ? `${palette.primary}20` : 'transparent',
+                                color: isSelected ? palette.primary : palette.text,
+                                borderRadius: surface.radius === '9999px' ? '8px' : surface.radius === '0px' ? '0px' : '6px',
+                              }}
+                            >
+                              <div className="flex flex-col truncate pr-2">
+                                <span className="font-semibold truncate">{opt.label}</span>
+                                <span className="text-[10px] opacity-60 font-mono">{opt.meta}</span>
+                              </div>
+                              {isSelected && <Check className="w-3.5 h-3.5 flex-shrink-0 stroke-[3]" style={{ color: palette.primary }} />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* 2. Interactive Radio Buttons Group */}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[10px] font-mono font-bold uppercase tracking-wider opacity-75">
+                      Routing Profile
+                    </label>
+                    <span className="text-[9px] font-mono opacity-50">Radio Buttons</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {[
+                      { id: 'standard', label: 'Standard', desc: '1x Burst' },
+                      { id: 'turbo', label: 'Turbo', desc: '10x Speed' },
+                      { id: 'isolated', label: 'Airgap', desc: 'Zero-Trust' },
+                    ].map((tier) => {
+                      const isSelected = selectedRadio === tier.id;
+                      return (
+                        <button
+                          key={tier.id}
+                          type="button"
+                          onClick={() => {
+                            setSelectedRadio(tier.id as 'standard' | 'turbo' | 'isolated');
+                            setActionMessage(`Routing switched to: ${tier.label}`);
+                            setTimeout(() => setActionMessage(null), 1600);
+                          }}
+                          className="p-2 border flex flex-col items-center justify-center gap-1 cursor-pointer transition-all text-center select-none"
+                          style={{
+                            backgroundColor: isSelected ? `${palette.primary}18` : palette.background,
+                            borderColor: isSelected ? palette.primary : `${palette.border}77`,
+                            color: isSelected ? palette.primary : palette.text,
+                            borderRadius: surface.radius === '9999px' ? '9999px' : surface.radius === '0px' ? '0px' : '8px',
+                            boxShadow: isSelected && surface.id.includes('neobrutalist') ? `2px 2px 0px ${palette.primary}` : 'none',
+                          }}
+                        >
+                          <div className="flex items-center gap-1.5">
+                            <div
+                              className="w-3.5 h-3.5 flex items-center justify-center border transition-all flex-shrink-0"
+                              style={{
+                                borderColor: isSelected ? palette.primary : `${palette.text}66`,
+                                borderRadius: surface.radius === '0px' ? '0px' : '9999px',
+                                backgroundColor: 'transparent',
+                              }}
+                            >
+                              {isSelected && (
+                                <div
+                                  className="w-1.5 h-1.5 transition-transform"
+                                  style={{
+                                    backgroundColor: palette.primary,
+                                    borderRadius: surface.radius === '0px' ? '0px' : '9999px',
+                                  }}
+                                />
+                              )}
+                            </div>
+                            <span className="font-bold text-[11px] truncate">{tier.label}</span>
+                          </div>
+                          <span className="text-[9px] font-mono opacity-65">{tier.desc}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Interactive Checkboxes Row */}
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="text-[10px] font-mono font-bold uppercase tracking-wider opacity-75">
+                    Security & Protocol Policies
+                  </label>
+                  <span className="text-[9px] font-mono opacity-50">Checkboxes</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {/* Checkbox 1 */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCheckbox1(!checkbox1);
+                      setActionMessage(!checkbox1 ? '✓ Hardware Enclave Activated' : '○ Hardware Enclave Disabled');
+                      setTimeout(() => setActionMessage(null), 1600);
+                    }}
+                    className="p-2.5 border flex items-center gap-2.5 cursor-pointer transition-all select-none text-left"
+                    style={{
+                      backgroundColor: checkbox1 ? `${palette.primary}12` : palette.background,
+                      borderColor: checkbox1 ? palette.primary : `${palette.border}77`,
+                      borderRadius: surface.radius === '9999px' ? '9999px' : surface.radius === '0px' ? '0px' : '8px',
+                      boxShadow: checkbox1 && surface.id.includes('neobrutalist') ? `2px 2px 0px ${palette.primary}` : 'none',
+                    }}
+                  >
+                    <div
+                      className="w-4 h-4 flex items-center justify-center border transition-all flex-shrink-0"
+                      style={{
+                        borderColor: checkbox1 ? palette.primary : `${palette.text}66`,
+                        backgroundColor: checkbox1 ? palette.primary : 'transparent',
+                        borderRadius: surface.radius === '0px' ? '0px' : surface.radius === '9999px' ? '4px' : '3px',
+                        color: palette.isDark ? '#000000' : '#FFFFFF',
+                      }}
+                    >
+                      {checkbox1 && <Check className="w-3 h-3 stroke-[3]" />}
+                    </div>
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-semibold text-xs truncate" style={{ color: checkbox1 ? palette.primary : palette.text }}>
+                        Hardware Enclave Attestation
+                      </span>
+                      <span className="text-[10px] opacity-65 font-mono truncate">
+                        {checkbox1 ? 'ENCLAVE_LOCKED // AES-256' : 'DISABLED'}
+                      </span>
+                    </div>
+                  </button>
+
+                  {/* Checkbox 2 */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCheckbox2(!checkbox2);
+                      setActionMessage(!checkbox2 ? '✓ Continuous Telemetry Enabled' : '○ Continuous Telemetry Muted');
+                      setTimeout(() => setActionMessage(null), 1600);
+                    }}
+                    className="p-2.5 border flex items-center gap-2.5 cursor-pointer transition-all select-none text-left"
+                    style={{
+                      backgroundColor: checkbox2 ? `${palette.primary}12` : palette.background,
+                      borderColor: checkbox2 ? palette.primary : `${palette.border}77`,
+                      borderRadius: surface.radius === '9999px' ? '9999px' : surface.radius === '0px' ? '0px' : '8px',
+                      boxShadow: checkbox2 && surface.id.includes('neobrutalist') ? `2px 2px 0px ${palette.primary}` : 'none',
+                    }}
+                  >
+                    <div
+                      className="w-4 h-4 flex items-center justify-center border transition-all flex-shrink-0"
+                      style={{
+                        borderColor: checkbox2 ? palette.primary : `${palette.text}66`,
+                        backgroundColor: checkbox2 ? palette.primary : 'transparent',
+                        borderRadius: surface.radius === '0px' ? '0px' : surface.radius === '9999px' ? '4px' : '3px',
+                        color: palette.isDark ? '#000000' : '#FFFFFF',
+                      }}
+                    >
+                      {checkbox2 && <Check className="w-3 h-3 stroke-[3]" />}
+                    </div>
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-semibold text-xs truncate" style={{ color: checkbox2 ? palette.primary : palette.text }}>
+                        Continuous Telemetry Sync
+                      </span>
+                      <span className="text-[10px] opacity-65 font-mono truncate">
+                        {checkbox2 ? 'STREAMING // 60Hz' : 'PAUSED'}
+                      </span>
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
