@@ -1081,20 +1081,6 @@ export const SURFACE_PARTS: SurfacePart[] = [
 - Shadow Treatment: Luminous photon bloom shadow: 0 0 16px var(--color-primary), 0 0 2px var(--color-primary).`,
   },
   {
-    id: 'capsule-pill',
-    name: 'Floating Pill / Capsule',
-    tagline: 'Ultra-rounded 9999px pill containers, smooth curves, and gentle elevation',
-    description: 'Ultra-modern fluid shape aesthetic using continuous pill geometries, full 9999px border-radius, and friendly floating silhouettes.',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    radius: '9999px',
-    shadow: '0 6px 20px rgba(0, 0, 0, 0.08)',
-    promptSnippet: `### Surface, Borders & Elevation: Floating Pill / Capsule
-- Boundaries: Continuous full pill contours with 1px border.
-- Corner Radii: 9999px (full pill-radius) for all tags, buttons, and floating docks; 24px for outer cards.
-- Shadow Treatment: Soft buoyant lift shadow: 0 6px 20px rgba(0, 0, 0, 0.08).`,
-  },
-  {
     id: 'claymorphism-3d',
     name: 'Claymorphism Soft 3D',
     tagline: 'Plump pillowy 3D cards with dual inset highlights and rounded softness',
