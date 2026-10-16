@@ -22,7 +22,7 @@ When building web apps with AI agents (Cursor, Claude, Antigravity, ChatGPT, v0)
 ### The Solution
 Archetype decomposes UI design into **5 strictly enumerable, recognizable pillars**:
 1. **01. Palette**: Curated brand/aesthetic color token harmonies (33 styles).
-2. **02. Typography**: Iconic font pairings and typographic rules (22 styles).
+2. **02. Typography**: Iconic font pairings and typographic rules (21 styles).
 3. **03. Surface & Borders**: Corner radii, borders, bevels, chamfers, and shadows (19 styles).
 4. **04. UI Components & Controls**: Button mechanics, inputs, badges, and micro-interactions (18 styles).
 5. **05. Signature Graphic Accents**: Distinctive graphic DNA (scanlines, aurora glow, crosshairs, washi tape, halftone pop art, barcode, waveform, constellation, etc.) (19 styles).
@@ -89,7 +89,7 @@ archetype/
     - Accents: Specialized `AccentVisualPreview` component rendering visual representation.
 
 - **`src/lib/designPartsData.ts`**:
-  - Master data source. Contains `PALETTE_PARTS` (33), `FONT_PARTS` (22), `SURFACE_PARTS` (19), `COMPONENT_PARTS` (18), `ACCENT_PARTS` (19).
+  - Master data source. Contains `PALETTE_PARTS` (33), `FONT_PARTS` (21), `SURFACE_PARTS` (19), `COMPONENT_PARTS` (18), `ACCENT_PARTS` (19).
   - `generateCombinedMasterPrompt(selection)`: Synthesizes the 5 prompt snippets into an executable plain-text agent prompt with a Tailwind CSS v4 `@theme` block.
 
 ---

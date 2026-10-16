@@ -984,20 +984,6 @@ export const FONT_PARTS: FontPart[] = [
 - Invariants: Ensure numbers align in strict vertical columns without font-width wobble.`,
   },
   {
-    id: 'space-grotesk',
-    name: 'Geometric Space Grotesk',
-    tagline: 'Loud, punchy, geometric uppercase headlines with dramatic presence',
-    description: 'High-impact neo-grotesk with bold geometric stance, wide proportions, and dramatic display presence.',
-    fontFamily: "'Space Grotesk', Impact, sans-serif",
-    previewSample: 'MANIFESTO DIRECTIVE',
-    classification: 'grotesk',
-    promptSnippet: `### Typography Treatment: Geometric Space Grotesk
-- Style: Loud, punchy, high-impact neo-grotesk with bold geometric stance and dramatic uppercase presence.
-- Headings: 'Space Grotesk' in uppercase bold with tight letter-spacing (-0.03em).
-- Body: Clean sans-serif paired for secondary paragraph readability.
-- Invariants: Headline sizes should feel confident, bold, and unapologetic.`,
-  },
-  {
     id: 'luxury-display',
     name: 'Luxury Classical Display',
     tagline: 'Majestic Roman inscriptional letterforms with refined classical proportions',

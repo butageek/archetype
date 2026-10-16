@@ -29,7 +29,7 @@ Archetype deconstructs UI design into 5 enumerable, modular pillars:
 │   (Pinned in Viewport)            │       (Searchable Categories)      │
 │                                   │                                    │
 │  • Interactive Specimen Preview   │   01. Palette (33 styles)          │
-│  • Checkboxes, Radios, Dropdown   │   02. Typography (22 fonts)        │
+│  • Checkboxes, Radios, Dropdown   │   02. Typography (21 fonts)        │
 │  • Inputs, Slider, Hover Physics  │   03. Surface & Borders (19 styles)│
 │  • Inline 🎲 Dice Re-Roll Badges  │   04. UI Controls (18 styles)      │
 │  • Dedicated Category Copy Chips  │   05. Graphic Accents (19 styles)  │
@@ -53,7 +53,7 @@ Archetype deconstructs UI design into 5 enumerable, modular pillars:
 - **Minimal & Classic**: *Swiss Graphic Stark Minimal*, *Bauhaus Primary Modernism*, *Nordic Slate & Frosted Pine*, *Warm Editorial Monograph*, *Japanese Wabi-Sabi Zen*, *Kyoto Ceremonial Matcha & Hinoki*.
 - **Subcultures**: *Acid Rave Toxic Techno*, *Art Deco Imperial Gold*, *Solarpunk Sage & Copper*, *Pastel Macaron Soft Play*, *SCADA Heavy Industrial*, *Dracula Gothic Midnight*, *CAD Engineering Blueprint*, *Frutiger Aero Skeuomorphic*, *Coffee & Cream / Warm Latte*.
 
-### 2. Typography & Font Archetypes (22 Fonts)
+### 2. Typography & Font Archetypes (21 Fonts)
 - **Modern Bento UI / Plus Jakarta Sans**: Geometric, ultra-clean neo-grotesk with friendly terminal curves.
 - **Wonky 70s Editorial Serif / Fraunces**: Characterful variable serif with teardrop terminals and organic curves.
 - **Fintech Sharp Executive / DM Sans**: Uncompromising numeric clarity with tabular numbers (`tabular-nums`).
@@ -63,7 +63,7 @@ Archetype deconstructs UI design into 5 enumerable, modular pillars:
 - **Retro 1980s Chrome Disco & Sports / Righteous**: Aerodynamic fluid curves with energetic forward momentum for arcade marquees and synthwave titles.
 - **Haute Couture Editorial Serif / Cormorant Garamond**: Whisper-thin hairlines and statuesque classical proportions for high-fashion elegance.
 - **1982 Green Phosphor CRT Terminal / VT323**: Real 80-column monospaced raster font with cathode beam texture for retro mainframe consoles and BBS boards.
-- **Plus**: *Rajdhani HUD*, *Press Start 2P*, *Syne Acid*, *Cinzel Classical Luxury*, *Share Tech Mono CAD*, *Outfit Humanist*, *Caveat Marker*, *Fredoka Cartoon Bubble*, *Space Grotesk*, *Playfair Display*, *JetBrains Mono*, *Orbitron Sci-Fi*, *Poiret One*.
+- **Plus**: *Rajdhani HUD*, *Press Start 2P*, *Syne Acid*, *Cinzel Classical Luxury*, *Share Tech Mono CAD*, *Outfit Humanist*, *Caveat Marker*, *Fredoka Cartoon Bubble*, *Playfair Display*, *JetBrains Mono*, *Orbitron Sci-Fi*, *Poiret One*.
 
 ### 3. Surface, Borders & Elevation (19 Boundary Treatments)
 - **Modern Bento Grid Spotlight Card**: 20px squircle radius with specular 1px hairline border and ambient radial spotlight glow.
