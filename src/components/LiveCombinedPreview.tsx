@@ -30,14 +30,15 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
     borderStyle: surface.borderStyle,
     borderRadius: surface.radius,
     boxShadow: surface.shadow,
+    clipPath: surface.clipPath,
     fontFamily: font.fontFamily,
     transition: 'all 200ms ease-out',
   };
 
   const headingStyle: React.CSSProperties = {
     fontFamily: font.fontFamily,
-    letterSpacing: font.classification === 'grotesk' ? '-0.025em' : font.classification === 'luxury' ? '0.06em' : 'normal',
-    textTransform: font.classification === 'pixel' ? 'uppercase' : 'none',
+    letterSpacing: font.classification === 'grotesk' || font.classification === 'cyberpunk' ? '-0.02em' : font.classification === 'luxury' || font.classification === 'art-deco' ? '0.08em' : 'normal',
+    textTransform: font.classification === 'pixel' || font.classification === 'cyberpunk' ? 'uppercase' : 'none',
   };
 
   return (
@@ -73,6 +74,60 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
             backgroundSize: '16px 16px',
           }}
         />
+      )}
+
+      {accent.type === 'cyber-hud' && (
+        <>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-0 opacity-10"
+            style={{
+              backgroundImage: `radial-gradient(${palette.primary} 1.5px, transparent 1.5px)`,
+              backgroundSize: '20px 20px',
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-3 right-4 text-[9px] font-mono tracking-widest z-20 flex items-center gap-1.5 opacity-90 animate-pulse"
+            style={{ color: palette.primary }}
+          >
+            <span>⊕ [TARGET_LOCK // 0x7FFA]</span>
+          </div>
+        </>
+      )}
+
+      {accent.type === 'prismatic-flare' && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-0 left-0 right-0 h-1.5 z-20"
+          style={{
+            background:
+              'linear-gradient(90deg, transparent, rgba(56,189,248,0.7), rgba(244,114,182,0.7), rgba(250,204,21,0.7), transparent)',
+          }}
+        />
+      )}
+
+      {accent.type === 'art-deco-sunburst' && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-48 h-2 z-20 flex items-center justify-center opacity-80"
+          style={{
+            background: `radial-gradient(ellipse at top, ${palette.primary} 0%, transparent 70%)`,
+          }}
+        />
+      )}
+
+      {accent.type === 'blueprint-dimensions' && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-2 right-4 text-[9px] font-mono z-20 flex items-center gap-2 opacity-80"
+          style={{ color: palette.primary }}
+        >
+          <span>|&lt;--- 480mm ---&gt;|</span>
+          <span className="px-1 py-0.2 rounded border text-[8px]" style={{ borderColor: palette.primary }}>
+            1:50
+          </span>
+        </div>
       )}
 
       {accent.type === 'noise-grain' && (
@@ -154,7 +209,18 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
       {/* Interactive Component Showcase Specimen */}
       <div className="p-4 sm:p-6 relative z-10 space-y-4 min-h-[340px]">
         {/* Main Specimen Showcase Card */}
-        <div className="p-4 sm:p-6 relative space-y-4" style={cardStyle}>
+        <div className="p-4 sm:p-6 relative space-y-4 overflow-hidden" style={cardStyle}>
+          {/* Optional Glossy Sheen for Frutiger Aero */}
+          {surface.id === 'frutiger-gloss' && (
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 top-0 h-1/2 opacity-30"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, transparent 100%)',
+              }}
+            />
+          )}
+
           {/* Corner Ticks & Washi Tape */}
           {accent.type === 'corner-ticks' && (
             <>

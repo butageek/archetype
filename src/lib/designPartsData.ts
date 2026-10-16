@@ -12,53 +12,29 @@ import {
 // ============================================================================
 export const PALETTE_PARTS: PalettePart[] = [
   {
-    id: 'retro-synthwave',
-    name: 'Retro 80s Synthwave',
-    tagline: 'Electric neon magenta, laser cyan, and deep cosmic obsidian purple',
-    description: 'Vibrant 1980s retro-futuristic arcade aesthetic with high-voltage neon glow contrasting against deep midnight violet.',
-    primary: '#FF007F',
+    id: 'cyberpunk-nightcity',
+    name: 'Cyberpunk 2077 Night City',
+    tagline: 'Electric high-voltage yellow, cyber cyan, trauma red, and carbon black',
+    description: 'The definitive Cyberpunk 2077 aesthetic with radioactive neon yellow, razor-sharp cyber cyan bloom, and pitch carbon black substrates.',
+    primary: '#FCEE0A',
     secondary: '#00F0FF',
-    accent: '#FFE600',
-    background: '#12072B',
-    surface: '#1E0C42',
-    border: '#FF007F',
+    accent: '#FF003C',
+    background: '#08080C',
+    surface: '#12131A',
+    border: '#FCEE0A',
     text: '#FFFFFF',
-    textMuted: '#B197FC',
+    textMuted: '#9E9EA8',
     isDark: true,
-    promptSnippet: `### Color Palette Tokens: Retro 80s Synthwave
-- Mood: Electric retro-futuristic arcade aesthetic with high-voltage neon against deep obsidian violet.
-- Background: #12072B (deep cosmic midnight purple)
-- Surface / Cards: #1E0C42 (elevated dark violet substrate)
-- Borders: #FF007F (electric neon magenta)
-- Primary Accent: #FF007F (laser hot pink)
-- Secondary Accent: #00F0FF (electric cyan bloom)
-- Text Primary: #FFFFFF (crisp white)
-- Text Muted: #B197FC (soft lavender haze)`,
-  },
-  {
-    id: 'vintage-hifi',
-    name: 'Vintage 70s Hi-Fi',
-    tagline: 'Warm peanut mustard, terracotta clay, olive avocado, and cream',
-    description: 'Analog 1970s audio equipment tones with warm tactile earth shades, walnut faceplate warmth, and nostalgic mellow lighting.',
-    primary: '#DDA15E',
-    secondary: '#BC6C25',
-    accent: '#606C38',
-    background: '#FEFAE0',
-    surface: '#F4EED4',
-    border: '#D4A373',
-    text: '#283618',
-    textMuted: '#606C38',
-    isDark: false,
-    promptSnippet: `### Color Palette Tokens: Vintage 70s Hi-Fi
-- Mood: Analog 1970s hardware tones with warm tactile earth shades, mustard warmth, and mellow cream substrates.
-- Background: #FEFAE0 (warm aged parchment cream)
-- Surface / Cards: #F4EED4 (warm analog faceplate substrate)
-- Borders: #D4A373 (aged brass hairline)
-- Primary Accent: #DDA15E (peanut mustard gold)
-- Secondary Accent: #BC6C25 (terracotta walnut clay)
-- Olive Accent: #606C38 (warm avocado green)
-- Text Primary: #283618 (deep forest earth)
-- Text Muted: #606C38 (subtle moss olive)`,
+    promptSnippet: `### Color Palette Tokens: Cyberpunk 2077 Night City
+- Mood: High-voltage Cyberpunk 2077 night city aesthetic with electric radioactive yellow against deep carbon black.
+- Background: #08080C (pitch carbon black substrate)
+- Surface / Cards: #12131A (elevated dark cyberdeck chassis)
+- Borders: #FCEE0A (electric high-voltage yellow)
+- Primary Accent: #FCEE0A (radioactive warning yellow)
+- Secondary Accent: #00F0FF (electric cyber cyan bloom)
+- Critical Alert: #FF003C (trauma team crimson red)
+- Text Primary: #FFFFFF (high-contrast crisp white)
+- Text Muted: #9E9EA8 (cold gunmetal gray)`,
   },
   {
     id: 'cyberpunk-phosphor',
@@ -83,6 +59,80 @@ export const PALETTE_PARTS: PalettePart[] = [
 - Warning Accent: #FFB000 (amber caution)
 - Text Primary: #00FF88 (crisp phosphor beam)
 - Text Muted: #4F8F68 (dim cathode green)`,
+  },
+  {
+    id: 'retro-synthwave',
+    name: 'Retro 80s Synthwave Outrun',
+    tagline: 'Electric neon magenta, laser cyan, and deep cosmic obsidian purple',
+    description: 'Vibrant 1980s retro-futuristic arcade aesthetic with high-voltage neon glow contrasting against deep midnight violet.',
+    primary: '#FF007F',
+    secondary: '#00F0FF',
+    accent: '#FFE600',
+    background: '#12072B',
+    surface: '#1E0C42',
+    border: '#FF007F',
+    text: '#FFFFFF',
+    textMuted: '#B197FC',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Retro 80s Synthwave Outrun
+- Mood: Electric retro-futuristic arcade aesthetic with high-voltage neon against deep obsidian violet.
+- Background: #12072B (deep cosmic midnight purple)
+- Surface / Cards: #1E0C42 (elevated dark violet substrate)
+- Borders: #FF007F (electric neon magenta)
+- Primary Accent: #FF007F (laser hot pink)
+- Secondary Accent: #00F0FF (electric cyan bloom)
+- Text Primary: #FFFFFF (crisp white)
+- Text Muted: #B197FC (soft lavender haze)`,
+  },
+  {
+    id: 'cad-blueprint',
+    name: 'CAD Technical Blueprint & Schematic',
+    tagline: 'Deep Prussian drafting blue, electric cyan lines, and crisp drafting white',
+    description: 'Authentic architectural blueprint aesthetic with cyan schematic lines, technical grid layers, and engineered Prussian blue contrast.',
+    primary: '#00F0FF',
+    secondary: '#38BDF8',
+    accent: '#F59E0B',
+    background: '#0B2545',
+    surface: '#133966',
+    border: '#00F0FF',
+    text: '#EEF4F8',
+    textMuted: '#8DA9C4',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: CAD Technical Blueprint & Schematic
+- Mood: Precision architectural blueprint and engineered technical schematic with electric cyan lines on Prussian blue.
+- Background: #0B2545 (deep Prussian drafting blue)
+- Surface / Cards: #133966 (elevated schematic panel)
+- Borders: #00F0FF (electric drafting cyan)
+- Primary Accent: #00F0FF (cyan laser hairline)
+- Secondary Accent: #38BDF8 (cadet drafting blue)
+- Annotation Accent: #F59E0B (amber revision callout)
+- Text Primary: #EEF4F8 (drafting sheet crisp white)
+- Text Muted: #8DA9C4 (cool schematic slate)`,
+  },
+  {
+    id: 'frutiger-aero',
+    name: 'Frutiger Aero Y2K Glossy Aqua',
+    tagline: 'Vibrant azure sky, aqua crystal water, fresh grass lime, and glossy white',
+    description: 'Nostalgic mid-2000s humanism with crystalline water tones, lush grass greens, sky blue gradients, and pristine glass reflections.',
+    primary: '#0EA5E9',
+    secondary: '#06B6D4',
+    accent: '#22C55E',
+    background: '#F0F9FF',
+    surface: '#FFFFFF',
+    border: '#BAE6FD',
+    text: '#0C4A6E',
+    textMuted: '#0284C7',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Frutiger Aero Y2K Glossy Aqua
+- Mood: Optimistic mid-2000s skeuomorphic digital humanism with crystalline aqua water, sky blue, and fresh grass lime.
+- Background: #F0F9FF (luminous sky atmosphere)
+- Surface / Cards: #FFFFFF (glossy crystalline white card)
+- Borders: #BAE6FD (translucent ice blue border)
+- Primary Accent: #0EA5E9 (vibrant azure sky)
+- Secondary Accent: #06B6D4 (crystal aqua marine)
+- Nature Accent: #22C55E (fresh botanical lime)
+- Text Primary: #0C4A6E (deep ocean navy)
+- Text Muted: #0284C7 (cool clear sky blue)`,
   },
   {
     id: 'bauhaus-primary',
@@ -110,6 +160,81 @@ export const PALETTE_PARTS: PalettePart[] = [
 - Text Muted: #555555 (disciplined neutral gray)`,
   },
   {
+    id: 'art-deco-gold',
+    name: 'Art Deco Gatsby Gold & Onyx',
+    tagline: 'Burnished metallic gold, imperial onyx black, and champagne ivory',
+    description: 'Opulent 1920s glamour inspired by the Chrysler Building with lustrous brass gold contrasts against velvety onyx black.',
+    primary: '#D4AF37',
+    secondary: '#E5C583',
+    accent: '#113F34',
+    background: '#0E1013',
+    surface: '#17191E',
+    border: '#D4AF37',
+    text: '#FAF5EB',
+    textMuted: '#A39987',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Art Deco Gatsby Gold & Onyx
+- Mood: Luxurious 1920s metropolitan elegance with burnished metallic gold and deep onyx black.
+- Background: #0E1013 (velvety imperial onyx)
+- Surface / Cards: #17191E (elevated lacquer obsidian)
+- Borders: #D4AF37 (burnished metallic brass gold)
+- Primary Accent: #D4AF37 (lustrous Gatsby gold)
+- Secondary Accent: #E5C583 (champagne shimmer)
+- Jewel Tone: #113F34 (deep Gatsby emerald)
+- Text Primary: #FAF5EB (champagne silk white)
+- Text Muted: #A39987 (antique muted bronze)`,
+  },
+  {
+    id: 'acid-rave',
+    name: 'Acid Rave Toxic Underground',
+    tagline: 'Radioactive toxic slime lime, ultraviolet, and pitch void black',
+    description: 'Underground 90s warehouse rave and acid techno aesthetic with blinding radioactive lime greens and deep ultraviolet blacklights.',
+    primary: '#39FF14',
+    secondary: '#8A2BE2',
+    accent: '#E2F952',
+    background: '#0A0A0A',
+    surface: '#141414',
+    border: '#39FF14',
+    text: '#FFFFFF',
+    textMuted: '#A0A0A0',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Acid Rave Toxic Underground
+- Mood: High-energy underground rave aesthetic with blinding toxic slime green against pitch black.
+- Background: #0A0A0A (pitch club void)
+- Surface / Cards: #141414 (matte industrial asphalt)
+- Borders: #39FF14 (radioactive slime lime)
+- Primary Accent: #39FF14 (toxic high-visibility green)
+- Secondary Accent: #8A2BE2 (ultraviolet blacklight)
+- Shock Accent: #E2F952 (electric acid lemon)
+- Text Primary: #FFFFFF (high-contrast white)
+- Text Muted: #A0A0A0 (industrial gray)`,
+  },
+  {
+    id: 'japanese-zen',
+    name: 'Japanese Zen / Wabi-Sabi Linen',
+    tagline: 'Unbleached linen cream, raw sumi calligraphy ink, and aged cedar bamboo',
+    description: 'Contemplative Japanese aesthetic honoring natural textures, unbleached washi paper warmth, and quiet sumi ink calligraphy.',
+    primary: '#1F1E1D',
+    secondary: '#8C7B6B',
+    accent: '#C84B31',
+    background: '#F7F5F0',
+    surface: '#FFFFFF',
+    border: '#DDD7CD',
+    text: '#1F1E1D',
+    textMuted: '#7D7569',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Japanese Zen / Wabi-Sabi Linen
+- Mood: Calming Japanese minimalist atmosphere with unbleached washi paper substrates and rich sumi calligraphy ink.
+- Background: #F7F5F0 (unbleached linen cream)
+- Surface / Cards: #FFFFFF (pure paper sheet)
+- Borders: #DDD7CD (raw cedar hairline)
+- Primary Ink: #1F1E1D (deep sumi ink black)
+- Bamboo Accent: #8C7B6B (aged bamboo earth)
+- Hanko Seal: #C84B31 (vermilion stamp red)
+- Text Primary: #1F1E1D (charcoal brush ink)
+- Text Muted: #7D7569 (soft river stone gray)`,
+  },
+  {
     id: 'nordic-slate',
     name: 'Nordic Minimalist Slate',
     tagline: 'Subtle cool mineral gray, misty slate, and deep fjord charcoal',
@@ -132,6 +257,31 @@ export const PALETTE_PARTS: PalettePart[] = [
 - Secondary Accent: #475569 (mineral slate)
 - Text Primary: #0F172A (deep fjord charcoal)
 - Text Muted: #64748B (neutral cool gray)`,
+  },
+  {
+    id: 'vintage-hifi',
+    name: 'Vintage 70s Hi-Fi & Walnut',
+    tagline: 'Warm peanut mustard, terracotta clay, olive avocado, and cream',
+    description: 'Analog 1970s audio equipment tones with warm tactile earth shades, walnut faceplate warmth, and nostalgic mellow lighting.',
+    primary: '#DDA15E',
+    secondary: '#BC6C25',
+    accent: '#606C38',
+    background: '#FEFAE0',
+    surface: '#F4EED4',
+    border: '#D4A373',
+    text: '#283618',
+    textMuted: '#606C38',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Vintage 70s Hi-Fi & Walnut
+- Mood: Analog 1970s hardware tones with warm tactile earth shades, mustard warmth, and mellow cream substrates.
+- Background: #FEFAE0 (warm aged parchment cream)
+- Surface / Cards: #F4EED4 (warm analog faceplate substrate)
+- Borders: #D4A373 (aged brass hairline)
+- Primary Accent: #DDA15E (peanut mustard gold)
+- Secondary Accent: #BC6C25 (terracotta walnut clay)
+- Olive Accent: #606C38 (warm avocado green)
+- Text Primary: #283618 (deep forest earth)
+- Text Muted: #606C38 (subtle moss olive)`,
   },
   {
     id: 'solarpunk-sage',
@@ -208,7 +358,7 @@ export const PALETTE_PARTS: PalettePart[] = [
   },
   {
     id: 'vaporwave-sunset',
-    name: 'Vaporwave Sunset',
+    name: 'Vaporwave Sunset Twilight',
     tagline: 'Lilac hot pink, radiant violet, turquoise cyan, and midnight',
     description: 'Dreamy aesthetic nostalgia with vivid sunset gradients, digital twilight hues, and surreal cyberspace undertones.',
     primary: '#F472B6',
@@ -220,7 +370,7 @@ export const PALETTE_PARTS: PalettePart[] = [
     text: '#FDF4FF',
     textMuted: '#A78BFA',
     isDark: true,
-    promptSnippet: `### Color Palette Tokens: Vaporwave Sunset
+    promptSnippet: `### Color Palette Tokens: Vaporwave Sunset Twilight
 - Mood: Dreamy nostalgic twilight cyber-aesthetic with hot lilac pink, radiant violet, and luminous turquoise against midnight indigo.
 - Background: #0F0C20 (midnight cyberspace indigo)
 - Surface / Cards: #181432 (elevated violet chamber)
@@ -232,7 +382,7 @@ export const PALETTE_PARTS: PalettePart[] = [
   },
   {
     id: 'warm-editorial',
-    name: 'Warm Editorial Newspaper',
+    name: 'Warm Editorial Broadsheet',
     tagline: 'Aged newsprint cream, rich espresso ink, and sepia brown',
     description: 'Classic print publishing aesthetic inspired by physical broadsheets and literary journals with rich ink contrast and warm aged paper.',
     primary: '#A62B2B',
@@ -244,7 +394,7 @@ export const PALETTE_PARTS: PalettePart[] = [
     text: '#1A1816',
     textMuted: '#736B5E',
     isDark: false,
-    promptSnippet: `### Color Palette Tokens: Warm Editorial Newspaper
+    promptSnippet: `### Color Palette Tokens: Warm Editorial Broadsheet
 - Mood: Literary broadsheet print publication aesthetic with rich ink contrast against warm aged newsprint cream.
 - Background: #F7F4EB (aged newsprint parchment)
 - Surface / Cards: #FFFFFF (clean broadsheet white)
@@ -280,6 +430,31 @@ export const PALETTE_PARTS: PalettePart[] = [
 - Text Muted: #8B949E (slate gray)`,
   },
   {
+    id: 'scada-industrial',
+    name: 'SCADA Heavy Industrial Machinery',
+    tagline: 'Safety Caterpillar yellow, alert amber, heavy cast iron, and relay green',
+    description: 'Rugged industrial monitoring console designed for factory telemetry, physical control valves, and high-contrast hazard legibility.',
+    primary: '#F5A623',
+    secondary: '#FF5722',
+    accent: '#00E676',
+    background: '#14171A',
+    surface: '#1E2328',
+    border: '#F5A623',
+    text: '#E4E7EB',
+    textMuted: '#8C96A3',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: SCADA Heavy Industrial Machinery
+- Mood: High-durability industrial machinery console with safety yellow and heavy cast iron contrast.
+- Background: #14171A (heavy cast iron chassis)
+- Surface / Cards: #1E2328 (industrial telemetry bay)
+- Borders: #F5A623 (safety machinery yellow)
+- Primary Accent: #F5A623 (heavy hazard yellow)
+- Alert Accent: #FF5722 (warning emergency amber)
+- Operational State: #00E676 (circuit live green)
+- Text Primary: #E4E7EB (high-visibility machine white)
+- Text Muted: #8C96A3 (industrial steel gray)`,
+  },
+  {
     id: 'coffee-latte',
     name: 'Coffee & Cream / Warm Latte',
     tagline: 'Deep roasted espresso, steamed milk cream, and warm hazelnut bronze',
@@ -303,12 +478,51 @@ export const PALETTE_PARTS: PalettePart[] = [
 - Text Primary: #2C1B14 (deep dark espresso bean)
 - Text Muted: #7D6758 (warm mocha gray)`,
   },
+  {
+    id: 'dracula-gothic',
+    name: 'Dracula Gothic Midnight',
+    tagline: 'Vampire orchid purple, neon pink, toxic cyan, and Alucard charcoal',
+    description: 'The universally acclaimed developer theme celebrating gothic dark tones, luminous violet accents, and electric neon code highlights.',
+    primary: '#BD93F9',
+    secondary: '#FF79C6',
+    accent: '#50FA7B',
+    background: '#1E1F29',
+    surface: '#282A36',
+    border: '#6272A4',
+    text: '#F8F8F2',
+    textMuted: '#6272A4',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Dracula Gothic Midnight
+- Mood: Iconic dark gothic palette with vibrant orchid purple, hot pink, and crystalline cyan highlights on deep charcoal.
+- Background: #1E1F29 (gothic deep night void)
+- Surface / Cards: #282A36 (elevated vampire charcoal substrate)
+- Borders: #6272A4 (mystic twilight slate)
+- Primary Accent: #BD93F9 (orchid purple glow)
+- Secondary Accent: #FF79C6 (vibrant vampire pink)
+- Success State: #50FA7B (toxic electric mint)
+- Text Primary: #F8F8F2 (moonlight pearl white)
+- Text Muted: #6272A4 (crypt slate gray)`,
+  },
 ];
 
 // ============================================================================
 // 2. FONTS & TYPOGRAPHY STYLES (RECOGNIZED FONT ARCHETYPES)
 // ============================================================================
 export const FONT_PARTS: FontPart[] = [
+  {
+    id: 'cyberpunk-hud',
+    name: 'Cyberpunk HUD / Sci-Fi Angular',
+    tagline: 'Chiseled 45° angular chamfer letterforms, wide tracking, and futuristic HUD display',
+    description: 'Futuristic sci-fi heads-up display typography designed for high-tech telemetry, cybernetic enhancements, and tactical military cockpits.',
+    fontFamily: "'Orbitron', 'Rajdhani', sans-serif",
+    previewSample: 'NIGHT_CITY // 2077 HUD',
+    classification: 'cyberpunk',
+    promptSnippet: `### Typography Treatment: Cyberpunk HUD / Sci-Fi Angular
+- Style: Futuristic high-tech telemetry heads-up display with angular 45-degree corner bevels and wide tracking.
+- Headings: 'Orbitron' or 'Rajdhani' in bold uppercase with letter-spacing (0.08em) and bracketed index tags.
+- Body: 'Rajdhani' or clean geometric technical sans with high legibility.
+- Invariants: Headings must feel like an augmented-reality HUD interface; all labels uppercase with technical prefixes.`,
+  },
   {
     id: 'pixel-bitmap',
     name: 'Pixel / 8-Bit Retro Gaming',
@@ -322,6 +536,62 @@ export const FONT_PARTS: FontPart[] = [
 - Headings: 'Press Start 2P', 'Silkscreen', or blocky monospace bitmap letterforms with uppercase tracking.
 - Body: Discrete pixel monospaced or clean geometric sans with high tabular legibility.
 - Invariants: Preserve discrete grid-aligned character spacing; avoid overly smooth anti-aliasing on headings.`,
+  },
+  {
+    id: 'avant-garde-acid',
+    name: 'Avant-Garde Acid / Heavy Rave',
+    tagline: 'Ultra-wide display proportions, dramatic heavy weights, and experimental rave energy',
+    description: 'High-impact progressive typography found in underground fashion magazines, rave posters, and avant-garde modern European graphic design.',
+    fontFamily: "'Syne', Impact, sans-serif",
+    previewSample: 'HYPER_DISTORTION ⚡',
+    classification: 'acid',
+    promptSnippet: `### Typography Treatment: Avant-Garde Acid / Heavy Rave
+- Style: Bold, experimental European display typography with ultra-wide tracking and dramatic structural weight.
+- Headings: 'Syne' in extra-bold (700-800) with wide proportions and deliberate dramatic tension.
+- Body: Sharp neutral sans paired with tight line-heights.
+- Invariants: Displays should feel bold, artistic, and unapologetically unconventional.`,
+  },
+  {
+    id: 'art-deco-glamour',
+    name: 'Art Deco Geometric / 1920s Metropolis',
+    tagline: 'Tall graceful ascenders, circular geometric arches, and 1920s metropolitan elegance',
+    description: 'Opulent geometric display font inspired by classic Roaring Twenties jazz clubs, Parisian luxury ateliers, and the Chrysler Building.',
+    fontFamily: "'Poiret One', 'Cinzel', cursive",
+    previewSample: 'THE GRAND METROPOLIS',
+    classification: 'art-deco',
+    promptSnippet: `### Typography Treatment: Art Deco Geometric / 1920s Metropolis
+- Style: Refined 1920s geometric art-deco typography with elongated ascenders, circular curves, and glamorous poise.
+- Headings: 'Poiret One' in uppercase with generous, airy letter-spacing (0.12em).
+- Body: Refined humanist or high-contrast clean serif.
+- Invariants: Typography conveys effortless jazz-age sophistication and architectural majesty.`,
+  },
+  {
+    id: 'cad-drafting',
+    name: 'CAD Technical Drafting Mono',
+    tagline: 'Standard architectural blueprint font, slashed zeros, and uniform character metrics',
+    description: 'Precision engineering schematic font designed for mechanical drafting, blueprint callouts, and dimensional tolerances.',
+    fontFamily: "'Share Tech Mono', monospace",
+    previewSample: 'SCHEMATIC // SCALE 1:50',
+    classification: 'cad',
+    promptSnippet: `### Typography Treatment: CAD Technical Drafting Mono
+- Style: Mechanical drafting monospace typography with fixed-pitch character boxes and slashed zero.
+- Headings: 'Share Tech Mono' in uppercase with technical drafting prefixes (e.g., 'SPEC_REV:', 'TOLERANCE:').
+- Body: Clean technical monospace with high tabular numeral alignment.
+- Invariants: Strict tabular alignment; text blocks feel stamped onto an engineering blueprint sheet.`,
+  },
+  {
+    id: 'modern-saas-humanist',
+    name: 'Modern SaaS Clean Humanist',
+    tagline: 'Approachable geometric curves, friendly rounded terminals, and balanced rhythm',
+    description: 'The contemporary gold standard for modern tech products (Linear, Vercel, Stripe) with approachable curves and effortless readability.',
+    fontFamily: "'Outfit', sans-serif",
+    previewSample: 'Next-Gen Workflow Platform',
+    classification: 'humanist',
+    promptSnippet: `### Typography Treatment: Modern SaaS Clean Humanist
+- Style: Contemporary tech product typography with balanced optical kerning, friendly circular forms, and crisp clarity.
+- Headings: 'Outfit' in semi-bold (600) with slight tight tracking (-0.02em).
+- Body: Clean humanist sans with 1.6 line height for effortless readability.
+- Invariants: Balances modern technical authority with welcoming human approachability.`,
   },
   {
     id: 'handwriting-marker',
@@ -428,6 +698,23 @@ export const FONT_PARTS: FontPart[] = [
 // ============================================================================
 export const SURFACE_PARTS: SurfacePart[] = [
   {
+    id: 'cyberpunk-chamfer',
+    name: 'Cyberpunk 45° Chamfered Cut',
+    tagline: 'Diagonal 45° clipped corners (clip-path polygon), neon line border, and HUD armor plate',
+    description: 'Futuristic sci-fi cyberdeck chassis with 45-degree angled clipped corners, vibrant neon boundary lines, and high-tech defense plating.',
+    borderWidth: '2px',
+    borderStyle: 'solid',
+    radius: '0px',
+    shadow: '0 0 16px rgba(252, 238, 10, 0.35), inset 0 0 8px rgba(0, 240, 255, 0.15)',
+    clipPath: 'polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))',
+    promptSnippet: `### Surface, Borders & Elevation: Cyberpunk 45° Chamfered Cut
+- Boundaries: 2px solid neon primary colored border line.
+- Clipped Geometry: 45-degree chamfered diagonal corner notch on cards and buttons:
+  \`clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))\`.
+- Corner Radii: 0px (strictly sharp right and 45-degree angles; never rounded).
+- Shadow Treatment: Glowing photon halo with dual inner neon bloom.`,
+  },
+  {
     id: 'neobrutalist-hard',
     name: 'Neo-Brutalist Hard Offset',
     tagline: '3px solid black borders, 4px unblurred block drop shadows, 4px corners',
@@ -441,6 +728,21 @@ export const SURFACE_PARTS: SurfacePart[] = [
 - Corner Radii: 4px sharp corners (rounded-sm) with crisp definition.
 - Shadow Treatment: 4px 4px 0px #000000 hard unblurred directional block drop shadow (ZERO blur!).
 - Button Feedback: Tactile press-down translation on click (active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#000]).`,
+  },
+  {
+    id: 'frutiger-gloss',
+    name: 'Frutiger Aero Glossy Gel',
+    tagline: 'Translucent 3D liquid gel, specular white top reflection, 20px pill corners',
+    description: 'Lush mid-2000s skeuomorphic aqua gel surface with top specular glass reflection, translucent watery depth, and buoyant bubble elevation.',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    radius: '20px',
+    shadow: '0 12px 30px rgba(14, 165, 233, 0.18), inset 0 2px 0 rgba(255, 255, 255, 0.8)',
+    promptSnippet: `### Surface, Borders & Elevation: Frutiger Aero Glossy Gel
+- Boundaries: 1px translucent specular border (rgba(255, 255, 255, 0.6) top, rgba(14, 165, 233, 0.3) bottom).
+- Corner Radii: Smooth 20px (rounded-3xl) or continuous 9999px pill curves.
+- Specular Sheen: Inset bright top highlight: \`inset 0 2px 0 rgba(255, 255, 255, 0.8)\`.
+- Shadow Treatment: Buoyant water bubble lift shadow with soft azure ambient falloff.`,
   },
   {
     id: 'cad-hairline',
@@ -472,7 +774,7 @@ export const SURFACE_PARTS: SurfacePart[] = [
 - Shadow Treatment: Deep floating ambient shadow: 0 20px 50px rgba(0, 0, 0, 0.5).`,
   },
   {
-    id: 'soft-ambient',
+    id: 'nordic-soft',
     name: 'Nordic Soft Ambient',
     tagline: '1px subtle borders, gentle 12px rounded corners, and soft diffused elevation',
     description: 'Contemporary Scandinavian product design with soft ambient light falloff, clean rounded corners, and calm elevation.',
@@ -488,7 +790,7 @@ export const SURFACE_PARTS: SurfacePart[] = [
   {
     id: 'paper-lift',
     name: 'Skeuomorphic Paper Lift',
-    tagline: '1px warm craft borders, subtle 4px radius, and physical 3D paper lift shadows',
+    tagline: '1px warm craft borders, subtle 6px radius, and physical 3D paper lift shadows',
     description: 'Physical workshop pinboard with warm tactile paper elevation, physical multi-layered shadows, and organic warmth.',
     borderWidth: '1px',
     borderStyle: 'solid',
@@ -541,12 +843,54 @@ export const SURFACE_PARTS: SurfacePart[] = [
 - Inset Lighting: Dual inner bevel shadows: inset -3px -3px 6px rgba(0,0,0,0.1) and inset 3px 3px 6px rgba(255,255,255,0.8).
 - Shadow Treatment: Buoyant clay drop shadow: 0 10px 24px rgba(0, 0, 0, 0.08).`,
   },
+  {
+    id: 'art-deco-double',
+    name: 'Art Deco Double Brass Frame',
+    tagline: 'Double parallel metallic border lines, 0px sharp corners, and Gatsby prestige',
+    description: 'Architectural luxury boundary treatment with double brass borders, precise 90-degree corners, and understated golden glow.',
+    borderWidth: '3px',
+    borderStyle: 'double',
+    radius: '0px',
+    shadow: '0 8px 24px rgba(212, 175, 55, 0.15)',
+    promptSnippet: `### Surface, Borders & Elevation: Art Deco Double Brass Frame
+- Boundaries: 3px double parallel metallic gold border lines (border-style: double).
+- Corner Radii: Strictly 0px sharp corners.
+- Shadow Treatment: Subtle ambient golden brass drop shadow: 0 8px 24px rgba(212, 175, 55, 0.15).`,
+  },
+  {
+    id: 'heavy-industrial-chassis',
+    name: 'Heavy SCADA Industrial Chassis',
+    tagline: 'Heavy 3px stamped metal chassis, mechanical corner rivets, and deep drop channel',
+    description: 'Industrial control cabinet casing built to withstand rugged environments with simulated metal rivets, heavy borders, and zero blur.',
+    borderWidth: '3px',
+    borderStyle: 'solid',
+    radius: '2px',
+    shadow: 'inset 0 1px 0 rgba(255,255,255,0.2), 4px 4px 0px #000000',
+    promptSnippet: `### Surface, Borders & Elevation: Heavy SCADA Industrial Chassis
+- Boundaries: Heavy 3px solid industrial border.
+- Corner Radii: 2px minimal bevel.
+- Inset Machining: Top edge highlight (inset 0 1px 0 rgba(255,255,255,0.2)).
+- Shadow Treatment: Solid 4px 4px 0px #000000 physical chassis offset.`,
+  },
 ];
 
 // ============================================================================
 // 4. UI COMPONENTS & CONTROLS STYLE (RECOGNIZED COMPONENT TREATMENTS)
 // ============================================================================
 export const COMPONENT_PARTS: ComponentPart[] = [
+  {
+    id: 'cyberpunk-hud-clipped',
+    name: 'Cyberpunk HUD Clipped Buttons & Hex Gauges',
+    tagline: '45° clipped corner action buttons, warning yellow neon, and bracketed telemetry tags',
+    description: 'Heads-up display buttons featuring 45° diagonal clipped corners, radioactive neon outlines, uppercase cyber deck labels, and glitch hover feedback.',
+    buttonClass: 'px-4 py-2 bg-yellow-400 text-black font-black uppercase text-xs tracking-wider border-2 border-yellow-300 [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,8px_100%,0_calc(100%-8px))] hover:bg-yellow-300 cursor-pointer transition-all active:scale-95',
+    badgeClass: 'px-2 py-0.5 border border-cyan-400 bg-cyan-950/60 font-mono text-[10px] text-cyan-300 font-bold uppercase tracking-wider',
+    promptSnippet: `### UI Component Treatment: Cyberpunk HUD Clipped Buttons & Hex Gauges
+- Buttons: 45-degree diagonal clipped corner buttons using \`clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))\`.
+- Colors: Radioactive high-voltage yellow (#FCEE0A) or laser cyan (#00F0FF) with black uppercase text.
+- Badges & Status: Bracketed cybernetic tags like \`[CYBER // 0x4F]\` and \`[ONLINE: 99.8%]\` with neon borders.
+- Micro-interactions: Glitch displacement or color inversion on hover; rapid scale-95 click feedback.`,
+  },
   {
     id: 'neobrutalist-chunky',
     name: 'Neo-Brutalist Chunky Controls',
@@ -558,6 +902,18 @@ export const COMPONENT_PARTS: ComponentPart[] = [
 - Buttons: Oversized with 3px solid #000000 border, bold uppercase text, 3px 3px 0px #000 hard drop shadow, and tactile click depression (active:translate-x-0.5 active:translate-y-0.5).
 - Badges & Pills: Angled sticker badges with 2px black border, solid color background, and uppercase tracking.
 - Inputs: 3px solid black border with high-contrast text and 3px 3px 0px #000 focus ring shadow.`,
+  },
+  {
+    id: 'frutiger-aero-gel',
+    name: 'Frutiger Aero Glossy Gel Buttons',
+    tagline: '3D pill buttons with liquid specular light reflection, aqua glow, and jelly click',
+    description: 'Liquid glass capsule buttons inspired by mid-2000s Mac OS Aqua and Windows Vista Aero with specular reflection highlights and smooth rounded-full geometry.',
+    buttonClass: 'px-4 py-2 bg-gradient-to-b from-sky-400 to-sky-600 text-white font-bold text-xs rounded-full shadow-[0_4px_12px_rgba(14,165,233,0.35),inset_0_1px_0_rgba(255,255,255,0.7)] border border-sky-300 hover:brightness-110 cursor-pointer active:scale-95',
+    badgeClass: 'px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 shadow-2xs',
+    promptSnippet: `### UI Component Treatment: Frutiger Aero Glossy Gel Buttons
+- Buttons: Pill-shaped capsule buttons with vertical dual-gradient (\`from-sky-400 to-sky-600\`), specular top white reflection (\`inset 0 1px 0 rgba(255,255,255,0.7)\`), and watery drop shadow.
+- Badges: Translucent dewdrop pills with smooth rounded-full corners and crisp saturation.
+- Hover & Feedback: Luminous brightness increase on hover; soft buoyant depression on active click.`,
   },
   {
     id: 'minimal-rounded',
@@ -619,12 +975,47 @@ export const COMPONENT_PARTS: ComponentPart[] = [
 - Badges: Blocky pixel badge tags with discrete pixel padding and uppercase gaming labels.
 - Feedback: Immediate inverted bevel depression on click without smooth tweening.`,
   },
+  {
+    id: 'art-deco-chevron',
+    name: 'Art Deco Stepped Brass Buttons',
+    tagline: 'Double gold/brass border inlays, uppercase tracked luxury lettering, and architectural steps',
+    description: 'Prestige luxury buttons featuring stepped metallic gold border inlays, Roman uppercase typography, and opulent Gatsby poise.',
+    buttonClass: 'px-4 py-1.5 border-2 border-amber-500/80 bg-amber-950/40 text-amber-200 font-serif tracking-widest text-xs uppercase hover:bg-amber-900/60 transition-all cursor-pointer shadow-xs',
+    badgeClass: 'px-2 py-0.5 border border-amber-500/60 text-amber-300 font-mono text-[9px] uppercase tracking-widest',
+    promptSnippet: `### UI Component Treatment: Art Deco Stepped Brass Buttons
+- Buttons: Stepped brass border inlay with gold metallic stroke (#D4AF37), tracked uppercase Roman letterforms, and subtle warm amber glow.
+- Badges: Geometric gold medallions with uppercase tracking and crisp 0px corners.
+- Micro-interactions: Warm lustrous metallic sheen on hover; quiet authoritative click.`,
+  },
+  {
+    id: 'japanese-zen-hairline',
+    name: 'Japanese Zen Hairline Controls',
+    tagline: 'Understated bottom hairline, generous breathing room, quiet hover states, and red Hanko seal',
+    description: 'Minimalist contemplation controls that refuse flashy decoration, using understated bottom hairline underlines and traditional red seal markers.',
+    buttonClass: 'px-3 py-1.5 border-b-2 border-stone-800 text-stone-900 font-sans text-xs tracking-wider hover:bg-stone-100 transition-colors cursor-pointer',
+    badgeClass: 'px-2 py-0.5 rounded-full border border-red-700/60 bg-red-50 text-red-700 text-[10px] font-medium',
+    promptSnippet: `### UI Component Treatment: Japanese Zen Hairline Controls
+- Buttons: Minimal border-b hairline underline with generous horizontal padding and quiet ink-bleed hover transition.
+- Badges: Red circular Hanko seal status badge (vermilion stamp #C84B31) denoting authenticity and calm status.
+- Philosophy: Zero gratuitous animations; functional clarity and generous white space.`,
+  },
 ];
 
 // ============================================================================
 // 5. SIGNATURE ACCENTS & GRAPHIC DNA (RECOGNIZED DECORATIVE TREATMENTS)
 // ============================================================================
 export const ACCENT_PARTS: AccentPart[] = [
+  {
+    id: 'cyber-hud',
+    name: 'Cyberpunk Hologram Reticle & Circuit Traces',
+    tagline: 'Corner HUD targeting reticles, glowing neon circuit paths, hex matrix background, and telemetry tags',
+    description: 'High-tech cyberpunk augmented-reality overlay featuring targeting crosshair reticles, hexagonal telemetry matrices, and glowing cyber circuit traces.',
+    type: 'cyber-hud',
+    promptSnippet: `### Signature Graphic Accents: Cyberpunk Hologram Reticle & Circuit Traces
+- Targeting Marks: Corner holographic reticle targets \`⊕ [TARGET_LOCK // 0x7FFA]\`.
+- Background Matrix: Subtle repeating hexagonal cyber honeycomb pattern at 12% opacity.
+- Header Bar: Electric warning status band with neon corner circuit brackets.`,
+  },
   {
     id: 'crt-scanlines',
     name: 'CRT Raster Scanlines',
@@ -647,6 +1038,16 @@ export const ACCENT_PARTS: AccentPart[] = [
 - Metadata: Coordinate readouts and precision engineering tags.`,
   },
   {
+    id: 'frutiger-flare',
+    name: 'Frutiger Aero Prismatic Light Flares & Dewdrops',
+    tagline: 'Radiant rainbow prism streak flare, soft dewdrops, and sky-blue ambient aura',
+    description: 'Iconic mid-2000s light rays and prismatic rainbow flares radiating across card headers with fresh morning dewdrops.',
+    type: 'prismatic-flare',
+    promptSnippet: `### Signature Graphic Accents: Frutiger Aero Prismatic Light Flares & Dewdrops
+- Light Flare: Horizontal prismatic rainbow light streak flare (\`linear-gradient(90deg, transparent, rgba(56,189,248,0.4), rgba(244,114,182,0.4), rgba(250,204,21,0.4), transparent)\`).
+- Atmosphere: Pristine crystalline morning aura with soft translucent dewdrop bubbles.`,
+  },
+  {
     id: 'washi-tape',
     name: 'Tactile Washi Tape Strips',
     tagline: 'Textured washi tape tape-downs fixed to card headers with subtle paper grain',
@@ -655,6 +1056,16 @@ export const ACCENT_PARTS: AccentPart[] = [
     promptSnippet: `### Signature Graphic Accents: Tactile Washi Tape Strips
 - Tape Accents: Semi-translucent washi tape strips fixed to card headers with subtle paper texture.
 - Angled Tilt: Slight -1deg to 0.8deg tilt to emulate physical craft tape-down.`,
+  },
+  {
+    id: 'art-deco-sunburst',
+    name: 'Art Deco Sunburst Rays & Chevron Fan',
+    tagline: 'Geometric radiant gold sunburst beam rays and stepped chevron fans framing the header',
+    description: 'Classic Chrysler Building and Radio City Music Hall sunburst beam rays with symmetrical stepped chevron fans.',
+    type: 'art-deco-sunburst',
+    promptSnippet: `### Signature Graphic Accents: Art Deco Sunburst Rays & Chevron Fan
+- Header Ornamentation: Symmetrical geometric sunburst rays radiating outward from center headers.
+- Chevron Trim: Stepped brass chevron triangles framing the corner boundaries of containers.`,
   },
   {
     id: 'dot-grid',
@@ -687,6 +1098,16 @@ export const ACCENT_PARTS: AccentPart[] = [
 - Placement: Header accent bars, emergency alert strips, or boundary margins.`,
   },
   {
+    id: 'blueprint-dimensions',
+    name: 'CAD Blueprint Dimensional Callouts',
+    tagline: 'Engineering dimension callout arrows (|<-- 480mm -->|), radius arcs, and scale notations',
+    description: 'Architectural dimension measurement arrows, millimeter callouts, and technical blueprint scaling marks.',
+    type: 'blueprint-dimensions',
+    promptSnippet: `### Signature Graphic Accents: CAD Blueprint Dimensional Callouts
+- Dimensions: Engineering measurement arrows (\`|<--- 480mm --->|\`) along card margins.
+- Notations: Scale factor tags (\`SCALE: 1:50\`, \`DATUM: A-01\`, \`TOLERANCE: ±0.05mm\`).`,
+  },
+  {
     id: 'noise-grain',
     name: 'Subtle Film Grain / Noise',
     tagline: 'Organic film grain and paper stipple texture for physical tactile warmth',
@@ -709,14 +1130,14 @@ export const ACCENT_PARTS: AccentPart[] = [
 ];
 
 // ============================================================================
-// DEFAULT INITIAL SELECTION (POPULAR CLASSIC COMBO)
+// DEFAULT INITIAL SELECTION (CYBERPUNK NIGHT CITY HIGH IMPACT COMBO)
 // ============================================================================
 export const DEFAULT_DESIGN_PARTS: DesignPartsSelection = {
-  palette: PALETTE_PARTS[0], // Retro 80s Synthwave
-  font: FONT_PARTS[3], // Neo-Grotesque Swiss Sans
-  surface: SURFACE_PARTS[0], // Neo-Brutalist Hard Offset
-  components: COMPONENT_PARTS[0], // Neo-Brutalist Chunky
-  accent: ACCENT_PARTS[0], // CRT Raster Scanlines
+  palette: PALETTE_PARTS[0], // Cyberpunk 2077 Night City
+  font: FONT_PARTS[0], // Cyberpunk HUD / Sci-Fi Angular
+  surface: SURFACE_PARTS[0], // Cyberpunk 45° Chamfered Cut
+  components: COMPONENT_PARTS[0], // Cyberpunk HUD Clipped Buttons
+  accent: ACCENT_PARTS[0], // Cyberpunk Hologram Reticle
 };
 
 // ============================================================================

@@ -288,6 +288,7 @@ export function DesignPartPicker({
                       borderStyle: surf.borderStyle,
                       borderColor: '#1C1917',
                       borderRadius: surf.radius,
+                      clipPath: surf.clipPath,
                       boxShadow: surf.shadow === 'none' ? 'none' : surf.shadow.includes('4px 4px') ? '3px 3px 0px #000' : '0 4px 12px rgba(0,0,0,0.08)',
                     }}
                   >

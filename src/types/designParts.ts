@@ -7,7 +7,7 @@ export type DesignPartCategory =
 
 export interface PalettePart {
   id: string;
-  name: string; // e.g. "Retro 80s Synthwave", "Vintage 70s Hi-Fi"
+  name: string; // e.g. "Cyberpunk 2077 Night City", "Retro 80s Synthwave"
   tagline: string;
   description: string;
   primary: string;
@@ -22,32 +22,48 @@ export interface PalettePart {
   promptSnippet: string;
 }
 
+export type FontClassification =
+  | 'pixel'
+  | 'handwriting'
+  | 'cartoon'
+  | 'sans'
+  | 'serif'
+  | 'mono'
+  | 'grotesk'
+  | 'luxury'
+  | 'cyberpunk'
+  | 'art-deco'
+  | 'acid'
+  | 'cad'
+  | 'humanist';
+
 export interface FontPart {
   id: string;
-  name: string; // e.g. "Pixel / 8-Bit Bitmap", "Handwriting / Marker", "Cartoon / Bubble"
+  name: string; // e.g. "Cyberpunk HUD / Sci-Fi Angular", "Pixel / 8-Bit Bitmap"
   tagline: string;
   description: string;
   fontFamily: string;
   previewSample: string;
-  classification: 'pixel' | 'handwriting' | 'cartoon' | 'sans' | 'serif' | 'mono' | 'grotesk' | 'luxury';
+  classification: FontClassification;
   promptSnippet: string;
 }
 
 export interface SurfacePart {
   id: string;
-  name: string; // e.g. "Neo-Brutalist Hard Offset", "CAD Precision Hairline", "Frosted Glassmorphism"
+  name: string; // e.g. "Cyberpunk 45° Chamfered Cut", "Neo-Brutalist Hard Offset"
   tagline: string;
   description: string;
   borderWidth: string;
-  borderStyle: 'solid' | 'dashed' | 'double';
+  borderStyle: 'solid' | 'dashed' | 'double' | 'groove' | 'ridge' | 'none';
   radius: string;
   shadow: string;
+  clipPath?: string;
   promptSnippet: string;
 }
 
 export interface ComponentPart {
   id: string;
-  name: string; // e.g. "Neo-Brutalist Chunky Buttons", "Minimalist Rounded Pills", "Industrial Hardware Relays"
+  name: string; // e.g. "Cyberpunk HUD Clipped Buttons", "Neo-Brutalist Chunky Buttons"
   tagline: string;
   description: string;
   buttonClass: string;
@@ -55,12 +71,28 @@ export interface ComponentPart {
   promptSnippet: string;
 }
 
+export type AccentType =
+  | 'scanlines'
+  | 'crosshairs'
+  | 'washi-tape'
+  | 'dot-grid'
+  | 'corner-ticks'
+  | 'hazard-stripes'
+  | 'noise-grain'
+  | 'minimal'
+  | 'cyber-hud'
+  | 'prismatic-flare'
+  | 'art-deco-sunburst'
+  | 'blueprint-dimensions'
+  | 'hanko-stamp'
+  | 'wireframe-grid';
+
 export interface AccentPart {
   id: string;
-  name: string; // e.g. "CRT Raster Scanlines", "CAD Crosshairs & Rulers", "Tactile Washi Tape"
+  name: string; // e.g. "Cyberpunk Hologram Reticle & Circuit Traces", "CRT Raster Scanlines"
   tagline: string;
   description: string;
-  type: 'scanlines' | 'crosshairs' | 'washi-tape' | 'dot-grid' | 'corner-ticks' | 'hazard-stripes' | 'noise-grain' | 'minimal';
+  type: AccentType;
   promptSnippet: string;
 }
 
