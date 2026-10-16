@@ -28,9 +28,10 @@ Archetype deconstructs UI design into 5 enumerable, modular pillars:
 │   LIVE COMBINED MOCKUP & PROMPT   │       RECOGNIZED PARTS LIBRARY     │
 │   (Pinned in Viewport)            │       (Searchable Categories)      │
 │                                   │                                    │
-│  • Interactive Specimen Preview   │   01. Palette (33 styles)          │
-│  • Checkboxes, Radios, Dropdown   │   02. Typography (21 fonts)        │
-│  • Inputs, Slider, Hover Physics  │   03. Surface & Borders (19 styles)│
+│  • Interactive Specimen Preview   │   ✨ Curated Themes (16 Presets)   │
+│  • Checkboxes, Radios, Dropdown   │   01. Palette (33 styles)          │
+│  • Inputs, Slider, Hover Physics  │   02. Typography (21 fonts)        │
+│  • Quick Presets Strip (1-Click)  │   03. Surface & Borders (19 styles)│
 │  • Inline 🎲 Dice Re-Roll Badges  │   04. UI Controls (18 styles)      │
 │  • Dedicated Category Copy Chips  │   05. Graphic Accents (19 styles)  │
 │  • Master Plain-Text Prompt Tab   │   • Category-specific Randomizers  │
@@ -38,9 +39,35 @@ Archetype deconstructs UI design into 5 enumerable, modular pillars:
 └───────────────────────────────────┴────────────────────────────────────┘
 ```
 
-1. **Pick or Randomize**: Select an option from any of the 5 categories, click **"Surprise Me"** to roll a fresh 5-part combination, or use the split dropdown / inline dice buttons to randomize a single category.
-2. **Interactive Live Specimen**: The pinned left-hand studio canvas immediately updates colors, typography, border geometry, shadows, component physics (inputs, dropdowns, checkboxes, radio groups, buttons), and atmospheric graphic accents in real time.
-3. **1-Click Copy Master Prompt & Parts**: Click **"Copy Master Prompt"** to copy the synthesized prompt with Tailwind CSS v4 `@theme` tokens, or click any dedicated category chip (`🎨 Palette`, `🔤 Typography`, `📐 Surface`, `🧩 Controls`, `✨ Accent`, `⚡ @theme`) to copy individual styles.
+1. **1-Click Prebuilt Curated Themes**: Choose from 16 calibrated aesthetic universes where palette, font, surface, controls, and accents have been mathematically harmonized to avoid visual clashes.
+2. **Modular Customization**: Tweak any of the 5 categories individually via the right-hand library tabs or inline dice badges.
+3. **Interactive Live Specimen**: The pinned left-hand studio canvas immediately updates colors, typography, border geometry, shadows, component physics (inputs, dropdowns, checkboxes, radio groups, buttons), and atmospheric graphic accents in real time.
+4. **1-Click Copy Master Prompt & Parts**: Click **"Copy Master Prompt"** to copy the synthesized prompt with Tailwind CSS v4 `@theme` tokens, or click any dedicated category chip (`🎨 Palette`, `🔤 Typography`, `📐 Surface`, `🧩 Controls`, `✨ Accent`, `⚡ @theme`) to copy individual styles.
+
+---
+
+## ✨ 16 Prebuilt Curated Themes (Guaranteed Harmonious Combinations)
+
+To eliminate design guesswork and ensure colors, fonts, shadows, and accents never clash, Archetype includes 16 production-tested, cohesive themes:
+
+| # | Theme Name | Badge | Category | Key Components |
+|---|------------|-------|----------|----------------|
+| 1 | **Cyberpunk 2077 Night City** | Sci-Fi HUD | High-Tech | Night City Neon + Rajdhani HUD + 45° Chamfer Cut + Clipped Buttons + Cyber HUD Reticle |
+| 2 | **Obsidian Velvet (Linear / Raycast)** | Velvet Dark | Developer | Raycast Aurora + Jakarta Sans + Velvet Glass + Bento Spotlight Buttons + Crosshair Marks |
+| 3 | **Stripe Fintech Precision** | Fintech SaaS | Fintech | Fintech Indigo + DM Sans (Tabular) + CAD Hairline + Metric Delta Chips + Dot Matrix Grid |
+| 4 | **Frutiger Aero Y2K Skeuomorphism** | Y2K Skeuomorphic | Retro | Frutiger Aqua + Humanist Sans + Gloss Substrate + Aqua Gel Buttons + Rainbow Light Flare |
+| 5 | **Wonky 70s Editorial Broadsheet** | Retro Print | Editorial | Warm Editorial + Fraunces Variable Serif + Tactile Paper Lift + Minimal Rounded + Washi Tape Strip |
+| 6 | **Windows 95 Classic Desktop** | 90s Desktop | Retro | Vintage Hi-Fi + VT323 Raster CRT + Win95 3D Bevel + Win95 Push Buttons + Corner Ticks |
+| 7 | **SCADA Heavy Industrial Machinery** | Industrial Chassis | Industrial | SCADA Industrial + Space Mono + Heavy Chassis + Industrial Relays + Hazard Warning Stripes |
+| 8 | **Kyoto Ceremonial Zen Modern** | Zen Minimal | Minimal | Matcha Hinoki + Neo-Grotesque + Nordic Soft + Zen Hairline Controls + Analog Film Grain |
+| 9 | **Art Deco 1920s Gatsby Metropolis** | Gilded Glamour | Editorial | Imperial Gold + Art Deco Glamour + Double Brass Frame + Stepped Chevron Buttons + Gold Sunburst Fan |
+| 10 | **Game Boy 1989 Retro Gaming** | 8-Bit Portable | Retro | Game Boy DMG-01 + Press Start 2P + Architectural Split + 16-Bit Pixel Buttons + CRT Scanlines |
+| 11 | **CAD Architectural Blueprint** | Blueprint Vector | Developer | Blueprint Cyan + Share Tech Mono + Double Hairline Frame + Monospace Badges + Dimensional Callouts |
+| 12 | **Monokai Pro Synth Terminal** | Synth Monospace | Developer | Monokai Pro + JetBrains Mono + Frosted Glassmorphism + Segmented Cyber Gauges + 3D Wireframe Grid |
+| 13 | **Avant-Garde Klein Blue Gallery** | Curatorial Modern | Minimal | Klein Blue + Cormorant Garamond Serif + Architectural Split + Zen Underline + Inventory Barcode |
+| 14 | **Retro 80s Synthwave Arcade** | Neon Arcade | Retro | Synthwave Magenta/Cyan + Righteous Disco + Neon Bloom Wireframe + Laser Shimmer Buttons + Audio Waveform |
+| 15 | **Bauhaus Constructivist Primaries** | Constructivist | Industrial | Bauhaus Primaries + Neo-Grotesque + Hard Offset Shadow + Neo-Brutalist Chunky + Dot Matrix Grid |
+| 16 | **Cosmic Lilac & Floating Dock (Arc Style)** | Holographic Fluid | High-Tech | Cosmic Lilac + Jakarta Sans + Holographic Foil + Floating Dock Capsules + Node Constellation |
 
 ---
 

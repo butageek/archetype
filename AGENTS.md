@@ -27,11 +27,26 @@ Archetype decomposes UI design into **5 strictly enumerable, recognizable pillar
 4. **04. UI Components & Controls**: Button mechanics, inputs, badges, and micro-interactions (18 styles).
 5. **05. Signature Graphic Accents**: Distinctive graphic DNA (scanlines, aurora glow, crosshairs, washi tape, halftone pop art, barcode, waveform, constellation, etc.) (19 styles).
 
-Each part has:
-- Human-readable name & classification.
-- Visual mini-preview thumbnail directly in the library card.
-- Standalone plain-text prompt snippet.
-- Dynamic integration into an interactive live specimen card and a synthesized **Universal Master Prompt**.
+### Prebuilt Curated Themes (16 Calibrated Harmonies)
+Because random combinations across 5 dimensions can occasionally clash, Archetype provides **16 hand-crafted, mathematically harmonious Prebuilt Themes**:
+1. *Cyberpunk 2077 Night City* (Sci-Fi HUD)
+2. *Obsidian Velvet (Linear / Raycast)* (Velvet Dark)
+3. *Stripe Fintech Precision* (Fintech SaaS)
+4. *Frutiger Aero Y2K Skeuomorphism* (Y2K Skeuomorphic)
+5. *Wonky 70s Editorial Broadsheet* (Retro Print)
+6. *Windows 95 Classic Desktop* (90s Desktop)
+7. *SCADA Heavy Industrial Machinery* (Industrial Chassis)
+8. *Kyoto Ceremonial Zen Modern* (Zen Minimal)
+9. *Art Deco 1920s Gatsby Metropolis* (Gilded Glamour)
+10. *Game Boy 1989 Retro Gaming* (8-Bit Portable)
+11. *CAD Architectural Blueprint* (Blueprint Vector)
+12. *Monokai Pro Synth Terminal* (Synth Monospace)
+13. *Avant-Garde Klein Blue Gallery* (Curatorial Modern)
+14. *Retro 80s Synthwave Arcade* (Neon Arcade)
+15. *Bauhaus Constructivist Primaries* (Constructivist)
+16. *Cosmic Lilac & Floating Dock (Arc Style)* (Holographic Fluid)
+
+Users can activate any theme with 1 click, browse by category tags (`high-tech`, `developer`, `fintech`, `retro`, `editorial`, `minimal`, `industrial`), or use "Surprise Curated Theme" to roll a guaranteed harmonious aesthetic universe. Once applied, all individual pillars remain freely tweakable.
 
 ---
 

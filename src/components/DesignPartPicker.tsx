@@ -9,24 +9,31 @@ import {
   Layers,
   MousePointerClick,
   Palette,
+  Search,
   Sparkles,
   Type,
+  Wand2,
 } from 'lucide-react';
 import {
   ACCENT_PARTS,
   COMPONENT_PARTS,
+  CURATED_THEMES,
   FONT_PARTS,
+  generateCombinedMasterPrompt,
   PALETTE_PARTS,
+  resolveCuratedTheme,
   SURFACE_PARTS,
 } from '../lib/designPartsData';
 import {
   AccentPart,
   ComponentPart,
+  CuratedTheme,
   DesignPartCategory,
   DesignPartsSelection,
   FontPart,
   PalettePart,
   SurfacePart,
+  ThemeTag,
 } from '../types/designParts';
 
 function AccentVisualPreview({ type }: { type: AccentPart['type'] }) {
@@ -337,6 +344,7 @@ interface DesignPartPickerProps {
   onSelectSurface: (surf: SurfacePart) => void;
   onSelectComponent: (comp: ComponentPart) => void;
   onSelectAccent: (acc: AccentPart) => void;
+  onApplyTheme?: (theme: CuratedTheme) => void;
   onToast: (msg: string) => void;
   activeCategory?: DesignPartCategory;
   onCategoryChange?: (category: DesignPartCategory) => void;
@@ -350,22 +358,50 @@ export function DesignPartPicker({
   onSelectSurface,
   onSelectComponent,
   onSelectAccent,
+  onApplyTheme,
   onToast,
   activeCategory: controlledCategory,
   onCategoryChange,
   onRandomizeCategory,
 }: DesignPartPickerProps) {
   const [internalCategory, setInternalCategory] = useState<DesignPartCategory>('palette');
+  const [selectedThemeTag, setSelectedThemeTag] = useState<ThemeTag>('all');
+  const [themeSearch, setThemeSearch] = useState<string>('');
   const activeCategory = controlledCategory ?? internalCategory;
   const setActiveCategory = onCategoryChange ?? setInternalCategory;
 
   const categories: { id: DesignPartCategory; label: string; count: number; icon: ElementType }[] = [
+    { id: 'themes', label: '✨ Curated Themes', count: CURATED_THEMES.length, icon: Sparkles },
     { id: 'palette', label: '01. Palette', count: PALETTE_PARTS.length, icon: Palette },
     { id: 'font', label: '02. Typography', count: FONT_PARTS.length, icon: Type },
     { id: 'surface', label: '03. Surface & Borders', count: SURFACE_PARTS.length, icon: Layers },
     { id: 'components', label: '04. UI Controls', count: COMPONENT_PARTS.length, icon: MousePointerClick },
-    { id: 'accents', label: '05. Accents', count: ACCENT_PARTS.length, icon: Sparkles },
+    { id: 'accents', label: '05. Accents', count: ACCENT_PARTS.length, icon: Wand2 },
   ];
+
+  const themeTags: { id: ThemeTag; label: string }[] = [
+    { id: 'all', label: 'All Themes' },
+    { id: 'high-tech', label: '⚡ High-Tech' },
+    { id: 'developer', label: '💻 Developer' },
+    { id: 'fintech', label: '💳 Fintech' },
+    { id: 'retro', label: '🕹️ Retro' },
+    { id: 'editorial', label: '📰 Editorial' },
+    { id: 'minimal', label: '🍵 Minimal & Zen' },
+    { id: 'industrial', label: '🏭 Industrial' },
+  ];
+
+  const filteredThemes = CURATED_THEMES.filter((theme) => {
+    const matchesTag = selectedThemeTag === 'all' || theme.categoryTag === selectedThemeTag;
+    const q = themeSearch.toLowerCase().trim();
+    if (!q) return matchesTag;
+    return (
+      matchesTag &&
+      (theme.name.toLowerCase().includes(q) ||
+        theme.tagline.toLowerCase().includes(q) ||
+        theme.description.toLowerCase().includes(q) ||
+        theme.badge.toLowerCase().includes(q))
+    );
+  });
 
   const handleCopyPartPrompt = (e: MouseEvent, prompt: string, name: string) => {
     e.stopPropagation();
@@ -405,6 +441,259 @@ export function DesignPartPicker({
           );
         })}
       </div>
+
+      {/* 0. CURATED THEMES GALLERY */}
+      {activeCategory === 'themes' && (
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono">
+                  Prebuilt Curated Themes
+                </h3>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-bold">
+                  Calibrated Harmonies
+                </span>
+              </div>
+              <p className="text-xs text-stone-500 mt-0.5">
+                Hand-crafted aesthetic combinations matching palette, typography, surface physics, button mechanics, and accents. Click any theme to apply all 5 parts at once.
+              </p>
+            </div>
+
+            {onRandomizeCategory && (
+              <button
+                type="button"
+                onClick={() => onRandomizeCategory('themes')}
+                className="px-2.5 py-1.5 text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 rounded-xl cursor-pointer flex items-center gap-1.5 transition-transform active:scale-95 shadow-2xs"
+                title="Randomly pick and apply one of the curated themes"
+              >
+                <Dices className="w-3.5 h-3.5 text-stone-700" />
+                <span>Randomize Theme</span>
+              </button>
+            )}
+          </div>
+
+          {/* Search & Tag Filter Bar */}
+          <div className="space-y-2 bg-stone-50 p-2.5 rounded-xl border border-stone-200">
+            <div className="relative">
+              <Search className="w-3.5 h-3.5 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                value={themeSearch}
+                onChange={(e) => setThemeSearch(e.target.value)}
+                placeholder="Search curated themes by style, mood, keywords..."
+                className="w-full pl-8 pr-7 py-1.5 text-xs bg-white rounded-lg border border-stone-200 text-stone-900 placeholder:text-stone-400 focus:outline-hidden focus:ring-1 focus:ring-stone-900 focus:border-stone-900"
+              />
+              {themeSearch && (
+                <button
+                  type="button"
+                  onClick={() => setThemeSearch('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 text-xs cursor-pointer font-bold"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Filter pills */}
+            <div className="flex flex-wrap items-center gap-1.5">
+              {themeTags.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => setSelectedThemeTag(t.id)}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold cursor-pointer transition-colors ${
+                    selectedThemeTag === t.id
+                      ? 'bg-stone-900 text-white shadow-2xs'
+                      : 'bg-white text-stone-600 hover:bg-stone-200/70 border border-stone-200'
+                  }`}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Theme Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            {filteredThemes.map((theme) => {
+              const isThemeActive =
+                selection.palette.id === theme.paletteId &&
+                selection.font.id === theme.fontId &&
+                selection.surface.id === theme.surfaceId &&
+                selection.components.id === theme.componentId &&
+                selection.accent.id === theme.accentId;
+
+              const pal = PALETTE_PARTS.find((p) => p.id === theme.paletteId) || PALETTE_PARTS[0];
+              const fnt = FONT_PARTS.find((f) => f.id === theme.fontId) || FONT_PARTS[0];
+              const srf = SURFACE_PARTS.find((s) => s.id === theme.surfaceId) || SURFACE_PARTS[0];
+              const cmp = COMPONENT_PARTS.find((c) => c.id === theme.componentId) || COMPONENT_PARTS[0];
+              const acc = ACCENT_PARTS.find((a) => a.id === theme.accentId) || ACCENT_PARTS[0];
+
+              return (
+                <div
+                  key={theme.id}
+                  onClick={() => onApplyTheme?.(theme)}
+                  className={`p-4 rounded-2xl border text-left cursor-pointer transition-all space-y-3 relative ${
+                    isThemeActive
+                      ? 'border-stone-900 ring-2 ring-stone-900/10 bg-white shadow-md'
+                      : 'border-stone-200 bg-white hover:border-stone-400 hover:shadow-xs'
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span
+                        className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full font-bold border"
+                        style={{
+                          backgroundColor: `${theme.accentColor}18`,
+                          borderColor: `${theme.accentColor}40`,
+                          color: theme.accentColor,
+                        }}
+                      >
+                        {theme.badge}
+                      </span>
+                      <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-stone-100 text-stone-600 font-bold border border-stone-200">
+                        {theme.categoryTag}
+                      </span>
+                    </div>
+                    {isThemeActive && (
+                      <span className="flex items-center gap-1 text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        <Check className="w-3 h-3 stroke-[3]" /> Active Theme
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-bold text-stone-900 tracking-tight">{theme.name}</h4>
+                    <p className="text-xs text-stone-500 mt-0.5 line-clamp-2 leading-relaxed">
+                      {theme.tagline}
+                    </p>
+                  </div>
+
+                  {/* Swatches preview */}
+                  <div className="flex items-center gap-1.5 p-2 rounded-xl bg-stone-50 border border-stone-200">
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.primary }}
+                      title={`Primary: ${pal.primary}`}
+                    />
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.secondary }}
+                      title={`Secondary: ${pal.secondary}`}
+                    />
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.accent }}
+                      title={`Accent: ${pal.accent}`}
+                    />
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.surface }}
+                      title={`Surface: ${pal.surface}`}
+                    />
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.background }}
+                      title={`Background: ${pal.background}`}
+                    />
+                    <span className="text-[10px] font-mono text-stone-400 ml-auto">
+                      {pal.name}
+                    </span>
+                  </div>
+
+                  {/* Typography Live Specimen */}
+                  <div className="p-2.5 rounded-xl bg-stone-50 border border-stone-200 space-y-1">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-stone-400">
+                      <span>Typography: {fnt.name}</span>
+                      <span>{fnt.classification}</span>
+                    </div>
+                    <div
+                      className="text-xs text-stone-800 font-medium truncate"
+                      style={{ fontFamily: fnt.fontFamily }}
+                    >
+                      {fnt.previewSample || 'The quick brown fox jumps over the lazy dog'}
+                    </div>
+                  </div>
+
+                  {/* 5-Pillar Breakdown Chips */}
+                  <div className="grid grid-cols-2 gap-1.5 text-[10px] font-mono">
+                    <div className="px-2 py-1 rounded-lg bg-stone-50 border border-stone-200 text-stone-700 truncate" title={`Surface: ${srf.name}`}>
+                      📐 <span className="font-semibold">{srf.name}</span>
+                    </div>
+                    <div className="px-2 py-1 rounded-lg bg-stone-50 border border-stone-200 text-stone-700 truncate" title={`Controls: ${cmp.name}`}>
+                      🧩 <span className="font-semibold">{cmp.name}</span>
+                    </div>
+                    <div className="col-span-2 px-2 py-1 rounded-lg bg-stone-50 border border-stone-200 text-stone-700 truncate" title={`Accent: ${acc.name}`}>
+                      ✨ <span className="font-semibold">{acc.name}</span>
+                    </div>
+                  </div>
+
+                  {/* Actions Bar */}
+                  <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const themeSelection = resolveCuratedTheme(theme);
+                        const prompt = generateCombinedMasterPrompt(themeSelection);
+                        handleCopyPartPrompt(e, prompt, theme.name);
+                      }}
+                      className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
+                      title="Copy full synthesized master prompt for this theme"
+                    >
+                      <Copy className="w-3 h-3" />
+                      <span>Copy Prompt</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onApplyTheme?.(theme);
+                      }}
+                      className={`px-3 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5 cursor-pointer transition-transform active:scale-95 ${
+                        isThemeActive
+                          ? 'bg-emerald-600 text-white'
+                          : 'bg-stone-900 hover:bg-black text-white shadow-xs'
+                      }`}
+                    >
+                      {isThemeActive ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 stroke-[3]" />
+                          <span>Active</span>
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                          <span>Apply Theme</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {filteredThemes.length === 0 && (
+            <div className="p-8 text-center bg-stone-50 rounded-2xl border border-stone-200 space-y-2">
+              <p className="text-sm font-semibold text-stone-700">No themes found matching &quot;{themeSearch}&quot;</p>
+              <p className="text-xs text-stone-500">Try adjusting your search or category filter.</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setThemeSearch('');
+                  setSelectedThemeTag('all');
+                }}
+                className="px-3 py-1.5 bg-stone-900 text-white text-xs font-bold rounded-xl cursor-pointer"
+              >
+                Clear Filters
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* 1. COLOR PALETTES */}
       {activeCategory === 'palette' && (

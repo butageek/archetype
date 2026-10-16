@@ -13,15 +13,18 @@ import confetti from 'canvas-confetti';
 import {
   ACCENT_PARTS,
   COMPONENT_PARTS,
+  CURATED_THEMES,
   DEFAULT_DESIGN_PARTS,
   FONT_PARTS,
   generateCombinedMasterPrompt,
   PALETTE_PARTS,
+  resolveCuratedTheme,
   SURFACE_PARTS,
 } from '../lib/designPartsData';
 import {
   AccentPart,
   ComponentPart,
+  CuratedTheme,
   DesignPartCategory,
   DesignPartsSelection,
   FontPart,
@@ -42,6 +45,31 @@ export default function ArchetypeSynthesizerPage() {
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3200);
+  };
+
+  // Check if current selection matches one of the prebuilt curated themes
+  const activeCuratedTheme = useMemo(() => {
+    return CURATED_THEMES.find(
+      (t) =>
+        t.paletteId === selection.palette.id &&
+        t.fontId === selection.font.id &&
+        t.surfaceId === selection.surface.id &&
+        t.componentId === selection.components.id &&
+        t.accentId === selection.accent.id
+    );
+  }, [selection]);
+
+  // Apply a prebuilt curated theme across all 5 categories at once
+  const handleApplyTheme = (theme: CuratedTheme) => {
+    const newSelection = resolveCuratedTheme(theme);
+    setSelection(newSelection);
+    confetti({
+      particleCount: 50,
+      spread: 60,
+      origin: { y: 0.8 },
+      colors: [theme.accentColor, newSelection.palette.primary, newSelection.palette.accent],
+    });
+    showToast(`Applied Curated Theme: "${theme.name}"!`);
   };
 
   // Generate combined master prompt dynamically
@@ -67,7 +95,11 @@ export default function ArchetypeSynthesizerPage() {
 
   // Randomize a single category while preserving the other 4
   const handleRandomizeCategory = (category: DesignPartCategory) => {
-    if (category === 'palette') {
+    if (category === 'themes') {
+      const candidates = CURATED_THEMES.filter((t) => t.id !== activeCuratedTheme?.id);
+      const nextTheme = candidates[Math.floor(Math.random() * candidates.length)] || CURATED_THEMES[0];
+      handleApplyTheme(nextTheme);
+    } else if (category === 'palette') {
       const candidates = PALETTE_PARTS.filter((p) => p.id !== selection.palette.id);
       const next = candidates[Math.floor(Math.random() * candidates.length)] || PALETTE_PARTS[0];
       setSelection((prev) => ({ ...prev, palette: next }));
@@ -193,13 +225,31 @@ export default function ArchetypeSynthesizerPage() {
                       <button
                         type="button"
                         onClick={() => {
+                          const candidates = CURATED_THEMES.filter((t) => t.id !== activeCuratedTheme?.id);
+                          const nextTheme = candidates[Math.floor(Math.random() * candidates.length)] || CURATED_THEMES[0];
+                          handleApplyTheme(nextTheme);
+                          setSurpriseMenuOpen(false);
+                        }}
+                        className="w-full text-left px-3 py-1.5 hover:bg-amber-50/70 flex items-center justify-between cursor-pointer font-medium text-amber-900 transition-colors"
+                      >
+                        <span className="flex items-center gap-2">
+                          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                          <span>Surprise Curated Theme</span>
+                        </span>
+                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 font-bold border border-amber-200">
+                          Harmonious
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
                           handleSurpriseMe();
                           setSurpriseMenuOpen(false);
                         }}
                         className="w-full text-left px-3 py-1.5 hover:bg-stone-100 flex items-center justify-between cursor-pointer font-medium"
                       >
                         <span className="flex items-center gap-2">
-                          <span>🎲</span>
+                          <Dices className="w-3.5 h-3.5 text-stone-500" />
                           <span>Surprise All (5 Parts)</span>
                         </span>
                         <span className="text-[10px] font-mono text-stone-500">All</span>
@@ -210,6 +260,22 @@ export default function ArchetypeSynthesizerPage() {
                       <div className="px-3 py-1 text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider">
                         Tweak Individual Category
                       </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveCategory('themes');
+                          setSurpriseMenuOpen(false);
+                        }}
+                        className="w-full text-left px-3 py-1.5 hover:bg-stone-100 flex items-center justify-between cursor-pointer"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>✨</span>
+                          <span>Curated Themes</span>
+                        </span>
+                        <span className="text-[10px] font-mono text-stone-500">
+                          {CURATED_THEMES.length} Presets
+                        </span>
+                      </button>
                       <button
                         type="button"
                         onClick={() => {
@@ -377,7 +443,59 @@ export default function ArchetypeSynthesizerPage() {
               {/* TAB 1: LIVE COMBINED MOCKUP VIEWPORT */}
               {leftTab === 'mockup' && (
                 <div className="space-y-3 animate-in fade-in duration-150">
+                  {/* Quick Theme Presets Strip */}
+                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none border-b border-stone-100 pb-2.5">
+                    <span className="text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider shrink-0 flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-amber-500" /> Presets:
+                    </span>
+                    {CURATED_THEMES.slice(0, 6).map((theme) => {
+                      const isThemeActive = activeCuratedTheme?.id === theme.id;
+                      return (
+                        <button
+                          key={theme.id}
+                          type="button"
+                          onClick={() => handleApplyTheme(theme)}
+                          className={`px-2 py-1 rounded-lg text-[11px] font-semibold cursor-pointer shrink-0 transition-all flex items-center gap-1.5 ${
+                            isThemeActive
+                              ? 'bg-stone-900 text-white shadow-xs font-bold'
+                              : 'bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200'
+                          }`}
+                          title={`${theme.name} — ${theme.tagline}`}
+                        >
+                          <span
+                            className="w-2 h-2 rounded-full shrink-0"
+                            style={{ backgroundColor: theme.accentColor }}
+                          />
+                          <span>{theme.name.split(' (')[0].replace(' 1989', '').replace(' 1920s', '').replace(' Heavy', '')}</span>
+                        </button>
+                      );
+                    })}
+                    <button
+                      type="button"
+                      onClick={() => setActiveCategory('themes')}
+                      className="px-2 py-1 rounded-lg text-[11px] font-bold cursor-pointer shrink-0 text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors flex items-center gap-1"
+                      title="Open all 16 curated themes in the right panel"
+                    >
+                      <span>All ({CURATED_THEMES.length}) →</span>
+                    </button>
+                  </div>
+
                   <LiveCombinedPreview selection={selection} />
+
+                  {/* Active Curated Theme Indicator */}
+                  {activeCuratedTheme && (
+                    <div className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-amber-50/70 border border-amber-200/80 text-amber-900 text-xs">
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                        <span className="font-mono text-[11px] text-amber-900 font-semibold truncate">
+                          Active Prebuilt Theme: <strong>{activeCuratedTheme.name}</strong>
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-white text-amber-800 font-bold border border-amber-200 shrink-0">
+                        {activeCuratedTheme.badge}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Selection Summary Badges */}
                   <div className="flex items-center gap-1.5 flex-wrap pt-1 text-[11px] font-mono">
@@ -634,6 +752,7 @@ export default function ArchetypeSynthesizerPage() {
                 onSelectSurface={(surf: SurfacePart) => setSelection((prev) => ({ ...prev, surface: surf }))}
                 onSelectComponent={(comp: ComponentPart) => setSelection((prev) => ({ ...prev, components: comp }))}
                 onSelectAccent={(acc: AccentPart) => setSelection((prev) => ({ ...prev, accent: acc }))}
+                onApplyTheme={handleApplyTheme}
                 onToast={showToast}
                 activeCategory={activeCategory}
                 onCategoryChange={setActiveCategory}

@@ -1,4 +1,5 @@
 export type DesignPartCategory =
+  | 'themes'
   | 'palette'
   | 'font'
   | 'surface'
@@ -118,4 +119,29 @@ export interface DesignPartsSelection {
   surface: SurfacePart;
   components: ComponentPart;
   accent: AccentPart;
+}
+
+export type ThemeTag =
+  | 'all'
+  | 'high-tech'
+  | 'developer'
+  | 'fintech'
+  | 'retro'
+  | 'editorial'
+  | 'minimal'
+  | 'industrial';
+
+export interface CuratedTheme {
+  id: string;
+  name: string;
+  tagline: string;
+  description: string;
+  badge: string;
+  categoryTag: ThemeTag;
+  accentColor: string;
+  paletteId: string;
+  fontId: string;
+  surfaceId: string;
+  componentId: string;
+  accentId: string;
 }
