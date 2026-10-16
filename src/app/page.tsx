@@ -34,6 +34,14 @@ export default function ArchetypeSynthesizerPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copiedCombined, setCopiedCombined] = useState<boolean>(false);
   const [leftTab, setLeftTab] = useState<'mockup' | 'prompt'>('mockup');
+  const [selectedSnippet, setSelectedSnippet] = useState<string>('');
+
+  const handleSelectionChange = () => {
+    if (typeof window !== 'undefined') {
+      const text = window.getSelection()?.toString().trim() || '';
+      setSelectedSnippet(text);
+    }
+  };
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -227,36 +235,112 @@ export default function ArchetypeSynthesizerPage() {
               {/* TAB 2: SYNTHESIZED AGENT MASTER PROMPT VIEW */}
               {leftTab === 'prompt' && (
                 <div className="space-y-3 animate-in fade-in duration-150">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-stone-500">
-                      Plain-text design directives + Tailwind CSS v4 @theme block:
-                    </span>
-                    <button
-                      onClick={handleCopyCompletePrompt}
-                      className="px-3 py-1.5 text-xs font-bold text-stone-900 bg-stone-100 hover:bg-stone-200 border border-stone-300 rounded-xl flex items-center gap-1.5 transition-transform active:scale-95 cursor-pointer"
-                    >
-                      {copiedCombined ? (
-                        <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[3]" />
-                      ) : (
-                        <Copy className="w-3.5 h-3.5 text-stone-700" />
-                      )}
-                      <span>{copiedCombined ? 'Copied!' : 'Copy Prompt'}</span>
-                    </button>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    {/* Quick Section Copy Chips */}
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider">
+                        Copy:
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(selection.palette.promptSnippet);
+                          showToast(`Copied Palette tokens (${selection.palette.name})!`);
+                        }}
+                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
+                        title="Copy only color palette tokens"
+                      >
+                        🎨 Palette
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(selection.font.promptSnippet);
+                          showToast(`Copied Typography rules (${selection.font.name})!`);
+                        }}
+                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
+                        title="Copy only typography rules"
+                      >
+                        🔤 Typography
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(selection.surface.promptSnippet);
+                          showToast(`Copied Surface specifications (${selection.surface.name})!`);
+                        }}
+                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
+                        title="Copy only surface and elevation styles"
+                      >
+                        📐 Surface
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const themeBlock = `@theme {\n  --color-primary: ${selection.palette.primary};\n  --color-secondary: ${selection.palette.secondary};\n  --color-accent: ${selection.palette.accent};\n  --color-background: ${selection.palette.background};\n  --color-surface: ${selection.palette.surface};\n  --color-border: ${selection.palette.border};\n  --color-text-primary: ${selection.palette.text};\n  --color-text-muted: ${selection.palette.textMuted};\n  --radius-card: ${selection.surface.radius};\n}`;
+                          navigator.clipboard.writeText(themeBlock);
+                          showToast('Copied Tailwind CSS v4 @theme block!');
+                        }}
+                        className="px-2 py-0.5 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-md transition-colors cursor-pointer"
+                        title="Copy only Tailwind CSS v4 @theme block"
+                      >
+                        ⚡ @theme
+                      </button>
+                    </div>
+
+                    {/* Adaptive Copy Button: Changes to Copy Selection when text is highlighted */}
+                    {selectedSnippet ? (
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(selectedSnippet);
+                          showToast(`Copied highlighted selection (${selectedSnippet.length} chars)!`);
+                        }}
+                        className="px-3 py-1.5 text-xs font-bold text-amber-950 bg-amber-400 hover:bg-amber-300 border border-amber-500 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer animate-in fade-in shadow-xs active:scale-95"
+                        title="Copy the highlighted text"
+                      >
+                        <Copy className="w-3.5 h-3.5 text-amber-950" />
+                        <span>Copy Selection ({selectedSnippet.length > 15 ? `${selectedSnippet.slice(0, 15)}…` : selectedSnippet})</span>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleCopyCompletePrompt}
+                        className="px-3 py-1.5 text-xs font-bold text-stone-900 bg-stone-100 hover:bg-stone-200 border border-stone-300 rounded-xl flex items-center gap-1.5 transition-transform active:scale-95 cursor-pointer"
+                        title="Copy the complete synthesized prompt"
+                      >
+                        {copiedCombined ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[3]" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5 text-stone-700" />
+                        )}
+                        <span>{copiedCombined ? 'Copied!' : 'Copy Full Prompt'}</span>
+                      </button>
+                    )}
                   </div>
 
                   <div className="relative">
-                    <textarea
-                      readOnly
-                      value={combinedMasterPrompt}
-                      rows={18}
-                      className="w-full p-4 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs leading-relaxed border border-stone-800 focus:outline-none focus:ring-1 focus:ring-stone-600 cursor-text select-text resize-y shadow-inner scrollbar-thin"
-                      spellCheck={false}
-                    />
+                    <pre
+                      tabIndex={0}
+                      draggable={false}
+                      onDragStart={(e) => {
+                        e.preventDefault();
+                        return false;
+                      }}
+                      onMouseUp={handleSelectionChange}
+                      onKeyUp={handleSelectionChange}
+                      style={{
+                        userSelect: 'text',
+                        WebkitUserSelect: 'text',
+                        ...({ WebkitUserDrag: 'none' } as React.CSSProperties),
+                      }}
+                      className="w-full p-4 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs leading-relaxed border border-stone-800 focus:outline-none focus:ring-1 focus:ring-stone-600 cursor-text select-text overflow-auto max-h-[440px] whitespace-pre-wrap selection:bg-amber-400 selection:text-stone-950 shadow-inner scrollbar-thin"
+                    >
+                      {combinedMasterPrompt}
+                    </pre>
                   </div>
 
                   <div className="text-[11px] text-stone-500 flex flex-wrap items-center justify-between gap-1">
                     <span>
-                      💡 <strong>Tip</strong>: Highlight any snippet or token directly to copy with <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">Ctrl+C</kbd> / <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">⌘C</kbd>, or click <strong>Copy Prompt</strong> for the full directive.
+                      💡 <strong>Tip</strong>: Highlight any character, word, or token directly to copy with <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">Ctrl+C</kbd> / <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">⌘C</kbd>, or use the quick copy buttons above.
                     </span>
                   </div>
                 </div>

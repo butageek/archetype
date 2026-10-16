@@ -45,3 +45,15 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a29e;
 }
+
+/* High-contrast vibrant selection highlight across all platforms */
+::selection {
+  background-color: #fbbf24;
+  color: #0c0a09;
+}
+
+/* Prevent native drag ghosting on text blocks to ensure reliable text selection */
+pre, code, textarea {
+  -webkit-user-drag: none;
+  user-select: text;
+}
