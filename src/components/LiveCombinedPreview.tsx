@@ -64,7 +64,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
   const headingStyle: CSSProperties = {
     fontFamily: font.fontFamily,
     letterSpacing:
-      font.classification === 'grotesk' || font.classification === 'cyberpunk'
+      font.classification === 'bento' || font.classification === 'cyberpunk'
         ? '-0.02em'
         : font.classification === 'luxury' || font.classification === 'art-deco'
         ? '0.08em'

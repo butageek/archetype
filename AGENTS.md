@@ -73,11 +73,11 @@ archetype/
 ### Component Roles
 
 - **`src/app/page.tsx`**:
-  - Implements the Studio split-screen layout.
-  - Left column (`lg:col-span-5` or `lg:col-span-6`): Sticky in viewport (`lg:sticky lg:top-20`), housing the live preview specimen and prompt viewer tabs.
-  - Right column (`lg:col-span-7` or `lg:col-span-6`): Scrollable gallery with category pill buttons, search filter, category-specific randomize buttons, and individual part cards.
+  - Implements the Studio split-screen layout with balanced 6/6 desktop columns (`lg:col-span-6 xl:col-span-6`).
+  - Left column: Viewport-optimized studio card housing the live preview specimen (responsive scale) and prompt viewer tabs.
+  - Integrated bottom toolbar: Displays the active curated theme badge (or custom composition indicator) alongside compact inline `🎲` dice buttons to re-roll individual pillars in place.
+  - Right column: Independently scrollable design library housing the Curated Themes gallery (16 presets filterable by tag and search) and all 5 individual pillar category tabs.
   - Header controls: Split "Surprise Me ▾" dropdown (Surprise All or target individual category) and "Copy Master Prompt".
-  - Interactive selection summary badges with 1-click category jumping and inline `🎲` dice buttons to re-roll individual parts directly.
   - Dedicated category prompt copy chips (`🎨 Palette`, `🔤 Typography`, `📐 Surface`, `🧩 Controls`, `✨ Accent`, `⚡ @theme`).
 
 - **`src/components/LiveCombinedPreview.tsx`**:
@@ -93,8 +93,9 @@ archetype/
     - Ambient/viewport graphic accents (scanlines, dot grids, aurora glows, wireframe grids, barcodes, waveforms, constellations, etc.).
 
 - **`src/components/DesignPartPicker.tsx`**:
-  - Category selector tabs with icons and item counts.
+  - Category selector tabs with icons and item counts (Curated Themes + 5 design pillars).
   - Search filter filtering by name, tagline, description, or classification.
+  - Curated Themes view with 7 category tag filter pills (`high-tech`, `developer`, `fintech`, `retro`, `editorial`, `minimal`, `industrial`).
   - Dedicated `[🎲 Randomize {Category}]` header button in every category strip.
   - Visual preview cards:
     - Palettes: 5-swatch color bars + token chips.
@@ -104,8 +105,9 @@ archetype/
     - Accents: Specialized `AccentVisualPreview` component rendering visual representation.
 
 - **`src/lib/designPartsData.ts`**:
-  - Master data source. Contains `PALETTE_PARTS` (33), `FONT_PARTS` (21), `SURFACE_PARTS` (19), `COMPONENT_PARTS` (18), `ACCENT_PARTS` (19).
+  - Master data source. Contains `PALETTE_PARTS` (33), `FONT_PARTS` (21), `SURFACE_PARTS` (19), `COMPONENT_PARTS` (18), `ACCENT_PARTS` (19), and `CURATED_THEMES` (16).
   - `generateCombinedMasterPrompt(selection)`: Synthesizes the 5 prompt snippets into an executable plain-text agent prompt with a Tailwind CSS v4 `@theme` block.
+  - `resolveCuratedTheme(theme)`: Resolves a curated theme preset into a complete 5-pillar `DesignPartsSelection`.
 
 ---
 

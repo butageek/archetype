@@ -31,11 +31,11 @@ Archetype deconstructs UI design into 5 enumerable, modular pillars:
 │  • Interactive Specimen Preview   │   ✨ Curated Themes (16 Presets)   │
 │  • Checkboxes, Radios, Dropdown   │   01. Palette (33 styles)          │
 │  • Inputs, Slider, Hover Physics  │   02. Typography (21 fonts)        │
-│  • Quick Presets Strip (1-Click)  │   03. Surface & Borders (19 styles)│
-│  • Inline 🎲 Dice Re-Roll Badges  │   04. UI Controls (18 styles)      │
-│  • Dedicated Category Copy Chips  │   05. Graphic Accents (19 styles)  │
-│  • Master Plain-Text Prompt Tab   │   • Category-specific Randomizers  │
-│  • 1-Click Universal Copy         │   • Live Visual Preview Cards      │
+│  • Inline 🎲 Dice Re-Roll Toolbar │   03. Surface & Borders (19 styles)│
+│  • Dedicated Category Copy Chips  │   04. UI Controls (18 styles)      │
+│  • Master Plain-Text Prompt Tab   │   05. Graphic Accents (19 styles)  │
+│  • 1-Click Universal Copy         │   • Category-specific Randomizers  │
+│                                   │   • Live Visual Preview Cards      │
 └───────────────────────────────────┴────────────────────────────────────┘
 ```
 
