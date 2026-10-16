@@ -4,10 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Camera,
   Check,
-  Code2,
   Copy,
   Download,
-  Layers,
   Palette,
   Sparkles,
   Terminal,
@@ -35,8 +33,6 @@ export function MockupInspectorModal({
   const [copyingImage, setCopyingImage] = useState<boolean>(false);
   const [downloadingImage, setDownloadingImage] = useState<boolean>(false);
   const [copiedPrompt, setCopiedPrompt] = useState<boolean>(false);
-  const [copiedTokens, setCopiedTokens] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<'prompt' | 'tokens' | 'specs'>('prompt');
 
   // Escape key to close
   useEffect(() => {
@@ -104,16 +100,8 @@ export function MockupInspectorModal({
       colors: [specimen.palette.primary, '#10B981'],
     });
 
-    onToast(`Copied AI Agent prompt for "${specimen.title}"!`);
+    onToast(`Copied AI Agent Master Prompt!`);
     setTimeout(() => setCopiedPrompt(false), 1800);
-  };
-
-  // 1-Click Copy Tailwind Tokens
-  const handleCopyTokens = () => {
-    navigator.clipboard.writeText(specimen.tailwindTokens);
-    setCopiedTokens(true);
-    onToast(`Copied Tailwind CSS v4 tokens!`);
-    setTimeout(() => setCopiedTokens(false), 1800);
   };
 
   // Copy individual hex code
@@ -132,7 +120,7 @@ export function MockupInspectorModal({
         className="w-full max-w-5xl bg-white border border-stone-200 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-stone-900 my-auto max-h-[92vh]"
       >
         {/* Modal Header Toolbar */}
-        <div className="p-4 sm:p-5 border-b border-stone-200 flex flex-wrap items-center justify-between gap-3 bg-stone-50/80">
+        <div className="p-4 sm:p-5 border-b border-stone-200 flex flex-wrap items-center justify-between gap-3 bg-stone-50/90">
           <div>
             <div className="flex items-center gap-2.5">
               <h2 className="text-base sm:text-lg font-bold text-stone-950">
@@ -225,11 +213,11 @@ export function MockupInspectorModal({
             <div className="flex items-center gap-2">
               <Palette className="w-4 h-4 text-stone-700" />
               <h3 className="text-xs font-bold uppercase tracking-wider text-stone-700 font-mono">
-                Color Palette & Tokens (Click to Copy Hex)
+                Color Palette Tokens (Click to Copy Hex)
               </h3>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5">
               {[
                 { label: 'Primary', hex: specimen.palette.primary },
                 { label: 'Secondary', hex: specimen.palette.secondary },
@@ -260,124 +248,46 @@ export function MockupInspectorModal({
             </div>
           </div>
 
-          {/* 3. TABS: AGENT PROMPT / TAILWIND TOKENS / SPEC SUMMARY */}
-          <div className="bg-stone-50 border border-stone-200 rounded-2xl p-4 sm:p-5 space-y-4">
+          {/* 3. UNIFIED AGENT MASTER PROMPT (PLAIN TEXT, NO SEPARATE TABS) */}
+          <div className="bg-stone-50 border border-stone-200 rounded-2xl p-4 sm:p-5 space-y-3">
             <div className="flex items-center justify-between border-b border-stone-200 pb-3">
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setActiveTab('prompt')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-colors flex items-center gap-1.5 ${
-                    activeTab === 'prompt'
-                      ? 'bg-stone-900 text-white font-bold'
-                      : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200'
-                  }`}
-                >
-                  <Terminal className="w-3.5 h-3.5" />
-                  <span>AI Agent Master Prompt</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveTab('tokens')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-colors flex items-center gap-1.5 ${
-                    activeTab === 'tokens'
-                      ? 'bg-stone-900 text-white font-bold'
-                      : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200'
-                  }`}
-                >
-                  <Code2 className="w-3.5 h-3.5" />
-                  <span>Tailwind v4 @theme</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveTab('specs')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-colors flex items-center gap-1.5 ${
-                    activeTab === 'specs'
-                      ? 'bg-stone-900 text-white font-bold'
-                      : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200'
-                  }`}
-                >
-                  <Layers className="w-3.5 h-3.5" />
-                  <span>Design Rules</span>
-                </button>
+                <Terminal className="w-4 h-4 text-stone-800" />
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-stone-900 font-mono">
+                    AI Agent Master Prompt
+                  </h3>
+                  <p className="text-[11px] text-stone-500">
+                    Comprehensive visual design system, color tokens, layout invariants, and Tailwind v4 definitions.
+                  </p>
+                </div>
               </div>
 
-              {/* Tab Copy Button */}
-              {activeTab === 'prompt' && (
-                <button
-                  onClick={handleCopyPrompt}
-                  className="px-2.5 py-1 text-xs font-semibold text-stone-700 bg-white hover:bg-stone-100 border border-stone-300 rounded-lg flex items-center gap-1 cursor-pointer"
-                >
-                  <Copy className="w-3 h-3" />
-                  <span>Copy Prompt</span>
-                </button>
-              )}
-
-              {activeTab === 'tokens' && (
-                <button
-                  onClick={handleCopyTokens}
-                  className="px-2.5 py-1 text-xs font-semibold text-stone-700 bg-white hover:bg-stone-100 border border-stone-300 rounded-lg flex items-center gap-1 cursor-pointer"
-                >
-                  {copiedTokens ? (
-                    <Check className="w-3 h-3 text-emerald-600 stroke-[3]" />
-                  ) : (
-                    <Copy className="w-3 h-3" />
-                  )}
-                  <span>{copiedTokens ? 'Copied!' : 'Copy CSS'}</span>
-                </button>
-              )}
+              <button
+                onClick={handleCopyPrompt}
+                className="px-3 py-1.5 text-xs font-bold text-stone-900 bg-white hover:bg-stone-100 border border-stone-300 rounded-xl flex items-center gap-1.5 shadow-2xs transition-transform active:scale-95 cursor-pointer"
+              >
+                {copiedPrompt ? (
+                  <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[3]" />
+                ) : (
+                  <Copy className="w-3.5 h-3.5 text-stone-700" />
+                )}
+                <span>{copiedPrompt ? 'Copied Prompt!' : 'Copy Prompt'}</span>
+              </button>
             </div>
 
-            {/* Tab 1: Agent Prompt */}
-            {activeTab === 'prompt' && (
-              <div className="relative">
-                <pre className="p-4 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-60 select-all">
-                  {specimen.agentPrompt}
-                </pre>
-              </div>
-            )}
+            {/* Plain Text Code Block */}
+            <div className="relative">
+              <pre className="p-4 sm:p-5 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed select-all border border-stone-800 max-h-[340px]">
+                {specimen.agentPrompt}
+              </pre>
+            </div>
 
-            {/* Tab 2: Tailwind Tokens */}
-            {activeTab === 'tokens' && (
-              <div className="relative">
-                <pre className="p-4 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-60 select-all">
-                  {specimen.tailwindTokens}
-                </pre>
-              </div>
-            )}
-
-            {/* Tab 3: Design Rules */}
-            {activeTab === 'specs' && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <div className="p-3 bg-white border border-stone-200 rounded-xl space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-stone-400 font-bold block">
-                    Typography Pairing
-                  </span>
-                  <div className="font-bold text-stone-900">{specimen.typography.heading}</div>
-                  <div className="text-stone-500">{specimen.typography.mono}</div>
-                </div>
-
-                <div className="p-3 bg-white border border-stone-200 rounded-xl space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-stone-400 font-bold block">
-                    Surface & Borders
-                  </span>
-                  <div className="font-bold text-stone-900">
-                    Radius: {specimen.style.radius}
-                  </div>
-                  <div className="text-stone-500">
-                    Borders: {specimen.style.borderWidth} {specimen.style.borderStyle}
-                  </div>
-                </div>
-
-                <div className="p-3 bg-white border border-stone-200 rounded-xl space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-stone-400 font-bold block">
-                    Signature Accents
-                  </span>
-                  <div className="font-bold text-stone-900">
-                    {specimen.accents.join(' • ')}
-                  </div>
-                </div>
-              </div>
-            )}
+            <div className="pt-1 text-[11px] text-stone-500 flex items-center justify-between">
+              <span>
+                💡 <strong>How to use</strong>: Copy this prompt and paste it into Claude, Cursor, or Antigravity alongside your screenshot.
+              </span>
+            </div>
           </div>
         </div>
       </div>

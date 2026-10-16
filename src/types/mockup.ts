@@ -4,10 +4,11 @@ export type MockupCategory =
   | 'all'
   | 'saas'
   | 'devtools'
+  | 'ai-creative'
   | 'fintech'
   | 'minimal'
   | 'dark'
-  | 'creative';
+  | 'retro';
 
 export interface MockupPalette {
   primary: string;
@@ -38,7 +39,7 @@ export interface MockupTypography {
 export interface WebAppMockupSpecimen {
   id: string;
   title: string;
-  category: 'saas' | 'devtools' | 'fintech' | 'minimal' | 'dark' | 'creative';
+  category: MockupCategory;
   categoryLabel: string;
   tagline: string;
   description: string;
@@ -48,6 +49,5 @@ export interface WebAppMockupSpecimen {
   typography: MockupTypography;
   accents: string[];
   agentPrompt: string;
-  tailwindTokens: string;
   renderInteractive: (props: { isPreview?: boolean }) => React.ReactNode;
 }

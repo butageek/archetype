@@ -25,14 +25,14 @@ export default function ArchetypeGalleryPage() {
     setTimeout(() => setToastMessage(null), 3200);
   };
 
-  // Filter categories
   const categories: { id: MockupCategory; label: string }[] = [
     { id: 'all', label: 'All Mockups' },
     { id: 'devtools', label: 'Developer Tools' },
-    { id: 'fintech', label: 'Fintech & SaaS' },
-    { id: 'minimal', label: 'Minimalist & Clean' },
-    { id: 'dark', label: 'Dark Mode & Terminal' },
-    { id: 'creative', label: 'Neo-Brutal & Creative' },
+    { id: 'ai-creative', label: 'AI & Creative Studio' },
+    { id: 'fintech', label: 'Fintech & Markets' },
+    { id: 'minimal', label: 'Minimalist & Editorial' },
+    { id: 'dark', label: 'Dark Mode & Cyberpunk' },
+    { id: 'retro', label: 'Industrial & Retro' },
   ];
 
   // Filtered specimens
