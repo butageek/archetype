@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import {
   Check,
   Copy,
+  Dices,
   Layers,
   MousePointerClick,
   Palette,
@@ -270,6 +271,9 @@ interface DesignPartPickerProps {
   onSelectComponent: (comp: ComponentPart) => void;
   onSelectAccent: (acc: AccentPart) => void;
   onToast: (msg: string) => void;
+  activeCategory?: DesignPartCategory;
+  onCategoryChange?: (category: DesignPartCategory) => void;
+  onRandomizeCategory?: (category: DesignPartCategory) => void;
 }
 
 export function DesignPartPicker({
@@ -280,8 +284,13 @@ export function DesignPartPicker({
   onSelectComponent,
   onSelectAccent,
   onToast,
+  activeCategory: controlledCategory,
+  onCategoryChange,
+  onRandomizeCategory,
 }: DesignPartPickerProps) {
-  const [activeCategory, setActiveCategory] = useState<DesignPartCategory>('palette');
+  const [internalCategory, setInternalCategory] = useState<DesignPartCategory>('palette');
+  const activeCategory = controlledCategory ?? internalCategory;
+  const setActiveCategory = onCategoryChange ?? setInternalCategory;
 
   const categories: { id: DesignPartCategory; label: string; count: number; icon: React.ElementType }[] = [
     { id: 'palette', label: '01. Palette', count: PALETTE_PARTS.length, icon: Palette },
@@ -333,7 +342,7 @@ export function DesignPartPicker({
       {/* 1. COLOR PALETTES */}
       {activeCategory === 'palette' && (
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono">
                 Recognized Color Palette Styles
@@ -342,9 +351,22 @@ export function DesignPartPicker({
                 Pick a color atmosphere. Each name defines a specific emotional tone and semantic color system.
               </p>
             </div>
-            <span className="text-xs text-stone-600 font-medium">
-              Selected: <strong className="text-stone-900">{selection.palette.name}</strong>
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-stone-600 font-medium hidden sm:inline">
+                Selected: <strong className="text-stone-900">{selection.palette.name}</strong>
+              </span>
+              {onRandomizeCategory && (
+                <button
+                  type="button"
+                  onClick={() => onRandomizeCategory('palette')}
+                  className="px-2.5 py-1.5 text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 rounded-xl cursor-pointer flex items-center gap-1.5 transition-transform active:scale-95 shadow-2xs"
+                  title="Randomize only palette"
+                >
+                  <Dices className="w-3.5 h-3.5 text-stone-700" />
+                  <span>Randomize Palette</span>
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -427,7 +449,7 @@ export function DesignPartPicker({
       {/* 2. TYPOGRAPHY & FONT STYLES */}
       {activeCategory === 'font' && (
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono">
                 Recognized Font Archetypes (Pixel, Handwriting, Cartoon, etc.)
@@ -436,9 +458,22 @@ export function DesignPartPicker({
                 Preview how each typography style renders live. Select one to define your app&apos;s typographic voice.
               </p>
             </div>
-            <span className="text-xs text-stone-600 font-medium">
-              Selected: <strong className="text-stone-900">{selection.font.name}</strong>
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-stone-600 font-medium hidden sm:inline">
+                Selected: <strong className="text-stone-900">{selection.font.name}</strong>
+              </span>
+              {onRandomizeCategory && (
+                <button
+                  type="button"
+                  onClick={() => onRandomizeCategory('font')}
+                  className="px-2.5 py-1.5 text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 rounded-xl cursor-pointer flex items-center gap-1.5 transition-transform active:scale-95 shadow-2xs"
+                  title="Randomize only typography"
+                >
+                  <Dices className="w-3.5 h-3.5 text-stone-700" />
+                  <span>Randomize Typography</span>
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -497,7 +532,7 @@ export function DesignPartPicker({
       {/* 3. SURFACE, BORDERS & SHADOWS */}
       {activeCategory === 'surface' && (
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono">
                 Recognized Surface & Boundary Treatments
@@ -506,9 +541,22 @@ export function DesignPartPicker({
                 Corner radii, border strokes, and elevation shadows (Hard Block Drop, CAD Hairline, Glass, etc.).
               </p>
             </div>
-            <span className="text-xs text-stone-600 font-medium">
-              Selected: <strong className="text-stone-900">{selection.surface.name}</strong>
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-stone-600 font-medium hidden sm:inline">
+                Selected: <strong className="text-stone-900">{selection.surface.name}</strong>
+              </span>
+              {onRandomizeCategory && (
+                <button
+                  type="button"
+                  onClick={() => onRandomizeCategory('surface')}
+                  className="px-2.5 py-1.5 text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 rounded-xl cursor-pointer flex items-center gap-1.5 transition-transform active:scale-95 shadow-2xs"
+                  title="Randomize only surface"
+                >
+                  <Dices className="w-3.5 h-3.5 text-stone-700" />
+                  <span>Randomize Surface</span>
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -574,7 +622,7 @@ export function DesignPartPicker({
       {/* 4. UI COMPONENT STYLES & CONTROLS */}
       {activeCategory === 'components' && (
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono">
                 Recognized UI Component Styles & Controls
@@ -583,9 +631,22 @@ export function DesignPartPicker({
                 Choose how buttons, status badges, and interactive controls behave and appear.
               </p>
             </div>
-            <span className="text-xs text-stone-600 font-medium">
-              Selected: <strong className="text-stone-900">{selection.components.name}</strong>
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-stone-600 font-medium hidden sm:inline">
+                Selected: <strong className="text-stone-900">{selection.components.name}</strong>
+              </span>
+              {onRandomizeCategory && (
+                <button
+                  type="button"
+                  onClick={() => onRandomizeCategory('components')}
+                  className="px-2.5 py-1.5 text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 rounded-xl cursor-pointer flex items-center gap-1.5 transition-transform active:scale-95 shadow-2xs"
+                  title="Randomize only UI controls"
+                >
+                  <Dices className="w-3.5 h-3.5 text-stone-700" />
+                  <span>Randomize Controls</span>
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -650,7 +711,7 @@ export function DesignPartPicker({
       {/* 5. SIGNATURE ACCENTS */}
       {activeCategory === 'accents' && (
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono">
                 Recognized Signature Accents (Scanlines, Crosshairs, Washi Tape, etc.)
@@ -659,9 +720,22 @@ export function DesignPartPicker({
                 Graphic accents that give the design authenticity and visual character.
               </p>
             </div>
-            <span className="text-xs text-stone-600 font-medium">
-              Selected: <strong className="text-stone-900">{selection.accent.name}</strong>
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-stone-600 font-medium hidden sm:inline">
+                Selected: <strong className="text-stone-900">{selection.accent.name}</strong>
+              </span>
+              {onRandomizeCategory && (
+                <button
+                  type="button"
+                  onClick={() => onRandomizeCategory('accents')}
+                  className="px-2.5 py-1.5 text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 rounded-xl cursor-pointer flex items-center gap-1.5 transition-transform active:scale-95 shadow-2xs"
+                  title="Randomize only accent"
+                >
+                  <Dices className="w-3.5 h-3.5 text-stone-700" />
+                  <span>Randomize Accent</span>
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

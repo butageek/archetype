@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import {
   Check,
+  ChevronDown,
   Copy,
   Dices,
   Sparkles,
@@ -21,6 +22,7 @@ import {
 import {
   AccentPart,
   ComponentPart,
+  DesignPartCategory,
   DesignPartsSelection,
   FontPart,
   PalettePart,
@@ -31,6 +33,8 @@ import { DesignPartPicker } from '../components/DesignPartPicker';
 
 export default function ArchetypeSynthesizerPage() {
   const [selection, setSelection] = useState<DesignPartsSelection>(DEFAULT_DESIGN_PARTS);
+  const [activeCategory, setActiveCategory] = useState<DesignPartCategory>('palette');
+  const [surpriseMenuOpen, setSurpriseMenuOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copiedCombined, setCopiedCombined] = useState<boolean>(false);
   const [leftTab, setLeftTab] = useState<'mockup' | 'prompt'>('mockup');
@@ -59,6 +63,42 @@ export default function ArchetypeSynthesizerPage() {
 
     showToast('Copied Combined AI Agent Master Prompt! Ready to paste into Claude, Cursor, or Antigravity.');
     setTimeout(() => setCopiedCombined(false), 2000);
+  };
+
+  // Randomize a single category while preserving the other 4
+  const handleRandomizeCategory = (category: DesignPartCategory) => {
+    if (category === 'palette') {
+      const candidates = PALETTE_PARTS.filter((p) => p.id !== selection.palette.id);
+      const next = candidates[Math.floor(Math.random() * candidates.length)] || PALETTE_PARTS[0];
+      setSelection((prev) => ({ ...prev, palette: next }));
+      confetti({
+        particleCount: 25,
+        spread: 45,
+        origin: { y: 0.8 },
+        colors: [next.primary, next.secondary, next.accent],
+      });
+      showToast(`Randomized Palette to "${next.name}"`);
+    } else if (category === 'font') {
+      const candidates = FONT_PARTS.filter((f) => f.id !== selection.font.id);
+      const next = candidates[Math.floor(Math.random() * candidates.length)] || FONT_PARTS[0];
+      setSelection((prev) => ({ ...prev, font: next }));
+      showToast(`Randomized Typography to "${next.name}"`);
+    } else if (category === 'surface') {
+      const candidates = SURFACE_PARTS.filter((s) => s.id !== selection.surface.id);
+      const next = candidates[Math.floor(Math.random() * candidates.length)] || SURFACE_PARTS[0];
+      setSelection((prev) => ({ ...prev, surface: next }));
+      showToast(`Randomized Surface to "${next.name}"`);
+    } else if (category === 'components') {
+      const candidates = COMPONENT_PARTS.filter((c) => c.id !== selection.components.id);
+      const next = candidates[Math.floor(Math.random() * candidates.length)] || COMPONENT_PARTS[0];
+      setSelection((prev) => ({ ...prev, components: next }));
+      showToast(`Randomized Controls to "${next.name}"`);
+    } else if (category === 'accents') {
+      const candidates = ACCENT_PARTS.filter((a) => a.id !== selection.accent.id);
+      const next = candidates[Math.floor(Math.random() * candidates.length)] || ACCENT_PARTS[0];
+      setSelection((prev) => ({ ...prev, accent: next }));
+      showToast(`Randomized Accent to "${next.name}"`);
+    }
   };
 
   // Surprise Me / Random Selection across all 5 enumerable categories
@@ -116,14 +156,150 @@ export default function ArchetypeSynthesizerPage() {
 
           {/* Quick Header Actions */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={handleSurpriseMe}
-              className="px-3.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl text-xs font-semibold cursor-pointer flex items-center gap-1.5 transition-colors border border-stone-300"
-              title="Randomly pick recognized design parts"
-            >
-              <Dices className="w-3.5 h-3.5 text-stone-700" />
-              <span>Surprise Me</span>
-            </button>
+            {/* Surprise Me Split Dropdown */}
+            <div className="relative">
+              <div className="inline-flex items-center rounded-xl border border-stone-300 bg-stone-100 shadow-2xs divide-x divide-stone-300">
+                <button
+                  type="button"
+                  onClick={handleSurpriseMe}
+                  className="px-3 py-1.5 hover:bg-stone-200 text-stone-800 rounded-l-xl text-xs font-semibold cursor-pointer flex items-center gap-1.5 transition-colors"
+                  title="Randomly pick all 5 design parts at once"
+                >
+                  <Dices className="w-3.5 h-3.5 text-stone-700" />
+                  <span>Surprise Me</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSurpriseMenuOpen((prev) => !prev)}
+                  className="px-2 py-1.5 hover:bg-stone-200 text-stone-800 rounded-r-xl text-xs cursor-pointer transition-colors flex items-center justify-center"
+                  title="More randomize options (tweak individual categories)"
+                  aria-expanded={surpriseMenuOpen}
+                >
+                  <ChevronDown className={`w-3.5 h-3.5 text-stone-700 transition-transform duration-150 ${surpriseMenuOpen ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+
+              {surpriseMenuOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setSurpriseMenuOpen(false)}
+                  />
+                  <div className="absolute right-0 mt-1.5 w-64 bg-white rounded-xl border border-stone-200 shadow-xl z-50 py-1.5 text-xs text-stone-800 animate-in fade-in zoom-in-95 duration-100 divide-y divide-stone-100">
+                    <div className="py-1">
+                      <div className="px-3 py-1 text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider">
+                        Full Composition
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleSurpriseMe();
+                          setSurpriseMenuOpen(false);
+                        }}
+                        className="w-full text-left px-3 py-1.5 hover:bg-stone-100 flex items-center justify-between cursor-pointer font-medium"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>🎲</span>
+                          <span>Surprise All (5 Parts)</span>
+                        </span>
+                        <span className="text-[10px] font-mono text-stone-500">All</span>
+                      </button>
+                    </div>
+
+                    <div className="py-1">
+                      <div className="px-3 py-1 text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider">
+                        Tweak Individual Category
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleRandomizeCategory('palette');
+                          setActiveCategory('palette');
+                          setSurpriseMenuOpen(false);
+                        }}
+                        className="w-full text-left px-3 py-1.5 hover:bg-stone-100 flex items-center justify-between cursor-pointer"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>🎨</span>
+                          <span>Randomize Palette</span>
+                        </span>
+                        <span className="text-[10px] font-mono text-stone-500 truncate max-w-[90px]">
+                          {selection.palette.name}
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleRandomizeCategory('font');
+                          setActiveCategory('font');
+                          setSurpriseMenuOpen(false);
+                        }}
+                        className="w-full text-left px-3 py-1.5 hover:bg-stone-100 flex items-center justify-between cursor-pointer"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>🔤</span>
+                          <span>Randomize Typography</span>
+                        </span>
+                        <span className="text-[10px] font-mono text-stone-500 truncate max-w-[90px]">
+                          {selection.font.name}
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleRandomizeCategory('surface');
+                          setActiveCategory('surface');
+                          setSurpriseMenuOpen(false);
+                        }}
+                        className="w-full text-left px-3 py-1.5 hover:bg-stone-100 flex items-center justify-between cursor-pointer"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>📐</span>
+                          <span>Randomize Surface</span>
+                        </span>
+                        <span className="text-[10px] font-mono text-stone-500 truncate max-w-[90px]">
+                          {selection.surface.name}
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleRandomizeCategory('components');
+                          setActiveCategory('components');
+                          setSurpriseMenuOpen(false);
+                        }}
+                        className="w-full text-left px-3 py-1.5 hover:bg-stone-100 flex items-center justify-between cursor-pointer"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>🧩</span>
+                          <span>Randomize Controls</span>
+                        </span>
+                        <span className="text-[10px] font-mono text-stone-500 truncate max-w-[90px]">
+                          {selection.components.name}
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleRandomizeCategory('accents');
+                          setActiveCategory('accents');
+                          setSurpriseMenuOpen(false);
+                        }}
+                        className="w-full text-left px-3 py-1.5 hover:bg-stone-100 flex items-center justify-between cursor-pointer"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>✨</span>
+                          <span>Randomize Accent</span>
+                        </span>
+                        <span className="text-[10px] font-mono text-stone-500 truncate max-w-[90px]">
+                          {selection.accent.name}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
 
             <button
               onClick={handleCopyCompletePrompt}
@@ -205,21 +381,115 @@ export default function ArchetypeSynthesizerPage() {
 
                   {/* Selection Summary Badges */}
                   <div className="flex items-center gap-1.5 flex-wrap pt-1 text-[11px] font-mono">
-                    <span className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
-                      Palette: <strong>{selection.palette.name}</strong>
-                    </span>
-                    <span className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
-                      Font: <strong>{selection.font.name}</strong>
-                    </span>
-                    <span className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
-                      Surface: <strong>{selection.surface.name}</strong>
-                    </span>
-                    <span className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
-                      Controls: <strong>{selection.components.name}</strong>
-                    </span>
-                    <span className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
-                      Accent: <strong>{selection.accent.name}</strong>
-                    </span>
+                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
+                      <button
+                        type="button"
+                        onClick={() => setActiveCategory('palette')}
+                        className="cursor-pointer hover:text-stone-950 font-medium"
+                        title="View Palette in library"
+                      >
+                        Palette: <strong className="text-stone-900">{selection.palette.name}</strong>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRandomizeCategory('palette');
+                        }}
+                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
+                        title="Randomize Palette only"
+                      >
+                        <Dices className="w-3 h-3" />
+                      </button>
+                    </div>
+
+                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
+                      <button
+                        type="button"
+                        onClick={() => setActiveCategory('font')}
+                        className="cursor-pointer hover:text-stone-950 font-medium"
+                        title="View Typography in library"
+                      >
+                        Font: <strong>{selection.font.name}</strong>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRandomizeCategory('font');
+                        }}
+                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
+                        title="Randomize Typography only"
+                      >
+                        <Dices className="w-3 h-3" />
+                      </button>
+                    </div>
+
+                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
+                      <button
+                        type="button"
+                        onClick={() => setActiveCategory('surface')}
+                        className="cursor-pointer hover:text-stone-950 font-medium"
+                        title="View Surface in library"
+                      >
+                        Surface: <strong>{selection.surface.name}</strong>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRandomizeCategory('surface');
+                        }}
+                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
+                        title="Randomize Surface only"
+                      >
+                        <Dices className="w-3 h-3" />
+                      </button>
+                    </div>
+
+                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
+                      <button
+                        type="button"
+                        onClick={() => setActiveCategory('components')}
+                        className="cursor-pointer hover:text-stone-950 font-medium"
+                        title="View Controls in library"
+                      >
+                        Controls: <strong>{selection.components.name}</strong>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRandomizeCategory('components');
+                        }}
+                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
+                        title="Randomize Controls only"
+                      >
+                        <Dices className="w-3 h-3" />
+                      </button>
+                    </div>
+
+                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
+                      <button
+                        type="button"
+                        onClick={() => setActiveCategory('accents')}
+                        className="cursor-pointer hover:text-stone-950 font-medium"
+                        title="View Accent in library"
+                      >
+                        Accent: <strong>{selection.accent.name}</strong>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRandomizeCategory('accents');
+                        }}
+                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
+                        title="Randomize Accent only"
+                      >
+                        <Dices className="w-3 h-3" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -365,6 +635,9 @@ export default function ArchetypeSynthesizerPage() {
                 onSelectComponent={(comp: ComponentPart) => setSelection((prev) => ({ ...prev, components: comp }))}
                 onSelectAccent={(acc: AccentPart) => setSelection((prev) => ({ ...prev, accent: acc }))}
                 onToast={showToast}
+                activeCategory={activeCategory}
+                onCategoryChange={setActiveCategory}
+                onRandomizeCategory={handleRandomizeCategory}
               />
             </div>
           </section>
