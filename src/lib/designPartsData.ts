@@ -698,6 +698,131 @@ export const PALETTE_PARTS: PalettePart[] = [
 - Text Primary: #1A1915 (deep espresso charcoal)
 - Text Muted: #66645E (warm earth gray)`,
   },
+  {
+    id: 'gameboy-dmg01',
+    name: 'Game Boy 1989 DMG-01',
+    tagline: 'Iconic 4-shade pea-soup olive monochrome LCD gaming aesthetic',
+    description: 'Nostalgic 1989 handheld gaming palette featuring four strictly quantized shades of warm pea-soup olive and spinach green.',
+    primary: '#8BAC0F',
+    secondary: '#9BBC0F',
+    accent: '#306230',
+    background: '#0F380F',
+    surface: '#1A471A',
+    border: '#8BAC0F',
+    text: '#9BBC0F',
+    textMuted: '#8BAC0F',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Game Boy 1989 DMG-01
+- Mood: 4-shade quantized retro LCD handheld aesthetic with high-nostalgia olive and spinach green tones.
+- Background: #0F380F (deepest LCD shadow green)
+- Surface / Cards: #1A471A (elevated matrix substrate green)
+- Borders: #8BAC0F (crisp olive LCD border)
+- Primary Accent: #8BAC0F (bright olive active pixel)
+- Secondary Accent: #9BBC0F (illuminated pale LCD lime)
+- Deep Contrast: #306230 (dark spinach shadow)
+- Text Primary: #9BBC0F (high-contrast pale lime)
+- Text Muted: #8BAC0F (medium olive green)`,
+  },
+  {
+    id: 'monokai-pro',
+    name: 'Monokai Pro Synth Editor',
+    tagline: 'Deep charcoal stone with vibrant tangerine, cyber mint, and lavender accents',
+    description: 'The celebrated developer syntax aesthetic balancing deep slate charcoal with radiant pastel neon accents for effortless visual contrast.',
+    primary: '#FF6188',
+    secondary: '#78DCE8',
+    accent: '#FFD866',
+    background: '#221F22',
+    surface: '#2D2A2E',
+    border: '#403E41',
+    text: '#FCFCFA',
+    textMuted: '#939293',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Monokai Pro Synth Editor
+- Mood: Professional code syntax aesthetic balancing warm volcanic charcoal with electric candy pastel accents.
+- Background: #221F22 (deep volcanic charcoal)
+- Surface / Cards: #2D2A2E (elevated editor slate surface)
+- Borders: #403E41 (subtle stone boundary)
+- Primary Accent: #FF6188 (electric punchy coral red)
+- Secondary Accent: #78DCE8 (cyber mint cyan)
+- Highlight Accent: #FFD866 (warm sunny yellow)
+- Text Primary: #FCFCFA (crisp paper white)
+- Text Muted: #939293 (soft syntax comment gray)`,
+  },
+  {
+    id: 'tokyo-night',
+    name: 'Tokyo Night Cyber Dusk',
+    tagline: 'Deep indigo midnight with electric cyan, dusk magenta, and warm amber',
+    description: 'Sleek metropolitan twilight aesthetic inspired by Tokyo neon signage reflected on rainy asphalt, balanced for long-session readability.',
+    primary: '#7AA2F7',
+    secondary: '#BB9AF7',
+    accent: '#FF9E64',
+    background: '#1A1B26',
+    surface: '#24283B',
+    border: '#414868',
+    text: '#C0CAF5',
+    textMuted: '#7982A9',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Tokyo Night Cyber Dusk
+- Mood: Sleek metropolitan twilight with deep indigo midnight and atmospheric neon bloom.
+- Background: #1A1B26 (deep metropolitan indigo)
+- Surface / Cards: #24283B (elevated midnight slate)
+- Borders: #414868 (muted blue-gray border)
+- Primary Accent: #7AA2F7 (electric neon sky blue)
+- Secondary Accent: #BB9AF7 (soft dusk lavender magenta)
+- Warm Highlight: #FF9E64 (warm neon amber glow)
+- Text Primary: #C0CAF5 (luminous ice blue-white)
+- Text Muted: #7982A9 (atmospheric dusk gray)`,
+  },
+  {
+    id: 'klein-blue',
+    name: 'International Klein Blue & Museum White',
+    tagline: 'Hyper-saturated Yves Klein ultramarine with pristine gallery canvas',
+    description: 'Avant-garde fine-art aesthetic centered on pure, electrifying ultramarine blue paired with museum-grade gallery paper and architectural typography.',
+    primary: '#002FA7',
+    secondary: '#1E40AF',
+    accent: '#FF3366',
+    background: '#F8F9FA',
+    surface: '#FFFFFF',
+    border: '#002FA7',
+    text: '#0A0E1A',
+    textMuted: '#5A6578',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: International Klein Blue & Museum White
+- Mood: Avant-garde museum and fine-art aesthetic centered around Yves Klein's hyper-saturated ultramarine blue.
+- Background: #F8F9FA (gallery archival cold white)
+- Surface / Cards: #FFFFFF (pure museum paper substrate)
+- Borders: #002FA7 (striking International Klein Blue)
+- Primary Accent: #002FA7 (saturated electric ultramarine)
+- Secondary Accent: #1E40AF (deep cobalt ink)
+- Contrast Alert: #FF3366 (vivid neon vermilion)
+- Text Primary: #0A0E1A (deepest obsidian navy)
+- Text Muted: #5A6578 (archival blueprint slate)`,
+  },
+  {
+    id: 'matcha-hinoki',
+    name: 'Kyoto Ceremonial Matcha & Hinoki',
+    tagline: 'Muted ceremonial green, warm cypress wood, and steamy linen mist',
+    description: 'Organic architectural calm inspired by traditional Kyoto teahouses, pairing deep bamboo forest greens with steamed rice whites and warm hinoki wood.',
+    primary: '#2D5A27',
+    secondary: '#8F9E8B',
+    accent: '#C88D48',
+    background: '#F6F7F3',
+    surface: '#FFFFFF',
+    border: '#DCE0D5',
+    text: '#1A2419',
+    textMuted: '#697566',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Kyoto Ceremonial Matcha & Hinoki
+- Mood: Organic meditative luxury pairing ceremonial stone-ground matcha green with warm hinoki cypress wood.
+- Background: #F6F7F3 (steamed rice paper mist)
+- Surface / Cards: #FFFFFF (pure white ceramic porcelain)
+- Borders: #DCE0D5 (delicate bamboo reed border)
+- Primary Accent: #2D5A27 (ceremonial matcha green)
+- Secondary Accent: #8F9E8B (misty sage patina)
+- Warm Accent: #C88D48 (warm hinoki cypress timber)
+- Text Primary: #1A2419 (deepest roasted tea leaf)
+- Text Muted: #697566 (steamed green tea moss)`,
+  },
 ];
 
 // ============================================================================
@@ -956,6 +1081,62 @@ export const FONT_PARTS: FontPart[] = [
 - Body: Paired clean modern sans for high-readability paragraph copy.
 - Invariants: Massive visual punch for hero statements, KPI counters, and section anchors.`,
   },
+  {
+    id: 'vintage-typewriter',
+    name: 'Vintage Mechanical Typewriter / Special Elite',
+    tagline: 'Authentic uneven ink strike, mechanical ribbon bleed, and archival dossier character',
+    description: 'Mechanical typewriter letterforms reminiscent of mid-century investigative dossiers, archival zines, and historical field dispatches.',
+    fontFamily: "'Special Elite', cursive, monospace",
+    previewSample: 'CLASSIFIED DISPATCH 1968',
+    classification: 'typewriter',
+    promptSnippet: `### Typography Treatment: Vintage Mechanical Typewriter (Special Elite)
+- Style: Authentic mid-century mechanical typewriter with organic ink density and imperfect stamp strikes.
+- Headings: 'Special Elite', monospace, regular, tracking 0.04em, uppercase for classification labels.
+- Body: Paired typewriter monospace or clean typewriter grotesque for field dispatches and data sheets.
+- Invariants: Nostalgic historical weight, bureaucratic archival authority, and physical ink impact.`,
+  },
+  {
+    id: 'retro-disco-righteous',
+    name: 'Retro 1980s Chrome Disco & Sports / Righteous',
+    tagline: 'Futuristic 1980s fluid curves, aerodynamic titles, and synth title energy',
+    description: 'Bold rounded display letterforms with high forward momentum, evoking 1980s sci-fi film marquees and broadcast sports telemetry.',
+    fontFamily: "'Righteous', cursive, sans-serif",
+    previewSample: 'OUTRUN OVERDRIVE 88',
+    classification: 'disco',
+    promptSnippet: `### Typography Treatment: Retro 1980s Chrome Disco & Sports (Righteous)
+- Style: Aerodynamic 1980s retro-futuristic rounded display geometry with energetic forward momentum.
+- Headings: 'Righteous', display, tracking 0.03em, large impact scale.
+- Body: Paired clean modern geometric sans (e.g. Outfit, Space Grotesk) for crisp readability.
+- Invariants: High-energy retro arcade presence, chrome finish compatibility, and fluid curves.`,
+  },
+  {
+    id: 'haute-couture-serif',
+    name: 'Haute Couture Editorial Serif / Cormorant Garamond',
+    tagline: 'Razor-thin hairline serifs, dramatic contrast, and classical luxury',
+    description: 'High-fashion editorial serif with whisper-thin brackets and statuesque capitals, conveying museum exclusivity and bespoke elegance.',
+    fontFamily: "'Cormorant Garamond', Georgia, serif",
+    previewSample: 'Atelier Vêtements Luxe',
+    classification: 'haute-couture',
+    promptSnippet: `### Typography Treatment: Haute Couture Editorial Serif (Cormorant Garamond)
+- Style: Ultra-refined high-contrast luxury serif with razor-thin hairlines and statuesque classical proportions.
+- Headings: 'Cormorant Garamond', serif, tracking 0.05em, font-weight 600 or 700 with italicized display accents.
+- Body: Paired high-legibility book serif or ultra-minimalist geometric sans.
+- Invariants: Exquisite high-fashion editorial balance, bespoke museum poise, and timeless luxury.`,
+  },
+  {
+    id: 'crt-terminal-vt323',
+    name: '1982 Green Phosphor CRT Terminal / VT323',
+    tagline: 'Authentic 80-column monospaced raster font with cathode beam texture',
+    description: 'Real 1980s ASCII terminal letterforms engineered for green-screen mainframe consoles, flight computer readouts, and retro BBS boards.',
+    fontFamily: "'VT323', monospace",
+    previewSample: 'READY. LOAD "*",8,1',
+    classification: 'crt-terminal',
+    promptSnippet: `### Typography Treatment: 1982 Green Phosphor CRT Terminal (VT323)
+- Style: Authentic early 1980s 80-column dot-matrix terminal letterforms with scanline raster pitch.
+- Headings: 'VT323', monospace, uppercase, tracking 0.08em, text-2xl to text-4xl.
+- Body: 'VT323' or paired JetBrains Mono for system log feeds and command prompts.
+- Invariants: Authentic DEC VT100 / Commodore terminal nostalgia, fixed-pitch grid discipline, and retro hacker authority.`,
+  },
 ];
 
 // ============================================================================
@@ -1197,6 +1378,50 @@ export const SURFACE_PARTS: SurfacePart[] = [
 - Corner Radii: 24px spacious pill-like corners.
 - Shadow Treatment: Expansive soft atmospheric diffusion: 0 25px 50px -12px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.04).`,
   },
+  {
+    id: 'win95-classic-bezel',
+    name: 'Windows 95 Classic 3D Beveled Window',
+    tagline: 'Authentic 90s dual-tone raised bevels with physical depth illusion',
+    description: 'Classic desktop operating system window physics with light top/left highlights, dark bottom/right drop edges, and square zero-radius corners.',
+    borderWidth: '2px',
+    borderStyle: 'solid',
+    radius: '0px',
+    shadow: 'inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080, 2px 2px 0px #000000',
+    promptSnippet: `### Surface, Borders & Elevation: Windows 95 Classic 3D Beveled Window
+- Boundaries: 2px multi-tone physical bevel simulating raised sheet metal or molded plastic.
+- Highlights & Shadows: Inset 1px top-left highlight (#FFFFFF), inset 1px bottom-right shadow (#808080), outer 2px hard drop (#000000).
+- Corner Radii: 0px completely square corners adhering to 90s raster grid limits.`,
+  },
+  {
+    id: 'double-hairline-blueprint',
+    name: 'Double Hairline Drafting Frame',
+    tagline: 'Precision architectural double frame with 1px outer, gap, and 1px inner border',
+    description: 'Drafting schematic double border inspired by engineering patent prints and technical certificate borders.',
+    borderWidth: '4px',
+    borderStyle: 'double',
+    radius: '8px',
+    shadow: '0 2px 8px rgba(0,0,0,0.06)',
+    promptSnippet: `### Surface, Borders & Elevation: Double Hairline Drafting Frame
+- Boundaries: 4px double border stroke (\`border-style: double\`) creating parallel inner and outer hairline boundaries.
+- Corner Radii: 8px compact, disciplined architectural corners.
+- Shadow Treatment: Understated drafting desk shadow: 0 2px 8px rgba(0,0,0,0.06).`,
+  },
+  {
+    id: 'iridescent-holographic',
+    name: 'Iridescent Holographic Foil Glass',
+    tagline: 'Translucent backdrop with multi-spectral chromatic border glow',
+    description: 'Futuristic holographic foil effect combining deep background blur with a subtle rainbow refraction rim and dispersed chromatic glow.',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    radius: '20px',
+    shadow: '0 8px 32px -4px rgba(56,189,248,0.25), 0 0 16px -2px rgba(244,114,182,0.2)',
+    backdropBlur: '16px',
+    promptSnippet: `### Surface, Borders & Elevation: Iridescent Holographic Foil Glass
+- Boundaries: 1px semi-transparent prism border stroke (\`rgba(255,255,255,0.3)\`).
+- Backdrop Filter: 16px deep frosted glass refraction (\`backdrop-blur-md\`).
+- Chromatic Shadows: Multi-stop dual shadow: 0 8px 32px -4px rgba(56,189,248,0.25), 0 0 16px -2px rgba(244,114,182,0.2).
+- Corner Radii: 20px organic smooth pill radius.`,
+  },
 ];
 
 // ============================================================================
@@ -1384,6 +1609,42 @@ export const COMPONENT_PARTS: ComponentPart[] = [
 - Badges: Glowing neon capsule badges with electric border stroke.
 - Interaction: High-energy magnetic hover response and luminous feedback.`,
   },
+  {
+    id: 'win95-beveled-push',
+    name: 'Windows 95 Classic 3D Push-Buttons',
+    tagline: 'Authentic tactile gray buttons with inverted bevel lighting on active press',
+    description: 'Chunky 1990s desktop buttons with white top-left highlights and charcoal bottom-right shadows that visually sink into the surface on click.',
+    buttonClass: 'px-3.5 py-1.5 bg-[#dfdfdf] text-[#000000] border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-[#808080] border-b-[#808080] active:border-t-[#808080] active:border-l-[#808080] active:border-r-white active:border-b-white font-mono text-xs font-bold shadow-xs active:translate-x-0.5 active:translate-y-0.5 cursor-pointer',
+    badgeClass: 'px-2 py-0.5 bg-[#c0c0c0] text-[#000000] border-t border-l border-r border-b border-t-[#808080] border-l-[#808080] border-r-white border-b-white font-mono text-[10px] font-bold',
+    promptSnippet: `### UI Component Treatment: Windows 95 Classic 3D Push-Buttons
+- Buttons: 3D beveled rectangle (\`bg-[#dfdfdf]\`) with white top-left highlight and charcoal (#808080) bottom-right shadow.
+- Active State: On click, reverse the border lighting (top-left becomes dark #808080, bottom-right becomes white) and translate 1px down-right to simulate mechanical depressing.
+- Badges: Sunken status plates with dark top-left inset border and white bottom-right highlight.`,
+  },
+  {
+    id: 'avionics-guarded-switch',
+    name: 'Avionics Guarded Switches & Stencil Tags',
+    tagline: 'Aerospace telemetry controls with safety hash-marks and stenciled callouts',
+    description: 'High-reliability aerospace cockpit control mechanics with stenciled uppercase labels, recessed switch beds, and tactile toggle clicks.',
+    buttonClass: 'px-3.5 py-1.5 font-mono text-xs uppercase font-bold tracking-wider rounded-sm border-2 border-stone-800 bg-stone-900 text-amber-400 hover:bg-stone-800 active:scale-95 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] flex items-center gap-1.5 cursor-pointer',
+    badgeClass: 'px-2 py-0.5 font-mono text-[10px] uppercase font-black tracking-widest bg-amber-500/10 text-amber-500 border border-amber-500/40 rounded-xs',
+    promptSnippet: `### UI Component Treatment: Avionics Guarded Switches & Stencil Tags
+- Buttons: Dark cockpit avionics switch blocks with recessed shadow wells and stenciled amber telemetry text.
+- Badges: Cautionary stenciled status badges with amber warning borders and high-visibility tracking.
+- Interaction: Heavy spring toggle physics with snappy active transformation.`,
+  },
+  {
+    id: 'segmented-cyber-gauge',
+    name: 'Cyberpunk Segmented Gauge & Notch Buttons',
+    tagline: '45° cut corner buttons with integrated multi-segment LED meter bars',
+    description: 'Cyberdeck action controls with angled bottom-right corners, high-contrast border glows, and segmented battery/power level status chips.',
+    buttonClass: 'px-4 py-1.5 text-xs font-mono font-bold uppercase tracking-wider rounded-tl-md rounded-tr-md rounded-bl-md rounded-br-none border-b-2 border-r-2 border-t border-l hover:brightness-110 active:translate-y-0.5 transition-all cursor-pointer',
+    badgeClass: 'px-2.5 py-0.5 font-mono text-[10px] uppercase font-bold tracking-wider border rounded-xs flex items-center gap-1',
+    promptSnippet: `### UI Component Treatment: Cyberpunk Segmented Gauge & Notch Buttons
+- Buttons: Asymmetric cyberdeck action buttons with a sharp 45-degree cut on the bottom-right corner and thick bottom/right border accent lines.
+- Badges: High-density technical telemetry chips with dot status markers.
+- Micro-Interactions: High-speed brightness flash on hover with instant tactile 1px depression.`,
+  },
 ];
 
 // ============================================================================
@@ -1551,6 +1812,39 @@ export const ACCENT_PARTS: AccentPart[] = [
     promptSnippet: `### Signature Graphic Accents: Plus-Grid Alignment Calibration Marks
 - Alignment Marks: Delicate micro "+" marks (+ icon / font-mono crosshairs) positioned at corner intersections and boundary seams.
 - Tone: High-precision engineering calibration, architectural blueprint discipline, and obsessive micro-detail.`,
+  },
+  {
+    id: 'barcode-serial',
+    name: 'Technical Inventory Barcode & Serial Checksum',
+    tagline: 'Vertical bar code stripes with alphanumeric inspection serial marks',
+    description: 'Authentic industrial barcode strip and calibration serials affixed to technical sub-panels, common in cyberpunk, logistics, and streetwear design.',
+    type: 'barcode-serial',
+    promptSnippet: `### Signature Graphic Accents: Technical Inventory Barcode & Serial Checksum
+- Barcode Strip: Crisp vertical variable-width barcode stripes rendered along panel edges.
+- Serial Markings: Monospaced uppercase checksum strings (e.g. \`REF-ID: [SPEC-7702-X]\`).
+- Authentic Touch: Miniature "AUTHENTIC" or "CALIBRATED" inspection certification tag.`,
+  },
+  {
+    id: 'audio-waveform',
+    name: 'Realtime Audio Waveform & Oscilloscope Raster',
+    tagline: 'Seismic frequency waveform with dB decibel audio calibration marks',
+    description: 'Dynamic acoustic frequency track with audio level metering, ideal for media workstations, telemetry, and high-tech command centers.',
+    type: 'audio-waveform',
+    promptSnippet: `### Signature Graphic Accents: Realtime Audio Waveform & Oscilloscope Raster
+- Waveform Raster: Multi-bar frequency spectrum track with varying amplitude heights and animated pulses.
+- Calibration Readouts: Decibel level markers and sample rate callouts (\`FREQ 44.1 kHz // -6.2 dB FS\`).
+- Visual Identity: Precision sound engineering telemetry that communicates live signal throughput.`,
+  },
+  {
+    id: 'node-constellation',
+    name: 'Decentralized Constellation Node Graph',
+    tagline: 'Interconnected network vertices with vector coordinate links',
+    description: 'Cosmic constellation mesh featuring glowing coordinate vertices connected by whisper-thin vector lines, signifying network topology.',
+    type: 'node-constellation',
+    promptSnippet: `### Signature Graphic Accents: Decentralized Constellation Node Graph
+- Vertices: Multi-colored circular constellation nodes with subtle glow halos.
+- Connecting Vectors: 1px whisper-thin coordinate vector lines linking nodes across sub-panels.
+- Topology Status: Technical node count and hexadecimal cluster identifier tags (\`TOPOLOGY MESH // 0x4B\`).`,
   },
 ];
 

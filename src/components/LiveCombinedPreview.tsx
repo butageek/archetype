@@ -475,6 +475,93 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
               />
             )}
 
+            {/* TECHNICAL INVENTORY BARCODE & SERIAL STRIP */}
+            {accent.type === 'barcode-serial' && (
+              <div
+                className="w-full flex items-center justify-between text-[9px] font-mono py-1 px-2.5 rounded border mb-1"
+                style={{
+                  borderColor: `${palette.border}`,
+                  backgroundColor: `${palette.background}88`,
+                  color: palette.text,
+                }}
+              >
+                <div className="flex items-center gap-0.5 h-3.5">
+                  <div className="w-[1px] h-full" style={{ backgroundColor: palette.text }} />
+                  <div className="w-[2px] h-full" style={{ backgroundColor: palette.text }} />
+                  <div className="w-[1px] h-full bg-transparent" />
+                  <div className="w-[3px] h-full" style={{ backgroundColor: palette.primary }} />
+                  <div className="w-[1px] h-full" style={{ backgroundColor: palette.text }} />
+                  <div className="w-[2px] h-full bg-transparent" />
+                  <div className="w-[1px] h-full" style={{ backgroundColor: palette.text }} />
+                  <div className="w-[3px] h-full" style={{ backgroundColor: palette.text }} />
+                  <div className="w-[1px] h-full" style={{ backgroundColor: palette.primary }} />
+                  <div className="w-[2px] h-full" style={{ backgroundColor: palette.text }} />
+                </div>
+                <span className="font-bold tracking-wider">REF-ID: [SPEC-7702-X]</span>
+                <span
+                  className="px-1.5 py-0.2 rounded text-[8px] font-bold border"
+                  style={{ borderColor: palette.primary, color: palette.primary }}
+                >
+                  AUTHENTIC
+                </span>
+              </div>
+            )}
+
+            {/* REALTIME AUDIO OSCILLOSCOPE WAVEFORM STRIP */}
+            {accent.type === 'audio-waveform' && (
+              <div
+                className="w-full flex items-center justify-between text-[9px] font-mono py-1 px-2.5 rounded border mb-1"
+                style={{
+                  borderColor: `${palette.primary}44`,
+                  backgroundColor: `${palette.primary}0D`,
+                  color: palette.primary,
+                }}
+              >
+                <div className="flex items-center gap-1 h-3.5">
+                  <div className="w-1 h-2 rounded-full animate-pulse" style={{ backgroundColor: palette.primary }} />
+                  <div className="w-1 h-3.5 rounded-full" style={{ backgroundColor: palette.secondary }} />
+                  <div className="w-1 h-1.5 rounded-full" style={{ backgroundColor: palette.primary }} />
+                  <div className="w-1 h-3 rounded-full" style={{ backgroundColor: palette.primary }} />
+                  <div className="w-1 h-2 rounded-full" style={{ backgroundColor: palette.secondary }} />
+                  <div className="w-1 h-3.5 rounded-full animate-pulse" style={{ backgroundColor: palette.primary }} />
+                </div>
+                <span className="font-bold tracking-widest">FREQ 44.1 kHz // -6.2 dB FS</span>
+                <span
+                  className="px-1.5 py-0.2 rounded text-[8px] font-bold border"
+                  style={{ borderColor: palette.primary }}
+                >
+                  LIVE RASTER
+                </span>
+              </div>
+            )}
+
+            {/* CONSTELLATION NODE NETWORK ACCENT */}
+            {accent.type === 'node-constellation' && (
+              <div
+                className="w-full flex items-center justify-between text-[9px] font-mono py-1 px-2.5 rounded border mb-1"
+                style={{
+                  borderColor: `${palette.secondary}44`,
+                  backgroundColor: `${palette.secondary}0D`,
+                  color: palette.secondary,
+                }}
+              >
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full shadow-xs" style={{ backgroundColor: palette.primary }} />
+                  <div className="w-3 h-[1px]" style={{ backgroundColor: `${palette.primary}88` }} />
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: palette.secondary }} />
+                  <div className="w-4 h-[1px]" style={{ backgroundColor: `${palette.primary}88` }} />
+                  <span className="w-2 h-2 rounded-full shadow-xs" style={{ backgroundColor: palette.accent }} />
+                </div>
+                <span className="font-bold tracking-widest">TOPOLOGY MESH // 0x4B</span>
+                <span
+                  className="px-1.5 py-0.2 rounded text-[8px] font-bold border"
+                  style={{ borderColor: palette.secondary }}
+                >
+                  5 NODES
+                </span>
+              </div>
+            )}
+
             {/* TOP BAR: TABS & STATUS BADGES */}
             <div className="flex flex-wrap items-center justify-between gap-2 relative z-10">
               {/* Interactive Segmented Tabs */}

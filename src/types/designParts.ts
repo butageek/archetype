@@ -40,7 +40,11 @@ export type FontClassification =
   | 'retro-serif'
   | 'fintech'
   | 'eccentric-mono'
-  | 'poster';
+  | 'poster'
+  | 'typewriter'
+  | 'disco'
+  | 'haute-couture'
+  | 'crt-terminal';
 
 export interface FontPart {
   id: string;
@@ -94,7 +98,10 @@ export type AccentType =
   | 'wireframe-grid'
   | 'aurora-glow'
   | 'halftone-dots'
-  | 'crosshair-plus';
+  | 'crosshair-plus'
+  | 'barcode-serial'
+  | 'audio-waveform'
+  | 'node-constellation';
 
 export interface AccentPart {
   id: string;

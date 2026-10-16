@@ -256,6 +256,72 @@ function AccentVisualPreview({ type }: { type: AccentPart['type'] }) {
     );
   }
 
+  if (type === 'barcode-serial') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-stone-900 border border-stone-800 relative overflow-hidden flex items-center justify-between px-3">
+        <div className="flex items-center gap-0.5 opacity-90 h-5">
+          <div className="w-[1px] h-full bg-white" />
+          <div className="w-[2px] h-full bg-white" />
+          <div className="w-[1px] h-full bg-transparent" />
+          <div className="w-[3px] h-full bg-white" />
+          <div className="w-[1px] h-full bg-white" />
+          <div className="w-[2px] h-full bg-transparent" />
+          <div className="w-[1px] h-full bg-white" />
+          <div className="w-[4px] h-full bg-white" />
+          <div className="w-[1px] h-full bg-white" />
+          <div className="w-[2px] h-full bg-white" />
+        </div>
+        <span className="text-[10px] font-mono font-bold text-stone-200">
+          BARCODE // SN-8820-X
+        </span>
+        <span className="text-[9px] font-mono text-emerald-400 font-bold border border-emerald-500/40 px-1 rounded bg-black/60">
+          VERIFIED
+        </span>
+      </div>
+    );
+  }
+
+  if (type === 'audio-waveform') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-stone-950 border border-cyan-800/60 relative overflow-hidden flex items-center justify-between px-3">
+        <div className="flex items-center gap-1 h-5">
+          <div className="w-1 h-2 bg-cyan-400 rounded-full animate-pulse" />
+          <div className="w-1 h-4 bg-cyan-400 rounded-full" />
+          <div className="w-1 h-3 bg-cyan-300 rounded-full" />
+          <div className="w-1 h-5 bg-cyan-400 rounded-full" />
+          <div className="w-1 h-2 bg-cyan-300 rounded-full" />
+          <div className="w-1 h-4 bg-cyan-400 rounded-full" />
+        </div>
+        <span className="text-[10px] font-mono font-bold text-cyan-300">
+          AUDIO OSCILLOSCOPE (44.1kHz)
+        </span>
+        <span className="text-[9px] font-mono text-cyan-400 font-bold border border-cyan-500/50 px-1 rounded">
+          -12dB
+        </span>
+      </div>
+    );
+  }
+
+  if (type === 'node-constellation') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-slate-950 border border-indigo-800/60 relative overflow-hidden flex items-center justify-between px-3">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-indigo-400 shadow-[0_0_8px_#818cf8]" />
+          <div className="w-4 h-[1px] bg-indigo-400/60" />
+          <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
+          <div className="w-3 h-[1px] bg-indigo-400/60" />
+          <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]" />
+        </div>
+        <span className="text-[10px] font-mono font-bold text-indigo-200">
+          CONSTELLATION NODE WEB
+        </span>
+        <span className="text-[9px] font-mono text-indigo-300 font-bold border border-indigo-500/50 px-1 rounded">
+          MESH
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div className="h-10 w-full rounded-xl bg-stone-50 border border-stone-200 relative overflow-hidden flex items-center justify-center">
       <span className="text-[10px] font-mono text-stone-400 font-semibold">Pure Minimal (No Accents)</span>
