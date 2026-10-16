@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import type { CSSProperties } from 'react';
+import { useState } from 'react';
 import {
   Activity,
   ArrowRight,
@@ -46,7 +47,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
   ];
 
   // Derive card styles
-  const cardStyle: React.CSSProperties = {
+  const cardStyle: CSSProperties = {
     backgroundColor: palette.surface,
     color: palette.text,
     borderColor: palette.border,
@@ -60,7 +61,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
     transition: 'all 200ms ease-out',
   };
 
-  const headingStyle: React.CSSProperties = {
+  const headingStyle: CSSProperties = {
     fontFamily: font.fontFamily,
     letterSpacing:
       font.classification === 'grotesk' || font.classification === 'cyberpunk'

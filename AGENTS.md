@@ -60,31 +60,36 @@ archetype/
 - **`src/app/page.tsx`**:
   - Implements the Studio split-screen layout.
   - Left column (`lg:col-span-5` or `lg:col-span-6`): Sticky in viewport (`lg:sticky lg:top-20`), housing the live preview specimen and prompt viewer tabs.
-  - Right column (`lg:col-span-7` or `lg:col-span-6`): Scrollable gallery with category pill buttons, search filter, and individual part cards.
-  - Header controls: "Surprise Me" (randomizer) and "Copy Complete Prompt".
+  - Right column (`lg:col-span-7` or `lg:col-span-6`): Scrollable gallery with category pill buttons, search filter, category-specific randomize buttons, and individual part cards.
+  - Header controls: Split "Surprise Me ▾" dropdown (Surprise All or target individual category) and "Copy Master Prompt".
+  - Interactive selection summary badges with 1-click category jumping and inline `🎲` dice buttons to re-roll individual parts directly.
+  - Dedicated category prompt copy chips (`🎨 Palette`, `🔤 Typography`, `📐 Surface`, `🧩 Controls`, `✨ Accent`, `⚡ @theme`).
 
 - **`src/components/LiveCombinedPreview.tsx`**:
   - Renders a live, highly reactive UI specimen honoring all 5 selected parts.
   - Interactive elements:
-    - Segmented overview/telemetry/metrics tabs.
+    - Segmented overview/telemetry/controls tabs.
+    - Custom styled select dropdown menu with z-index protection.
+    - Checkboxes and radio button groups matching target surface/control styles.
     - Slider (accent color tracks `palette.primary` / `palette.accent`).
     - Form inputs with real focus/hover states and editable value.
     - Hoverable buttons with tactile transform/shadow physics.
     - Dynamic status badges.
-    - Ambient/viewport graphic accents (scanlines, dot grids, aurora glows, wireframe grids, etc.).
+    - Ambient/viewport graphic accents (scanlines, dot grids, aurora glows, wireframe grids, barcodes, waveforms, constellations, etc.).
 
 - **`src/components/DesignPartPicker.tsx`**:
   - Category selector tabs with icons and item counts.
   - Search filter filtering by name, tagline, description, or classification.
+  - Dedicated `[🎲 Randomize {Category}]` header button in every category strip.
   - Visual preview cards:
     - Palettes: 5-swatch color bars + token chips.
     - Fonts: Live rendered specimen in target font family + classification badge.
     - Surfaces: 3D rendered card container showing exact radius, border, and shadow.
-    - Components: Interactive preview button with matching styles.
+    - Components: Interactive preview button and status badge with matching styles.
     - Accents: Specialized `AccentVisualPreview` component rendering visual representation.
 
 - **`src/lib/designPartsData.ts`**:
-  - Master data source. Contains `PALETTE_PARTS`, `FONT_PARTS`, `SURFACE_PARTS`, `COMPONENT_PARTS`, `ACCENT_PARTS`.
+  - Master data source. Contains `PALETTE_PARTS` (33), `FONT_PARTS` (22), `SURFACE_PARTS` (19), `COMPONENT_PARTS` (18), `ACCENT_PARTS` (19).
   - `generateCombinedMasterPrompt(selection)`: Synthesizes the 5 prompt snippets into an executable plain-text agent prompt with a Tailwind CSS v4 `@theme` block.
 
 ---

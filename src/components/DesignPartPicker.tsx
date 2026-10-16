@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import type { ElementType, MouseEvent } from 'react';
+import { useState } from 'react';
 import {
   Check,
   Copy,
@@ -358,7 +359,7 @@ export function DesignPartPicker({
   const activeCategory = controlledCategory ?? internalCategory;
   const setActiveCategory = onCategoryChange ?? setInternalCategory;
 
-  const categories: { id: DesignPartCategory; label: string; count: number; icon: React.ElementType }[] = [
+  const categories: { id: DesignPartCategory; label: string; count: number; icon: ElementType }[] = [
     { id: 'palette', label: '01. Palette', count: PALETTE_PARTS.length, icon: Palette },
     { id: 'font', label: '02. Typography', count: FONT_PARTS.length, icon: Type },
     { id: 'surface', label: '03. Surface & Borders', count: SURFACE_PARTS.length, icon: Layers },
@@ -366,7 +367,7 @@ export function DesignPartPicker({
     { id: 'accents', label: '05. Accents', count: ACCENT_PARTS.length, icon: Sparkles },
   ];
 
-  const handleCopyPartPrompt = (e: React.MouseEvent, prompt: string, name: string) => {
+  const handleCopyPartPrompt = (e: MouseEvent, prompt: string, name: string) => {
     e.stopPropagation();
     navigator.clipboard.writeText(prompt);
     onToast(`Copied standalone prompt for "${name}"!`);
