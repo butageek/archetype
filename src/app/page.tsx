@@ -41,7 +41,6 @@ export default function ArchetypeSynthesizerPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copiedCombined, setCopiedCombined] = useState<boolean>(false);
   const [leftTab, setLeftTab] = useState<'mockup' | 'prompt'>('mockup');
-  const [previewScale, setPreviewScale] = useState<'fit' | '100%'>('fit');
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -395,78 +394,38 @@ export default function ArchetypeSynthesizerPage() {
                   </p>
                 </div>
 
-                {/* View & Scale Switchers */}
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  {/* Scale control (only for mockup view) */}
-                  {leftTab === 'mockup' && (
-                    <div className="flex items-center gap-0.5 p-0.5 bg-stone-100 rounded-lg border border-stone-200 text-[11px] font-mono">
-                      <button
-                        type="button"
-                        onClick={() => setPreviewScale('fit')}
-                        className={`px-2 py-1 rounded font-semibold cursor-pointer transition-colors ${
-                          previewScale === 'fit'
-                            ? 'bg-white text-stone-900 shadow-2xs font-bold'
-                            : 'text-stone-500 hover:text-stone-900'
-                        }`}
-                        title="Automatically fit full preview into view without vertical scroll"
-                      >
-                        Fit View
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setPreviewScale('100%')}
-                        className={`px-2 py-1 rounded font-semibold cursor-pointer transition-colors ${
-                          previewScale === '100%'
-                            ? 'bg-white text-stone-900 shadow-2xs font-bold'
-                            : 'text-stone-500 hover:text-stone-900'
-                        }`}
-                        title="Display preview at 100% 1:1 pixel scale"
-                      >
-                        100%
-                      </button>
-                    </div>
-                  )}
-
-                  {/* View Mode Switcher: Mockup vs Master Prompt */}
-                  <div className="flex items-center gap-1 p-1 bg-stone-100 rounded-xl border border-stone-200 text-xs">
-                    <button
-                      type="button"
-                      onClick={() => setLeftTab('mockup')}
-                      className={`px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
-                        leftTab === 'mockup'
-                          ? 'bg-stone-900 text-white shadow-xs font-bold'
-                          : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
-                      }`}
-                    >
-                      <span>👁 Live Mockup</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setLeftTab('prompt')}
-                      className={`px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
-                        leftTab === 'prompt'
-                          ? 'bg-stone-900 text-white shadow-xs font-bold'
-                          : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
-                      }`}
-                    >
-                      <Terminal className="w-3.5 h-3.5" />
-                      <span>⚡ Master Prompt</span>
-                    </button>
-                  </div>
+                {/* View Mode Switcher: Mockup vs Master Prompt */}
+                <div className="flex items-center gap-1 p-1 bg-stone-100 rounded-xl border border-stone-200 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setLeftTab('mockup')}
+                    className={`px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
+                      leftTab === 'mockup'
+                        ? 'bg-stone-900 text-white shadow-xs font-bold'
+                        : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
+                    }`}
+                  >
+                    <span>👁 Live Mockup</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLeftTab('prompt')}
+                    className={`px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
+                      leftTab === 'prompt'
+                        ? 'bg-stone-900 text-white shadow-xs font-bold'
+                        : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
+                    }`}
+                  >
+                    <Terminal className="w-3.5 h-3.5" />
+                    <span>⚡ Master Prompt</span>
+                  </button>
                 </div>
               </div>
 
               {/* TAB 1: LIVE COMBINED MOCKUP VIEWPORT */}
               {leftTab === 'mockup' && (
                 <div className="space-y-2.5 animate-in fade-in duration-150">
-                  {/* Scaled Specimen Wrapper to fit on smaller viewports */}
-                  <div
-                    className={`overflow-hidden rounded-2xl ${
-                      previewScale === 'fit'
-                        ? 'origin-top scale-[0.88] sm:scale-[0.92] xl:scale-100 transition-transform duration-150 -mb-9 sm:-mb-6 xl:mb-0'
-                        : 'transition-transform duration-150'
-                    }`}
-                  >
+                  <div className="overflow-hidden rounded-2xl">
                     <LiveCombinedPreview selection={selection} />
                   </div>
 
