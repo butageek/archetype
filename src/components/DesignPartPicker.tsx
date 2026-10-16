@@ -27,6 +27,167 @@ import {
   SurfacePart,
 } from '../types/designParts';
 
+function AccentVisualPreview({ type }: { type: AccentPart['type'] }) {
+  if (type === 'scanlines') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-stone-900 border border-stone-800 relative overflow-hidden flex items-center justify-between px-3">
+        <div
+          className="absolute inset-0 pointer-events-none opacity-60"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(0,255,100,0) 50%, rgba(0,0,0,0.85) 50%)',
+            backgroundSize: '100% 4px',
+          }}
+        />
+        <span className="text-[10px] font-mono font-bold text-emerald-400 relative z-10 flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          CRT 60Hz RASTER SCANLINES
+        </span>
+        <span className="text-[9px] font-mono text-emerald-500/70 relative z-10">[ACTIVE]</span>
+      </div>
+    );
+  }
+
+  if (type === 'crosshairs') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-sky-950/80 border border-cyan-800 relative overflow-hidden flex items-center justify-between px-3">
+        <span className="text-[10px] font-mono font-bold text-cyan-400">⊕ [X: 420.50, Y: 110.25]</span>
+        <span className="text-[9px] font-mono text-cyan-300/80">|···|···|···|</span>
+      </div>
+    );
+  }
+
+  if (type === 'washi-tape') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-amber-50 border border-amber-200 relative overflow-hidden flex items-center justify-center">
+        <div className="px-4 py-0.5 bg-amber-300 text-amber-950 font-mono text-[10px] font-bold shadow-xs -rotate-2 border border-amber-400/80">
+          {'// WASHI_TAPE_MEMO'}
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'dot-grid') {
+    return (
+      <div
+        className="h-10 w-full rounded-xl bg-stone-100 border border-stone-200 relative overflow-hidden flex items-center justify-center"
+        style={{
+          backgroundImage: 'radial-gradient(#78716c 1.5px, transparent 1.5px)',
+          backgroundSize: '10px 10px',
+        }}
+      >
+        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-white/90 text-stone-700 shadow-2xs border border-stone-200">
+          10px Dot Matrix Grid
+        </span>
+      </div>
+    );
+  }
+
+  if (type === 'corner-ticks') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-stone-50 border border-stone-200 relative p-1.5 flex items-center justify-center">
+        <span className="absolute top-1 left-2 font-mono font-bold text-xs text-stone-800">┌</span>
+        <span className="absolute top-1 right-2 font-mono font-bold text-xs text-stone-800">┐</span>
+        <span className="absolute bottom-1 left-2 font-mono font-bold text-xs text-stone-800">└</span>
+        <span className="absolute bottom-1 right-2 font-mono font-bold text-xs text-stone-800">┘</span>
+        <span className="text-[10px] font-mono font-bold text-stone-600">Corner Calibration Marks</span>
+      </div>
+    );
+  }
+
+  if (type === 'hazard-stripes') {
+    return (
+      <div className="h-10 w-full rounded-xl overflow-hidden flex flex-col border border-stone-300">
+        <div
+          className="h-4 w-full"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(45deg, #FFB000, #FFB000 10px, #000000 10px, #000000 20px)',
+          }}
+        />
+        <div className="bg-stone-900 flex-1 flex items-center justify-between px-3 text-[10px] font-mono font-bold text-amber-400">
+          <span>HAZARD WARNING</span>
+          <span>[ALERT]</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'cyber-hud') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-stone-950 border border-cyan-500/80 relative overflow-hidden flex items-center justify-between px-3 shadow-[0_0_10px_rgba(0,240,255,0.2)]">
+        <span className="text-[10px] font-mono font-bold text-yellow-400 flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+          ⊕ [TARGET_LOCK // 0x7FFA]
+        </span>
+        <span className="text-[9px] font-mono text-cyan-400 font-bold border border-cyan-400/60 px-1 rounded">HUD</span>
+      </div>
+    );
+  }
+
+  if (type === 'prismatic-flare') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-sky-950 border border-sky-400/40 relative overflow-hidden flex flex-col justify-between p-2">
+        <div
+          className="h-1.5 w-full rounded-full"
+          style={{
+            background:
+              'linear-gradient(90deg, transparent, #38bdf8 20%, #818cf8 40%, #f472b6 60%, #facc15 80%, transparent)',
+          }}
+        />
+        <span className="text-[10px] font-semibold text-sky-200">Prismatic Rainbow Light Flare</span>
+      </div>
+    );
+  }
+
+  if (type === 'art-deco-sunburst') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-stone-950 border border-amber-500/50 relative overflow-hidden flex items-center justify-center">
+        <div
+          className="absolute inset-x-0 top-0 h-full opacity-60 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at top, #D4AF37 0%, transparent 70%)',
+          }}
+        />
+        <span className="text-[10px] font-serif uppercase tracking-widest text-amber-200 relative z-10 font-bold">
+          ☼ Gold Sunburst Fan ☼
+        </span>
+      </div>
+    );
+  }
+
+  if (type === 'blueprint-dimensions') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-blue-950 border border-cyan-400/60 relative overflow-hidden flex items-center justify-between px-3">
+        <span className="text-[10px] font-mono text-cyan-300 font-bold">|◄― 480.00 mm ―►|</span>
+        <span className="text-[9px] font-mono text-cyan-200 border border-cyan-400/50 px-1 rounded">SCALE 1:50</span>
+      </div>
+    );
+  }
+
+  if (type === 'noise-grain') {
+    return (
+      <div
+        className="h-10 w-full rounded-xl bg-stone-200 border border-stone-300 relative overflow-hidden flex items-center justify-center"
+        style={{
+          backgroundImage:
+            'radial-gradient(rgba(0,0,0,0.3) 15%, transparent 16%), radial-gradient(rgba(0,0,0,0.15) 15%, transparent 16%)',
+          backgroundSize: '4px 4px',
+        }}
+      >
+        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-white/90 text-stone-800 shadow-2xs">
+          Analog Film Grain / Noise
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="h-10 w-full rounded-xl bg-stone-50 border border-stone-200 relative overflow-hidden flex items-center justify-center">
+      <span className="text-[10px] font-mono text-stone-400 font-semibold">Pure Minimal (No Accents)</span>
+    </div>
+  );
+}
+
 interface DesignPartPickerProps {
   selection: DesignPartsSelection;
   onSelectPalette: (pal: PalettePart) => void;
@@ -452,6 +613,9 @@ export function DesignPartPicker({
                       </span>
                     )}
                   </div>
+
+                  {/* Live Rendered Visual Preview of Accent */}
+                  <AccentVisualPreview type={acc.type} />
 
                   <div>
                     <h4 className="text-sm font-bold text-stone-900 tracking-tight">{acc.name}</h4>
