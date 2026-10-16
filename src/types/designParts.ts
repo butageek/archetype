@@ -7,7 +7,7 @@ export type DesignPartCategory =
 
 export interface PalettePart {
   id: string;
-  name: string; // e.g. "Cyberpunk 2077 Night City", "Retro 80s Synthwave"
+  name: string; // e.g. "Cyberpunk 2077 Night City", "Stripe Vibrant Fintech Indigo"
   tagline: string;
   description: string;
   primary: string;
@@ -35,11 +35,16 @@ export type FontClassification =
   | 'art-deco'
   | 'acid'
   | 'cad'
-  | 'humanist';
+  | 'humanist'
+  | 'bento'
+  | 'retro-serif'
+  | 'fintech'
+  | 'eccentric-mono'
+  | 'poster';
 
 export interface FontPart {
   id: string;
-  name: string; // e.g. "Cyberpunk HUD / Sci-Fi Angular", "Pixel / 8-Bit Bitmap"
+  name: string; // e.g. "Modern Bento UI / Jakarta Sans", "Wonky 70s Editorial Serif"
   tagline: string;
   description: string;
   fontFamily: string;
@@ -50,20 +55,21 @@ export interface FontPart {
 
 export interface SurfacePart {
   id: string;
-  name: string; // e.g. "Cyberpunk 45° Chamfered Cut", "Neo-Brutalist Hard Offset"
+  name: string; // e.g. "Bento Grid Spotlight Glow", "Cyberpunk 45° Chamfered Cut"
   tagline: string;
   description: string;
   borderWidth: string;
   borderStyle: 'solid' | 'dashed' | 'double' | 'groove' | 'ridge' | 'none';
   radius: string;
   shadow: string;
+  backdropBlur?: string;
   clipPath?: string;
   promptSnippet: string;
 }
 
 export interface ComponentPart {
   id: string;
-  name: string; // e.g. "Cyberpunk HUD Clipped Buttons", "Neo-Brutalist Chunky Buttons"
+  name: string; // e.g. "Bento Spotlight Buttons", "Floating Capsule Dock"
   tagline: string;
   description: string;
   buttonClass: string;
@@ -85,11 +91,14 @@ export type AccentType =
   | 'art-deco-sunburst'
   | 'blueprint-dimensions'
   | 'hanko-stamp'
-  | 'wireframe-grid';
+  | 'wireframe-grid'
+  | 'aurora-glow'
+  | 'halftone-dots'
+  | 'crosshair-plus';
 
 export interface AccentPart {
   id: string;
-  name: string; // e.g. "Cyberpunk Hologram Reticle & Circuit Traces", "CRT Raster Scanlines"
+  name: string; // e.g. "Aurora Atmospheric Mesh Glow", "Isometric Tech Grid Floor"
   tagline: string;
   description: string;
   type: AccentType;

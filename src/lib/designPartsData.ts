@@ -503,6 +503,201 @@ export const PALETTE_PARTS: PalettePart[] = [
 - Text Primary: #F8F8F2 (moonlight pearl white)
 - Text Muted: #6272A4 (crypt slate gray)`,
   },
+  {
+    id: 'stripe-fintech',
+    name: 'Stripe Vibrant Fintech Indigo',
+    tagline: 'Vibrant blurple indigo, electric cyan, deep navy, and crystalline ice slate',
+    description: 'The iconic benchmark of modern fintech SaaS UI seen across Dribbble and Figma Community.',
+    primary: '#635BFF',
+    secondary: '#00D4FF',
+    accent: '#0A2540',
+    background: '#F6F9FC',
+    surface: '#FFFFFF',
+    border: '#E3E8EE',
+    text: '#0A2540',
+    textMuted: '#425466',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Stripe Vibrant Fintech Indigo
+- Mood: World-class fintech precision with electric blurple indigo and crisp cyan accents on crystalline ice slate.
+- Background: #F6F9FC (crystalline light ice)
+- Surface / Cards: #FFFFFF (pure white card elevation)
+- Borders: #E3E8EE (clean hairline border)
+- Primary Accent: #635BFF (signature Stripe indigo blurple)
+- Secondary Accent: #00D4FF (electric laser cyan)
+- Text Primary: #0A2540 (deep executive navy)
+- Text Muted: #425466 (neutral slate caption)`,
+  },
+  {
+    id: 'supabase-emerald',
+    name: 'Supabase Dark Emerald Matrix',
+    tagline: 'High-voltage neon emerald green, obsidian charcoal, and crisp developer dark mode',
+    description: 'Beloved across developer communities and modern Figma UI kits with luminous mint and emerald signals on deep charcoal.',
+    primary: '#3ECF8E',
+    secondary: '#24B47E',
+    accent: '#70E0A0',
+    background: '#121212',
+    surface: '#1C1C1C',
+    border: '#2E2E2E',
+    text: '#EDEDED',
+    textMuted: '#888888',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Supabase Dark Emerald Matrix
+- Mood: High-performance developer platform dark mode anchored by electric emerald green and crisp charcoal layers.
+- Background: #121212 (obsidian pitch void)
+- Surface / Cards: #1C1C1C (elevated carbon substrate)
+- Borders: #2E2E2E (subtle hairline boundary)
+- Primary Accent: #3ECF8E (vibrant neon emerald)
+- Secondary Accent: #24B47E (deep forest mint)
+- Text Primary: #EDEDED (bright code white)
+- Text Muted: #888888 (secondary commentary gray)`,
+  },
+  {
+    id: 'raycast-aurora',
+    name: 'Raycast Obsidian Velvet & Crimson',
+    tagline: 'Deep space obsidian, glowing crimson cherry, and ambient violet twilight',
+    description: 'The pinnacle of high-end Mac launcher aesthetics, deep pitch blacks with vibrant crimson focus indicators.',
+    primary: '#FF3B30',
+    secondary: '#9B51E0',
+    accent: '#FF2D55',
+    background: '#0B0C0E',
+    surface: '#15171B',
+    border: '#22252B',
+    text: '#F3F4F6',
+    textMuted: '#6C727F',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Raycast Obsidian Velvet & Crimson
+- Mood: Luxury macOS command-center aesthetic with deep pitch obsidian, rich crimson laser focus, and violet twilight.
+- Background: #0B0C0E (deep space pitch obsidian)
+- Surface / Cards: #15171B (dark velvet glass substrate)
+- Borders: #22252B (micro specular boundary)
+- Primary Accent: #FF3B30 (glowing crimson cherry)
+- Secondary Accent: #9B51E0 (mystic twilight violet)
+- Text Primary: #F3F4F6 (crisp frost white)
+- Text Muted: #6C727F (subdued metallic slate)`,
+  },
+  {
+    id: 'vercel-geist',
+    name: 'Vercel Stark Monochrome & Neon Prism',
+    tagline: 'Monochromatic pitch black, stark white contrast, and high-frequency prismatic accents',
+    description: 'Minimalist engineering design system popularized by Next.js and Vercel dashboards.',
+    primary: '#000000',
+    secondary: '#7928CA',
+    accent: '#0070F3',
+    background: '#FFFFFF',
+    surface: '#FAFAFA',
+    border: '#EAEAEA',
+    text: '#111111',
+    textMuted: '#666666',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Vercel Stark Monochrome & Neon Prism
+- Mood: Stark architectural high-contrast monochrome with prismatic violet and electric blue highlights.
+- Background: #FFFFFF (pure stark white)
+- Surface / Cards: #FAFAFA (soft architectural panel)
+- Borders: #EAEAEA (1px crisp structural seam)
+- Primary Accent: #000000 (absolute pitch black)
+- Secondary Accent: #7928CA (prismatic violet ray)
+- Electric Accent: #0070F3 (Next.js electric blue)
+- Text Primary: #111111 (uncompromising deep black)
+- Text Muted: #666666 (calibrated neutral)`,
+  },
+  {
+    id: 'arc-cosmic',
+    name: 'Arc Cosmic Neon & Electric Lilac',
+    tagline: 'Cosmic violet, energetic magenta, electric sunshine amber, and deep nebula canvas',
+    description: 'Celebrated for expressive, playful gradient energy and bold modern product architecture.',
+    primary: '#8338EC',
+    secondary: '#FF006E',
+    accent: '#FFBE0B',
+    background: '#181824',
+    surface: '#222234',
+    border: '#3A3A54',
+    text: '#FFFFFF',
+    textMuted: '#9E9EB2',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Arc Cosmic Neon & Electric Lilac
+- Mood: Expressive, luminous modern web product design celebrating cosmic violet, energetic magenta, and warm amber highlights.
+- Background: #181824 (deep cosmic twilight)
+- Surface / Cards: #222234 (translucent nebula glass)
+- Borders: #3A3A54 (electric boundary stroke)
+- Primary Accent: #8338EC (cosmic violet ray)
+- Secondary Accent: #FF006E (hot electric magenta)
+- Spark Accent: #FFBE0B (sunshine amber)
+- Text Primary: #FFFFFF (radiant white)
+- Text Muted: #9E9EB2 (soft lilac mist)`,
+  },
+  {
+    id: 'notion-warm',
+    name: 'Notion Warm Editorial Parchment',
+    tagline: 'Warm parchment white, soft charcoal typography, and cozy amber accent highlights',
+    description: 'The iconic clean documentation and knowledge workspace palette with organic warmth and gentle ink tones.',
+    primary: '#D9730D',
+    secondary: '#0F7B6C',
+    accent: '#2EAADC',
+    background: '#F7F6F3',
+    surface: '#FFFFFF',
+    border: '#E3E2E0',
+    text: '#37352F',
+    textMuted: '#787774',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Notion Warm Editorial Parchment
+- Mood: Organic, calming knowledge-base workspace palette with warm parchment tones and soft charcoal typography.
+- Background: #F7F6F3 (warm parchment paper)
+- Surface / Cards: #FFFFFF (clean sheet white)
+- Borders: #E3E2E0 (gentle warm gray outline)
+- Primary Accent: #D9730D (warm amber callout)
+- Secondary Accent: #0F7B6C (pine green tag)
+- Text Primary: #37352F (soft warm charcoal ink)
+- Text Muted: #787774 (muted graphite caption)`,
+  },
+  {
+    id: 'figma-canvas',
+    name: 'Figma Multiplayer Canvas & Neon Cursors',
+    tagline: 'Energetic Figma orange, teal, purple multiplayer cursor tags on graphite canvas',
+    description: 'Inspired by Figma creative workspace with distinct vibrant cursor badges and sleek slate tools.',
+    primary: '#F24E1E',
+    secondary: '#0ACF83',
+    accent: '#1ABCFE',
+    background: '#1E1E1E',
+    surface: '#2C2C2C',
+    border: '#383838',
+    text: '#FFFFFF',
+    textMuted: '#B3B3B3',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Figma Multiplayer Canvas & Neon Cursors
+- Mood: Creative collaboration workspace with energetic multiplayer cursor colors on graphite canvas.
+- Background: #1E1E1E (infinite graphite canvas)
+- Surface / Cards: #2C2C2C (dark tool panel substrate)
+- Borders: #383838 (calibrated neutral divider)
+- Primary Accent: #F24E1E (signature Figma fiery orange)
+- Secondary Accent: #0ACF83 (multiplayer mint green)
+- Third Accent: #1ABCFE (electric sky cyan)
+- Text Primary: #FFFFFF (crisp canvas white)
+- Text Muted: #B3B3B3 (soft UI chrome gray)`,
+  },
+  {
+    id: 'claude-ivory',
+    name: 'Warm Ivory AI & Baked Terracotta',
+    tagline: 'Warm toasted cream, rich baked terracotta, deep espresso, and organic bone paper',
+    description: 'Trending across modern conversational AI interfaces with humanistic warmth and calm typography.',
+    primary: '#CC785C',
+    secondary: '#DA7756',
+    accent: '#D28E65',
+    background: '#FAF8F5',
+    surface: '#FFFFFF',
+    border: '#E8E5DF',
+    text: '#1A1915',
+    textMuted: '#66645E',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Warm Ivory AI & Baked Terracotta
+- Mood: Humanist, intellectual, calm modern AI interface with warm toasted cream and organic terracotta earth tones.
+- Background: #FAF8F5 (warm ivory bone)
+- Surface / Cards: #FFFFFF (crisp sheet card)
+- Borders: #E8E5DF (natural linen border)
+- Primary Accent: #CC785C (baked terracotta earth)
+- Secondary Accent: #DA7756 (warm coral clay)
+- Text Primary: #1A1915 (deep espresso charcoal)
+- Text Muted: #66645E (warm earth gray)`,
+  },
 ];
 
 // ============================================================================
@@ -691,6 +886,76 @@ export const FONT_PARTS: FontPart[] = [
 - Body: Refined clean sans or classical book serif.
 - Invariants: Commands poise, luxury, and understated quiet grandeur.`,
   },
+  {
+    id: 'bento-jakarta',
+    name: 'Modern Bento UI / Jakarta Sans',
+    tagline: 'Geometric, ultra-crisp neo-grotesk with warm human terminal curves',
+    description: 'The reigning favorite on Figma Community and Dribbble for Bento grids, modern SaaS, and AI interfaces.',
+    fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+    previewSample: 'Modular Bento Grid Intelligence 2026',
+    classification: 'bento',
+    promptSnippet: `### Typography Treatment: Modern Bento UI (Plus Jakarta Sans)
+- Style: Pristine, geometric, high-clarity neo-grotesk engineered for high-density modern Bento layouts.
+- Headings: 'Plus Jakarta Sans', font-weight 700/800, tight tracking (-0.02em), crisp contrast.
+- Body: 'Plus Jakarta Sans', font-weight 500/600 with open aperture for micro-labels and metrics.
+- Invariants: Clean hierarchy, subtle line-height, contemporary tech feel.`,
+  },
+  {
+    id: 'retro-fraunces',
+    name: 'Wonky 70s Editorial Serif / Fraunces',
+    tagline: 'Organic soft serif curves, characterful variable axes, and tactile warmth',
+    description: 'Trending across Dribbble for lifestyle, creator economy, and editorial modern apps with distinctive personality.',
+    fontFamily: "'Fraunces', Georgia, serif",
+    previewSample: 'The Tactile Almanac of Taste',
+    classification: 'retro-serif',
+    promptSnippet: `### Typography Treatment: Wonky 70s Editorial Serif (Fraunces)
+- Style: Highly characterful, warm 1970s soft serif with distinctive teardrop terminals and organic curves.
+- Headings: 'Fraunces', font-weight 700 with soft organic weight distribution and editorial intimacy.
+- Body: Neutral warm grotesque or paired clean humanist sans for prolonged reading.
+- Invariants: Evokes artisanal warmth, thoughtful craftsmanship, and literary flair.`,
+  },
+  {
+    id: 'fintech-dmsans',
+    name: 'Fintech Sharp Executive / DM Sans',
+    tagline: 'Geometric financial clarity, razor-sharp tabular numbers, and institutional poise',
+    description: 'The de facto choice on Figma for executive analytics dashboards, crypto exchanges, and fintech interfaces.',
+    fontFamily: "'DM Sans', -apple-system, sans-serif",
+    previewSample: '$48,290.45 ▲ +14.28% NET',
+    classification: 'fintech',
+    promptSnippet: `### Typography Treatment: Fintech Sharp Executive (DM Sans)
+- Style: Razor-sharp geometric sans with uncompromising numeric clarity and institutional poise.
+- Headings: 'DM Sans', font-weight 700, tabular numbers enabled (font-variant-numeric: tabular-nums).
+- Body: 'DM Sans', font-weight 500 with high x-height for instantaneous data scanning.
+- Invariants: Prioritize legibility of data tables, currency figures, and metric percentages.`,
+  },
+  {
+    id: 'eccentric-spacemono',
+    name: 'Brutalist Mechanical / Space Mono',
+    tagline: 'Orthogonal fixed-width matrix, geometric monospace quirks, and Web3 cyber aesthetic',
+    description: 'Beloved by indie developers and brutalist designers on Dribbble for cutting through generic SaaS sameness.',
+    fontFamily: "'Space Mono', monospace",
+    previewSample: 'HASH://0x88F9_STABLE',
+    classification: 'eccentric-mono',
+    promptSnippet: `### Typography Treatment: Brutalist Mechanical Monospace (Space Mono)
+- Style: Fixed-width mechanical geometric monospace with angular serifs and brutalist flair.
+- Headings: 'Space Mono', font-weight 700, uppercase letter-spacing (0.05em), technical edge.
+- Body: 'Space Mono' for code snippets, raw metadata, and coordinates paired with clean sans for prose.
+- Invariants: Authentic terminal aesthetic with expressive mechanical character.`,
+  },
+  {
+    id: 'condensed-poster',
+    name: 'High-Impact Editorial Poster / Bebas Neue',
+    tagline: 'Tall, condensed, monumental uppercase headline typeface inspired by architectural signage',
+    description: 'Dominates Dribbble hero sections, creative agency showcases, and high-impact editorial landing pages.',
+    fontFamily: "'Bebas Neue', sans-serif",
+    previewSample: 'BREAKTHROUGH ARCHITECTURE',
+    classification: 'poster',
+    promptSnippet: `### Typography Treatment: High-Impact Editorial Poster (Bebas Neue)
+- Style: Tall condensed all-caps display typography with bold verticality and billboard presence.
+- Headings: 'Bebas Neue', uppercase, tracking 0.05em, large display scale (text-3xl to text-6xl).
+- Body: Paired clean modern sans for high-readability paragraph copy.
+- Invariants: Massive visual punch for hero statements, KPI counters, and section anchors.`,
+  },
 ];
 
 // ============================================================================
@@ -872,6 +1137,80 @@ export const SURFACE_PARTS: SurfacePart[] = [
 - Inset Machining: Top edge highlight (inset 0 1px 0 rgba(255,255,255,0.2)).
 - Shadow Treatment: Solid 4px 4px 0px #000000 physical chassis offset.`,
   },
+  {
+    id: 'bento-spotlight',
+    name: 'Modern Bento Grid Spotlight Card',
+    tagline: 'Specular hairline borders, 20px squircle radius, and subtle cursor spotlight illumination',
+    description: 'The hallmark of modern Figma Community Bento systems with 1px hairline border, squircle curves, and ambient radial glow.',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    radius: '20px',
+    shadow: '0 0 0 1px rgba(255,255,255,0.06), 0 12px 32px -8px rgba(0,0,0,0.25)',
+    promptSnippet: `### Surface, Borders & Elevation: Modern Bento Grid Spotlight
+- Boundaries: 1px subtle specular hairline border with subtle inner top highlight.
+- Corner Radii: 20px gentle squircle radius for modern high-density card grids.
+- Shadow Treatment: Multi-layered diffusion: 0 0 0 1px rgba(255,255,255,0.06), 0 12px 32px -8px rgba(0, 0, 0, 0.25).
+- Lighting: Subtle radial spotlight hover glow on active cards.`,
+  },
+  {
+    id: 'raycast-velvet',
+    name: 'Raycast Obsidian Velvet Glass',
+    tagline: 'Ultra-dark obsidian backdrop, micro 1px edge specular, and deep atmospheric blur',
+    description: 'Mac launcher aesthetic with deep translucent velvet substrate, sharp 1px glass edge, and luxurious ambient elevation.',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    radius: '16px',
+    shadow: 'inset 0 1px 0 0 rgba(255,255,255,0.12), 0 24px 48px -12px rgba(0,0,0,0.5)',
+    backdropBlur: '16px',
+    promptSnippet: `### Surface, Borders & Elevation: Raycast Obsidian Velvet Glass
+- Boundaries: 1px ultra-fine translucent border with top edge specular reflection (inset 0 1px 0 0 rgba(255,255,255,0.12)).
+- Corner Radii: 16px refined squircle.
+- Shadow Treatment: Deep cinematic elevation: 0 24px 48px -12px rgba(0, 0, 0, 0.50).
+- Surface Texture: Deep pitch velvet background with slight backdrop blur.`,
+  },
+  {
+    id: 'neumorphic-soft',
+    name: 'Soft Neumorphic Emboss & Deboss',
+    tagline: 'Extruded plastic surface with paired opposing light and shadow gradients',
+    description: 'The famous Dribbble soft UI trend where controls appear molded directly out of the surface sheet.',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    radius: '16px',
+    shadow: '6px 6px 14px rgba(0,0,0,0.12), -6px -6px 14px rgba(255,255,255,0.85)',
+    promptSnippet: `### Surface, Borders & Elevation: Soft Neumorphic Emboss
+- Boundaries: Matching tonal 1px border blending into substrate.
+- Corner Radii: 16px organic curved corners.
+- Shadow Treatment: Dual opposing light/dark cast shadows: 6px 6px 14px rgba(0,0,0,0.12) combined with -6px -6px 14px rgba(255,255,255,0.85).
+- Visual Effect: Appears soft-molded and continuous with background.`,
+  },
+  {
+    id: 'architectural-split',
+    name: 'Swiss Architectural Split / Border-Collapse',
+    tagline: 'Razor-sharp 0px radius, orthogonal hairline dividers, and flush grid alignment',
+    description: 'High-density information architecture seen in developer tools and technical dashboards with zero rounded corners and unified 1px grid seams.',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    radius: '0px',
+    shadow: 'none',
+    promptSnippet: `### Surface, Borders & Elevation: Swiss Architectural Split
+- Boundaries: Crisp 1px hairline border lines acting as shared grid separators.
+- Corner Radii: 0px strict right-angle corners.
+- Shadow Treatment: Zero drop shadows; elevation is communicated through pure contrast and partition boundaries.`,
+  },
+  {
+    id: 'floating-island',
+    name: 'Floating Island Elevated Modal',
+    tagline: 'Detached floating container with expansive multi-layered ambient diffusion shadow',
+    description: 'Modern macOS and iOS style card hovering freely above the backdrop with expansive soft ambient occlusion.',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    radius: '24px',
+    shadow: '0 25px 50px -12px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.04)',
+    promptSnippet: `### Surface, Borders & Elevation: Floating Island Elevated Modal
+- Boundaries: 1px faint border ring keeping the perimeter sharply defined.
+- Corner Radii: 24px spacious pill-like corners.
+- Shadow Treatment: Expansive soft atmospheric diffusion: 0 25px 50px -12px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.04).`,
+  },
 ];
 
 // ============================================================================
@@ -998,6 +1337,66 @@ export const COMPONENT_PARTS: ComponentPart[] = [
 - Buttons: Minimal border-b hairline underline with generous horizontal padding and quiet ink-bleed hover transition.
 - Badges: Red circular Hanko seal status badge (vermilion stamp #C84B31) denoting authenticity and calm status.
 - Philosophy: Zero gratuitous animations; functional clarity and generous white space.`,
+  },
+  {
+    id: 'bento-spotlight-btn',
+    name: 'Bento Micro-Spotlight Glow Buttons',
+    tagline: 'Subtle gradient border, pulsing live status beacon, smooth 1px lift, and clean pill shape',
+    description: 'Modern Bento grid controls with dynamic hover spotlight, status indicator LED, and high tactile polish.',
+    buttonClass: 'px-4 py-2 rounded-xl border border-white/20 bg-stone-900 text-stone-100 text-xs font-semibold hover:border-white/40 hover:-translate-y-0.5 transition-all cursor-pointer shadow-sm flex items-center gap-1.5',
+    badgeClass: 'px-2.5 py-0.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-mono text-[10px] font-medium flex items-center gap-1',
+    promptSnippet: `### UI Component Treatment: Bento Micro-Spotlight Glow Buttons
+- Buttons: Rounded 12px pill geometry with 1px translucent specular border, dark substrate fill, micro status LED, and subtle -1px vertical lift on hover.
+- Badges: Pill-shaped status chips with glowing indicator beacon.
+- Interaction: Smooth cubic-bezier transition, crisp focus rings, high tactile responsiveness.`,
+  },
+  {
+    id: 'floating-dock-capsule',
+    name: 'Floating Capsule Dock Controls',
+    tagline: 'macOS dock-inspired pill capsule buttons with backdrop blur and bouncy micro-interactions',
+    description: 'Floating segmented capsule controls with frosted glass transparency, smooth hover scale, and rounded-full silhouettes.',
+    buttonClass: 'px-4 py-2 rounded-full border border-stone-300 dark:border-white/25 bg-stone-100/80 dark:bg-white/10 backdrop-blur-md text-xs font-medium hover:bg-stone-200 dark:hover:bg-white/20 active:scale-95 transition-all cursor-pointer shadow-md',
+    badgeClass: 'px-2.5 py-0.5 rounded-full border border-stone-300 dark:border-white/30 bg-stone-200/50 dark:bg-white/20 backdrop-blur-xs text-[10px] font-semibold',
+    promptSnippet: `### UI Component Treatment: Floating Capsule Dock Controls
+- Buttons: Fully rounded pill capsule (rounded-full) with subtle glassmorphic blur and springy active press response (active:scale-95).
+- Badges: Circular and pill badges with translucent backdrop-blur.
+- Interaction: Playful spring bounce on hover/press, friendly touch targets.`,
+  },
+  {
+    id: 'tactile-push-button',
+    name: 'Tactile 3D Mechanical Push Buttons',
+    tagline: 'Chunky 4px bottom border bevel, mechanical keypress sinking effect, and physical click',
+    description: 'Retro-modern tactile physical push buttons that depress by 2px on click, delivering authentic mechanical keyboard feedback.',
+    buttonClass: 'px-4 py-1.5 rounded-lg border-2 border-stone-800 border-b-4 bg-stone-100 text-stone-900 font-bold text-xs hover:bg-stone-200 active:border-b-2 active:translate-y-0.5 transition-all cursor-pointer',
+    badgeClass: 'px-2 py-0.5 rounded border-2 border-stone-800 bg-amber-300 text-stone-900 font-mono font-bold text-[10px]',
+    promptSnippet: `### UI Component Treatment: Tactile 3D Mechanical Push Buttons
+- Buttons: Physical 3D keycap effect with thick bottom border bevel (border-b-4) that physically depresses (translate-y-0.5 and border-b-2) when clicked.
+- Badges: Stamped mechanical tags with bold 2px borders.
+- Interaction: Deep tactile satisfaction replicating physical arcade and keyboard switches.`,
+  },
+  {
+    id: 'fintech-metric-chip',
+    name: 'Fintech Metric Delta Chips & Controls',
+    tagline: 'Tabular numeric badges, micro percentage delta indicators, and sharp executive styling',
+    description: 'Precision financial dashboard controls with integrated percentage performance tags, tabular numbers, and clean dual-tone fills.',
+    buttonClass: 'px-3.5 py-1.5 rounded-lg border border-indigo-500/40 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 font-semibold text-xs hover:bg-indigo-100 transition-colors cursor-pointer flex items-center gap-1.5',
+    badgeClass: 'px-2 py-0.5 rounded-md border border-emerald-600/30 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-mono text-[10px] font-bold',
+    promptSnippet: `### UI Component Treatment: Fintech Metric Delta Chips
+- Buttons: Sharp 8px rounded controls with subtle tinted brand wash, tabular numbers, and integrated delta status indicators.
+- Badges: Metric chips with directional gain/loss arrows (▲ +14.2% / ▼ -2.1%) and high-contrast green/crimson fills.
+- Interaction: Crisp, corporate, high-precision response.`,
+  },
+  {
+    id: 'glow-shimmer-laser',
+    name: 'Laser Gradient Shimmer Buttons',
+    tagline: 'High-energy gradient border with animated beam shimmer and rich inner specular glow',
+    description: 'Trending on Dribbble Web3 and AI hero sections with animated luminous border sweeps and electric color highlights.',
+    buttonClass: 'px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-indigo-600 text-white font-semibold text-xs hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] hover:scale-102 active:scale-98 transition-all cursor-pointer shadow-md',
+    badgeClass: 'px-2.5 py-0.5 rounded-full border border-fuchsia-400/50 bg-fuchsia-500/20 text-fuchsia-300 text-[10px] font-bold',
+    promptSnippet: `### UI Component Treatment: Laser Gradient Shimmer Buttons
+- Buttons: Vivid multi-stop gradient (violet to fuchsia to indigo) with radiant hover bloom (0 0 20px rgba(168,85,247,0.5)) and subtle scale elevation.
+- Badges: Glowing neon capsule badges with electric border stroke.
+- Interaction: High-energy magnetic hover response and luminous feedback.`,
   },
 ];
 
@@ -1126,6 +1525,46 @@ export const ACCENT_PARTS: AccentPart[] = [
     promptSnippet: `### Signature Graphic Accents: Pure Minimal (No Accents)
 - Aesthetic Rule: Zero decorative overlays, scanlines, or crosshairs.
 - Purity: Clean, unadorned surfaces where typography, contrast, and spatial hierarchy communicate everything.`,
+  },
+  {
+    id: 'aurora-glow',
+    name: 'Aurora Atmospheric Mesh Glow',
+    tagline: 'Luminous ambient corner mesh glow, diffused violet/cyan light bloom, and dreamy depth',
+    description: 'Modern Dribbble SaaS & AI trend featuring rich, out-of-focus atmospheric radial mesh gradient blooms in corners and behind key focal points.',
+    type: 'aurora-glow',
+    promptSnippet: `### Signature Graphic Accents: Aurora Atmospheric Mesh Glow
+- Atmosphere: Multi-point diffused radial mesh gradients floating in upper corners (e.g. radial-gradient(circle at 10% 10%, rgba(99,102,241,0.25) 0%, transparent 50%)).
+- Mood: Dreamy, premium, high-tech glow that softly illuminates dark or light surfaces.`,
+  },
+  {
+    id: 'wireframe-grid',
+    name: 'Perspective Tech Wireframe Grid',
+    tagline: '3D perspective wireframe grid floor, isometric coordinate lines, and matrix horizon',
+    description: 'Futuristic technical grid matrix fading towards the horizon, beloved in Web3, developer tools, and futuristic dashboards.',
+    type: 'wireframe-grid',
+    promptSnippet: `### Signature Graphic Accents: Perspective Tech Wireframe Grid
+- Ground Grid: 3D perspective wireframe grid matrix (linear-gradient grid lines fading into transparent horizon with subtle perspective tilt).
+- Precision: 20px grid spacing with subtle 1px line stroke at 15-20% opacity.`,
+  },
+  {
+    id: 'halftone-dots',
+    name: 'Halftone Pop Art Dot Matrix',
+    tagline: 'Retro comic book risograph halftone dot gradation, pop art texture, and screenprint character',
+    description: 'Screenprinted halftone dot pattern with varying density gradient, inspired by classic Roy Lichtenstein pop art and modern neo-brutalist Dribbble explorations.',
+    type: 'halftone-dots',
+    promptSnippet: `### Signature Graphic Accents: Halftone Pop Art Dot Matrix
+- Texture: Screenprint risograph halftone dot matrix gradient (radial-gradient dot pattern with varying density mask).
+- Vibe: Energetic comic book pop art, graphic novel tactile print, and screen-printed authenticity.`,
+  },
+  {
+    id: 'crosshair-plus',
+    name: 'Plus-Grid Alignment Calibration Marks',
+    tagline: 'Delicate micro "+" crosshair registration marks at structural grid intersections',
+    description: 'Modern engineering aesthetic seen in Vercel, Linear, and Raycast where subtle "+" marks align with card grid corners and dividers.',
+    type: 'crosshair-plus',
+    promptSnippet: `### Signature Graphic Accents: Plus-Grid Alignment Calibration Marks
+- Alignment Marks: Delicate micro "+" marks (+ icon / font-mono crosshairs) positioned at corner intersections and boundary seams.
+- Tone: High-precision engineering calibration, architectural blueprint discipline, and obsessive micro-detail.`,
   },
 ];
 

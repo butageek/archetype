@@ -181,6 +181,80 @@ function AccentVisualPreview({ type }: { type: AccentPart['type'] }) {
     );
   }
 
+  if (type === 'aurora-glow') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-stone-950 border border-violet-500/40 relative overflow-hidden flex items-center justify-between px-3">
+        <div
+          className="absolute -top-6 -left-6 w-20 h-20 rounded-full blur-md opacity-70 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #8B5CF6 0%, #3B82F6 60%, transparent 80%)' }}
+        />
+        <div
+          className="absolute -bottom-6 -right-6 w-20 h-20 rounded-full blur-md opacity-70 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #EC4899 0%, #06B6D4 60%, transparent 80%)' }}
+        />
+        <span className="text-[10px] font-semibold text-white relative z-10 flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
+          Aurora Mesh Glow
+        </span>
+        <span className="text-[9px] font-mono text-cyan-300 font-bold relative z-10 border border-cyan-400/40 px-1 rounded bg-black/40">
+          BLOOM
+        </span>
+      </div>
+    );
+  }
+
+  if (type === 'wireframe-grid') {
+    return (
+      <div
+        className="h-10 w-full rounded-xl bg-stone-950 border border-emerald-500/40 relative overflow-hidden flex items-center justify-between px-3"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgba(16, 185, 129, 0.25) 1px, transparent 1px), linear-gradient(to bottom, rgba(16, 185, 129, 0.25) 1px, transparent 1px)',
+          backgroundSize: '10px 10px',
+        }}
+      >
+        <span className="text-[10px] font-mono font-bold text-emerald-400 bg-stone-950/80 px-1 rounded">
+          PERSPECTIVE GRID
+        </span>
+        <span className="text-[9px] font-mono text-emerald-300 font-bold border border-emerald-500/60 px-1 rounded bg-black/60">
+          3D MATRIX
+        </span>
+      </div>
+    );
+  }
+
+  if (type === 'halftone-dots') {
+    return (
+      <div
+        className="h-10 w-full rounded-xl bg-amber-50 border border-amber-300 relative overflow-hidden flex items-center justify-between px-3"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #f59e0b 2px, transparent 2px)',
+          backgroundSize: '8px 8px',
+        }}
+      >
+        <span className="text-[10px] font-bold text-amber-950 bg-white/90 px-1.5 py-0.5 rounded shadow-2xs">
+          Pop Art Halftone Dots
+        </span>
+        <span className="text-[9px] font-mono text-amber-800 font-bold border border-amber-400 bg-amber-100 px-1 rounded">
+          SCREENPRINT
+        </span>
+      </div>
+    );
+  }
+
+  if (type === 'crosshair-plus') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-stone-950 border border-stone-700 relative overflow-hidden flex items-center justify-between px-3">
+        <span className="absolute top-1 left-2 font-mono font-black text-xs text-stone-400">+</span>
+        <span className="absolute top-1 right-2 font-mono font-black text-xs text-stone-400">+</span>
+        <span className="absolute bottom-1 left-2 font-mono font-black text-xs text-stone-400">+</span>
+        <span className="absolute bottom-1 right-2 font-mono font-black text-xs text-stone-400">+</span>
+        <span className="text-[10px] font-mono font-bold text-stone-300">Plus-Grid Calibration (+)</span>
+        <span className="text-[9px] font-mono text-stone-400 border border-stone-600 px-1 rounded">CALIB</span>
+      </div>
+    );
+  }
+
   return (
     <div className="h-10 w-full rounded-xl bg-stone-50 border border-stone-200 relative overflow-hidden flex items-center justify-center">
       <span className="text-[10px] font-mono text-stone-400 font-semibold">Pure Minimal (No Accents)</span>

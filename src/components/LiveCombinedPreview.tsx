@@ -41,6 +41,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
     borderRadius: surface.radius,
     boxShadow: surface.shadow,
     clipPath: surface.clipPath,
+    backdropFilter: surface.backdropBlur ? `blur(${surface.backdropBlur})` : undefined,
     fontFamily: font.fontFamily,
     transition: 'all 200ms ease-out',
   };
@@ -143,6 +144,62 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
           className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-64 h-3 z-30 flex items-center justify-center opacity-85"
           style={{
             background: `radial-gradient(ellipse at top, ${palette.primary} 0%, transparent 75%)`,
+          }}
+        />
+      )}
+
+      {/* 7. Aurora Atmospheric Mesh Glow */}
+      {accent.type === 'aurora-glow' && (
+        <>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-24 -left-24 w-80 h-80 rounded-full blur-3xl opacity-40 z-0"
+            style={{
+              background: `radial-gradient(circle, ${palette.primary} 0%, ${palette.secondary} 50%, transparent 80%)`,
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-24 -right-24 w-80 h-80 rounded-full blur-3xl opacity-35 z-0"
+            style={{
+              background: `radial-gradient(circle, ${palette.accent} 0%, ${palette.primary} 50%, transparent 80%)`,
+            }}
+          />
+        </>
+      )}
+
+      {/* 8. Perspective Wireframe Grid */}
+      {accent.type === 'wireframe-grid' && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 opacity-20"
+          style={{
+            backgroundImage: `linear-gradient(to right, ${palette.primary} 1px, transparent 1px), linear-gradient(to bottom, ${palette.primary} 1px, transparent 1px)`,
+            backgroundSize: '24px 24px',
+          }}
+        />
+      )}
+
+      {/* 9. Halftone Pop Art Dots */}
+      {accent.type === 'halftone-dots' && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 opacity-15"
+          style={{
+            backgroundImage: `radial-gradient(${palette.primary} 2.5px, transparent 2.5px)`,
+            backgroundSize: '10px 10px',
+          }}
+        />
+      )}
+
+      {/* 10. Plus-Grid Alignment Marks */}
+      {accent.type === 'crosshair-plus' && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 opacity-25"
+          style={{
+            backgroundImage: `radial-gradient(circle, ${palette.primary} 1.5px, transparent 1.5px)`,
+            backgroundSize: '32px 32px',
           }}
         />
       )}
@@ -336,6 +393,74 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
               />
             )}
 
+            {/* PLUS-GRID CALIBRATION CORNER CROSSHAIRS */}
+            {accent.type === 'crosshair-plus' && (
+              <>
+                <span
+                  className="absolute top-1 left-1.5 text-xs font-mono font-black leading-none select-none z-20 opacity-70"
+                  style={{ color: palette.primary }}
+                >
+                  +
+                </span>
+                <span
+                  className="absolute top-1 right-1.5 text-xs font-mono font-black leading-none select-none z-20 opacity-70"
+                  style={{ color: palette.primary }}
+                >
+                  +
+                </span>
+                <span
+                  className="absolute bottom-1 left-1.5 text-xs font-mono font-black leading-none select-none z-20 opacity-70"
+                  style={{ color: palette.primary }}
+                >
+                  +
+                </span>
+                <span
+                  className="absolute bottom-1 right-1.5 text-xs font-mono font-black leading-none select-none z-20 opacity-70"
+                  style={{ color: palette.primary }}
+                >
+                  +
+                </span>
+              </>
+            )}
+
+            {/* AURORA SOFT AMBIENT BLOOM INSIDE CARD */}
+            {accent.type === 'aurora-glow' && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-12 -right-12 w-48 h-48 rounded-full blur-2xl opacity-30 z-0"
+                style={{
+                  background: `radial-gradient(circle, ${palette.primary} 0%, ${palette.secondary} 60%, transparent 80%)`,
+                }}
+              />
+            )}
+
+            {/* PERSPECTIVE TECH WIREFRAME GRID TOP STATUS BAR */}
+            {accent.type === 'wireframe-grid' && (
+              <div
+                className="w-full flex items-center justify-between text-[9px] font-mono py-0.5 px-2 rounded border mb-1"
+                style={{
+                  borderColor: `${palette.primary}44`,
+                  backgroundColor: `${palette.primary}0D`,
+                  color: palette.primary,
+                }}
+              >
+                <span>[3D_PERSPECTIVE_GRID // ACTIVE]</span>
+                <span className="font-bold">Z-INDEX: 0x00</span>
+              </div>
+            )}
+
+            {/* HALFTONE DOT MATRIX PATTERN INSIDE CARD */}
+            {accent.type === 'halftone-dots' && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 z-0 opacity-10"
+                style={{
+                  backgroundImage: `radial-gradient(circle, ${palette.primary} 2px, transparent 2px)`,
+                  backgroundSize: '8px 8px',
+                }}
+              />
+            )}
+
             {/* TOP BAR: TABS & STATUS BADGES */}
             <div className="flex flex-wrap items-center justify-between gap-2 relative z-10">
               {/* Interactive Segmented Tabs */}
@@ -409,6 +534,64 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
                     style={{ borderColor: palette.primary, color: palette.primary }}
                   >
                     ⊕ [X: 420.50, Y: 110.25]
+                  </div>
+                )}
+
+                {/* AURORA GLOW STATUS PILL */}
+                {accent.type === 'aurora-glow' && (
+                  <div
+                    className="text-[9px] font-mono px-2 py-0.5 rounded-full border flex items-center gap-1 font-bold shadow-xs"
+                    style={{
+                      borderColor: `${palette.primary}88`,
+                      backgroundColor: `${palette.primary}20`,
+                      color: palette.primary,
+                      boxShadow: `0 0 8px ${palette.primary}44`,
+                    }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: palette.secondary }} />
+                    <span>AURORA_MESH</span>
+                  </div>
+                )}
+
+                {/* WIREFRAME GRID BADGE */}
+                {accent.type === 'wireframe-grid' && (
+                  <div
+                    className="text-[9px] font-mono px-1.5 py-0.5 rounded border"
+                    style={{
+                      borderColor: `${palette.primary}66`,
+                      backgroundColor: `${palette.primary}15`,
+                      color: palette.primary,
+                    }}
+                  >
+                    GRID_SNAP: 20px
+                  </div>
+                )}
+
+                {/* PLUS-GRID CALIBRATION BADGE */}
+                {accent.type === 'crosshair-plus' && (
+                  <div
+                    className="text-[9px] font-mono px-1.5 py-0.5 rounded border font-bold"
+                    style={{
+                      borderColor: `${palette.primary}66`,
+                      backgroundColor: `${palette.primary}12`,
+                      color: palette.primary,
+                    }}
+                  >
+                    + CALIB: OK
+                  </div>
+                )}
+
+                {/* HALFTONE DOT MATRIX BADGE */}
+                {accent.type === 'halftone-dots' && (
+                  <div
+                    className="text-[9px] font-mono px-1.5 py-0.5 rounded border font-bold"
+                    style={{
+                      borderColor: `${palette.primary}66`,
+                      backgroundColor: `${palette.primary}12`,
+                      color: palette.primary,
+                    }}
+                  >
+                    ● DENSITY: 60 LPI
                   </div>
                 )}
 
