@@ -2,8 +2,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #fafaf9;
+  --foreground: #1c1917;
 }
 
 @theme inline {
@@ -14,12 +14,10 @@
 }
 
 body {
-  background: #09090b;
-  color: #ededed;
+  background: #fafaf9;
+  color: #1c1917;
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
 }
 
 /* Scrollbar customization */
@@ -33,10 +31,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(160, 160, 160, 0.2);
+  background: rgba(0, 0, 0, 0.12);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(160, 160, 160, 0.4);
+  background: rgba(0, 0, 0, 0.22);
 }
