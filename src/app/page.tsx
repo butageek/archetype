@@ -135,7 +135,7 @@ export default function ArchetypeSynthesizerPage() {
               ) : (
                 <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               )}
-              <span>{copiedCombined ? 'Copied Prompt!' : 'Copy Complete Prompt'}</span>
+              <span>{copiedCombined ? 'Copied Prompt!' : 'Copy Master Prompt'}</span>
             </button>
           </div>
         </div>
@@ -220,25 +220,6 @@ export default function ArchetypeSynthesizerPage() {
                     <span className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
                       Accent: <strong>{selection.accent.name}</strong>
                     </span>
-                  </div>
-
-                  {/* Big 1-Click Copy Bar */}
-                  <div className="pt-2 flex items-center justify-between gap-3 border-t border-stone-100">
-                    <div className="text-[11px] text-stone-500 hidden sm:block">
-                      Ready to paste into Cursor, Claude, or Antigravity
-                    </div>
-                    <button
-                      onClick={handleCopyCompletePrompt}
-                      className="w-full sm:w-auto px-4 py-2 bg-stone-900 hover:bg-black text-white text-xs font-bold rounded-xl cursor-pointer flex items-center justify-center gap-2 shadow-xs transition-transform active:scale-95 ml-auto"
-                      title="Copy synthesized master prompt"
-                    >
-                      {copiedCombined ? (
-                        <Check className="w-4 h-4 text-emerald-400 stroke-[3]" />
-                      ) : (
-                        <Copy className="w-4 h-4 text-stone-300" />
-                      )}
-                      <span>{copiedCombined ? 'Copied to Clipboard!' : 'Copy Master Prompt'}</span>
-                    </button>
                   </div>
                 </div>
               )}
