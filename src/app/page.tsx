@@ -245,13 +245,19 @@ export default function ArchetypeSynthesizerPage() {
                   </div>
 
                   <div className="relative">
-                    <pre className="p-4 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed select-all border border-stone-800 max-h-[420px]">
-                      {combinedMasterPrompt}
-                    </pre>
+                    <textarea
+                      readOnly
+                      value={combinedMasterPrompt}
+                      rows={18}
+                      className="w-full p-4 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs leading-relaxed border border-stone-800 focus:outline-none focus:ring-1 focus:ring-stone-600 cursor-text select-text resize-y shadow-inner scrollbar-thin"
+                      spellCheck={false}
+                    />
                   </div>
 
-                  <div className="text-[11px] text-stone-500">
-                    💡 <strong>Tip</strong>: Switch back to <strong>Live Mockup</strong> anytime via the header tabs above to test interactive controls.
+                  <div className="text-[11px] text-stone-500 flex flex-wrap items-center justify-between gap-1">
+                    <span>
+                      💡 <strong>Tip</strong>: Highlight any snippet or token directly to copy with <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">Ctrl+C</kbd> / <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">⌘C</kbd>, or click <strong>Copy Prompt</strong> for the full directive.
+                    </span>
                   </div>
                 </div>
               )}
