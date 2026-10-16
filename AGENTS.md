@@ -46,7 +46,7 @@ Because random combinations across 5 dimensions can occasionally clash, Archetyp
 15. *Bauhaus Constructivist Primaries* (Constructivist)
 16. *Cosmic Lilac & Floating Dock (Arc Style)* (Holographic Fluid)
 
-Users can activate any theme with 1 click, browse by category tags (`high-tech`, `developer`, `fintech`, `retro`, `editorial`, `minimal`, `industrial`), or use "Surprise Curated Theme" to roll a guaranteed harmonious aesthetic universe. Once applied, all individual pillars remain freely tweakable.
+Users can activate any theme with 1 click, or browse by category tags (`high-tech`, `developer`, `fintech`, `retro`, `editorial`, `minimal`, `industrial`). Once applied, all individual pillars remain freely tweakable.
 
 ---
 

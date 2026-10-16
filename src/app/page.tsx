@@ -225,24 +225,6 @@ export default function ArchetypeSynthesizerPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          const candidates = CURATED_THEMES.filter((t) => t.id !== activeCuratedTheme?.id);
-                          const nextTheme = candidates[Math.floor(Math.random() * candidates.length)] || CURATED_THEMES[0];
-                          handleApplyTheme(nextTheme);
-                          setSurpriseMenuOpen(false);
-                        }}
-                        className="w-full text-left px-3 py-1.5 hover:bg-amber-50/70 flex items-center justify-between cursor-pointer font-medium text-amber-900 transition-colors"
-                      >
-                        <span className="flex items-center gap-2">
-                          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                          <span>Surprise Curated Theme</span>
-                        </span>
-                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 font-bold border border-amber-200">
-                          Harmonious
-                        </span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
                           handleSurpriseMe();
                           setSurpriseMenuOpen(false);
                         }}
@@ -443,19 +425,34 @@ export default function ArchetypeSynthesizerPage() {
               {/* TAB 1: LIVE COMBINED MOCKUP VIEWPORT */}
               {leftTab === 'mockup' && (
                 <div className="space-y-3 animate-in fade-in duration-150">
-                  {/* Quick Theme Presets Strip */}
-                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none border-b border-stone-100 pb-2.5">
-                    <span className="text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider shrink-0 flex items-center gap-1">
+                  {/* Quick Theme Presets Strip (Wrapped & Fully Visible) */}
+                  <div className="flex flex-wrap items-center gap-1.5 pb-2.5 border-b border-stone-100">
+                    <span className="text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider shrink-0 flex items-center gap-1 mr-0.5">
                       <Sparkles className="w-3 h-3 text-amber-500" /> Presets:
                     </span>
                     {CURATED_THEMES.slice(0, 6).map((theme) => {
                       const isThemeActive = activeCuratedTheme?.id === theme.id;
+                      const shortName =
+                        theme.id === 'cyberpunk-nightcity'
+                          ? 'Cyberpunk 2077'
+                          : theme.id === 'raycast-obsidian-velvet'
+                          ? 'Obsidian Velvet'
+                          : theme.id === 'stripe-fintech'
+                          ? 'Stripe Fintech'
+                          : theme.id === 'frutiger-aero'
+                          ? 'Frutiger Aero'
+                          : theme.id === 'warm-70s-editorial'
+                          ? '70s Editorial'
+                          : theme.id === 'win95-classic'
+                          ? 'Windows 95'
+                          : theme.name.split(' (')[0].replace(' 1989', '').replace(' 1920s', '').replace(' Heavy', '');
+
                       return (
                         <button
                           key={theme.id}
                           type="button"
                           onClick={() => handleApplyTheme(theme)}
-                          className={`px-2 py-1 rounded-lg text-[11px] font-semibold cursor-pointer shrink-0 transition-all flex items-center gap-1.5 ${
+                          className={`px-2 py-1 rounded-lg text-[11px] font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
                             isThemeActive
                               ? 'bg-stone-900 text-white shadow-xs font-bold'
                               : 'bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200'
@@ -466,14 +463,14 @@ export default function ArchetypeSynthesizerPage() {
                             className="w-2 h-2 rounded-full shrink-0"
                             style={{ backgroundColor: theme.accentColor }}
                           />
-                          <span>{theme.name.split(' (')[0].replace(' 1989', '').replace(' 1920s', '').replace(' Heavy', '')}</span>
+                          <span>{shortName}</span>
                         </button>
                       );
                     })}
                     <button
                       type="button"
                       onClick={() => setActiveCategory('themes')}
-                      className="px-2 py-1 rounded-lg text-[11px] font-bold cursor-pointer shrink-0 text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors flex items-center gap-1"
+                      className="px-2.5 py-1 rounded-lg text-[11px] font-bold cursor-pointer text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors flex items-center gap-1"
                       title="Open all 16 curated themes in the right panel"
                     >
                       <span>All ({CURATED_THEMES.length}) →</span>
