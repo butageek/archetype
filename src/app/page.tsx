@@ -71,7 +71,7 @@ export default function ArchetypePortal() {
     const randomComp = getRandomComposition();
     setComposition(randomComp);
     triggerConfetti();
-    showToast(`Assembled "${randomComp.palette.name}" + "${randomComp.style.name}"!`);
+    showToast(`Assembled "${randomComp.palette.name}" + "${randomComp.surface.name}"!`);
   };
 
   // 1. SYNTHESIZE: Build a complete new design archetype from scratch
@@ -233,7 +233,7 @@ export default function ArchetypePortal() {
                   </span>
                 </div>
                 <p className="text-xs text-stone-500 mt-0.5 line-clamp-1">
-                  <strong>{composition.palette.name}</strong> • <strong>{composition.layout.name}</strong> • <strong>{composition.style.name}</strong>
+                  <strong>{composition.palette.name}</strong> • <strong>{composition.layout.name}</strong> • <strong>{composition.surface.name}</strong>
                 </p>
               </div>
 
@@ -313,7 +313,7 @@ export default function ArchetypePortal() {
               {composition.palette.name}
             </span>
             <span className="text-[9px] text-stone-500 font-mono truncate max-w-[140px]">
-              {composition.style.name}
+              {composition.surface.name}
             </span>
           </div>
         </div>

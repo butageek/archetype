@@ -1,4 +1,4 @@
-export type CategoryType = 'palette' | 'layout' | 'theme' | 'style' | 'font' | 'animation';
+export type CategoryType = 'palette' | 'layout' | 'surface' | 'font' | 'accents' | 'animation';
 
 export interface PaletteOption {
   id: string;
@@ -25,17 +25,7 @@ export interface LayoutOption {
   description: string;
 }
 
-export interface ThemeOption {
-  id: string;
-  name: string;
-  tagline: string;
-  mode: 'daylight' | 'nocturne' | 'vellum' | 'glass' | 'monochrome';
-  surfaceOpacity: string;
-  backgroundStyle: string;
-  description: string;
-}
-
-export interface StyleOption {
+export interface SurfaceOption {
   id: string;
   name: string;
   tagline: string;
@@ -43,15 +33,6 @@ export interface StyleOption {
   borderStyle: 'solid' | 'dashed' | 'double';
   radius: 'sharp' | 'subtle' | 'rounded' | 'pill';
   shadow: 'none' | 'hard-offset' | 'subtle-diffused' | 'glowing-neon' | 'skeuomorphic' | 'layered-hard';
-  accents: {
-    cornerTicks?: boolean;
-    crosshairs?: boolean;
-    washiTape?: boolean;
-    scanlines?: boolean;
-    dotGrid?: boolean;
-    rulers?: boolean;
-    noiseGrain?: boolean;
-  };
   description: string;
 }
 
@@ -68,21 +49,37 @@ export interface FontOption {
   description: string;
 }
 
+export interface AccentOption {
+  id: string;
+  name: string;
+  tagline: string;
+  cornerTicks?: boolean;
+  crosshairs?: boolean;
+  washiTape?: boolean;
+  scanlines?: boolean;
+  dotGrid?: boolean;
+  rulers?: boolean;
+  noiseGrain?: boolean;
+  description: string;
+}
+
 export interface AnimationOption {
   id: string;
   name: string;
   tagline: string;
   transitionCurve: string;
   duration: string;
-  styleClass: string;
+  cssStyle: string;
+  hoverClass: string;
+  activeClass: string;
   description: string;
 }
 
 export interface DesignComposition {
   palette: PaletteOption;
   layout: LayoutOption;
-  theme: ThemeOption;
-  style: StyleOption;
+  surface: SurfaceOption;
   font: FontOption;
+  accents: AccentOption;
   animation: AnimationOption;
 }

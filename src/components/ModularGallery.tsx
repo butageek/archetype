@@ -6,7 +6,7 @@ import {
   Grid,
   Layers,
   Palette,
-  SunMoon,
+  Sparkles,
   Type,
   Zap,
 } from 'lucide-react';
@@ -15,12 +15,12 @@ import {
   DesignComposition,
 } from '../types/design';
 import {
+  ACCENTS,
   ANIMATIONS,
   FONTS,
   LAYOUTS,
   PALETTES,
-  STYLES,
-  THEMES,
+  SURFACES,
 } from '../lib/modularPresets';
 
 interface ModularGalleryProps {
@@ -34,9 +34,9 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
   const categories: { id: CategoryType; label: string; icon: React.ElementType }[] = [
     { id: 'palette', label: 'Palette', icon: Palette },
     { id: 'layout', label: 'Layout', icon: Grid },
-    { id: 'theme', label: 'Theme', icon: SunMoon },
-    { id: 'style', label: 'Style', icon: Layers },
+    { id: 'surface', label: 'Surface', icon: Layers },
     { id: 'font', label: 'Font', icon: Type },
+    { id: 'accents', label: 'Accents', icon: Sparkles },
     { id: 'animation', label: 'Motion', icon: Zap },
   ];
 
@@ -52,7 +52,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
               : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
           }`}
         >
-          All Categories
+          All 6 Pillars
         </button>
         {categories.map((cat) => {
           const Icon = cat.icon;
@@ -80,7 +80,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono flex items-center gap-1.5">
               <Palette className="w-3.5 h-3.5 text-stone-700" />
-              01. Color Palettes
+              01. Color Palettes & Tone
             </h3>
             <span className="text-xs text-stone-600 font-medium">
               Selected: <strong className="text-stone-900">{composition.palette.name}</strong>
@@ -105,19 +105,22 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
                     <div
                       className="w-5 h-5 rounded-full border border-black/10 shadow-xs flex-shrink-0"
                       style={{ backgroundColor: pal.primary }}
+                      title={`Primary: ${pal.primary}`}
                     />
                     <div
                       className="w-4 h-4 rounded-full border border-black/10 shadow-xs flex-shrink-0"
                       style={{ backgroundColor: pal.secondary }}
+                      title={`Secondary: ${pal.secondary}`}
                     />
                     <div
                       className="w-4 h-4 rounded-full border border-black/10 shadow-xs flex-shrink-0"
                       style={{ backgroundColor: pal.accent }}
+                      title={`Accent: ${pal.accent}`}
                     />
                     <div
                       className="w-4 h-4 rounded-full border border-black/10 shadow-xs flex-shrink-0 ml-auto"
                       style={{ backgroundColor: pal.background }}
-                      title="Background"
+                      title={`Background: ${pal.background}`}
                     />
                   </div>
 
@@ -139,7 +142,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono flex items-center gap-1.5">
               <Grid className="w-3.5 h-3.5 text-stone-700" />
-              02. Layout & Density
+              02. Spatial Architecture & Density
             </h3>
             <span className="text-xs text-stone-600 font-medium">
               Selected: <strong className="text-stone-900">{composition.layout.name}</strong>
@@ -153,20 +156,20 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
                 <div
                   key={lay.id}
                   onClick={() => onChange({ ...composition, layout: lay })}
-                  className={`p-3 rounded-xl border text-left cursor-pointer transition-all ${
+                  className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all ${
                     isSelected
                       ? 'border-stone-900 ring-2 ring-stone-900/10 bg-white shadow-sm'
                       : 'border-stone-200 bg-white hover:border-stone-300 hover:shadow-xs'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-stone-100 text-stone-600 font-bold">
-                      {lay.density}
+                    <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-stone-100 text-stone-700 font-bold">
+                      {lay.type} • {lay.density}
                     </span>
                     {isSelected && <Check className="w-3.5 h-3.5 text-stone-900 stroke-[3]" />}
                   </div>
                   <div className="text-xs font-bold text-stone-900">{lay.name}</div>
-                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5">{lay.tagline}</p>
+                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5 leading-snug">{lay.tagline}</p>
                 </div>
               );
             })}
@@ -174,81 +177,40 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
         </section>
       )}
 
-      {/* 3. THEMES SECTION */}
-      {(selectedCategoryTab === 'all' || selectedCategoryTab === 'theme') && (
-        <section className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono flex items-center gap-1.5">
-              <SunMoon className="w-3.5 h-3.5 text-stone-700" />
-              03. Theme & Atmosphere
-            </h3>
-            <span className="text-xs text-stone-600 font-medium">
-              Selected: <strong className="text-stone-900">{composition.theme.name}</strong>
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
-            {THEMES.map((thm) => {
-              const isSelected = composition.theme.id === thm.id;
-              return (
-                <div
-                  key={thm.id}
-                  onClick={() => onChange({ ...composition, theme: thm })}
-                  className={`p-3 rounded-xl border text-left cursor-pointer transition-all ${
-                    isSelected
-                      ? 'border-stone-900 ring-2 ring-stone-900/10 bg-white shadow-sm'
-                      : 'border-stone-200 bg-white hover:border-stone-300 hover:shadow-xs'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-stone-100 text-stone-600 font-bold">
-                      {thm.mode}
-                    </span>
-                    {isSelected && <Check className="w-3.5 h-3.5 text-stone-900 stroke-[3]" />}
-                  </div>
-                  <div className="text-xs font-bold text-stone-900">{thm.name}</div>
-                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5">{thm.tagline}</p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* 4. STYLES & TREATMENTS SECTION */}
-      {(selectedCategoryTab === 'all' || selectedCategoryTab === 'style') && (
+      {/* 3. SURFACE TREATMENTS SECTION */}
+      {(selectedCategoryTab === 'all' || selectedCategoryTab === 'surface') && (
         <section className="space-y-3">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5 text-stone-700" />
-              04. Style & Border Treatment
+              03. Surface, Borders & Shadows
             </h3>
             <span className="text-xs text-stone-600 font-medium">
-              Selected: <strong className="text-stone-900">{composition.style.name}</strong>
+              Selected: <strong className="text-stone-900">{composition.surface.name}</strong>
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
-            {STYLES.map((sty) => {
-              const isSelected = composition.style.id === sty.id;
+            {SURFACES.map((surf) => {
+              const isSelected = composition.surface.id === surf.id;
               return (
                 <div
-                  key={sty.id}
-                  onClick={() => onChange({ ...composition, style: sty })}
-                  className={`p-3 rounded-xl border text-left cursor-pointer transition-all ${
+                  key={surf.id}
+                  onClick={() => onChange({ ...composition, surface: surf })}
+                  className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all ${
                     isSelected
                       ? 'border-stone-900 ring-2 ring-stone-900/10 bg-white shadow-sm'
                       : 'border-stone-200 bg-white hover:border-stone-300 hover:shadow-xs'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 text-stone-600 font-bold">
-                      {sty.borderWidth} / {sty.radius}
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 text-stone-700 font-bold">
+                      {surf.borderWidth} • {surf.radius} • {surf.shadow}
                     </span>
                     {isSelected && <Check className="w-3.5 h-3.5 text-stone-900 stroke-[3]" />}
                   </div>
-                  <div className="text-xs font-bold text-stone-900">{sty.name}</div>
-                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5">{sty.tagline}</p>
+                  <div className="text-xs font-bold text-stone-900">{surf.name}</div>
+                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5 leading-snug">{surf.tagline}</p>
                 </div>
               );
             })}
@@ -256,13 +218,13 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
         </section>
       )}
 
-      {/* 5. FONTS & TYPOGRAPHY SECTION */}
+      {/* 4. FONTS & TYPOGRAPHY SECTION */}
       {(selectedCategoryTab === 'all' || selectedCategoryTab === 'font') && (
         <section className="space-y-3">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono flex items-center gap-1.5">
               <Type className="w-3.5 h-3.5 text-stone-700" />
-              05. Font & Typography Pairings
+              04. Typography & Casing
             </h3>
             <span className="text-xs text-stone-600 font-medium">
               Selected: <strong className="text-stone-900">{composition.font.name}</strong>
@@ -276,22 +238,63 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
                 <div
                   key={fnt.id}
                   onClick={() => onChange({ ...composition, font: fnt })}
-                  className={`p-3 rounded-xl border text-left cursor-pointer transition-all ${
+                  className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all ${
                     isSelected
                       ? 'border-stone-900 ring-2 ring-stone-900/10 bg-white shadow-sm'
                       : 'border-stone-200 bg-white hover:border-stone-300 hover:shadow-xs'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 text-stone-600 font-bold">
-                      {fnt.transform}
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 text-stone-700 font-bold">
+                      {fnt.transform} • {fnt.weight}
                     </span>
                     {isSelected && <Check className="w-3.5 h-3.5 text-stone-900 stroke-[3]" />}
                   </div>
                   <div className="text-xs font-bold text-stone-900" style={{ fontFamily: fnt.headingFamily }}>
                     {fnt.name}
                   </div>
-                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5">{fnt.tagline}</p>
+                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5 leading-snug">{fnt.tagline}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* 5. SIGNATURE ACCENTS SECTION */}
+      {(selectedCategoryTab === 'all' || selectedCategoryTab === 'accents') && (
+        <section className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-stone-700" />
+              05. Signature Accents & Graphic DNA
+            </h3>
+            <span className="text-xs text-stone-600 font-medium">
+              Selected: <strong className="text-stone-900">{composition.accents.name}</strong>
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
+            {ACCENTS.map((acc) => {
+              const isSelected = composition.accents.id === acc.id;
+              return (
+                <div
+                  key={acc.id}
+                  onClick={() => onChange({ ...composition, accents: acc })}
+                  className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all ${
+                    isSelected
+                      ? 'border-stone-900 ring-2 ring-stone-900/10 bg-white shadow-sm'
+                      : 'border-stone-200 bg-white hover:border-stone-300 hover:shadow-xs'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 text-stone-700 font-bold">
+                      {acc.id}
+                    </span>
+                    {isSelected && <Check className="w-3.5 h-3.5 text-stone-900 stroke-[3]" />}
+                  </div>
+                  <div className="text-xs font-bold text-stone-900">{acc.name}</div>
+                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5 leading-snug">{acc.tagline}</p>
                 </div>
               );
             })}
@@ -305,7 +308,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono flex items-center gap-1.5">
               <Zap className="w-3.5 h-3.5 text-stone-700" />
-              06. Animation & Motion
+              06. Motion Physics & Easing Curves
             </h3>
             <span className="text-xs text-stone-600 font-medium">
               Selected: <strong className="text-stone-900">{composition.animation.name}</strong>
@@ -319,20 +322,20 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
                 <div
                   key={anim.id}
                   onClick={() => onChange({ ...composition, animation: anim })}
-                  className={`p-3 rounded-xl border text-left cursor-pointer transition-all ${
+                  className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all ${
                     isSelected
                       ? 'border-stone-900 ring-2 ring-stone-900/10 bg-white shadow-sm'
                       : 'border-stone-200 bg-white hover:border-stone-300 hover:shadow-xs'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 text-stone-600 font-bold">
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 text-stone-700 font-bold">
                       {anim.duration}
                     </span>
                     {isSelected && <Check className="w-3.5 h-3.5 text-stone-900 stroke-[3]" />}
                   </div>
                   <div className="text-xs font-bold text-stone-900">{anim.name}</div>
-                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5">{anim.tagline}</p>
+                  <p className="text-[11px] text-stone-500 line-clamp-2 mt-0.5 leading-snug">{anim.tagline}</p>
                 </div>
               );
             })}

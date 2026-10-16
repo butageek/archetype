@@ -1,14 +1,14 @@
 import {
+  AccentOption,
   AnimationOption,
   DesignComposition,
   FontOption,
   LayoutOption,
   PaletteOption,
-  StyleOption,
-  ThemeOption,
+  SurfaceOption,
 } from '../types/design';
 
-// 1. PALETTES
+// 1. PALETTES & ATMOSPHERE
 export const PALETTES: PaletteOption[] = [
   {
     id: 'bauhaus-primary',
@@ -162,28 +162,28 @@ export const PALETTES: PaletteOption[] = [
   },
 ];
 
-// 2. LAYOUTS
+// 2. LAYOUT ARCHITECTURES
 export const LAYOUTS: LayoutOption[] = [
   {
     id: 'bento-grid',
     name: 'Bento Box Modular Grid',
-    tagline: 'Asymmetric multi-scale cards with clear modular division',
+    tagline: 'Asymmetric cards: hero showcase, control tile, and metric strip',
     type: 'bento',
     density: 'balanced',
-    description: 'Modern Bento-style layout organizing hero metrics, feature cards, and control modules into clean visual containers.',
+    description: 'Bento-style layout organizing hero metrics, feature cards, and control modules into clean visual containers.',
   },
   {
     id: 'dense-telemetry',
     name: 'Dense Telemetry Cockpit',
-    tagline: 'High information density with compact cards and zero wasted space',
+    tagline: 'Split-screen mission control with dense terminal table & telemetry meters',
     type: 'cockpit',
     density: 'compact',
-    description: 'Industrial mission-control layout designed for maximum data visibility, compact tables, and quick action bars.',
+    description: 'Industrial mission-control layout with top metric strip, terminal log table, and gauge readouts.',
   },
   {
     id: 'swiss-editorial',
     name: 'Asymmetric Swiss Rules',
-    tagline: 'Mathematical whitespace rhythm, hairline column dividing rules',
+    tagline: 'Oversized bold typographic statement, hairline rules, and asymmetric statistics',
     type: 'asymmetric-swiss',
     density: 'compact',
     description: 'International typographic grid with strong vertical guides, disciplined negative space, and strict typographic hierarchy.',
@@ -191,141 +191,86 @@ export const LAYOUTS: LayoutOption[] = [
   {
     id: 'minimal-dock',
     name: 'Minimalist Island Dock',
-    tagline: 'Airy floating panels with tranquil margins and spacious ease',
+    tagline: 'Centered floating focal card with generous tranquil breathing room & pill dock',
     type: 'minimal-dock',
     density: 'spacious',
     description: 'Focused single-pane architecture with expansive margins and elevated central cards for distraction-free workflows.',
   },
   {
     id: 'card-stream',
-    name: 'Feed Stream & Action Bar',
-    tagline: 'Chronological timeline feed paired with right-rail telemetry',
+    name: 'Activity Stream & Feed',
+    tagline: 'Chronological timeline feed connected by track line with right-rail telemetry',
     type: 'card-stream',
     density: 'balanced',
-    description: 'Activity stream layout with status cards, action triggers, and quick metric summaries.',
+    description: 'Activity stream layout with chronological event cards, action triggers, and quick metric summaries.',
   },
 ];
 
-// 3. THEMES / ATMOSPHERE
-export const THEMES: ThemeOption[] = [
-  {
-    id: 'daylight-studio',
-    name: 'Crisp Daylight Studio',
-    tagline: 'Pure white gallery walls, high clarity, and natural illumination',
-    mode: 'daylight',
-    surfaceOpacity: '1',
-    backgroundStyle: 'clean',
-    description: 'Bright, clean studio environment emphasizing typography and crisp component silhouettes.',
-  },
-  {
-    id: 'oled-nocturne',
-    name: 'Deep OLED Nocturne',
-    tagline: 'Pitch black foundation with high-contrast luminous highlights',
-    mode: 'nocturne',
-    surfaceOpacity: '1',
-    backgroundStyle: 'dark-graphite',
-    description: 'Night operations aesthetic optimized for dark displays with luminous neon telemetry.',
-  },
-  {
-    id: 'antique-vellum',
-    name: 'Warm Antique Vellum',
-    tagline: 'Subtle paper grain, gentle sepia tones, and tactile craftsmanship',
-    mode: 'vellum',
-    surfaceOpacity: '0.96',
-    backgroundStyle: 'paper-noise',
-    description: 'Tactile physical vellum paper warmth reminiscent of classic monographs and architectural notebooks.',
-  },
-  {
-    id: 'frosted-crystal',
-    name: 'Frosted Crystal Blur',
-    tagline: 'Semi-translucent glass layers with backdrop-filter refraction',
-    mode: 'glass',
-    surfaceOpacity: '0.8',
-    backgroundStyle: 'mesh-gradient',
-    description: 'Glassmorphic frosted aesthetic with subtle blurs, refraction borders, and ambient light pass-through.',
-  },
-  {
-    id: 'stark-monochrome',
-    name: 'Stark Monochromatic',
-    tagline: 'High-definition black and white with surgical precision',
-    mode: 'monochrome',
-    surfaceOpacity: '1',
-    backgroundStyle: 'stark-white',
-    description: 'Zero distraction monochromatic contrast allowing form, proportion, and typography to shine.',
-  },
-];
-
-// 4. STYLES & TREATMENTS
-export const STYLES: StyleOption[] = [
+// 3. SURFACE TREATMENTS (BORDERS, CORNERS & SHADOWS)
+export const SURFACES: SurfaceOption[] = [
   {
     id: 'neo-brutalist',
-    name: 'Neo-Brutalist Hard Offset',
-    tagline: '3px solid black borders and 4px unblurred block drop shadows',
+    name: 'Neo-Brutalist Hard Drop',
+    tagline: '3px solid black borders, 4px unblurred block drop shadows, 4px corners',
     borderWidth: '3px',
     borderStyle: 'solid',
     radius: 'subtle',
     shadow: 'hard-offset',
-    accents: { dotGrid: true },
     description: 'Playful, unapologetic physical boundary lines with hard directional drop-cast block shadows.',
   },
   {
     id: 'cad-blueprint',
-    name: 'CAD Blueprint Crosshairs',
-    tagline: '1px hairline grids, drafting crosshairs, and zero border radius',
+    name: 'CAD Precision Hairline',
+    tagline: '1px precision hairline borders, zero border radius (sharp 0px), pure flat',
     borderWidth: '1px',
     borderStyle: 'solid',
     radius: 'sharp',
     shadow: 'none',
-    accents: { cornerTicks: true, crosshairs: true, rulers: true },
-    description: 'Engineered CAD drafting treatment with corner alignment marks, precision coordinates, and rulers.',
+    description: 'Engineered CAD drafting treatment with 0px corner radius and hairline precision.',
   },
   {
     id: 'bauhaus-geometric',
-    name: 'Bauhaus Geometric Outlines',
-    tagline: '2px bold outlines, sharp 90-degree corners, and block silhouettes',
+    name: 'Bauhaus Geometric Outline',
+    tagline: '2px bold outlines, sharp 90-degree corners, and 3px block drop silhouettes',
     borderWidth: '2px',
     borderStyle: 'solid',
     radius: 'sharp',
     shadow: 'hard-offset',
-    accents: { cornerTicks: true },
     description: 'Clean constructivist outlines inspired by Walter Gropius and Bauhaus Dessau architecture.',
   },
   {
     id: 'nordic-ambient',
-    name: 'Nordic Soft Elevation',
-    tagline: '1px subtle borders, gentle 10px rounded corners, and soft ambient shadow',
+    name: 'Nordic Soft Ambient',
+    tagline: '1px subtle borders, gentle 12px rounded corners, and soft diffused elevation',
     borderWidth: '1px',
     borderStyle: 'solid',
     radius: 'rounded',
     shadow: 'subtle-diffused',
-    accents: {},
     description: 'Contemporary Scandinavian product design with soft ambient light falloff and clean rounded corners.',
   },
   {
     id: 'tactile-pinboard',
-    name: 'Tactile Washi Pinboard',
-    tagline: 'Washi tape header strips, memo paper cards, and physical lift shadows',
+    name: 'Tactile Paper Lift',
+    tagline: '1px warm craft borders, subtle 4px radius, and physical 3D paper lift shadows',
     borderWidth: '1px',
     borderStyle: 'solid',
     radius: 'subtle',
     shadow: 'skeuomorphic',
-    accents: { washiTape: true, noiseGrain: true },
-    description: 'Physical workshop pinboard with washi tape header accents and warm tactile paper elevation.',
+    description: 'Physical workshop pinboard with warm tactile paper elevation.',
   },
   {
-    id: 'crt-scada',
-    name: 'CRT Terminal Scanlines',
-    tagline: 'Glowing phosphor borders, scanline scan overlay, and sharp corners',
+    id: 'glass-glow',
+    name: 'Luminous Refraction Rim',
+    tagline: '1px glowing neon border, sharp or rounded corners, and colored photon bloom',
     borderWidth: '1px',
     borderStyle: 'solid',
-    radius: 'sharp',
+    radius: 'rounded',
     shadow: 'glowing-neon',
-    accents: { scanlines: true, cornerTicks: true },
-    description: 'Industrial telemetry console with phosphor blooming glow and horizontal CRT raster lines.',
+    description: 'Luminous glowing border emitting colored ambient glow.',
   },
 ];
 
-// 5. FONTS & TYPOGRAPHY
+// 4. FONTS & TYPOGRAPHY
 export const FONTS: FontOption[] = [
   {
     id: 'clean-sans',
@@ -389,51 +334,110 @@ export const FONTS: FontOption[] = [
   },
 ];
 
-// 6. ANIMATION & MOTION
+// 5. SIGNATURE ACCENTS & GRAPHIC DNA
+export const ACCENTS: AccentOption[] = [
+  {
+    id: 'cad-crosshairs',
+    name: 'CAD Drafting Crosshairs & Rulers',
+    tagline: 'Corner targeting crosshairs, perimeter millimeter rulers, coordinate tags',
+    crosshairs: true,
+    rulers: true,
+    cornerTicks: true,
+    description: 'Architectural drafting crosshairs, millimeter dimensions, and coordinate tags.',
+  },
+  {
+    id: 'crt-scanlines',
+    name: 'CRT Phosphor Scanlines',
+    tagline: 'Horizontal raster scanline overlay with subtle vignette',
+    scanlines: true,
+    cornerTicks: true,
+    description: 'Retro CRT monitor scanline shader giving digital terminal depth.',
+  },
+  {
+    id: 'washi-tape',
+    name: 'Tactile Washi Tape Strips',
+    tagline: 'Textured washi tape tape-downs fixed to card headers with subtle paper grain',
+    washiTape: true,
+    noiseGrain: true,
+    description: 'Physical workshop aesthetic with washi tape header accents.',
+  },
+  {
+    id: 'dot-grid',
+    name: 'Architectural Dot Grid',
+    tagline: 'Subtle mathematical dot matrix texture across background surface',
+    dotGrid: true,
+    description: 'Precision architectural drafting dot grid for visual structure.',
+  },
+  {
+    id: 'corner-ticks',
+    name: 'Corner Registration Ticks (┌ ┐ └ ┘)',
+    tagline: 'Technical boundary corner registration marks',
+    cornerTicks: true,
+    description: 'Classic printing and technical drafting corner alignment marks.',
+  },
+  {
+    id: 'pure-minimal',
+    name: 'Pure Minimal (No Accents)',
+    tagline: 'Unadorned graphic clarity with zero decorative distractions',
+    description: 'Strict minimalist execution letting typography and space breathe.',
+  },
+];
+
+// 6. MOTION & INTERACTION PHYSICS
 export const ANIMATIONS: AnimationOption[] = [
   {
     id: 'snappy-spring',
     name: 'Snappy Kinetic Spring',
-    tagline: 'Instant tactile response with a lively 150ms micro-spring pop',
+    tagline: 'Lively 150ms micro-spring pop on hover and active click',
     transitionCurve: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
     duration: '150ms',
-    styleClass: 'transition-all duration-150 active:scale-95 hover:-translate-y-0.5',
+    cssStyle: 'transition-all duration-150 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]',
+    hoverClass: 'hover:-translate-y-1 hover:scale-[1.02]',
+    activeClass: 'active:scale-95 active:translate-y-0.5',
     description: 'Brisk, mechanical click responsiveness inspired by physical micro-switches.',
   },
   {
     id: 'subtle-ambient',
     name: 'Subtle Ambient Fade',
-    tagline: 'Gentle 250ms ease-in-out transition with quiet elegance',
+    tagline: 'Gentle 300ms ease-in-out transition with quiet elegance',
     transitionCurve: 'cubic-bezier(0.4, 0, 0.2, 1)',
-    duration: '250ms',
-    styleClass: 'transition-all duration-200 hover:opacity-90',
+    duration: '300ms',
+    cssStyle: 'transition-all duration-300 ease-in-out',
+    hoverClass: 'hover:opacity-90 hover:shadow-md',
+    activeClass: 'active:opacity-80',
     description: 'Serene, smooth transitions that quietly respect visual attention.',
   },
   {
     id: 'retro-stepped',
     name: 'Retro Stepped Mechanical',
-    tagline: 'Zero-blur stepped keyframe action like hardware relays',
+    tagline: 'Zero-blur 100ms stepped click action like hardware relays',
     transitionCurve: 'steps(3)',
     duration: '100ms',
-    styleClass: 'transition-transform duration-100 active:translate-x-1 active:translate-y-1',
+    cssStyle: 'transition-transform duration-100 ease-[steps(3)]',
+    hoverClass: 'hover:translate-x-0.5 hover:translate-y-0.5',
+    activeClass: 'active:translate-x-1 active:translate-y-1',
     description: 'Crisp stepped feedback without intermediate tweening, reminiscent of vintage machinery.',
   },
   {
     id: 'fluid-ease',
     name: 'Fluid Modern Ease',
-    tagline: 'Silky 200ms cubic ease for contemporary fluid workflows',
+    tagline: 'Silky 250ms cubic ease for contemporary fluid workflows',
     transitionCurve: 'cubic-bezier(0.16, 1, 0.3, 1)',
-    duration: '200ms',
-    styleClass: 'transition-all duration-200 hover:shadow-lg',
+    duration: '250ms',
+    cssStyle: 'transition-all duration-250 ease-[cubic-bezier(0.16,1,0.3,1)]',
+    hoverClass: 'hover:-translate-y-1 hover:shadow-lg',
+    activeClass: 'active:scale-98',
     description: 'Apple-style fluid physics with gentle acceleration and natural deceleration.',
   },
   {
     id: 'tactile-bounce',
     name: 'Tactile Micro-Bounce',
-    tagline: 'Playful slight overshoot on click and hover',
+    tagline: 'Playful 200ms overshoot bounce on click and hover',
     transitionCurve: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-    duration: '180ms',
-    styleClass: 'transition-transform duration-180 hover:scale-105 active:scale-95',
+    duration: '200ms',
+    cssStyle: 'transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)]',
+    hoverClass: 'hover:scale-[1.04] hover:-translate-y-0.5',
+    activeClass: 'active:scale-95',
     description: 'Tactile micro-bounce providing satisfying feedback for buttons and pills.',
   },
 ];
@@ -441,54 +445,66 @@ export const ANIMATIONS: AnimationOption[] = [
 // Default Initial Composition
 export const DEFAULT_COMPOSITION: DesignComposition = {
   palette: PALETTES[0], // Bauhaus Primaries
-  layout: LAYOUTS[0], // Bento Box
-  theme: THEMES[0], // Daylight Studio
-  style: STYLES[0], // Neo-Brutalist
+  layout: LAYOUTS[0], // Bento Box Grid
+  surface: SURFACES[0], // Neo-Brutalist Hard Drop
   font: FONTS[0], // Modern Geometric Sans
+  accents: ACCENTS[3], // Dot Grid
   animation: ANIMATIONS[0], // Snappy Kinetic Spring
 };
 
 // Generate AI Agent Master Prompt
 export function generateAgentPrompt(comp: DesignComposition): string {
-  const { palette, layout, theme, style, font, animation } = comp;
+  const { palette, layout, surface, font, accents, animation } = comp;
+
+  const activeAccentsList = [
+    accents.crosshairs ? 'Drafting crosshairs & coordinates' : null,
+    accents.rulers ? 'Millimeter metric perimeter rulers' : null,
+    accents.cornerTicks ? 'Corner registration marks (┌ ┐ └ ┘)' : null,
+    accents.scanlines ? 'CRT phosphor horizontal scanlines' : null,
+    accents.washiTape ? 'Washi tape header strips' : null,
+    accents.dotGrid ? 'Architectural dot grid matrix' : null,
+  ]
+    .filter(Boolean)
+    .join(', ');
 
   return `Build an application following this exact visual design specification:
 
 Aesthetic Combination:
-- Palette: "${palette.name}" (Primary: ${palette.primary}, Secondary: ${palette.secondary}, Accent: ${palette.accent}, Background: ${palette.background}, Card Surface: ${palette.surface}, Border: ${palette.border}, Text: ${palette.text}).
-- Layout: "${layout.name}" (${layout.type} architecture with ${layout.density} density).
-- Theme: "${theme.name}" (${theme.mode} mode, ${theme.description}).
-- Style Treatment: "${style.name}" (${style.borderWidth} ${style.borderStyle} borders, ${style.radius} corner radius, ${style.shadow} shadow profile).
+- Palette & Mood: "${palette.name}" (Primary: ${palette.primary}, Secondary: ${palette.secondary}, Accent: ${palette.accent}, Background: ${palette.background}, Card Surface: ${palette.surface}, Border: ${palette.border}, Text: ${palette.text}, Mode: ${palette.isDark ? 'Dark' : 'Light'}).
+- Layout Architecture: "${layout.name}" (${layout.type} architecture with ${layout.density} density. ${layout.description}).
+- Surface & Elevation: "${surface.name}" (${surface.borderWidth} ${surface.borderStyle} borders, ${surface.radius} corner radius, ${surface.shadow} shadow treatment).
 - Typography: "${font.name}" (Heading Font: ${font.headingFamily}, Heading Transform: ${font.transform}, Body: ${font.bodyFamily}, Tracking: ${font.letterSpacing}).
-- Motion / Animation: "${animation.name}" (${animation.duration} duration with ${animation.transitionCurve} curve).
+- Signature Accents: "${accents.name}" (${activeAccentsList || 'Pure minimal without graphic overlays'}).
+- Motion & Interaction Physics: "${animation.name}" (${animation.duration} duration with ${animation.transitionCurve} curve).
 
 Strict Invariants for the AI Agent:
-1. Always apply ${style.borderWidth} solid borders with color "${palette.border}" on cards, buttons, and inputs.
+1. Always apply ${surface.borderWidth} solid borders with color "${palette.border}" on cards, buttons, and inputs.
 2. Shadow Treatment: ${
-    style.shadow === 'hard-offset' ? 'Use hard offset block shadows (e.g. 4px 4px 0px #000) with ZERO blur.' :
-    style.shadow === 'none' ? 'Flat design with ZERO drop shadows.' :
-    style.shadow === 'glowing-neon' ? `Use glowing phosphor bloom shadow: 0 0 14px ${palette.primary}66.` :
+    surface.shadow === 'hard-offset' ? 'Use hard offset block shadows (e.g. 4px 4px 0px #000) with ZERO blur.' :
+    surface.shadow === 'none' ? 'Flat design with ZERO drop shadows.' :
+    surface.shadow === 'glowing-neon' ? `Use glowing phosphor bloom shadow: 0 0 16px ${palette.primary}66.` :
     'Use subtle ambient diffused shadows.'
   }
-3. Corner Radii: strictly "${style.radius}" (${
-    style.radius === 'sharp' ? 'rounded-none / 0px' :
-    style.radius === 'subtle' ? 'rounded (4px)' :
-    style.radius === 'rounded' ? 'rounded-xl (10-12px)' : 'rounded-full'
+3. Corner Radii: strictly "${surface.radius}" (${
+    surface.radius === 'sharp' ? 'rounded-none / 0px' :
+    surface.radius === 'subtle' ? 'rounded (4px)' :
+    surface.radius === 'rounded' ? 'rounded-xl (12px)' : 'rounded-full'
   }). Do not mix round and sharp arbitrarily.
-4. Density: "${layout.density}" spacing. Never waste unnecessary vertical whitespace. Keep metric tiles and action controls tight and ergonomic.
-5. Typography: Heading weight is ${font.weight}, transform is ${font.transform}.`;
+4. Layout Architecture: Implement the "${layout.type}" layout structure. Density is "${layout.density}". Keep metric tiles and action controls aligned with no empty vertical waste.
+5. Typography: Heading weight is ${font.weight}, transform is ${font.transform}.
+6. Motion: Use transition curve \`${animation.transitionCurve}\` with \`${animation.duration}\` duration for button hover/active states.`;
 }
 
 // Generate Full Structured Design Spec
 export function generateFullDesignSpec(comp: DesignComposition): string {
-  const { palette, layout, theme, style, font, animation } = comp;
+  const { palette, layout, surface, font, accents, animation } = comp;
 
-  return `# DESIGN SPECIFICATION: ${palette.name.toUpperCase()} / ${style.name.toUpperCase()}
+  return `# DESIGN SPECIFICATION: ${palette.name.toUpperCase()} / ${layout.name.toUpperCase()}
 
-> **Archetype Blend**: ${palette.name} + ${layout.name} + ${style.name}
-> **Theme Mode**: ${theme.name} (${theme.mode})
+> **Aesthetic Archetype**: ${palette.name} + ${layout.name} + ${surface.name}
 > **Typography**: ${font.name}
-> **Motion**: ${animation.name}
+> **Signature Accents**: ${accents.name}
+> **Motion Physics**: ${animation.name}
 
 ---
 
@@ -515,13 +531,13 @@ ${generateAgentPrompt(comp)}
   --color-text-muted: ${palette.textMuted};
 
   /* Structural Tokens */
-  --border-width: ${style.borderWidth};
-  --border-style: ${style.borderStyle};
-  --radius-archetype: ${style.radius === 'sharp' ? '0px' : style.radius === 'subtle' ? '4px' : style.radius === 'rounded' ? '12px' : '9999px'};
+  --border-width: ${surface.borderWidth};
+  --border-style: ${surface.borderStyle};
+  --radius-archetype: ${surface.radius === 'sharp' ? '0px' : surface.radius === 'subtle' ? '4px' : surface.radius === 'rounded' ? '12px' : '9999px'};
   --shadow-archetype: ${
-    style.shadow === 'none' ? 'none' :
-    style.shadow === 'hard-offset' ? '4px 4px 0px ' + palette.border :
-    style.shadow === 'glowing-neon' ? '0 0 16px ' + palette.primary :
+    surface.shadow === 'none' ? 'none' :
+    surface.shadow === 'hard-offset' ? '4px 4px 0px ' + palette.border :
+    surface.shadow === 'glowing-neon' ? '0 0 16px ' + palette.primary :
     '0 4px 12px rgba(0,0,0,0.08)'
   };
 
@@ -531,7 +547,7 @@ ${generateAgentPrompt(comp)}
   --font-mono: ${font.monoFamily};
   --heading-transform: ${font.transform};
 
-  /* Animation */
+  /* Motion Physics */
   --transition-curve: ${animation.transitionCurve};
   --transition-duration: ${animation.duration};
 }
@@ -554,7 +570,7 @@ ${generateAgentPrompt(comp)}
   --color-text-primary: ${palette.text};
   --color-text-muted: ${palette.textMuted};
 
-  --radius-card: ${style.radius === 'sharp' ? '0px' : style.radius === 'subtle' ? '4px' : style.radius === 'rounded' ? '12px' : '9999px'};
+  --radius-card: ${surface.radius === 'sharp' ? '0px' : surface.radius === 'subtle' ? '4px' : surface.radius === 'rounded' ? '12px' : '9999px'};
 }
 \`\`\`
 `;
