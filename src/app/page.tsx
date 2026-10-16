@@ -1,354 +1,210 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
-  ArrowUp,
   Check,
-  Code2,
-  Copy,
   Dices,
-  FileCode,
-  Layers,
+  LayoutGrid,
   Search,
-  Sparkles,
-  Terminal,
-  Wand2,
+  X,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { DesignComposition } from '../types/design';
-import {
-  DEFAULT_COMPOSITION,
-  generateAgentPrompt,
-  generateFullDesignSpec,
-} from '../lib/modularPresets';
-import {
-  blendCompositionWithPrompt,
-  getRandomComposition,
-  synthesizeCompositionFromPrompt,
-} from '../lib/modularSynthesizer';
-import { LiveDesignMockup } from '../components/LiveDesignMockup';
-import { ModularGallery } from '../components/ModularGallery';
-import { AgentExportModal } from '../components/AgentExportModal';
+import { MOCKUP_SPECIMENS } from '../lib/mockupData';
+import { MockupCategory, WebAppMockupSpecimen } from '../types/mockup';
+import { MockupCard } from '../components/MockupCard';
+import { MockupInspectorModal } from '../components/MockupInspectorModal';
 
-export default function ArchetypePortal() {
-  const [composition, setComposition] = useState<DesignComposition>(DEFAULT_COMPOSITION);
-  const [promptInput, setPromptInput] = useState<string>('');
-  const [exportModalOpen, setExportModalOpen] = useState<boolean>(false);
+export default function ArchetypeGalleryPage() {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<MockupCategory>('all');
+  const [activeInspectorSpecimen, setActiveInspectorSpecimen] = useState<WebAppMockupSpecimen | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3000);
+    setTimeout(() => setToastMessage(null), 3200);
   };
 
-  const triggerConfetti = () => {
+  // Filter categories
+  const categories: { id: MockupCategory; label: string }[] = [
+    { id: 'all', label: 'All Mockups' },
+    { id: 'devtools', label: 'Developer Tools' },
+    { id: 'fintech', label: 'Fintech & SaaS' },
+    { id: 'minimal', label: 'Minimalist & Clean' },
+    { id: 'dark', label: 'Dark Mode & Terminal' },
+    { id: 'creative', label: 'Neo-Brutal & Creative' },
+  ];
+
+  // Filtered specimens
+  const filteredSpecimens = useMemo(() => {
+    return MOCKUP_SPECIMENS.filter((spec) => {
+      // Category match
+      const matchCat = selectedCategory === 'all' || spec.category === selectedCategory;
+      if (!matchCat) return false;
+
+      // Search match
+      if (!searchQuery.trim()) return true;
+      const q = searchQuery.toLowerCase();
+      return (
+        spec.title.toLowerCase().includes(q) ||
+        spec.tagline.toLowerCase().includes(q) ||
+        spec.description.toLowerCase().includes(q) ||
+        spec.tags.some((t) => t.toLowerCase().includes(q))
+      );
+    });
+  }, [selectedCategory, searchQuery]);
+
+  // Surprise Me / Random Selection
+  const handleSurpriseMe = () => {
+    const randomSpec = MOCKUP_SPECIMENS[Math.floor(Math.random() * MOCKUP_SPECIMENS.length)];
+    setActiveInspectorSpecimen(randomSpec);
     confetti({
       particleCount: 45,
       spread: 60,
       origin: { y: 0.8 },
-      colors: [composition.palette.primary, composition.palette.secondary, '#10B981'],
+      colors: [randomSpec.palette.primary, randomSpec.palette.secondary, '#10B981'],
     });
+    showToast(`Opened "${randomSpec.title}"!`);
   };
-
-  // 1-Click Copy Agent Prompt
-  const handleCopyAgentPrompt = () => {
-    const prompt = generateAgentPrompt(composition);
-    navigator.clipboard.writeText(prompt);
-    triggerConfetti();
-    showToast('Copied Agent Prompt! Ready to paste into Cursor / Claude / Antigravity.');
-  };
-
-  // 1-Click Copy Design Spec Markdown
-  const handleCopyDesignSpec = () => {
-    const spec = generateFullDesignSpec(composition);
-    navigator.clipboard.writeText(spec);
-    triggerConfetti();
-    showToast('Copied STYLE_SPEC.md! Ready to paste into your codebase or agent docs.');
-  };
-
-  // Surprise Me Randomizer
-  const handleSurpriseMe = () => {
-    const randomComp = getRandomComposition();
-    setComposition(randomComp);
-    triggerConfetti();
-    showToast(`Assembled "${randomComp.palette.name}" + "${randomComp.surface.name}"!`);
-  };
-
-  // 1. SYNTHESIZE: Build a complete new design archetype from scratch
-  const handleSynthesizePrompt = (overrideText?: string) => {
-    const text = overrideText || promptInput;
-    if (!text.trim()) return;
-    const res = synthesizeCompositionFromPrompt(text);
-    setComposition(res.composition);
-    triggerConfetti();
-    showToast(res.description);
-  };
-
-  // 2. BLEND: Merge only the prompt's nuances into the current selections
-  const handleBlendPrompt = () => {
-    if (!promptInput.trim()) return;
-    const res = blendCompositionWithPrompt(promptInput, composition);
-    setComposition(res.composition);
-    triggerConfetti();
-    showToast(res.description);
-  };
-
-  const scrollToMockup = () => {
-    const elem = document.getElementById('live-mockup-section');
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const inspirationPrompts = [
-    'Tokyo cyberpunk rain alleyway with neon cyan and magenta',
-    '1970s Dieter Rams Braun audio monitor with matte pebble gray',
-    'Swiss International Typographic magazine with Zurich red',
-    'Solarpunk greenhouse botanical conservatory with sage clay',
-    'Scandinavian minimalist ceramic studio with quiet slate',
-    'NASA Apollo Lunar Guidance computer with titanium telemetry',
-  ];
 
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans selection:bg-stone-900 selection:text-white pb-32">
-      {/* 1. TOP PORTAL HEADER */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200 px-4 sm:px-8 py-3.5 flex items-center justify-between">
-        {/* Brand */}
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-stone-900 flex items-center justify-center font-black text-xs text-white shadow-xs">
-            ▲
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-sm sm:text-base tracking-tight text-stone-950 font-mono">
-                ARCHETYPE
-              </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-100 text-stone-600 font-semibold border border-stone-200">
-                Design Idea Portal
-              </span>
+    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans selection:bg-stone-900 selection:text-white pb-28">
+      {/* 1. TOP NAVIGATION HEADER (Dribbble / Figma Community Style) */}
+      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200 px-4 sm:px-8 py-3.5">
+        <div className="max-w-[1520px] mx-auto flex items-center justify-between gap-4">
+          {/* Logo & Subtitle */}
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-xl bg-stone-900 flex items-center justify-center font-black text-xs text-white shadow-xs">
+              ▲
             </div>
-            <p className="text-[11px] text-stone-500 hidden sm:block">
-              Modular UI specimens & prompt synthesizer for AI coding agents
-            </p>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-extrabold text-base tracking-tight text-stone-950 font-mono">
+                  ARCHETYPE
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-100 text-stone-600 font-bold border border-stone-200">
+                  UI Mockup Gallery
+                </span>
+              </div>
+              <p className="text-[11px] text-stone-500 hidden sm:block">
+                Prebuilt web app UI mockups with 1-click screenshot & prompt export for AI agents
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Header Action Controls */}
-        <div className="flex items-center gap-2">
-          {/* Surprise Me Button */}
-          <button
-            onClick={handleSurpriseMe}
-            className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-lg text-xs font-semibold cursor-pointer flex items-center gap-1.5 transition-colors border border-stone-300/80"
-            title="Randomly assemble a fresh design combination"
-          >
-            <Dices className="w-3.5 h-3.5 text-stone-700" />
-            <span>Surprise Me</span>
-          </button>
-
-          {/* Export for AI Button (Opens Full Modal) */}
-          <button
-            onClick={() => setExportModalOpen(true)}
-            className="px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 text-white rounded-lg text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-sm transition-transform active:scale-95"
-            title="Export for AI Coding Agent"
-          >
-            <Terminal className="w-3.5 h-3.5" />
-            <span>Export for AI</span>
-          </button>
+          {/* Quick Surprise Me Button */}
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={handleSurpriseMe}
+              className="px-3.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl text-xs font-semibold cursor-pointer flex items-center gap-1.5 transition-colors border border-stone-300"
+              title="Pick a random mockup"
+            >
+              <Dices className="w-3.5 h-3.5 text-stone-700" />
+              <span>Surprise Me</span>
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* 2. MAIN WORKSPACE CONTAINER */}
-      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-6">
-        {/* PROMPT SYNTHESIZER & BLENDER SECTION */}
-        <section className="bg-white rounded-2xl border border-stone-200 p-4 sm:p-5 shadow-xs space-y-3">
-          <div className="flex flex-col sm:flex-row gap-2">
-            <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3.5 top-3 text-stone-400" />
-              <input
-                type="text"
-                placeholder="Type an aesthetic prompt (e.g. '1970s Dieter Rams Braun audio console', 'Tokyo neon cyan alleyway', 'Scandinavian pottery studio')..."
-                value={promptInput}
-                onChange={(e) => setPromptInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSynthesizePrompt()}
-                className="w-full bg-stone-50 border border-stone-200 rounded-xl pl-10 pr-4 py-2 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 outline-none focus:border-stone-900 focus:bg-white transition-all"
-              />
-            </div>
+      {/* 2. DISCOVERY HERO & SEARCH BAR */}
+      <section className="max-w-[1520px] mx-auto px-4 sm:px-8 pt-8 pb-4 space-y-5">
+        <div className="max-w-3xl space-y-2">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-950">
+            Explore Prebuilt Web App UI Mockups
+          </h1>
+          <p className="text-xs sm:text-sm text-stone-500 leading-relaxed">
+            Browse recognized, authentic web app design mockups like on Dribbble or Figma Community. Hover over any mockup to <strong>copy the screenshot</strong> directly to your clipboard or <strong>copy the prompt</strong> to build it from scratch with Claude, Cursor, or Antigravity.
+          </p>
+        </div>
 
-            <div className="flex gap-2">
-              <button
-                onClick={() => handleSynthesizePrompt()}
-                disabled={!promptInput.trim()}
-                className="flex-1 sm:flex-none px-4 py-2 bg-stone-900 hover:bg-stone-800 disabled:opacity-40 text-white font-bold text-xs rounded-xl cursor-pointer flex items-center justify-center gap-1.5 shadow-xs transition-transform active:scale-95"
-                title="Synthesize an entire 6-part design system from scratch"
-              >
-                <Wand2 className="w-3.5 h-3.5" />
-                <span>Synthesize</span>
-              </button>
+        {/* Search Bar */}
+        <div className="relative max-w-2xl">
+          <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-stone-400" />
+          <input
+            type="text"
+            placeholder="Search mockups by name, style, or stack (e.g. 'linear', 'fintech', 'minimal', 'scada', 'dark', 'stripe')..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-white border border-stone-200 rounded-2xl pl-10 pr-10 py-2.5 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 shadow-xs transition-all"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3.5 top-3 text-stone-400 hover:text-stone-700 cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
 
+        {/* Category Pills (Figma Community style) */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          {categories.map((cat) => {
+            const isSelected = selectedCategory === cat.id;
+            return (
               <button
-                onClick={handleBlendPrompt}
-                disabled={!promptInput.trim()}
-                className="flex-1 sm:flex-none px-3.5 py-2 bg-stone-100 hover:bg-stone-200 disabled:opacity-40 text-stone-700 font-semibold text-xs rounded-xl cursor-pointer border border-stone-200 transition-colors flex items-center justify-center gap-1.5"
-                title="Blend prompt nuances into current design while preserving other selections"
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold cursor-pointer transition-all whitespace-nowrap ${
+                  isSelected
+                    ? 'bg-stone-900 text-white shadow-xs font-bold'
+                    : 'bg-white text-stone-600 hover:text-stone-900 hover:bg-stone-100 border border-stone-200'
+                }`}
               >
-                <Sparkles className="w-3.5 h-3.5 text-stone-600" />
-                <span>Blend</span>
+                {cat.label}
               </button>
-            </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 3. THE MOCKUP GALLERY GRID */}
+      <main className="max-w-[1520px] mx-auto px-4 sm:px-8 pt-4">
+        {filteredSpecimens.length === 0 ? (
+          <div className="p-12 text-center bg-white rounded-3xl border border-stone-200 space-y-3 my-6">
+            <LayoutGrid className="w-8 h-8 text-stone-400 mx-auto" />
+            <h3 className="text-base font-bold text-stone-800">No mockups matched your search</h3>
+            <p className="text-xs text-stone-500">
+              Try searching for &quot;linear&quot;, &quot;dark&quot;, &quot;fintech&quot;, or clear the search filter.
+            </p>
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setSelectedCategory('all');
+              }}
+              className="px-4 py-2 bg-stone-900 text-white rounded-xl text-xs font-semibold cursor-pointer"
+            >
+              Reset Filters
+            </button>
           </div>
-
-          {/* Prompt Inspiration Chips */}
-          <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-stone-400 font-bold mr-1">
-              Quick Inspirations:
-            </span>
-            {inspirationPrompts.map((p) => (
-              <button
-                key={p}
-                onClick={() => {
-                  setPromptInput(p);
-                  handleSynthesizePrompt(p);
-                }}
-                className="px-2.5 py-1 text-[11px] rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-600 hover:text-stone-900 transition-colors cursor-pointer"
-              >
-                {p.split(' ')[0]} {p.split(' ')[1]}
-              </button>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 sm:gap-7">
+            {filteredSpecimens.map((specimen) => (
+              <MockupCard
+                key={specimen.id}
+                specimen={specimen}
+                onOpenInspector={(spec) => setActiveInspectorSpecimen(spec)}
+                onToast={showToast}
+              />
             ))}
           </div>
-        </section>
-
-        {/* 3. DUAL-PANE STUDIO LAYOUT: STICKY PREVIEW ON LEFT, SCROLLABLE GALLERY ON RIGHT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* LEFT COLUMN: STICKY LIVE DESIGN MOCKUP (Always visible when scrolling!) */}
-          <section
-            id="live-mockup-section"
-            className="lg:col-span-5 xl:col-span-6 lg:sticky lg:top-20 space-y-3 z-20"
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-base font-bold text-stone-900">Live Design Mockup</h2>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold">
-                    Live Preview
-                  </span>
-                </div>
-                <p className="text-xs text-stone-500 mt-0.5 line-clamp-1">
-                  <strong>{composition.palette.name}</strong> • <strong>{composition.layout.name}</strong> • <strong>{composition.surface.name}</strong>
-                </p>
-              </div>
-
-              {/* Action Buttons Right Beside the Mockup */}
-              <div className="flex items-center gap-1.5">
-                <button
-                  onClick={handleCopyAgentPrompt}
-                  className="px-3 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
-                  title="Copy ready-to-paste AI agent prompt"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>Copy Prompt</span>
-                </button>
-
-                <button
-                  onClick={handleCopyDesignSpec}
-                  className="px-2.5 py-1.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold cursor-pointer border border-stone-200 transition-colors flex items-center gap-1"
-                  title="Copy STYLE_SPEC.md"
-                >
-                  <FileCode className="w-3.5 h-3.5" />
-                  <span>Spec</span>
-                </button>
-
-                <button
-                  onClick={() => setExportModalOpen(true)}
-                  className="p-1.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 cursor-pointer border border-stone-200 transition-colors"
-                  title="View full blueprint modal"
-                >
-                  <Code2 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* The High-Fidelity Mockup Container */}
-            <LiveDesignMockup composition={composition} />
-
-            {/* Screenshot Tip Banner */}
-            <div className="text-[11px] bg-stone-100 text-stone-600 px-3.5 py-2 rounded-xl border border-stone-200/90 flex items-center justify-between">
-              <span>
-                💡 <strong>AI Tip</strong>: Take a screenshot of this mockup to paste into Cursor / Claude alongside the prompt!
-              </span>
-            </div>
-          </section>
-
-          {/* RIGHT COLUMN: SCROLLABLE MODULAR GALLERY */}
-          <section className="lg:col-span-7 xl:col-span-6 bg-white rounded-2xl border border-stone-200 p-5 sm:p-6 shadow-xs space-y-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <Layers className="w-4 h-4 text-stone-800" />
-                <h2 className="text-base font-bold text-stone-900">Modular Design Gallery</h2>
-              </div>
-              <p className="text-xs text-stone-500 mt-0.5">
-                Click any part below. The sticky preview on the left updates in real time as you scroll.
-              </p>
-            </div>
-
-            <ModularGallery composition={composition} onChange={setComposition} />
-          </section>
-        </div>
+        )}
       </main>
 
-      {/* 4. MOBILE FLOATING MINI DOCK (Only visible on mobile/tablet when scrolling) */}
-      <div className="lg:hidden fixed bottom-4 left-4 right-4 z-40 bg-white/95 backdrop-blur-md shadow-2xl border border-stone-200 p-2.5 rounded-2xl flex items-center justify-between">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={scrollToMockup}>
-          <div className="flex items-center gap-1">
-            <div
-              className="w-4 h-4 rounded-full border border-black/10 shadow-xs"
-              style={{ backgroundColor: composition.palette.primary }}
-            />
-            <div
-              className="w-3.5 h-3.5 rounded-full border border-black/10 shadow-xs"
-              style={{ backgroundColor: composition.palette.secondary }}
-            />
-          </div>
-          <div className="flex flex-col text-left">
-            <span className="text-[11px] font-bold text-stone-900 truncate max-w-[140px]">
-              {composition.palette.name}
-            </span>
-            <span className="text-[9px] text-stone-500 font-mono truncate max-w-[140px]">
-              {composition.surface.name}
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-1.5">
-          <button
-            onClick={scrollToMockup}
-            className="px-2.5 py-1.5 bg-stone-100 text-stone-800 text-xs font-semibold rounded-lg flex items-center gap-1 cursor-pointer border border-stone-200"
-          >
-            <ArrowUp className="w-3.5 h-3.5" />
-            <span>Preview</span>
-          </button>
-          <button
-            onClick={handleCopyAgentPrompt}
-            className="px-2.5 py-1.5 bg-stone-900 text-white text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer shadow-xs"
-          >
-            <Copy className="w-3.5 h-3.5" />
-            <span>Prompt</span>
-          </button>
-        </div>
-      </div>
-
-      {/* 5. NOTIFICATION TOAST */}
+      {/* 4. NOTIFICATION TOAST */}
       {toastMessage && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-stone-900 text-white px-4 py-2.5 rounded-xl text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-150 flex items-center gap-2 border border-stone-700">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-stone-900 text-white px-4 py-2.5 rounded-2xl text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-150 flex items-center gap-2 border border-stone-700">
           <Check className="w-4 h-4 text-emerald-400 stroke-[3]" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* 6. AGENT EXPORT MODAL */}
-      {exportModalOpen && (
-        <AgentExportModal
-          composition={composition}
-          onClose={() => setExportModalOpen(false)}
+      {/* 5. FULL-SIZE SPECIMEN INSPECTOR MODAL */}
+      {activeInspectorSpecimen && (
+        <MockupInspectorModal
+          specimen={activeInspectorSpecimen}
+          onClose={() => setActiveInspectorSpecimen(null)}
+          onToast={showToast}
         />
       )}
     </div>
