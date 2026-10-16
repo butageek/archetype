@@ -41,6 +41,7 @@ export default function ArchetypeSynthesizerPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copiedCombined, setCopiedCombined] = useState<boolean>(false);
   const [leftTab, setLeftTab] = useState<'mockup' | 'prompt'>('mockup');
+  const [previewScale, setPreviewScale] = useState<'fit' | '100%'>('fit');
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -374,12 +375,12 @@ export default function ArchetypeSynthesizerPage() {
               ========================================================================= */}
           <section
             id="live-mockup-section"
-            className="lg:col-span-5 xl:col-span-6 flex flex-col space-y-3 lg:h-full lg:overflow-y-auto lg:pr-2 scrollbar-thin"
+            className="lg:col-span-6 xl:col-span-6 flex flex-col space-y-3 lg:h-full lg:overflow-y-auto lg:pr-2 scrollbar-thin"
           >
             {/* The Main Studio Card */}
-            <div className="bg-white rounded-2xl border border-stone-200 p-4 sm:p-5 shadow-xs space-y-3">
-              {/* Studio Card Header: Title & View Mode Tabs */}
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 pb-3">
+            <div className="bg-white rounded-2xl border border-stone-200 p-3 sm:p-4 shadow-xs space-y-2.5">
+              {/* Studio Card Header: Title & View Mode / Scale Tabs */}
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 pb-2.5">
                 <div>
                   <div className="flex items-center gap-2">
                     <h2 className="text-sm sm:text-base font-bold text-stone-900">
@@ -394,215 +395,165 @@ export default function ArchetypeSynthesizerPage() {
                   </p>
                 </div>
 
-                {/* View Switcher: Mockup vs Master Prompt */}
-                <div className="flex items-center gap-1 p-1 bg-stone-100 rounded-xl border border-stone-200 text-xs">
-                  <button
-                    type="button"
-                    onClick={() => setLeftTab('mockup')}
-                    className={`px-3 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
-                      leftTab === 'mockup'
-                        ? 'bg-stone-900 text-white shadow-xs font-bold'
-                        : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
-                    }`}
-                  >
-                    <span>👁 Live Mockup</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setLeftTab('prompt')}
-                    className={`px-3 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
-                      leftTab === 'prompt'
-                        ? 'bg-stone-900 text-white shadow-xs font-bold'
-                        : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
-                    }`}
-                  >
-                    <Terminal className="w-3.5 h-3.5" />
-                    <span>⚡ Master Prompt</span>
-                  </button>
+                {/* View & Scale Switchers */}
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {/* Scale control (only for mockup view) */}
+                  {leftTab === 'mockup' && (
+                    <div className="flex items-center gap-0.5 p-0.5 bg-stone-100 rounded-lg border border-stone-200 text-[11px] font-mono">
+                      <button
+                        type="button"
+                        onClick={() => setPreviewScale('fit')}
+                        className={`px-2 py-1 rounded font-semibold cursor-pointer transition-colors ${
+                          previewScale === 'fit'
+                            ? 'bg-white text-stone-900 shadow-2xs font-bold'
+                            : 'text-stone-500 hover:text-stone-900'
+                        }`}
+                        title="Automatically fit full preview into view without vertical scroll"
+                      >
+                        Fit View
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPreviewScale('100%')}
+                        className={`px-2 py-1 rounded font-semibold cursor-pointer transition-colors ${
+                          previewScale === '100%'
+                            ? 'bg-white text-stone-900 shadow-2xs font-bold'
+                            : 'text-stone-500 hover:text-stone-900'
+                        }`}
+                        title="Display preview at 100% 1:1 pixel scale"
+                      >
+                        100%
+                      </button>
+                    </div>
+                  )}
+
+                  {/* View Mode Switcher: Mockup vs Master Prompt */}
+                  <div className="flex items-center gap-1 p-1 bg-stone-100 rounded-xl border border-stone-200 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => setLeftTab('mockup')}
+                      className={`px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
+                        leftTab === 'mockup'
+                          ? 'bg-stone-900 text-white shadow-xs font-bold'
+                          : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
+                      }`}
+                    >
+                      <span>👁 Live Mockup</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setLeftTab('prompt')}
+                      className={`px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
+                        leftTab === 'prompt'
+                          ? 'bg-stone-900 text-white shadow-xs font-bold'
+                          : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
+                      }`}
+                    >
+                      <Terminal className="w-3.5 h-3.5" />
+                      <span>⚡ Master Prompt</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* TAB 1: LIVE COMBINED MOCKUP VIEWPORT */}
               {leftTab === 'mockup' && (
-                <div className="space-y-3 animate-in fade-in duration-150">
-                  {/* Quick Theme Presets Strip (Wrapped & Fully Visible) */}
-                  <div className="flex flex-wrap items-center gap-1.5 pb-2.5 border-b border-stone-100">
-                    <span className="text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider shrink-0 flex items-center gap-1 mr-0.5">
-                      <Sparkles className="w-3 h-3 text-amber-500" /> Presets:
-                    </span>
-                    {CURATED_THEMES.slice(0, 6).map((theme) => {
-                      const isThemeActive = activeCuratedTheme?.id === theme.id;
-                      const shortName =
-                        theme.id === 'cyberpunk-nightcity'
-                          ? 'Cyberpunk 2077'
-                          : theme.id === 'raycast-obsidian-velvet'
-                          ? 'Obsidian Velvet'
-                          : theme.id === 'stripe-fintech'
-                          ? 'Stripe Fintech'
-                          : theme.id === 'frutiger-aero'
-                          ? 'Frutiger Aero'
-                          : theme.id === 'warm-70s-editorial'
-                          ? '70s Editorial'
-                          : theme.id === 'win95-classic'
-                          ? 'Windows 95'
-                          : theme.name.split(' (')[0].replace(' 1989', '').replace(' 1920s', '').replace(' Heavy', '');
-
-                      return (
-                        <button
-                          key={theme.id}
-                          type="button"
-                          onClick={() => handleApplyTheme(theme)}
-                          className={`px-2 py-1 rounded-lg text-[11px] font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
-                            isThemeActive
-                              ? 'bg-stone-900 text-white shadow-xs font-bold'
-                              : 'bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200'
-                          }`}
-                          title={`${theme.name} — ${theme.tagline}`}
-                        >
-                          <span
-                            className="w-2 h-2 rounded-full shrink-0"
-                            style={{ backgroundColor: theme.accentColor }}
-                          />
-                          <span>{shortName}</span>
-                        </button>
-                      );
-                    })}
-                    <button
-                      type="button"
-                      onClick={() => setActiveCategory('themes')}
-                      className="px-2.5 py-1 rounded-lg text-[11px] font-bold cursor-pointer text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors flex items-center gap-1"
-                      title="Open all 16 curated themes in the right panel"
-                    >
-                      <span>All ({CURATED_THEMES.length}) →</span>
-                    </button>
+                <div className="space-y-2.5 animate-in fade-in duration-150">
+                  {/* Scaled Specimen Wrapper to fit on smaller viewports */}
+                  <div
+                    className={`overflow-hidden rounded-2xl ${
+                      previewScale === 'fit'
+                        ? 'origin-top scale-[0.88] sm:scale-[0.92] xl:scale-100 transition-transform duration-150 -mb-9 sm:-mb-6 xl:mb-0'
+                        : 'transition-transform duration-150'
+                    }`}
+                  >
+                    <LiveCombinedPreview selection={selection} />
                   </div>
 
-                  <LiveCombinedPreview selection={selection} />
-
-                  {/* Active Curated Theme Indicator */}
-                  {activeCuratedTheme && (
-                    <div className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-amber-50/70 border border-amber-200/80 text-amber-900 text-xs">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                        <span className="font-mono text-[11px] text-amber-900 font-semibold truncate">
-                          Active Prebuilt Theme: <strong>{activeCuratedTheme.name}</strong>
+                  {/* Sleek Integrated Toolbar: Active Theme / Archetype & 1-Click Pillar Re-Rolls */}
+                  <div className="flex flex-wrap items-center justify-between gap-1.5 pt-1 text-[11px] font-mono border-t border-stone-100">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      {activeCuratedTheme ? (
+                        <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 border border-amber-200 font-semibold truncate">
+                          <Sparkles className="w-3 h-3 text-amber-600 shrink-0" />
+                          <span className="truncate">Theme: <strong>{activeCuratedTheme.name}</strong></span>
+                          <span className="text-[9px] px-1 py-0.2 rounded bg-white text-amber-800 border border-amber-200 font-bold shrink-0">
+                            {activeCuratedTheme.badge}
+                          </span>
                         </span>
-                      </div>
-                      <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-white text-amber-800 font-bold border border-amber-200 shrink-0">
-                        {activeCuratedTheme.badge}
-                      </span>
+                      ) : (
+                        <span className="text-stone-500 font-medium px-1 truncate">
+                          Custom Composition • <strong>5 Pillars</strong>
+                        </span>
+                      )}
                     </div>
-                  )}
 
-                  {/* Selection Summary Badges */}
-                  <div className="flex items-center gap-1.5 flex-wrap pt-1 text-[11px] font-mono">
-                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
+                    {/* Compact Inline Dice Buttons to tweak each pillar */}
+                    <div className="flex items-center gap-1 shrink-0">
                       <button
                         type="button"
-                        onClick={() => setActiveCategory('palette')}
-                        className="cursor-pointer hover:text-stone-950 font-medium"
-                        title="View Palette in library"
-                      >
-                        Palette: <strong className="text-stone-900">{selection.palette.name}</strong>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
+                        onClick={() => {
                           handleRandomizeCategory('palette');
+                          setActiveCategory('palette');
                         }}
-                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
-                        title="Randomize Palette only"
+                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                        title={`Palette: ${selection.palette.name} (Click to randomize)`}
                       >
-                        <Dices className="w-3 h-3" />
-                      </button>
-                    </div>
-
-                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
-                      <button
-                        type="button"
-                        onClick={() => setActiveCategory('font')}
-                        className="cursor-pointer hover:text-stone-950 font-medium"
-                        title="View Typography in library"
-                      >
-                        Font: <strong>{selection.font.name}</strong>
+                        <span>🎨</span>
+                        <span className="hidden sm:inline text-[10px] font-bold">Palette</span>
+                        <Dices className="w-2.5 h-2.5 text-stone-500" />
                       </button>
                       <button
                         type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
+                        onClick={() => {
                           handleRandomizeCategory('font');
+                          setActiveCategory('font');
                         }}
-                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
-                        title="Randomize Typography only"
+                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                        title={`Typography: ${selection.font.name} (Click to randomize)`}
                       >
-                        <Dices className="w-3 h-3" />
-                      </button>
-                    </div>
-
-                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
-                      <button
-                        type="button"
-                        onClick={() => setActiveCategory('surface')}
-                        className="cursor-pointer hover:text-stone-950 font-medium"
-                        title="View Surface in library"
-                      >
-                        Surface: <strong>{selection.surface.name}</strong>
+                        <span>🔤</span>
+                        <span className="hidden sm:inline text-[10px] font-bold">Type</span>
+                        <Dices className="w-2.5 h-2.5 text-stone-500" />
                       </button>
                       <button
                         type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
+                        onClick={() => {
                           handleRandomizeCategory('surface');
+                          setActiveCategory('surface');
                         }}
-                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
-                        title="Randomize Surface only"
+                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                        title={`Surface: ${selection.surface.name} (Click to randomize)`}
                       >
-                        <Dices className="w-3 h-3" />
-                      </button>
-                    </div>
-
-                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
-                      <button
-                        type="button"
-                        onClick={() => setActiveCategory('components')}
-                        className="cursor-pointer hover:text-stone-950 font-medium"
-                        title="View Controls in library"
-                      >
-                        Controls: <strong>{selection.components.name}</strong>
+                        <span>📐</span>
+                        <span className="hidden sm:inline text-[10px] font-bold">Surface</span>
+                        <Dices className="w-2.5 h-2.5 text-stone-500" />
                       </button>
                       <button
                         type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
+                        onClick={() => {
                           handleRandomizeCategory('components');
+                          setActiveCategory('components');
                         }}
-                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
-                        title="Randomize Controls only"
+                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                        title={`Controls: ${selection.components.name} (Click to randomize)`}
                       >
-                        <Dices className="w-3 h-3" />
-                      </button>
-                    </div>
-
-                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200/80 text-stone-700 border border-stone-200 transition-colors">
-                      <button
-                        type="button"
-                        onClick={() => setActiveCategory('accents')}
-                        className="cursor-pointer hover:text-stone-950 font-medium"
-                        title="View Accent in library"
-                      >
-                        Accent: <strong>{selection.accent.name}</strong>
+                        <span>🧩</span>
+                        <span className="hidden sm:inline text-[10px] font-bold">Controls</span>
+                        <Dices className="w-2.5 h-2.5 text-stone-500" />
                       </button>
                       <button
                         type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
+                        onClick={() => {
                           handleRandomizeCategory('accents');
+                          setActiveCategory('accents');
                         }}
-                        className="p-0.5 rounded hover:bg-stone-300 text-stone-500 hover:text-stone-900 cursor-pointer transition-colors"
-                        title="Randomize Accent only"
+                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                        title={`Accent: ${selection.accent.name} (Click to randomize)`}
                       >
-                        <Dices className="w-3 h-3" />
+                        <span>✨</span>
+                        <span className="hidden sm:inline text-[10px] font-bold">Accent</span>
+                        <Dices className="w-2.5 h-2.5 text-stone-500" />
                       </button>
                     </div>
                   </div>
@@ -723,7 +674,7 @@ export default function ArchetypeSynthesizerPage() {
           {/* =========================================================================
               RIGHT COLUMN: DESIGN PARTS SELECTION LIBRARY (INDEPENDENTLY SCROLLABLE)
               ========================================================================= */}
-          <section className="lg:col-span-7 xl:col-span-6 bg-white rounded-2xl border border-stone-200 p-5 sm:p-6 shadow-xs flex flex-col lg:h-full lg:overflow-hidden space-y-4">
+          <section className="lg:col-span-6 xl:col-span-6 bg-white rounded-2xl border border-stone-200 p-4 sm:p-5 shadow-xs flex flex-col lg:h-full lg:overflow-hidden space-y-3">
             <div className="border-b border-stone-200 pb-3 flex-shrink-0">
               <div className="flex items-center justify-between">
                 <div>

@@ -223,12 +223,12 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
           TOP HEADER BAR
           ========================================================================= */}
       <div
-        className="w-full border-b flex flex-wrap items-center justify-between px-4 sm:px-5 py-3 relative z-10 backdrop-blur-xs gap-2"
+        className="w-full border-b flex flex-wrap items-center justify-between px-3.5 sm:px-4 py-2 relative z-10 backdrop-blur-xs gap-2"
         style={{ borderColor: `${palette.border}44`, backgroundColor: `${palette.surface}EE` }}
       >
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
           <div
-            className="w-7 h-7 flex items-center justify-center font-bold text-xs shadow-xs"
+            className="w-6 h-6 flex items-center justify-center font-bold text-xs shadow-xs"
             style={{
               backgroundColor: palette.primary,
               color: palette.isDark ? '#000000' : '#FFFFFF',
@@ -236,7 +236,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
               border: `${surface.borderWidth} solid ${palette.border}`,
             }}
           >
-            <Zap className="w-3.5 h-3.5" />
+            <Zap className="w-3 h-3" />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -277,9 +277,9 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
       {/* =========================================================================
           INTERACTIVE COMPONENT SHOWCASE SPECIMEN
           ========================================================================= */}
-      <div className="p-4 sm:p-6 relative z-10 space-y-4 min-h-[340px]">
+      <div className="p-3 sm:p-4 relative z-10 space-y-3 min-h-[280px]">
         {/* Main Specimen Showcase Card (Relative wrapper allowing washi tape to overlap border) */}
-        <div className="relative pt-2">
+        <div className="relative pt-1">
           {/* TACTILE WASHI TAPE STRIP (Overlapping Card Top Border) */}
           {accent.type === 'washi-tape' && (
             <div
@@ -296,7 +296,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
           )}
 
           {/* THE CARD ITSELF */}
-          <div className="p-4 sm:p-6 relative space-y-4" style={cardStyle}>
+          <div className="p-3 sm:p-4 relative space-y-2.5" style={cardStyle}>
             {/* Optional Glossy Sheen for Frutiger Aero Surface */}
             {surface.id === 'frutiger-gloss' && (
               <div
@@ -711,17 +711,17 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
             </div>
 
             {/* Typography Display */}
-            <div className="space-y-1 relative z-10">
-              <h2 className="text-xl sm:text-3xl font-extrabold tracking-tight" style={headingStyle}>
+            <div className="space-y-0.5 relative z-10">
+              <h2 className="text-base sm:text-2xl font-extrabold tracking-tight truncate" style={headingStyle}>
                 {font.previewSample}
               </h2>
-              <p className="text-xs sm:text-sm opacity-80 leading-relaxed max-w-xl">
+              <p className="text-[11px] sm:text-xs opacity-80 leading-relaxed truncate max-w-xl">
                 Previewing the exact combination of {palette.name}, {font.name}, {surface.name}, and {components.name}.
               </p>
             </div>
 
             {/* Row 1: Search Input & Cluster Gateway Dropdown Select */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 relative ${dropdownOpen ? 'z-50' : 'z-20'}`}>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 relative ${dropdownOpen ? 'z-50' : 'z-20'}`}>
               {/* Fully Interactive Search Input Box */}
               <div
                 onMouseEnter={() => setIsInputHovered(true)}
@@ -856,7 +856,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
             </div>
 
             {/* Row 2: Checkboxes & Dynamic Slider */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 relative z-10">
               {/* Checkboxes: Security & Protocol Policies */}
               <div className="flex flex-col justify-between gap-1.5">
                 <div className="flex items-center justify-between text-xs font-bold">
@@ -955,8 +955,8 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
             </div>
 
             {/* Row 3: Interactive Radio Buttons Group */}
-            <div className="pt-2 relative z-10">
-              <div className="flex items-center justify-between mb-1">
+            <div className="pt-1 relative z-10">
+              <div className="flex items-center justify-between mb-0.5">
                 <label className="text-[10px] font-mono font-bold uppercase tracking-wider opacity-75">
                   Routing Profile
                 </label>
@@ -974,7 +974,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
                       key={tier.id}
                       type="button"
                       onClick={() => setSelectedRadio(tier.id as 'standard' | 'turbo' | 'isolated')}
-                      className="p-2 border flex flex-col items-center justify-center gap-1 cursor-pointer transition-all text-center select-none"
+                      className="p-1.5 border flex flex-col items-center justify-center gap-0.5 cursor-pointer transition-all text-center select-none"
                       style={{
                         backgroundColor: isSelected ? `${palette.primary}18` : palette.background,
                         borderColor: isSelected ? palette.primary : `${palette.border}77`,
@@ -1012,7 +1012,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
             </div>
 
             {/* Row 4: Buttons & Interactive Actions */}
-            <div className="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-black/10 relative z-0">
+            <div className="pt-1.5 flex flex-wrap items-center justify-between gap-2 border-t border-black/10 relative z-0">
               <div className="flex items-center gap-2">
                 {/* Primary Button styled by components with live hover and active click */}
                 <button
@@ -1065,7 +1065,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
                 <button
                   type="button"
                   onClick={() => setToggleActive(!toggleActive)}
-                  className="w-10 h-5 rounded-full relative cursor-pointer transition-all duration-200 border"
+                  className="w-9 h-4.5 rounded-full relative cursor-pointer transition-all duration-200 border"
                   style={{
                     backgroundColor: toggleActive ? palette.primary : `${palette.border}66`,
                     borderColor: palette.border,
@@ -1074,9 +1074,9 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
                   title="Toggle automatic synchronization"
                 >
                   <div
-                    className="w-3.5 h-3.5 rounded-full bg-white absolute top-0.5 transition-transform duration-200 shadow-xs"
+                    className="w-3 h-3 rounded-full bg-white absolute top-0.5 transition-transform duration-200 shadow-xs"
                     style={{
-                      transform: toggleActive ? 'translateX(21px)' : 'translateX(3px)',
+                      transform: toggleActive ? 'translateX(18px)' : 'translateX(2px)',
                     }}
                   />
                 </button>
@@ -1086,21 +1086,21 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
         </div>
 
         {/* Subsystem Interactive Tiles (Hoverable, Clickable, Animated) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           {/* Tile 1: Engine Core Toggle */}
           <button
             type="button"
             onClick={() => setEngineOnline(!engineOnline)}
-            className="p-3 border flex items-center justify-between text-left cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
+            className="p-2.5 border flex items-center justify-between text-left cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
             style={{
               ...cardStyle,
               borderColor: engineOnline ? palette.border : `${palette.border}66`,
             }}
             title="Click to toggle Engine Core status"
           >
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               <Cpu
-                className="w-4 h-4 transition-transform group-hover:rotate-45"
+                className="w-3.5 h-3.5 transition-transform group-hover:rotate-45"
                 style={{ color: engineOnline ? palette.primary : palette.textMuted }}
               />
               <div className="flex flex-col text-xs">
@@ -1126,12 +1126,12 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
           <button
             type="button"
             onClick={() => setThroughput((prev) => prev + Math.floor(Math.random() * 200 + 50))}
-            className="p-3 border flex items-center justify-between text-left cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
+            className="p-2.5 border flex items-center justify-between text-left cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
             style={cardStyle}
             title="Click to surge throughput telemetry"
           >
-            <div className="flex items-center gap-2.5">
-              <Activity className="w-4 h-4" style={{ color: palette.secondary }} />
+            <div className="flex items-center gap-2">
+              <Activity className="w-3.5 h-3.5" style={{ color: palette.secondary }} />
               <div className="flex flex-col text-xs">
                 <span className="font-bold">Throughput</span>
                 <span className="text-[10px] opacity-75 font-mono">
@@ -1153,7 +1153,7 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
             onClick={() => {
               setThroughput((prev) => prev + 42);
             }}
-            className="p-3 border flex items-center justify-between text-left cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
+            className="p-2.5 border flex items-center justify-between text-left cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
             style={cardStyle}
             title="Click to run diagnostic inspection"
           >
@@ -1161,14 +1161,14 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
               <span className="font-bold">Inspect Node</span>
               <span className="text-[10px] opacity-75 font-mono">Diagnostic Ping</span>
             </div>
-            <ArrowRight className="w-4 h-4" style={{ color: palette.primary }} />
+            <ArrowRight className="w-3.5 h-3.5" style={{ color: palette.primary }} />
           </button>
         </div>
       </div>
 
       {/* Footer Strip */}
       <div
-        className="px-5 py-2 border-t flex flex-wrap items-center justify-between text-[11px] font-mono relative z-10 opacity-80"
+        className="px-4 py-1.5 border-t flex flex-wrap items-center justify-between text-[11px] font-mono relative z-10 opacity-80"
         style={{ borderColor: `${palette.border}22`, backgroundColor: `${palette.surface}88` }}
       >
         <div className="flex items-center gap-2">
