@@ -9,6 +9,7 @@ import {
   FileCode,
   Layers,
   Search,
+  Sparkles,
   Terminal,
   Wand2,
 } from 'lucide-react';
@@ -20,6 +21,7 @@ import {
   generateFullDesignSpec,
 } from '../lib/modularPresets';
 import {
+  blendCompositionWithPrompt,
   getRandomComposition,
   synthesizeCompositionFromPrompt,
 } from '../lib/modularSynthesizer';
@@ -35,7 +37,7 @@ export default function ArchetypePortal() {
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 2500);
+    setTimeout(() => setToastMessage(null), 3000);
   };
 
   const triggerConfetti = () => {
@@ -71,23 +73,23 @@ export default function ArchetypePortal() {
     showToast(`Assembled "${randomComp.palette.name}" + "${randomComp.style.name}"!`);
   };
 
-  // Synthesize from Prompt
+  // 1. SYNTHESIZE: Build a complete new design archetype from scratch
   const handleSynthesizePrompt = (overrideText?: string) => {
     const text = overrideText || promptInput;
     if (!text.trim()) return;
-    const synthesized = synthesizeCompositionFromPrompt(text);
-    setComposition(synthesized);
+    const res = synthesizeCompositionFromPrompt(text);
+    setComposition(res.composition);
     triggerConfetti();
-    showToast(`Synthesized aesthetic for "${text.slice(0, 35)}..."`);
+    showToast(res.description);
   };
 
-  // Blend into Current
+  // 2. BLEND: Merge only the prompt's nuances into the current selections
   const handleBlendPrompt = () => {
     if (!promptInput.trim()) return;
-    const blended = synthesizeCompositionFromPrompt(promptInput, composition);
-    setComposition(blended);
+    const res = blendCompositionWithPrompt(promptInput, composition);
+    setComposition(res.composition);
     triggerConfetti();
-    showToast('Blended prompt nuances into current design.');
+    showToast(res.description);
   };
 
   const inspirationPrompts = [
@@ -100,9 +102,9 @@ export default function ArchetypePortal() {
   ];
 
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans selection:bg-stone-900 selection:text-white pb-16">
+    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans selection:bg-stone-900 selection:text-white pb-32">
       {/* 1. TOP PORTAL HEADER */}
-      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-stone-200 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200 px-4 sm:px-8 py-3.5 flex items-center justify-between">
         {/* Brand */}
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-stone-900 flex items-center justify-center font-black text-xs text-white shadow-xs">
@@ -123,7 +125,7 @@ export default function ArchetypePortal() {
           </div>
         </div>
 
-        {/* Action Controls */}
+        {/* Header Action Controls */}
         <div className="flex items-center gap-2">
           {/* Surprise Me Button */}
           <button
@@ -132,50 +134,31 @@ export default function ArchetypePortal() {
             title="Randomly assemble a fresh design combination"
           >
             <Dices className="w-3.5 h-3.5 text-stone-700" />
-            <span className="hidden sm:inline">Surprise Me</span>
+            <span>Surprise Me</span>
           </button>
 
-          {/* Core Action: Copy Agent Prompt */}
-          <button
-            onClick={handleCopyAgentPrompt}
-            className="px-3 py-1.5 bg-stone-900 hover:bg-stone-800 text-white rounded-lg text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-sm transition-transform active:scale-95"
-            title="Copy ready-to-paste AI agent prompt"
-          >
-            <Terminal className="w-3.5 h-3.5" />
-            <span>Copy Agent Prompt</span>
-          </button>
-
-          {/* Quick Action: Copy Spec */}
-          <button
-            onClick={handleCopyDesignSpec}
-            className="px-2.5 py-1.5 bg-white hover:bg-stone-100 text-stone-700 rounded-lg text-xs font-semibold cursor-pointer border border-stone-200 transition-colors hidden md:flex items-center gap-1.5"
-            title="Copy STYLE_SPEC.md with CSS variables and Tailwind tokens"
-          >
-            <FileCode className="w-3.5 h-3.5" />
-            <span>Copy Spec</span>
-          </button>
-
-          {/* Full Modal */}
+          {/* Export for AI Button (Opens Full Modal) */}
           <button
             onClick={() => setExportModalOpen(true)}
-            className="p-1.5 bg-white hover:bg-stone-100 text-stone-600 rounded-lg text-xs cursor-pointer border border-stone-200"
-            title="View full specification & code blueprints"
+            className="px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 text-white rounded-lg text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-sm transition-transform active:scale-95"
+            title="Export for AI Coding Agent"
           >
-            <Code2 className="w-4 h-4" />
+            <Terminal className="w-3.5 h-3.5" />
+            <span>Export for AI</span>
           </button>
         </div>
       </header>
 
-      {/* 2. MAIN CONTAINER */}
+      {/* 2. MAIN WORKSPACE CONTAINER */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 space-y-8">
-        {/* PROMPT SYNTHESIZER & BLENDER */}
-        <section className="bg-white rounded-2xl border border-stone-200/90 p-4 sm:p-5 shadow-xs space-y-3">
+        {/* PROMPT SYNTHESIZER & BLENDER SECTION */}
+        <section className="bg-white rounded-2xl border border-stone-200 p-4 sm:p-5 shadow-xs space-y-3">
           <div className="flex flex-col sm:flex-row gap-2">
             <div className="relative flex-1">
               <Search className="w-4 h-4 absolute left-3.5 top-3 text-stone-400" />
               <input
                 type="text"
-                placeholder="Type an aesthetic prompt (e.g. '1970s Braun Dieter Rams audio monitor', 'Tokyo neon cyan alleyway', 'Scandinavian pottery studio')..."
+                placeholder="Type an aesthetic prompt (e.g. '1970s Dieter Rams Braun audio console', 'Tokyo neon cyan alleyway', 'Scandinavian pottery studio')..."
                 value={promptInput}
                 onChange={(e) => setPromptInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSynthesizePrompt()}
@@ -188,6 +171,7 @@ export default function ArchetypePortal() {
                 onClick={() => handleSynthesizePrompt()}
                 disabled={!promptInput.trim()}
                 className="flex-1 sm:flex-none px-4 py-2 bg-stone-900 hover:bg-stone-800 disabled:opacity-40 text-white font-bold text-xs rounded-xl cursor-pointer flex items-center justify-center gap-1.5 shadow-xs transition-transform active:scale-95"
+                title="Synthesize an entire 6-part design system from scratch"
               >
                 <Wand2 className="w-3.5 h-3.5" />
                 <span>Synthesize</span>
@@ -196,9 +180,10 @@ export default function ArchetypePortal() {
               <button
                 onClick={handleBlendPrompt}
                 disabled={!promptInput.trim()}
-                className="flex-1 sm:flex-none px-3.5 py-2 bg-stone-100 hover:bg-stone-200 disabled:opacity-40 text-stone-700 font-semibold text-xs rounded-xl cursor-pointer border border-stone-200 transition-colors"
-                title="Blend prompt into the currently selected design elements"
+                className="flex-1 sm:flex-none px-3.5 py-2 bg-stone-100 hover:bg-stone-200 disabled:opacity-40 text-stone-700 font-semibold text-xs rounded-xl cursor-pointer border border-stone-200 transition-colors flex items-center justify-center gap-1.5"
+                title="Blend prompt nuances into current design while preserving other selections"
               >
+                <Sparkles className="w-3.5 h-3.5 text-stone-600" />
                 <span>Blend</span>
               </button>
             </div>
@@ -224,9 +209,9 @@ export default function ArchetypePortal() {
           </div>
         </section>
 
-        {/* COMPLETE DESIGN MOCKUP SECTION */}
+        {/* COMPLETE DESIGN MOCKUP SECTION (WITH PRIMARY EXPORT ACTIONS) */}
         <section className="space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-base font-bold text-stone-900">Live Design Mockup</h2>
@@ -234,35 +219,47 @@ export default function ArchetypePortal() {
                   Synthesized Specimen
                 </span>
               </div>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-stone-500 mt-0.5">
                 Formed by: <strong>{composition.palette.name}</strong> • <strong>{composition.layout.name}</strong> • <strong>{composition.style.name}</strong> • <strong>{composition.font.name}</strong>
               </p>
             </div>
 
-            {/* Direct Copy Actions */}
+            {/* Dedicated Primary Actions on the Mockup */}
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopyAgentPrompt}
-                className="px-3 py-1.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
+                className="px-3.5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-sm transition-transform active:scale-95"
+                title="Copy ready-to-paste AI agent prompt"
               >
                 <Copy className="w-3.5 h-3.5" />
                 <span>Copy Agent Prompt</span>
               </button>
+
               <button
                 onClick={handleCopyDesignSpec}
-                className="px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold cursor-pointer border border-stone-200 transition-colors"
+                className="px-3 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold cursor-pointer border border-stone-200 transition-colors flex items-center gap-1.5"
+                title="Copy STYLE_SPEC.md with CSS variables and Tailwind tokens"
               >
-                <span>Copy Spec (Markdown)</span>
+                <FileCode className="w-3.5 h-3.5" />
+                <span>Copy Spec</span>
+              </button>
+
+              <button
+                onClick={() => setExportModalOpen(true)}
+                className="p-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 cursor-pointer border border-stone-200 transition-colors"
+                title="Open full blueprint modal"
+              >
+                <Code2 className="w-4 h-4" />
               </button>
             </div>
           </div>
 
           {/* Screenshot Tip Banner */}
-          <div className="text-[11px] bg-stone-100/80 text-stone-600 px-3.5 py-2 rounded-xl border border-stone-200 flex items-center justify-between">
+          <div className="text-[11px] bg-stone-100 text-stone-600 px-3.5 py-2 rounded-xl border border-stone-200/90 flex items-center justify-between">
             <span>
-              💡 <strong>AI Agent Workflow</strong>: Take a screenshot of the mockup below, then paste it alongside the copied prompt into your agent tool!
+              💡 <strong>AI Agent Workflow</strong>: Take a screenshot of the mockup below and paste it directly into Cursor, Claude, or ChatGPT alongside the copied prompt!
             </span>
-            <span className="font-mono text-[10px] text-stone-500 hidden sm:inline">No manual token tweaking required</span>
+            <span className="font-mono text-[10px] text-stone-500 hidden sm:inline">Zero token friction</span>
           </div>
 
           {/* The High-Fidelity Mockup Container */}
@@ -274,10 +271,10 @@ export default function ArchetypePortal() {
           <div>
             <div className="flex items-center gap-2">
               <Layers className="w-4 h-4 text-stone-800" />
-              <h2 className="text-base font-bold text-stone-900">Design Parts Gallery</h2>
+              <h2 className="text-base font-bold text-stone-900">Modular Design Gallery</h2>
             </div>
             <p className="text-xs text-stone-500 mt-0.5">
-              Click any element below to swap out parts. The complete design mockup above updates instantly.
+              Click any element below to swap out parts. The live design mockup above updates instantly.
             </p>
           </div>
 
