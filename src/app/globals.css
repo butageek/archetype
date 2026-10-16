@@ -46,10 +46,17 @@ body {
   background: #a8a29e;
 }
 
-/* High-contrast vibrant selection highlight across all platforms */
+/* High-contrast vibrant selection highlight across all platforms and components */
 ::selection {
-  background-color: #fbbf24;
-  color: #0c0a09;
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+textarea::selection,
+pre::selection,
+code::selection {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
 }
 
 /* Prevent native drag ghosting on text blocks to ensure reliable text selection */

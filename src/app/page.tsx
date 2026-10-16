@@ -36,10 +36,15 @@ export default function ArchetypeSynthesizerPage() {
   const [leftTab, setLeftTab] = useState<'mockup' | 'prompt'>('mockup');
   const [selectedSnippet, setSelectedSnippet] = useState<string>('');
 
-  const handleSelectionChange = () => {
-    if (typeof window !== 'undefined') {
-      const text = window.getSelection()?.toString().trim() || '';
+  const handleTextareaSelect = (e: React.SyntheticEvent<HTMLTextAreaElement>) => {
+    const target = e.currentTarget;
+    const start = target.selectionStart;
+    const end = target.selectionEnd;
+    if (start !== end) {
+      const text = target.value.substring(start, end).trim();
       setSelectedSnippet(text);
+    } else {
+      setSelectedSnippet('');
     }
   };
 
@@ -288,21 +293,25 @@ export default function ArchetypeSynthesizerPage() {
                       </button>
                     </div>
 
-                    {/* Adaptive Copy Button: Changes to Copy Selection when text is highlighted */}
-                    {selectedSnippet ? (
+                    {/* Action Buttons: Copy Full Prompt always visible, plus Copy Highlighted Snippet when text is selected */}
+                    <div className="flex items-center gap-2">
+                      {selectedSnippet && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigator.clipboard.writeText(selectedSnippet);
+                            showToast(`Copied highlighted snippet (${selectedSnippet.length} chars)!`);
+                          }}
+                          className="px-3 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 border border-blue-400 rounded-xl flex items-center gap-1.5 transition-transform active:scale-95 cursor-pointer shadow-xs animate-in fade-in"
+                          title="Click to copy highlighted snippet to clipboard"
+                        >
+                          <Copy className="w-3.5 h-3.5 text-white" />
+                          <span>Copy Highlighted Snippet</span>
+                        </button>
+                      )}
+
                       <button
-                        onClick={() => {
-                          navigator.clipboard.writeText(selectedSnippet);
-                          showToast(`Copied highlighted selection (${selectedSnippet.length} chars)!`);
-                        }}
-                        className="px-3 py-1.5 text-xs font-bold text-amber-950 bg-amber-400 hover:bg-amber-300 border border-amber-500 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer animate-in fade-in shadow-xs active:scale-95"
-                        title="Copy the highlighted text"
-                      >
-                        <Copy className="w-3.5 h-3.5 text-amber-950" />
-                        <span>Copy Selection ({selectedSnippet.length > 15 ? `${selectedSnippet.slice(0, 15)}…` : selectedSnippet})</span>
-                      </button>
-                    ) : (
-                      <button
+                        type="button"
                         onClick={handleCopyCompletePrompt}
                         className="px-3 py-1.5 text-xs font-bold text-stone-900 bg-stone-100 hover:bg-stone-200 border border-stone-300 rounded-xl flex items-center gap-1.5 transition-transform active:scale-95 cursor-pointer"
                         title="Copy the complete synthesized prompt"
@@ -312,35 +321,38 @@ export default function ArchetypeSynthesizerPage() {
                         ) : (
                           <Copy className="w-3.5 h-3.5 text-stone-700" />
                         )}
-                        <span>{copiedCombined ? 'Copied!' : 'Copy Full Prompt'}</span>
+                        <span>{copiedCombined ? 'Copied Full Prompt!' : 'Copy Full Prompt'}</span>
                       </button>
-                    )}
+                    </div>
                   </div>
 
                   <div className="relative">
-                    <pre
-                      tabIndex={0}
+                    <textarea
+                      readOnly
+                      value={combinedMasterPrompt}
+                      rows={18}
                       draggable={false}
                       onDragStart={(e) => {
                         e.preventDefault();
                         return false;
                       }}
-                      onMouseUp={handleSelectionChange}
-                      onKeyUp={handleSelectionChange}
+                      onSelect={handleTextareaSelect}
+                      onMouseUp={handleTextareaSelect}
+                      onKeyUp={handleTextareaSelect}
                       style={{
+                        colorScheme: 'dark',
                         userSelect: 'text',
                         WebkitUserSelect: 'text',
                         ...({ WebkitUserDrag: 'none' } as React.CSSProperties),
                       }}
-                      className="w-full p-4 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs leading-relaxed border border-stone-800 focus:outline-none focus:ring-1 focus:ring-stone-600 cursor-text select-text overflow-auto max-h-[440px] whitespace-pre-wrap selection:bg-amber-400 selection:text-stone-950 shadow-inner scrollbar-thin"
-                    >
-                      {combinedMasterPrompt}
-                    </pre>
+                      className="w-full p-4 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs leading-relaxed border border-stone-800 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-text select-text resize-y shadow-inner scrollbar-thin selection:bg-blue-600 selection:text-white"
+                      spellCheck={false}
+                    />
                   </div>
 
                   <div className="text-[11px] text-stone-500 flex flex-wrap items-center justify-between gap-1">
                     <span>
-                      💡 <strong>Tip</strong>: Highlight any character, word, or token directly to copy with <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">Ctrl+C</kbd> / <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">⌘C</kbd>, or use the quick copy buttons above.
+                      💡 <strong>Tip</strong>: Highlight any text in the box to see blue selection feedback. Use <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">Ctrl+C</kbd> / <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-300 font-mono text-[10px]">⌘C</kbd> or click <strong>Copy Highlighted Snippet</strong> to copy.
                     </span>
                   </div>
                 </div>
