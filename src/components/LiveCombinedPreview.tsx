@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import {
   Activity,
   ArrowRight,
-  CircleDot,
   Cpu,
   Search,
+  Sparkles,
   Zap,
 } from 'lucide-react';
 import { DesignPartsSelection } from '../types/designParts';
@@ -18,8 +18,18 @@ interface LiveCombinedPreviewProps {
 export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
   const { palette, font, surface, components, accent } = selection;
 
+  // Interactive states
   const [sliderVal, setSliderVal] = useState<number>(82);
   const [toggleActive, setToggleActive] = useState<boolean>(true);
+  const [inputValue, setInputValue] = useState<string>('System node v4.2 active');
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
+  const [isInputHovered, setIsInputHovered] = useState<boolean>(false);
+  const [primaryHovered, setPrimaryHovered] = useState<boolean>(false);
+  const [secondaryHovered, setSecondaryHovered] = useState<boolean>(false);
+  const [actionMessage, setActionMessage] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'overview' | 'telemetry' | 'controls'>('overview');
+  const [engineOnline, setEngineOnline] = useState<boolean>(true);
+  const [throughput, setThroughput] = useState<number>(1842);
 
   // Derive card styles
   const cardStyle: React.CSSProperties = {
@@ -326,13 +336,55 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
               />
             )}
 
-            {/* TOP STATUS & PILL BAR */}
-            <div className="flex items-center justify-between relative z-10">
-              <span className="text-xs uppercase tracking-wider font-bold opacity-75 flex items-center gap-1.5">
-                <CircleDot className="w-3.5 h-3.5" style={{ color: palette.primary }} />
-                Active Component Specimen
-              </span>
+            {/* TOP BAR: TABS & STATUS BADGES */}
+            <div className="flex flex-wrap items-center justify-between gap-2 relative z-10">
+              {/* Interactive Segmented Tabs */}
+              <div
+                className="flex items-center gap-1 p-1 rounded-xl border"
+                style={{
+                  borderColor: `${palette.border}44`,
+                  backgroundColor: `${palette.background}88`,
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('overview')}
+                  className="px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer transition-all"
+                  style={{
+                    backgroundColor: activeTab === 'overview' ? palette.primary : 'transparent',
+                    color: activeTab === 'overview' ? (palette.isDark ? '#000000' : '#FFFFFF') : palette.text,
+                    boxShadow: activeTab === 'overview' ? `0 2px 8px ${palette.primary}55` : 'none',
+                  }}
+                >
+                  ✦ Overview
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('telemetry')}
+                  className="px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer transition-all"
+                  style={{
+                    backgroundColor: activeTab === 'telemetry' ? palette.primary : 'transparent',
+                    color: activeTab === 'telemetry' ? (palette.isDark ? '#000000' : '#FFFFFF') : palette.text,
+                    boxShadow: activeTab === 'telemetry' ? `0 2px 8px ${palette.primary}55` : 'none',
+                  }}
+                >
+                  ⚡ Telemetry
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('controls')}
+                  className="px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer transition-all"
+                  style={{
+                    backgroundColor: activeTab === 'controls' ? palette.primary : 'transparent',
+                    color: activeTab === 'controls' ? (palette.isDark ? '#000000' : '#FFFFFF') : palette.text,
+                    boxShadow: activeTab === 'controls' ? `0 2px 8px ${palette.primary}55` : 'none',
+                  }}
+                >
+                  ⚙ Metrics
+                </button>
+              </div>
 
+              {/* Status Badges */}
               <div className="flex items-center gap-2">
                 {/* CYBERPUNK HUD TARGET RETICLE */}
                 {accent.type === 'cyber-hud' && (
@@ -383,99 +435,185 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
               </p>
             </div>
 
-            {/* Interactive Controls Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 relative z-10">
-              {/* Input Search Field */}
+            {/* Interactive Feedback Notification (if action triggered) */}
+            {actionMessage && (
               <div
-                className="p-2 border flex items-center gap-2"
+                className="p-2.5 rounded-xl text-xs font-mono font-bold flex items-center gap-2 border animate-in fade-in zoom-in-95 duration-150"
                 style={{
-                  backgroundColor: `${palette.background}88`,
-                  borderColor: `${palette.border}66`,
+                  backgroundColor: `${palette.primary}20`,
+                  borderColor: palette.primary,
+                  color: palette.isDark ? '#FFFFFF' : palette.text,
+                }}
+              >
+                <Sparkles className="w-4 h-4" style={{ color: palette.primary }} />
+                <span>{actionMessage}</span>
+              </div>
+            )}
+
+            {/* Interactive Controls Row: Search Input & Dynamic Slider */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 relative z-10">
+              {/* Fully Interactive Search Input Box */}
+              <div
+                onMouseEnter={() => setIsInputHovered(true)}
+                onMouseLeave={() => setIsInputHovered(false)}
+                className="p-2.5 border flex items-center gap-2 transition-all duration-150 relative"
+                style={{
+                  backgroundColor: `${palette.background}`,
+                  borderColor: isInputFocused
+                    ? palette.primary
+                    : isInputHovered
+                    ? palette.border
+                    : `${palette.border}66`,
+                  boxShadow: isInputFocused
+                    ? surface.id.includes('neobrutalist')
+                      ? `3px 3px 0px ${palette.primary}`
+                      : `0 0 0 2px ${palette.primary}44`
+                    : isInputHovered
+                    ? `0 2px 8px rgba(0,0,0,0.06)`
+                    : 'none',
                   borderRadius: surface.radius === '9999px' ? '9999px' : surface.radius === '0px' ? '0px' : '8px',
                 }}
               >
-                <Search className="w-3.5 h-3.5 opacity-60 flex-shrink-0" />
+                <Search
+                  className="w-3.5 h-3.5 flex-shrink-0 transition-colors"
+                  style={{ color: isInputFocused ? palette.primary : `${palette.text}88` }}
+                />
                 <input
                   type="text"
-                  readOnly
-                  value="Search command..."
-                  className="w-full bg-transparent text-xs outline-none"
-                  style={{ color: palette.text }}
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onFocus={() => setIsInputFocused(true)}
+                  onBlur={() => setIsInputFocused(false)}
+                  placeholder="Type commands or keywords..."
+                  className="w-full bg-transparent text-xs outline-none transition-colors"
+                  style={{ color: palette.text, fontFamily: font.fontFamily }}
                 />
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/10 border border-black/10 flex-shrink-0">
-                  ⌘K
-                </span>
+                {inputValue.length > 0 ? (
+                  <button
+                    type="button"
+                    onClick={() => setInputValue('')}
+                    className="text-[10px] font-mono px-1.5 py-0.5 rounded cursor-pointer transition-colors opacity-60 hover:opacity-100"
+                    style={{ backgroundColor: `${palette.surface}`, color: palette.text }}
+                    title="Clear text"
+                  >
+                    ✕
+                  </button>
+                ) : (
+                  <span
+                    className="text-[10px] font-mono px-1.5 py-0.5 rounded border flex-shrink-0 opacity-70"
+                    style={{ borderColor: `${palette.border}44`, backgroundColor: `${palette.surface}` }}
+                  >
+                    ⌘K
+                  </span>
+                )}
               </div>
 
-              {/* Dynamic Slider Potentiometer */}
+              {/* Dynamic Slider Potentiometer (Color Matched 100% to Palette Primary) */}
               <div
-                className="p-2 border flex items-center gap-2.5 justify-between"
+                className="p-2.5 border flex flex-col justify-between gap-1.5"
                 style={{
-                  backgroundColor: `${palette.background}88`,
+                  backgroundColor: `${palette.background}`,
                   borderColor: `${palette.border}66`,
                   borderRadius: surface.radius === '9999px' ? '9999px' : surface.radius === '0px' ? '0px' : '8px',
                 }}
               >
-                <span className="text-[11px] font-bold opacity-75">Level</span>
-                <input
-                  type="range"
-                  min="20"
-                  max="100"
-                  value={sliderVal}
-                  onChange={(e) => setSliderVal(Number(e.target.value))}
-                  className="w-24 cursor-pointer accent-[var(--color-primary)]"
-                />
-                <span className="text-xs font-mono font-bold" style={{ color: palette.primary }}>
-                  {sliderVal}%
-                </span>
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="opacity-75">Intensity Modulation</span>
+                  <span className="font-mono" style={{ color: palette.primary }}>
+                    {sliderVal}%
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={sliderVal}
+                    onChange={(e) => setSliderVal(Number(e.target.value))}
+                    style={{
+                      accentColor: palette.primary,
+                      cursor: 'ew-resize',
+                    }}
+                    className="w-full h-2 rounded-lg cursor-pointer"
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Buttons & Actions */}
+            {/* Buttons & Interactive Actions */}
             <div className="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-black/10 relative z-10">
               <div className="flex items-center gap-2">
-                {/* Primary Button styled by components */}
+                {/* Primary Button styled by components with live hover and active click */}
                 <button
-                  className={components.buttonClass}
+                  type="button"
+                  onMouseEnter={() => setPrimaryHovered(true)}
+                  onMouseLeave={() => setPrimaryHovered(false)}
+                  onClick={() => {
+                    setActionMessage('✓ Primary Action Triggered!');
+                    setTimeout(() => setActionMessage(null), 1600);
+                  }}
+                  className={`${components.buttonClass} transition-all duration-150 flex items-center gap-1.5 cursor-pointer`}
                   style={{
-                    backgroundColor: palette.primary,
+                    backgroundColor: primaryHovered ? `${palette.primary}E6` : palette.primary,
                     color: palette.isDark ? '#000000' : '#FFFFFF',
                     borderColor: palette.border,
+                    transform: primaryHovered ? 'scale(1.02)' : 'scale(1)',
+                    boxShadow: primaryHovered
+                      ? surface.id.includes('neobrutalist')
+                        ? '4px 4px 0px #000'
+                        : `0 0 16px ${palette.primary}88`
+                      : 'none',
                   }}
                 >
+                  <Zap className="w-3.5 h-3.5" />
                   <span>Primary Action</span>
                 </button>
 
-                {/* Secondary Button */}
+                {/* Secondary Button with live hover background & border shift */}
                 <button
-                  className="px-3.5 py-1.5 text-xs font-semibold rounded-lg border cursor-pointer transition-colors"
+                  type="button"
+                  onMouseEnter={() => setSecondaryHovered(true)}
+                  onMouseLeave={() => setSecondaryHovered(false)}
+                  onClick={() => {
+                    setActionMessage('⚡ Secondary Route Activated!');
+                    setTimeout(() => setActionMessage(null), 1600);
+                  }}
+                  className="px-3.5 py-2 text-xs font-semibold border cursor-pointer transition-all duration-150 flex items-center gap-1.5"
                   style={{
-                    backgroundColor: `${palette.background}88`,
-                    borderColor: palette.border,
-                    color: palette.text,
+                    backgroundColor: secondaryHovered ? `${palette.primary}20` : `${palette.background}88`,
+                    borderColor: secondaryHovered ? palette.primary : `${palette.border}88`,
+                    color: secondaryHovered ? palette.primary : palette.text,
                     borderRadius: surface.radius === '9999px' ? '9999px' : surface.radius === '0px' ? '0px' : '8px',
+                    transform: secondaryHovered ? 'scale(1.02)' : 'scale(1)',
                   }}
                 >
-                  Secondary
+                  <span>Secondary</span>
                 </button>
               </div>
 
-              {/* Toggle Switch */}
+              {/* Interactive Toggle Switch */}
               <div className="flex items-center gap-2 text-xs">
-                <span className="opacity-75 font-medium">Auto-Sync</span>
+                <span
+                  className="font-mono text-[11px] font-bold transition-colors select-none"
+                  style={{ color: toggleActive ? palette.primary : `${palette.text}88` }}
+                >
+                  {toggleActive ? 'AUTO-SYNC: ON' : 'AUTO-SYNC: OFF'}
+                </span>
                 <button
                   type="button"
                   onClick={() => setToggleActive(!toggleActive)}
-                  className="w-9 h-5 rounded-full relative cursor-pointer transition-colors"
+                  className="w-10 h-5 rounded-full relative cursor-pointer transition-all duration-200 border"
                   style={{
-                    backgroundColor: toggleActive ? palette.primary : '#888888',
-                    border: `1px solid ${palette.border}`,
+                    backgroundColor: toggleActive ? palette.primary : `${palette.border}66`,
+                    borderColor: palette.border,
+                    boxShadow: toggleActive ? `0 0 8px ${palette.primary}66` : 'none',
                   }}
+                  title="Toggle automatic synchronization"
                 >
                   <div
-                    className="w-3.5 h-3.5 rounded-full bg-white absolute top-0.5 transition-transform"
+                    className="w-3.5 h-3.5 rounded-full bg-white absolute top-0.5 transition-transform duration-200 shadow-xs"
                     style={{
-                      transform: toggleActive ? 'translateX(17px)' : 'translateX(2px)',
+                      transform: toggleActive ? 'translateX(21px)' : 'translateX(3px)',
                     }}
                   />
                 </button>
@@ -484,28 +622,85 @@ export function LiveCombinedPreview({ selection }: LiveCombinedPreviewProps) {
           </div>
         </div>
 
-        {/* Secondary Subsystem Tiles */}
+        {/* Subsystem Interactive Tiles (Hoverable, Clickable, Animated) */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div className="p-3 border flex items-center gap-2.5" style={cardStyle}>
-            <Cpu className="w-4 h-4" style={{ color: palette.primary }} />
-            <div className="flex flex-col text-xs">
-              <span className="font-bold">Engine Core</span>
-              <span className="text-[10px] opacity-70 font-mono">100% Online</span>
+          {/* Tile 1: Engine Core Toggle */}
+          <button
+            type="button"
+            onClick={() => setEngineOnline(!engineOnline)}
+            className="p-3 border flex items-center justify-between text-left cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
+            style={{
+              ...cardStyle,
+              borderColor: engineOnline ? palette.border : `${palette.border}66`,
+            }}
+            title="Click to toggle Engine Core status"
+          >
+            <div className="flex items-center gap-2.5">
+              <Cpu
+                className="w-4 h-4 transition-transform group-hover:rotate-45"
+                style={{ color: engineOnline ? palette.primary : palette.textMuted }}
+              />
+              <div className="flex flex-col text-xs">
+                <span className="font-bold">Engine Core</span>
+                <span
+                  className="text-[10px] font-mono font-bold"
+                  style={{ color: engineOnline ? (palette.isDark ? '#50FA7B' : '#059669') : palette.textMuted }}
+                >
+                  {engineOnline ? '100% ONLINE' : 'PAUSED'}
+                </span>
+              </div>
             </div>
-          </div>
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{
+                backgroundColor: engineOnline ? palette.primary : '#888888',
+                boxShadow: engineOnline ? `0 0 6px ${palette.primary}` : 'none',
+              }}
+            />
+          </button>
 
-          <div className="p-3 border flex items-center gap-2.5" style={cardStyle}>
-            <Activity className="w-4 h-4" style={{ color: palette.secondary }} />
-            <div className="flex flex-col text-xs">
-              <span className="font-bold">Throughput</span>
-              <span className="text-[10px] opacity-70 font-mono">1,842 TX/s</span>
+          {/* Tile 2: Throughput Pulse Surge */}
+          <button
+            type="button"
+            onClick={() => setThroughput((prev) => prev + Math.floor(Math.random() * 200 + 50))}
+            className="p-3 border flex items-center justify-between text-left cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
+            style={cardStyle}
+            title="Click to surge throughput telemetry"
+          >
+            <div className="flex items-center gap-2.5">
+              <Activity className="w-4 h-4" style={{ color: palette.secondary }} />
+              <div className="flex flex-col text-xs">
+                <span className="font-bold">Throughput</span>
+                <span className="text-[10px] opacity-75 font-mono">
+                  {throughput.toLocaleString()} TX/s
+                </span>
+              </div>
             </div>
-          </div>
+            <span
+              className="text-[9px] font-mono px-1.5 py-0.5 rounded border"
+              style={{ borderColor: palette.secondary, color: palette.secondary }}
+            >
+              +SURGE
+            </span>
+          </button>
 
-          <div className="p-3 border flex items-center justify-between" style={cardStyle}>
-            <span className="text-xs font-bold">Inspect Node</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </div>
+          {/* Tile 3: Inspect Node Action */}
+          <button
+            type="button"
+            onClick={() => {
+              setActionMessage('Diagnostic Ping: Latency 14ms // 0 packet loss // Status Nominal');
+              setTimeout(() => setActionMessage(null), 2500);
+            }}
+            className="p-3 border flex items-center justify-between text-left cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
+            style={cardStyle}
+            title="Click to run diagnostic inspection"
+          >
+            <div className="flex flex-col text-xs">
+              <span className="font-bold">Inspect Node</span>
+              <span className="text-[10px] opacity-75 font-mono">Diagnostic Ping</span>
+            </div>
+            <ArrowRight className="w-4 h-4" style={{ color: palette.primary }} />
+          </button>
         </div>
       </div>
 
