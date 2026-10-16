@@ -48,12 +48,12 @@ export function DesignPartPicker({
 }: DesignPartPickerProps) {
   const [activeCategory, setActiveCategory] = useState<DesignPartCategory>('palette');
 
-  const categories: { id: DesignPartCategory; label: string; icon: React.ElementType }[] = [
-    { id: 'palette', label: '01. Color Palette', icon: Palette },
-    { id: 'font', label: '02. Typography & Fonts', icon: Type },
-    { id: 'surface', label: '03. Surface & Borders', icon: Layers },
-    { id: 'components', label: '04. UI Component Controls', icon: MousePointerClick },
-    { id: 'accents', label: '05. Signature Accents', icon: Sparkles },
+  const categories: { id: DesignPartCategory; label: string; count: number; icon: React.ElementType }[] = [
+    { id: 'palette', label: '01. Palette', count: PALETTE_PARTS.length, icon: Palette },
+    { id: 'font', label: '02. Typography', count: FONT_PARTS.length, icon: Type },
+    { id: 'surface', label: '03. Surface & Borders', count: SURFACE_PARTS.length, icon: Layers },
+    { id: 'components', label: '04. UI Controls', count: COMPONENT_PARTS.length, icon: MousePointerClick },
+    { id: 'accents', label: '05. Accents', count: ACCENT_PARTS.length, icon: Sparkles },
   ];
 
   const handleCopyPartPrompt = (e: React.MouseEvent, prompt: string, name: string) => {
@@ -64,8 +64,8 @@ export function DesignPartPicker({
 
   return (
     <div className="w-full space-y-5">
-      {/* Category Navigation Pills */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none border-b border-stone-200">
+      {/* Category Navigation Pills (Wrapped & Always Fully Visible) */}
+      <div className="flex flex-wrap items-center gap-2 pb-3 border-b border-stone-200">
         {categories.map((cat) => {
           const Icon = cat.icon;
           const isSelected = activeCategory === cat.id;
@@ -73,14 +73,23 @@ export function DesignPartPicker({
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-all flex items-center gap-2 whitespace-nowrap ${
+              className={`px-3 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-all flex items-center gap-2 ${
                 isSelected
                   ? 'bg-stone-900 text-white shadow-xs font-bold'
                   : 'bg-white text-stone-600 hover:text-stone-900 hover:bg-stone-100 border border-stone-200'
               }`}
             >
-              <Icon className="w-3.5 h-3.5" />
+              <Icon className="w-3.5 h-3.5 shrink-0" />
               <span>{cat.label}</span>
+              <span
+                className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold ${
+                  isSelected
+                    ? 'bg-stone-800 text-stone-200 border border-stone-700'
+                    : 'bg-stone-100 text-stone-500 border border-stone-200'
+                }`}
+              >
+                {cat.count}
+              </span>
             </button>
           );
         })}
