@@ -87,7 +87,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
             </span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2.5">
             {PALETTES.map((pal) => {
               const isSelected = composition.palette.id === pal.id;
               return (
@@ -146,7 +146,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
             {LAYOUTS.map((lay) => {
               const isSelected = composition.layout.id === lay.id;
               return (
@@ -187,7 +187,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
             {THEMES.map((thm) => {
               const isSelected = composition.theme.id === thm.id;
               return (
@@ -228,7 +228,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
             {STYLES.map((sty) => {
               const isSelected = composition.style.id === sty.id;
               return (
@@ -269,7 +269,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
             {FONTS.map((fnt) => {
               const isSelected = composition.font.id === fnt.id;
               return (
@@ -312,7 +312,7 @@ export function ModularGallery({ composition, onChange }: ModularGalleryProps) {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
             {ANIMATIONS.map((anim) => {
               const isSelected = composition.animation.id === anim.id;
               return (

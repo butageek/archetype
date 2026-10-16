@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import {
+  ArrowUp,
   Check,
   Code2,
   Copy,
@@ -92,6 +93,13 @@ export default function ArchetypePortal() {
     showToast(res.description);
   };
 
+  const scrollToMockup = () => {
+    const elem = document.getElementById('live-mockup-section');
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const inspirationPrompts = [
     'Tokyo cyberpunk rain alleyway with neon cyan and magenta',
     '1970s Dieter Rams Braun audio monitor with matte pebble gray',
@@ -150,7 +158,7 @@ export default function ArchetypePortal() {
       </header>
 
       {/* 2. MAIN WORKSPACE CONTAINER */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 space-y-8">
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-6">
         {/* PROMPT SYNTHESIZER & BLENDER SECTION */}
         <section className="bg-white rounded-2xl border border-stone-200 p-4 sm:p-5 shadow-xs space-y-3">
           <div className="flex flex-col sm:flex-row gap-2">
@@ -209,80 +217,126 @@ export default function ArchetypePortal() {
           </div>
         </section>
 
-        {/* COMPLETE DESIGN MOCKUP SECTION (WITH PRIMARY EXPORT ACTIONS) */}
-        <section className="space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        {/* 3. DUAL-PANE STUDIO LAYOUT: STICKY PREVIEW ON LEFT, SCROLLABLE GALLERY ON RIGHT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* LEFT COLUMN: STICKY LIVE DESIGN MOCKUP (Always visible when scrolling!) */}
+          <section
+            id="live-mockup-section"
+            className="lg:col-span-5 xl:col-span-6 lg:sticky lg:top-20 space-y-3 z-20"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-base font-bold text-stone-900">Live Design Mockup</h2>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold">
+                    Live Preview
+                  </span>
+                </div>
+                <p className="text-xs text-stone-500 mt-0.5 line-clamp-1">
+                  <strong>{composition.palette.name}</strong> • <strong>{composition.layout.name}</strong> • <strong>{composition.style.name}</strong>
+                </p>
+              </div>
+
+              {/* Action Buttons Right Beside the Mockup */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={handleCopyAgentPrompt}
+                  className="px-3 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
+                  title="Copy ready-to-paste AI agent prompt"
+                >
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>Copy Prompt</span>
+                </button>
+
+                <button
+                  onClick={handleCopyDesignSpec}
+                  className="px-2.5 py-1.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold cursor-pointer border border-stone-200 transition-colors flex items-center gap-1"
+                  title="Copy STYLE_SPEC.md"
+                >
+                  <FileCode className="w-3.5 h-3.5" />
+                  <span>Spec</span>
+                </button>
+
+                <button
+                  onClick={() => setExportModalOpen(true)}
+                  className="p-1.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 cursor-pointer border border-stone-200 transition-colors"
+                  title="View full blueprint modal"
+                >
+                  <Code2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* The High-Fidelity Mockup Container */}
+            <LiveDesignMockup composition={composition} />
+
+            {/* Screenshot Tip Banner */}
+            <div className="text-[11px] bg-stone-100 text-stone-600 px-3.5 py-2 rounded-xl border border-stone-200/90 flex items-center justify-between">
+              <span>
+                💡 <strong>AI Tip</strong>: Take a screenshot of this mockup to paste into Cursor / Claude alongside the prompt!
+              </span>
+            </div>
+          </section>
+
+          {/* RIGHT COLUMN: SCROLLABLE MODULAR GALLERY */}
+          <section className="lg:col-span-7 xl:col-span-6 bg-white rounded-2xl border border-stone-200 p-5 sm:p-6 shadow-xs space-y-4">
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-stone-900">Live Design Mockup</h2>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold">
-                  Synthesized Specimen
-                </span>
+                <Layers className="w-4 h-4 text-stone-800" />
+                <h2 className="text-base font-bold text-stone-900">Modular Design Gallery</h2>
               </div>
               <p className="text-xs text-stone-500 mt-0.5">
-                Formed by: <strong>{composition.palette.name}</strong> • <strong>{composition.layout.name}</strong> • <strong>{composition.style.name}</strong> • <strong>{composition.font.name}</strong>
+                Click any part below. The sticky preview on the left updates in real time as you scroll.
               </p>
             </div>
 
-            {/* Dedicated Primary Actions on the Mockup */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleCopyAgentPrompt}
-                className="px-3.5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold cursor-pointer flex items-center gap-1.5 shadow-sm transition-transform active:scale-95"
-                title="Copy ready-to-paste AI agent prompt"
-              >
-                <Copy className="w-3.5 h-3.5" />
-                <span>Copy Agent Prompt</span>
-              </button>
-
-              <button
-                onClick={handleCopyDesignSpec}
-                className="px-3 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold cursor-pointer border border-stone-200 transition-colors flex items-center gap-1.5"
-                title="Copy STYLE_SPEC.md with CSS variables and Tailwind tokens"
-              >
-                <FileCode className="w-3.5 h-3.5" />
-                <span>Copy Spec</span>
-              </button>
-
-              <button
-                onClick={() => setExportModalOpen(true)}
-                className="p-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 cursor-pointer border border-stone-200 transition-colors"
-                title="Open full blueprint modal"
-              >
-                <Code2 className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* Screenshot Tip Banner */}
-          <div className="text-[11px] bg-stone-100 text-stone-600 px-3.5 py-2 rounded-xl border border-stone-200/90 flex items-center justify-between">
-            <span>
-              💡 <strong>AI Agent Workflow</strong>: Take a screenshot of the mockup below and paste it directly into Cursor, Claude, or ChatGPT alongside the copied prompt!
-            </span>
-            <span className="font-mono text-[10px] text-stone-500 hidden sm:inline">Zero token friction</span>
-          </div>
-
-          {/* The High-Fidelity Mockup Container */}
-          <LiveDesignMockup composition={composition} />
-        </section>
-
-        {/* MODULAR CATEGORY GALLERY */}
-        <section className="bg-white rounded-2xl border border-stone-200 p-5 sm:p-6 shadow-xs space-y-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <Layers className="w-4 h-4 text-stone-800" />
-              <h2 className="text-base font-bold text-stone-900">Modular Design Gallery</h2>
-            </div>
-            <p className="text-xs text-stone-500 mt-0.5">
-              Click any element below to swap out parts. The live design mockup above updates instantly.
-            </p>
-          </div>
-
-          <ModularGallery composition={composition} onChange={setComposition} />
-        </section>
+            <ModularGallery composition={composition} onChange={setComposition} />
+          </section>
+        </div>
       </main>
 
-      {/* 3. NOTIFICATION TOAST */}
+      {/* 4. MOBILE FLOATING MINI DOCK (Only visible on mobile/tablet when scrolling) */}
+      <div className="lg:hidden fixed bottom-4 left-4 right-4 z-40 bg-white/95 backdrop-blur-md shadow-2xl border border-stone-200 p-2.5 rounded-2xl flex items-center justify-between">
+        <div className="flex items-center gap-2 cursor-pointer" onClick={scrollToMockup}>
+          <div className="flex items-center gap-1">
+            <div
+              className="w-4 h-4 rounded-full border border-black/10 shadow-xs"
+              style={{ backgroundColor: composition.palette.primary }}
+            />
+            <div
+              className="w-3.5 h-3.5 rounded-full border border-black/10 shadow-xs"
+              style={{ backgroundColor: composition.palette.secondary }}
+            />
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="text-[11px] font-bold text-stone-900 truncate max-w-[140px]">
+              {composition.palette.name}
+            </span>
+            <span className="text-[9px] text-stone-500 font-mono truncate max-w-[140px]">
+              {composition.style.name}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={scrollToMockup}
+            className="px-2.5 py-1.5 bg-stone-100 text-stone-800 text-xs font-semibold rounded-lg flex items-center gap-1 cursor-pointer border border-stone-200"
+          >
+            <ArrowUp className="w-3.5 h-3.5" />
+            <span>Preview</span>
+          </button>
+          <button
+            onClick={handleCopyAgentPrompt}
+            className="px-2.5 py-1.5 bg-stone-900 text-white text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer shadow-xs"
+          >
+            <Copy className="w-3.5 h-3.5" />
+            <span>Prompt</span>
+          </button>
+        </div>
+      </div>
+
+      {/* 5. NOTIFICATION TOAST */}
       {toastMessage && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-stone-900 text-white px-4 py-2.5 rounded-xl text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-150 flex items-center gap-2 border border-stone-700">
           <Check className="w-4 h-4 text-emerald-400 stroke-[3]" />
@@ -290,7 +344,7 @@ export default function ArchetypePortal() {
         </div>
       )}
 
-      {/* 4. AGENT EXPORT MODAL */}
+      {/* 6. AGENT EXPORT MODAL */}
       {exportModalOpen && (
         <AgentExportModal
           composition={composition}
