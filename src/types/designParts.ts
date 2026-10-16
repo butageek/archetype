@@ -1,8 +1,8 @@
 export type DesignPartCategory =
   | 'palette'
   | 'font'
-  | 'layout'
   | 'surface'
+  | 'components'
   | 'accents';
 
 export interface PalettePart {
@@ -29,17 +29,7 @@ export interface FontPart {
   description: string;
   fontFamily: string;
   previewSample: string;
-  classification: 'pixel' | 'handwriting' | 'cartoon' | 'sans' | 'serif' | 'mono' | 'grotesk';
-  promptSnippet: string;
-}
-
-export interface LayoutPart {
-  id: string;
-  name: string; // e.g. "Bento Box Modular Grid", "Dense Telemetry Cockpit", "Asymmetric Swiss"
-  tagline: string;
-  description: string;
-  type: 'bento' | 'cockpit' | 'asymmetric-swiss' | 'minimal-dock' | 'card-stream' | 'kanban';
-  density: 'compact' | 'balanced' | 'spacious';
+  classification: 'pixel' | 'handwriting' | 'cartoon' | 'sans' | 'serif' | 'mono' | 'grotesk' | 'luxury';
   promptSnippet: string;
 }
 
@@ -55,19 +45,29 @@ export interface SurfacePart {
   promptSnippet: string;
 }
 
+export interface ComponentPart {
+  id: string;
+  name: string; // e.g. "Neo-Brutalist Chunky Buttons", "Minimalist Rounded Pills", "Industrial Hardware Relays"
+  tagline: string;
+  description: string;
+  buttonClass: string;
+  badgeClass: string;
+  promptSnippet: string;
+}
+
 export interface AccentPart {
   id: string;
   name: string; // e.g. "CRT Raster Scanlines", "CAD Crosshairs & Rulers", "Tactile Washi Tape"
   tagline: string;
   description: string;
-  type: 'scanlines' | 'crosshairs' | 'washi-tape' | 'dot-grid' | 'corner-ticks' | 'minimal';
+  type: 'scanlines' | 'crosshairs' | 'washi-tape' | 'dot-grid' | 'corner-ticks' | 'hazard-stripes' | 'noise-grain' | 'minimal';
   promptSnippet: string;
 }
 
 export interface DesignPartsSelection {
   palette: PalettePart;
   font: FontPart;
-  layout: LayoutPart;
   surface: SurfacePart;
+  components: ComponentPart;
   accent: AccentPart;
 }

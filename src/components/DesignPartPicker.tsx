@@ -4,25 +4,25 @@ import React, { useState } from 'react';
 import {
   Check,
   Copy,
-  Grid,
   Layers,
+  MousePointerClick,
   Palette,
   Sparkles,
   Type,
 } from 'lucide-react';
 import {
   ACCENT_PARTS,
+  COMPONENT_PARTS,
   FONT_PARTS,
-  LAYOUT_PARTS,
   PALETTE_PARTS,
   SURFACE_PARTS,
 } from '../lib/designPartsData';
 import {
   AccentPart,
+  ComponentPart,
   DesignPartCategory,
   DesignPartsSelection,
   FontPart,
-  LayoutPart,
   PalettePart,
   SurfacePart,
 } from '../types/designParts';
@@ -31,8 +31,8 @@ interface DesignPartPickerProps {
   selection: DesignPartsSelection;
   onSelectPalette: (pal: PalettePart) => void;
   onSelectFont: (fnt: FontPart) => void;
-  onSelectLayout: (lay: LayoutPart) => void;
   onSelectSurface: (surf: SurfacePart) => void;
+  onSelectComponent: (comp: ComponentPart) => void;
   onSelectAccent: (acc: AccentPart) => void;
   onToast: (msg: string) => void;
 }
@@ -41,8 +41,8 @@ export function DesignPartPicker({
   selection,
   onSelectPalette,
   onSelectFont,
-  onSelectLayout,
   onSelectSurface,
+  onSelectComponent,
   onSelectAccent,
   onToast,
 }: DesignPartPickerProps) {
@@ -51,8 +51,8 @@ export function DesignPartPicker({
   const categories: { id: DesignPartCategory; label: string; icon: React.ElementType }[] = [
     { id: 'palette', label: '01. Color Palette', icon: Palette },
     { id: 'font', label: '02. Typography & Fonts', icon: Type },
-    { id: 'layout', label: '03. Spatial Layout', icon: Grid },
-    { id: 'surface', label: '04. Surface & Borders', icon: Layers },
+    { id: 'surface', label: '03. Surface & Borders', icon: Layers },
+    { id: 'components', label: '04. UI Component Controls', icon: MousePointerClick },
     { id: 'accents', label: '05. Signature Accents', icon: Sparkles },
   ];
 
@@ -116,15 +116,10 @@ export function DesignPartPicker({
                       : 'border-stone-200 bg-white hover:border-stone-400 hover:shadow-xs'
                   }`}
                 >
-                  {/* Swatches Visual Preview */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1.5 p-1 rounded-xl bg-stone-50 border border-stone-200">
-                      <div className="w-5 h-5 rounded-lg border border-black/10 shadow-2xs" style={{ backgroundColor: pal.primary }} title="Primary" />
-                      <div className="w-4 h-4 rounded-md border border-black/10 shadow-2xs" style={{ backgroundColor: pal.secondary }} title="Secondary" />
-                      <div className="w-4 h-4 rounded-md border border-black/10 shadow-2xs" style={{ backgroundColor: pal.accent }} title="Accent" />
-                      <div className="w-4 h-4 rounded-md border border-black/10 shadow-2xs" style={{ backgroundColor: pal.surface }} title="Surface" />
-                      <div className="w-4 h-4 rounded-md border border-black/10 shadow-2xs" style={{ backgroundColor: pal.background }} title="Background" />
-                    </div>
+                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-bold border border-stone-200">
+                      {pal.isDark ? 'Dark Mode' : 'Light Mode'}
+                    </span>
                     {isSelected && (
                       <span className="flex items-center gap-1 text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                         <Check className="w-3 h-3 stroke-[3]" /> Selected
@@ -137,11 +132,38 @@ export function DesignPartPicker({
                     <p className="text-xs text-stone-500 mt-0.5 line-clamp-2 leading-relaxed">{pal.description}</p>
                   </div>
 
-                  {/* Standalone Part Prompt Action */}
+                  {/* Swatches preview */}
+                  <div className="flex items-center gap-1.5 p-2 rounded-xl bg-stone-50 border border-stone-200">
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.primary }}
+                      title={`Primary: ${pal.primary}`}
+                    />
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.secondary }}
+                      title={`Secondary: ${pal.secondary}`}
+                    />
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.accent }}
+                      title={`Accent: ${pal.accent}`}
+                    />
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.surface }}
+                      title={`Surface: ${pal.surface}`}
+                    />
+                    <div
+                      className="w-5 h-5 rounded-md border border-black/10 shadow-2xs"
+                      style={{ backgroundColor: pal.background }}
+                      title={`Background: ${pal.background}`}
+                    />
+                    <span className="text-[10px] font-mono text-stone-400 ml-auto">5 swatches</span>
+                  </div>
+
                   <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
-                    <span className="text-[10px] font-mono text-stone-400">
-                      {pal.isDark ? 'Dark Theme' : 'Light Theme'}
-                    </span>
+                    <span className="text-[11px] text-stone-400 font-mono">{pal.tagline.slice(0, 30)}...</span>
                     <button
                       onClick={(e) => handleCopyPartPrompt(e, pal.promptSnippet, pal.name)}
                       className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
@@ -228,71 +250,7 @@ export function DesignPartPicker({
         </div>
       )}
 
-      {/* 3. SPATIAL LAYOUTS */}
-      {activeCategory === 'layout' && (
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono">
-                Recognized Spatial Architecture (Bento, Cockpit, Swiss, etc.)
-              </h3>
-              <p className="text-xs text-stone-500">
-                Choose the structural skeleton that defines how cards, panels, and telemetry are arranged.
-              </p>
-            </div>
-            <span className="text-xs text-stone-600 font-medium">
-              Selected: <strong className="text-stone-900">{selection.layout.name}</strong>
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {LAYOUT_PARTS.map((lay) => {
-              const isSelected = selection.layout.id === lay.id;
-              return (
-                <div
-                  key={lay.id}
-                  onClick={() => onSelectLayout(lay)}
-                  className={`p-4 rounded-2xl border text-left cursor-pointer transition-all space-y-3 ${
-                    isSelected
-                      ? 'border-stone-900 ring-2 ring-stone-900/10 bg-white shadow-md'
-                      : 'border-stone-200 bg-white hover:border-stone-400 hover:shadow-xs'
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-bold border border-stone-200">
-                      {lay.type} • {lay.density}
-                    </span>
-                    {isSelected && (
-                      <span className="flex items-center gap-1 text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                        <Check className="w-3 h-3 stroke-[3]" /> Selected
-                      </span>
-                    )}
-                  </div>
-
-                  <div>
-                    <h4 className="text-sm font-bold text-stone-900 tracking-tight">{lay.name}</h4>
-                    <p className="text-xs text-stone-500 mt-0.5 line-clamp-2 leading-relaxed">{lay.description}</p>
-                  </div>
-
-                  <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
-                    <span className="text-[11px] text-stone-400 font-mono">{lay.density} density</span>
-                    <button
-                      onClick={(e) => handleCopyPartPrompt(e, lay.promptSnippet, lay.name)}
-                      className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
-                      title="Copy standalone prompt for this layout"
-                    >
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Part Prompt</span>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* 4. SURFACE, BORDERS & SHADOWS */}
+      {/* 3. SURFACE, BORDERS & SHADOWS */}
       {activeCategory === 'surface' && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
@@ -356,6 +314,82 @@ export function DesignPartPicker({
                       onClick={(e) => handleCopyPartPrompt(e, surf.promptSnippet, surf.name)}
                       className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
                       title="Copy standalone prompt for this surface"
+                    >
+                      <Copy className="w-3 h-3" />
+                      <span>Copy Part Prompt</span>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* 4. UI COMPONENT STYLES & CONTROLS */}
+      {activeCategory === 'components' && (
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 font-mono">
+                Recognized UI Component Styles & Controls
+              </h3>
+              <p className="text-xs text-stone-500">
+                Choose how buttons, status badges, and interactive controls behave and appear.
+              </p>
+            </div>
+            <span className="text-xs text-stone-600 font-medium">
+              Selected: <strong className="text-stone-900">{selection.components.name}</strong>
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {COMPONENT_PARTS.map((comp) => {
+              const isSelected = selection.components.id === comp.id;
+              return (
+                <div
+                  key={comp.id}
+                  onClick={() => onSelectComponent(comp)}
+                  className={`p-4 rounded-2xl border text-left cursor-pointer transition-all space-y-3 ${
+                    isSelected
+                      ? 'border-stone-900 ring-2 ring-stone-900/10 bg-white shadow-md'
+                      : 'border-stone-200 bg-white hover:border-stone-400 hover:shadow-xs'
+                  }`}
+                >
+                  {/* Live Rendered Component Box (Button + Badge Demo) */}
+                  <div className="p-3 bg-stone-100/80 rounded-xl border border-stone-200/80 flex items-center justify-between gap-2 overflow-hidden">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`${comp.buttonClass} bg-stone-900 text-white border-stone-800 text-xs inline-block`}
+                      >
+                        Action Button
+                      </span>
+                      <span
+                        className={`${comp.badgeClass} bg-stone-200 text-stone-800 border-stone-300 text-[10px] inline-block`}
+                      >
+                        STATUS
+                      </span>
+                    </div>
+                    {isSelected && (
+                      <span className="flex-shrink-0 flex items-center gap-1 text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        <Check className="w-3 h-3 stroke-[3]" /> Selected
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-bold text-stone-900 tracking-tight">{comp.name}</h4>
+                    <p className="text-xs text-stone-500 mt-0.5 line-clamp-2 leading-relaxed">{comp.description}</p>
+                  </div>
+
+                  <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-stone-100 text-stone-600 font-semibold truncate max-w-[150px]">
+                      {comp.tagline}
+                    </span>
+                    <button
+                      onClick={(e) => handleCopyPartPrompt(e, comp.promptSnippet, comp.name)}
+                      className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
+                      title="Copy standalone prompt for this component style"
                     >
                       <Copy className="w-3 h-3" />
                       <span>Copy Part Prompt</span>

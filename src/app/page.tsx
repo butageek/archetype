@@ -11,18 +11,18 @@ import {
 import confetti from 'canvas-confetti';
 import {
   ACCENT_PARTS,
+  COMPONENT_PARTS,
   DEFAULT_DESIGN_PARTS,
   FONT_PARTS,
   generateCombinedMasterPrompt,
-  LAYOUT_PARTS,
   PALETTE_PARTS,
   SURFACE_PARTS,
 } from '../lib/designPartsData';
 import {
   AccentPart,
+  ComponentPart,
   DesignPartsSelection,
   FontPart,
-  LayoutPart,
   PalettePart,
   SurfacePart,
 } from '../types/designParts';
@@ -60,19 +60,19 @@ export default function ArchetypeSynthesizerPage() {
     setTimeout(() => setCopiedCombined(false), 2000);
   };
 
-  // Surprise Me / Random Selection across all 5 categories
+  // Surprise Me / Random Selection across all 5 enumerable categories
   const handleSurpriseMe = () => {
     const randomPalette = PALETTE_PARTS[Math.floor(Math.random() * PALETTE_PARTS.length)];
     const randomFont = FONT_PARTS[Math.floor(Math.random() * FONT_PARTS.length)];
-    const randomLayout = LAYOUT_PARTS[Math.floor(Math.random() * LAYOUT_PARTS.length)];
     const randomSurface = SURFACE_PARTS[Math.floor(Math.random() * SURFACE_PARTS.length)];
+    const randomComponent = COMPONENT_PARTS[Math.floor(Math.random() * COMPONENT_PARTS.length)];
     const randomAccent = ACCENT_PARTS[Math.floor(Math.random() * ACCENT_PARTS.length)];
 
     const newSelection: DesignPartsSelection = {
       palette: randomPalette,
       font: randomFont,
-      layout: randomLayout,
       surface: randomSurface,
+      components: randomComponent,
       accent: randomAccent,
     };
 
@@ -85,7 +85,7 @@ export default function ArchetypeSynthesizerPage() {
       colors: [randomPalette.primary, randomPalette.secondary, '#10B981'],
     });
 
-    showToast(`Assembled: "${randomPalette.name}" + "${randomFont.name}" + "${randomSurface.name}"!`);
+    showToast(`Assembled: "${randomPalette.name}" + "${randomFont.name}" + "${randomComponent.name}"!`);
   };
 
   return (
@@ -148,7 +148,7 @@ export default function ArchetypeSynthesizerPage() {
             UI Design Breakdown & Prompt Synthesizer
           </h1>
           <p className="text-xs sm:text-sm text-stone-500 leading-relaxed">
-            Pick recognized, industry-standard names for each part of your design (Palette, Font, Layout, Surface, Accents). See live previews of what each term means, and watch the app <strong>automatically combine them into the complete Master Prompt</strong> for Claude, Cursor, or Antigravity.
+            Pick recognized, industry-standard names for each design dimension (Palette, Font, Surface & Borders, Component Controls, Accents). See live previews of what each term looks like, and watch the app <strong>automatically combine them into the complete Master Prompt</strong> for Claude, Cursor, or Antigravity.
           </p>
         </div>
 
@@ -171,7 +171,7 @@ export default function ArchetypeSynthesizerPage() {
                     </span>
                   </div>
                   <p className="text-xs text-stone-500 mt-0.5 line-clamp-1">
-                    <strong>{selection.palette.name}</strong> • <strong>{selection.font.name}</strong> • <strong>{selection.surface.name}</strong>
+                    <strong>{selection.palette.name}</strong> • <strong>{selection.font.name}</strong> • <strong>{selection.surface.name}</strong> • <strong>{selection.components.name}</strong>
                   </p>
                 </div>
 
@@ -197,10 +197,13 @@ export default function ArchetypeSynthesizerPage() {
                   Font: <strong>{selection.font.name}</strong>
                 </span>
                 <span className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
-                  Layout: <strong>{selection.layout.name}</strong>
+                  Surface: <strong>{selection.surface.name}</strong>
                 </span>
                 <span className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
-                  Surface: <strong>{selection.surface.name}</strong>
+                  Controls: <strong>{selection.components.name}</strong>
+                </span>
+                <span className="px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
+                  Accent: <strong>{selection.accent.name}</strong>
                 </span>
               </div>
             </div>
@@ -215,7 +218,7 @@ export default function ArchetypeSynthesizerPage() {
                       Synthesized AI Agent Master Prompt
                     </h3>
                     <p className="text-[11px] text-stone-500">
-                      Automatically combines all selected parts into plain-text instructions.
+                      Automatically combines all selected parts into clean plain-text instructions.
                     </p>
                   </div>
                 </div>
@@ -263,8 +266,8 @@ export default function ArchetypeSynthesizerPage() {
               selection={selection}
               onSelectPalette={(pal: PalettePart) => setSelection((prev) => ({ ...prev, palette: pal }))}
               onSelectFont={(fnt: FontPart) => setSelection((prev) => ({ ...prev, font: fnt }))}
-              onSelectLayout={(lay: LayoutPart) => setSelection((prev) => ({ ...prev, layout: lay }))}
               onSelectSurface={(surf: SurfacePart) => setSelection((prev) => ({ ...prev, surface: surf }))}
+              onSelectComponent={(comp: ComponentPart) => setSelection((prev) => ({ ...prev, components: comp }))}
               onSelectAccent={(acc: AccentPart) => setSelection((prev) => ({ ...prev, accent: acc }))}
               onToast={showToast}
             />

@@ -1,8 +1,8 @@
 import {
   AccentPart,
+  ComponentPart,
   DesignPartsSelection,
   FontPart,
-  LayoutPart,
   PalettePart,
   SurfacePart,
 } from '../types/designParts';
@@ -254,6 +254,55 @@ export const PALETTE_PARTS: PalettePart[] = [
 - Text Primary: #1A1816 (deep printer espresso ink)
 - Text Muted: #736B5E (warm newsprint gray)`,
   },
+  {
+    id: 'linear-obsidian',
+    name: 'Midnight Obsidian / Linear Dark',
+    tagline: 'Deep slate obsidian, metallic borders, and kinetic electric purple',
+    description: 'Definitive developer-first dark mode inspired by Linear with subtle 1px metallic borders, high contrast, and focused electric purple highlights.',
+    primary: '#5E6AD2',
+    secondary: '#4E5BA6',
+    accent: '#F2994A',
+    background: '#0E1015',
+    surface: '#161922',
+    border: '#272B38',
+    text: '#F3F4F6',
+    textMuted: '#8B949E',
+    isDark: true,
+    promptSnippet: `### Color Palette Tokens: Midnight Obsidian / Linear Dark
+- Mood: High-efficiency developer dark slate with crisp metallic boundaries and electric purple highlights.
+- Background: #0E1015 (deep obsidian slate)
+- Surface / Cards: #161922 (elevated dark charcoal)
+- Borders: #272B38 (subtle metallic hairline)
+- Primary Accent: #5E6AD2 (kinetic electric purple)
+- Secondary Accent: #4E5BA6
+- Highlights: #F2994A (amber orange), #10B981 (emerald success)
+- Text Primary: #F3F4F6 (high-contrast crisp white)
+- Text Muted: #8B949E (slate gray)`,
+  },
+  {
+    id: 'coffee-latte',
+    name: 'Coffee & Cream / Warm Latte',
+    tagline: 'Deep roasted espresso, steamed milk cream, and warm hazelnut bronze',
+    description: 'Cozy, organic coffee shop palette featuring dark espresso contrasts, frothy oat milk backgrounds, and warm toasted caramel accents.',
+    primary: '#8A5A36',
+    secondary: '#C89666',
+    accent: '#D4B28C',
+    background: '#FAF6F0',
+    surface: '#FFFFFF',
+    border: '#E8DEC8',
+    text: '#2C1B14',
+    textMuted: '#7D6758',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Coffee & Cream / Warm Latte
+- Mood: Cozy organic warmth with rich espresso tones, steamed milk foam substrates, and hazelnut bronze accents.
+- Background: #FAF6F0 (steamed milk froth cream)
+- Surface / Cards: #FFFFFF (clean porcelain white)
+- Borders: #E8DEC8 (warm toasted oat hairline)
+- Primary Accent: #8A5A36 (roasted espresso bronze)
+- Secondary Accent: #C89666 (warm hazelnut caramel)
+- Text Primary: #2C1B14 (deep dark espresso bean)
+- Text Muted: #7D6758 (warm mocha gray)`,
+  },
 ];
 
 // ============================================================================
@@ -286,7 +335,7 @@ export const FONT_PARTS: FontPart[] = [
 - Style: Organic, informal hand-drawn marker lettering with personal warmth and casual character.
 - Headings: 'Caveat', 'Architects Daughter', or hand-drawn marker script with natural stroke variation.
 - Body: Paired with friendly rounded sans-serif for secondary legibility.
-- Invariants: Slight baseline rotation (-0.5deg to 1deg) to emulate handwritten physical post-it memos.`,
+- Invariants: Emulate handwritten physical post-it memos with natural casual rhythm.`,
   },
   {
     id: 'cartoon-bubble',
@@ -358,92 +407,24 @@ export const FONT_PARTS: FontPart[] = [
 - Body: Clean sans-serif paired for secondary paragraph readability.
 - Invariants: Headline sizes should feel confident, bold, and unapologetic.`,
   },
-];
-
-// ============================================================================
-// 3. LAYOUT & SPATIAL ARCHITECTURE (RECOGNIZED STRUCTURAL LAYOUTS)
-// ============================================================================
-export const LAYOUT_PARTS: LayoutPart[] = [
   {
-    id: 'bento-grid',
-    name: 'Bento Box Modular Grid',
-    tagline: 'Asymmetric cards: hero showcase, control tile, and bottom metric strip',
-    description: 'Bento-style modular layout organizing hero metrics, feature cards, and control modules into clean visual containers.',
-    type: 'bento',
-    density: 'balanced',
-    promptSnippet: `### Layout Architecture: Bento Box Modular Grid
-- Structure: Asymmetric modular container grid grouping related metrics, tools, and actions into distinct visual boxes.
-- Proportions: 2-column or 3-column asymmetric layout with a dominant hero container paired with compact utility tiles.
-- Density: Balanced spacing (16px-20px inner padding per card, 14px gap between tiles).
-- Invariants: Every box has a dedicated focal purpose (hero metric tile, dynamic control dial, multi-stat bottom strip).`,
-  },
-  {
-    id: 'dense-cockpit',
-    name: 'Dense Telemetry Cockpit / SCADA',
-    tagline: 'Split-screen mission control with dense terminal table & telemetry meters',
-    description: 'Industrial mission-control layout with top metric strip, terminal log table, and gauge readouts.',
-    type: 'cockpit',
-    density: 'compact',
-    promptSnippet: `### Layout Architecture: Dense Telemetry Cockpit / SCADA
-- Structure: Industrial mission-control dashboard with top multi-channel status bar, central tabular event log table, and side actuator controls.
-- Density: Compact / High-efficiency with minimal wasted whitespace (8px-10px inner padding).
-- Invariants: Real-time telemetry readouts, status pills (NORMAL, WARN, SYNC), and master emergency override controls.`,
-  },
-  {
-    id: 'asymmetric-swiss',
-    name: 'Asymmetric Swiss Rules',
-    tagline: 'Oversized bold typographic statement, hairline rules, and asymmetric statistics',
-    description: 'International typographic grid with strong vertical guides, disciplined negative space, and strict typographic hierarchy.',
-    type: 'asymmetric-swiss',
-    density: 'compact',
-    promptSnippet: `### Layout Architecture: Asymmetric Swiss Rules
-- Structure: Disciplined international poster grid with asymmetric 2-column division and rigid vertical hairline guides.
-- Layout: Dominant bold typographic headline manifesto on left side with numbered guidelines (01, 02, 03) on right side.
-- Density: Compact architectural alignment with stark hairline divider rules.
-- Invariants: Zero redundant ornamentation; hierarchy is communicated strictly through typographic scale and position.`,
-  },
-  {
-    id: 'minimal-dock',
-    name: 'Minimalist Island Dock',
-    tagline: 'Centered floating focal card with generous tranquil breathing room & pill dock',
-    description: 'Focused single-pane architecture with expansive margins and elevated central cards for distraction-free workflows.',
-    type: 'minimal-dock',
-    density: 'spacious',
-    promptSnippet: `### Layout Architecture: Minimalist Island Dock
-- Structure: Single-task focus canvas with generous negative breathing space around a central elevated floating island card.
-- Dock: Floating bottom capsule pill action dock with icon buttons (Play, Sliders, Reset, Expand).
-- Density: Spacious and tranquil with 32px-48px outer canvas margins.
-- Invariants: Distraction-free single focal container with serene spatial elevation.`,
-  },
-  {
-    id: 'activity-stream',
-    name: 'Timeline Activity Stream',
-    tagline: 'Chronological timeline feed connected by track line with right-rail telemetry',
-    description: 'Activity stream layout with chronological event cards, action triggers, and quick metric summaries.',
-    type: 'card-stream',
-    density: 'balanced',
-    promptSnippet: `### Layout Architecture: Timeline Activity Stream
-- Structure: Chronological vertical timeline feed connected by a vertical track line with node status pins.
-- Right Rail: Summary telemetry card displaying bandwidth, latency, and status audits.
-- Density: Balanced stream spacing with 12px gap between chronological events.
-- Invariants: Connected vertical activity spine with timestamp badges and event state indicators.`,
-  },
-  {
-    id: 'kanban-board',
-    name: 'Kanban Board Columns',
-    tagline: 'Multi-lane segmented task workflow with column headers and drag-ready card tiles',
-    description: 'Horizontal multi-column board organizing items by workflow states with column item counts and card badges.',
-    type: 'kanban',
-    density: 'compact',
-    promptSnippet: `### Layout Architecture: Kanban Board Columns
-- Structure: Horizontal multi-column board with segmented workflow lanes (e.g. Backlog, Active, Review, Done).
-- Column Headers: Inset status pill indicating column title and item count.
-- Card Density: Compact draggable-style cards with priority icons, tags, and assignee avatars.`,
+    id: 'luxury-display',
+    name: 'Luxury Classical Display',
+    tagline: 'Majestic Roman inscriptional letterforms with refined classical proportions',
+    description: 'High-end luxury aesthetic inspired by Roman stone inscriptions, classical architecture, and prestigious luxury branding.',
+    fontFamily: "'Cinzel', Georgia, serif",
+    previewSample: 'ATELIER PRIVÉ // MMXXVI',
+    classification: 'luxury',
+    promptSnippet: `### Typography Treatment: Luxury Classical Display
+- Style: High-end luxury inscriptional serif inspired by classical Roman monuments and prestige branding.
+- Headings: 'Cinzel' or Roman display serif in uppercase with tracked, statuesque spacing (0.08em).
+- Body: Refined clean sans or classical book serif.
+- Invariants: Commands poise, luxury, and understated quiet grandeur.`,
   },
 ];
 
 // ============================================================================
-// 4. SURFACE, BORDERS & SHADOWS (RECOGNIZED BOUNDARY & ELEVATION TREATMENTS)
+// 3. SURFACE, BORDERS & SHADOWS (RECOGNIZED BOUNDARY & ELEVATION TREATMENTS)
 // ============================================================================
 export const SURFACE_PARTS: SurfacePart[] = [
   {
@@ -532,6 +513,112 @@ export const SURFACE_PARTS: SurfacePart[] = [
 - Corner Radii: 8px rounded corners.
 - Shadow Treatment: Luminous photon bloom shadow: 0 0 16px var(--color-primary), 0 0 2px var(--color-primary).`,
   },
+  {
+    id: 'capsule-pill',
+    name: 'Floating Pill / Capsule',
+    tagline: 'Ultra-rounded 9999px pill containers, smooth curves, and gentle elevation',
+    description: 'Ultra-modern fluid shape aesthetic using continuous pill geometries, full 9999px border-radius, and friendly floating silhouettes.',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    radius: '9999px',
+    shadow: '0 6px 20px rgba(0, 0, 0, 0.08)',
+    promptSnippet: `### Surface, Borders & Elevation: Floating Pill / Capsule
+- Boundaries: Continuous full pill contours with 1px border.
+- Corner Radii: 9999px (full pill-radius) for all tags, buttons, and floating docks; 24px for outer cards.
+- Shadow Treatment: Soft buoyant lift shadow: 0 6px 20px rgba(0, 0, 0, 0.08).`,
+  },
+  {
+    id: 'claymorphism-3d',
+    name: 'Claymorphism Soft 3D',
+    tagline: 'Plump pillowy 3D cards with dual inset highlights and rounded softness',
+    description: 'Charming tactile 3D clay aesthetic with dual inset inner highlights, soft rounded bevels, and pillowy depth.',
+    borderWidth: '2px',
+    borderStyle: 'solid',
+    radius: '18px',
+    shadow: '0 10px 24px rgba(0,0,0,0.08), inset -3px -3px 6px rgba(0,0,0,0.1), inset 3px 3px 6px rgba(255,255,255,0.8)',
+    promptSnippet: `### Surface, Borders & Elevation: Claymorphism Soft 3D
+- Boundaries: 2px soft matching border outline with plump 18px rounded corners.
+- Inset Lighting: Dual inner bevel shadows: inset -3px -3px 6px rgba(0,0,0,0.1) and inset 3px 3px 6px rgba(255,255,255,0.8).
+- Shadow Treatment: Buoyant clay drop shadow: 0 10px 24px rgba(0, 0, 0, 0.08).`,
+  },
+];
+
+// ============================================================================
+// 4. UI COMPONENTS & CONTROLS STYLE (RECOGNIZED COMPONENT TREATMENTS)
+// ============================================================================
+export const COMPONENT_PARTS: ComponentPart[] = [
+  {
+    id: 'neobrutalist-chunky',
+    name: 'Neo-Brutalist Chunky Controls',
+    tagline: 'Oversized buttons, 3px solid black borders, hard block shadow, and active press-down',
+    description: 'Tactile physical controls with thick black outlines, uppercase bold labels, and interactive mechanical click displacement.',
+    buttonClass: 'px-4 py-2 border-3 border-black font-black uppercase text-xs shadow-[3px_3px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#000] cursor-pointer',
+    badgeClass: 'px-2 py-0.5 border-2 border-black font-bold uppercase text-[10px] shadow-[2px_2px_0px_#000]',
+    promptSnippet: `### UI Component Treatment: Neo-Brutalist Chunky Controls
+- Buttons: Oversized with 3px solid #000000 border, bold uppercase text, 3px 3px 0px #000 hard drop shadow, and tactile click depression (active:translate-x-0.5 active:translate-y-0.5).
+- Badges & Pills: Angled sticker badges with 2px black border, solid color background, and uppercase tracking.
+- Inputs: 3px solid black border with high-contrast text and 3px 3px 0px #000 focus ring shadow.`,
+  },
+  {
+    id: 'minimal-rounded',
+    name: 'Modern Minimalist Rounded Pills',
+    tagline: 'Clean 1px borders, smooth 8px-12px radius, quiet hover states, and refined typography',
+    description: 'Understated, contemporary SaaS controls with subtle borders, smooth hover animations, and balanced optical padding.',
+    buttonClass: 'px-3.5 py-1.5 border border-stone-300 rounded-xl font-semibold text-xs transition-colors hover:bg-stone-100 cursor-pointer',
+    badgeClass: 'px-2 py-0.5 rounded-full text-[10px] font-medium border border-stone-200 bg-stone-50 text-stone-700',
+    promptSnippet: `### UI Component Treatment: Modern Minimalist Rounded Pills
+- Buttons: 8px-12px rounded corners with clean 1px border, smooth background color transitions, and subtle scale-98 active state.
+- Badges: Pill-shaped status badges with 15% opacity background tint and matching color text.
+- Inputs: Inset rounded field with subtle hairline border and gentle focus glow.`,
+  },
+  {
+    id: 'industrial-relays',
+    name: 'Industrial Hardware Relays & Dials',
+    tagline: 'Hardware toggle switches, potentiometer sliders, segmented status meters, and halt blocks',
+    description: 'Tactile mission-control interface components inspired by SCADA telemetry, physical rocker switches, and segmented LED bar indicators.',
+    buttonClass: 'px-3 py-1.5 border border-current font-mono font-bold uppercase text-xs tracking-wider cursor-pointer active:scale-95',
+    badgeClass: 'px-1.5 py-0.5 border border-current font-mono text-[9px] font-bold uppercase',
+    promptSnippet: `### UI Component Treatment: Industrial Hardware Relays & Dials
+- Buttons: Stamped rectangular action blocks with monospaced uppercase labels and high-contrast alert borders.
+- Controls: Potentiometer slider controls with numeric kilowatt/percentage readouts and segmented LED progress meters.
+- Status Indicators: Terminal bracketed tags (e.g. [200_OK], [SYNC], [BYPASS]) with colored phosphor borders.`,
+  },
+  {
+    id: 'glass-capsules',
+    name: 'Glass Translucent Capsules',
+    tagline: 'Translucent frosted capsule buttons with specular rim reflection and soft glow',
+    description: 'Spatial computing controls with frosted blur transparency, glowing specular rim highlights, and pill-shaped touch capsules.',
+    buttonClass: 'px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full font-semibold text-xs shadow-md transition-all hover:bg-white/20 cursor-pointer',
+    badgeClass: 'px-2.5 py-0.5 bg-white/10 backdrop-blur-xs border border-white/15 rounded-full text-[10px] font-mono text-cyan-300',
+    promptSnippet: `### UI Component Treatment: Glass Translucent Capsules
+- Buttons: Floating pill-shaped capsules with translucent frosted glass (backdrop-blur-md), specular white rim border, and ambient glow.
+- Badges: Translucent pill tags with soft cyan/violet border glow and monospaced telemetry text.
+- Inputs: Translucent glass field with ambient light bloom on focus.`,
+  },
+  {
+    id: 'terminal-badges',
+    name: 'Terminal Monospaced Badges & Prompts',
+    tagline: 'Bracketed prompt tags [200 OK], $ prompt glyphs, keyboard shortcut tags ⌘K, ↵',
+    description: 'Developer-first keyboard-centric controls with prompt glyphs, keyboard shortcut chips, and terminal tag conventions.',
+    buttonClass: 'px-3 py-1 bg-stone-800 text-stone-100 border border-stone-700 font-mono text-xs rounded hover:border-stone-500 cursor-pointer',
+    badgeClass: 'px-1.5 py-0.5 bg-black/30 border border-stone-700 font-mono text-[10px] text-emerald-400 font-bold rounded',
+    promptSnippet: `### UI Component Treatment: Terminal Monospaced Badges & Prompts
+- Buttons: Monospaced action keys with command prompt symbol (e.g. '> execute ↵') and keyboard shortcut indicators.
+- Badges: Bracketed status pills with code-like syntax (e.g. '[READY: 14ms]', '[BRANCH: main]').
+- Inputs: Dark inset command bar with terminal prompt indicator glyph ('$' or 'SQL>') and '⌘K' shortcut tag.`,
+  },
+  {
+    id: 'pixel-beveled',
+    name: 'Retro 8-Bit Beveled Controls',
+    tagline: 'Stepped chunky bitmap border outlines with high-contrast bevel and arcade feedback',
+    description: 'Chunky arcade-style buttons with distinct light-top and dark-bottom bevel highlights emulating retro game UI.',
+    buttonClass: 'px-3 py-1.5 border-2 border-t-white border-l-white border-b-black border-r-black font-mono font-bold text-xs uppercase cursor-pointer active:border-t-black active:border-l-black active:border-b-white active:border-r-white',
+    badgeClass: 'px-1.5 py-0.5 border border-black font-mono text-[9px] uppercase font-bold',
+    promptSnippet: `### UI Component Treatment: Retro 8-Bit Beveled Controls
+- Buttons: 8-bit arcade beveled buttons with crisp 2px border (light top/left edge, dark bottom/right edge for 3D bevel depth).
+- Badges: Blocky pixel badge tags with discrete pixel padding and uppercase gaming labels.
+- Feedback: Immediate inverted bevel depression on click without smooth tweening.`,
+  },
 ];
 
 // ============================================================================
@@ -590,6 +677,26 @@ export const ACCENT_PARTS: AccentPart[] = [
 - Printing Heritage: Gives an authentic printmaker and architectural blueprint calibration feel.`,
   },
   {
+    id: 'hazard-stripes',
+    name: 'Industrial Hazard Caution Stripes',
+    tagline: 'Diagonal black-and-yellow or amber caution hazard safety stripes',
+    description: 'Industrial safety barrier stripes for alert banners, critical action strips, and industrial status headers.',
+    type: 'hazard-stripes',
+    promptSnippet: `### Signature Graphic Accents: Industrial Hazard Caution Stripes
+- Pattern: Repeating 45-degree diagonal hazard caution stripes (black and yellow / amber).
+- Placement: Header accent bars, emergency alert strips, or boundary margins.`,
+  },
+  {
+    id: 'noise-grain',
+    name: 'Subtle Film Grain / Noise',
+    tagline: 'Organic film grain and paper stipple texture for physical tactile warmth',
+    description: 'Subtle analog film grain overlay that breaks up digital flat colors and gives organic paper-like warmth.',
+    type: 'noise-grain',
+    promptSnippet: `### Signature Graphic Accents: Subtle Film Grain / Noise
+- Texture: 4px repeating micro-noise stipple texture (10% opacity, mix-blend-multiply).
+- Atmosphere: Gives digital interfaces analog warmth, tactile depth, and physical substance.`,
+  },
+  {
     id: 'pure-minimal',
     name: 'Pure Minimal (No Accents)',
     tagline: 'Unadorned graphic clarity with zero decorative distractions',
@@ -607,8 +714,8 @@ export const ACCENT_PARTS: AccentPart[] = [
 export const DEFAULT_DESIGN_PARTS: DesignPartsSelection = {
   palette: PALETTE_PARTS[0], // Retro 80s Synthwave
   font: FONT_PARTS[3], // Neo-Grotesque Swiss Sans
-  layout: LAYOUT_PARTS[0], // Bento Box Modular Grid
   surface: SURFACE_PARTS[0], // Neo-Brutalist Hard Offset
+  components: COMPONENT_PARTS[0], // Neo-Brutalist Chunky
   accent: ACCENT_PARTS[0], // CRT Raster Scanlines
 };
 
@@ -616,19 +723,19 @@ export const DEFAULT_DESIGN_PARTS: DesignPartsSelection = {
 // AUTOMATIC MASTER PROMPT SYNTHESIS (COMBINING ALL 5 CHOSEN PARTS)
 // ============================================================================
 export function generateCombinedMasterPrompt(selection: DesignPartsSelection): string {
-  const { palette, font, layout, surface, accent } = selection;
+  const { palette, font, surface, components, accent } = selection;
 
   return `Apply this visual design system to the interface:
 
-## Aesthetic Archetype: ${palette.name} + ${font.name} + ${layout.name} + ${surface.name}
+## Aesthetic Archetype: ${palette.name} + ${font.name} + ${surface.name} + ${components.name}
 
 ${palette.promptSnippet}
 
 ${font.promptSnippet}
 
-${layout.promptSnippet}
-
 ${surface.promptSnippet}
+
+${components.promptSnippet}
 
 ${accent.promptSnippet}
 
