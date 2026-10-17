@@ -171,9 +171,9 @@ export default function ArchetypeSynthesizerPage() {
           {/* Logo & Brand */}
           <div className="flex items-center gap-3">
             <Link
-              href="/logos"
+              href="/"
               className="w-8 h-8 rounded-xl bg-stone-900 flex items-center justify-center text-white shadow-xs hover:bg-stone-800 transition-colors cursor-pointer"
-              title="Archetype Official Brand Mark (View Brand Kit)"
+              title="Archetype — Visual Design Terminology & Prompt Synthesizer"
             >
               <ArchetypeLogo size={20} className="text-white" />
             </Link>
@@ -185,14 +185,6 @@ export default function ArchetypeSynthesizerPage() {
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-100 text-stone-600 font-bold border border-stone-200">
                   Design Terminology & Prompt Synthesizer
                 </span>
-                <Link
-                  href="/logos"
-                  className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold border border-amber-300 transition-colors flex items-center gap-1 cursor-pointer"
-                  title="View 5 proposed brand logo mockups"
-                >
-                  <Sparkles className="w-2.5 h-2.5 text-amber-600" />
-                  <span>5 Logo Mockups</span>
-                </Link>
               </div>
               <p className="text-[11px] text-stone-500 hidden sm:block">
                 Recognized design styles broken down into parts with previews, automatically synthesized into complete agent prompts

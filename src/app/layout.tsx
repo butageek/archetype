@@ -13,11 +13,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://archetype.design'),
   title: "Archetype — Visual Design Specimen & Agent Synthesizer",
   description: "Curated design systems, visual tweaker, aesthetic synthesizer, and agent-ready style specification generator for AI coding assistants.",
   icons: {
     icon: "/brand/logo.svg",
     apple: "/brand/logo.svg",
+  },
+  openGraph: {
+    title: "Archetype — Visual Design Specimen & Agent Synthesizer",
+    description: "Curated design systems, visual tweaker, aesthetic synthesizer, and agent-ready style specification generator for AI coding assistants.",
+    images: [{ url: "/brand/og-banner.svg", width: 1200, height: 630 }],
   },
 };
 

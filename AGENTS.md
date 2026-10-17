@@ -66,6 +66,7 @@ archetype/
 │   │   ├── DesignPartPicker.tsx    # Right pane: Category tabs, search & visual part cards
 │   │   └── LiveCombinedPreview.tsx # Left pane: Sticky live interactive specimen & prompt viewer
 │   ├── lib/
+│   │   ├── brandLogosData.ts       # Official brand vector paths & metadata
 │   │   └── designPartsData.ts      # Data catalogs for all 5 pillars & prompt synthesis logic
 │   └── types/
 │       └── designParts.ts          # Core TypeScript contracts and classification enums

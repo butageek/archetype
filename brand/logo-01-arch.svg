@@ -1,7 +1,0 @@
-<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Concept 01: The Architectural Arch & Aperture (Roman Vault) -->
-  <path d="M32 6L54 54H41.5L37.5 44C37.5 37.5 26.5 37.5 26.5 44L22.5 54H10L32 6Z" fill="#18181B"/>
-  <path d="M26.5 44C26.5 37.5 37.5 37.5 37.5 44V54H26.5V44Z" fill="#F4F4F5"/>
-  <polygon points="32,22 36,30 28,30" fill="#10B981"/>
-  <line x1="20" y1="44" x2="44" y2="44" stroke="#10B981" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.8"/>
-</svg>

@@ -177,12 +177,12 @@ Archetype uses the **Interlocking Brackets** mark — two minimalist angled code
 
 | Asset | Format | Location | Description |
 |---|---|---|---|
-| **Master Icon** | SVG | [`brand/logo.svg`](brand/logo.svg) | Clean monochrome vector mark with currentColor stroke |
-| **Dark Mode** | SVG | [`brand/logo-dark.svg`](brand/logo-dark.svg) | White stroke for dark backgrounds |
-| **Light Mode** | SVG | [`brand/logo-light.svg`](brand/logo-light.svg) | Obsidian stroke (`#09090b`) for light surfaces |
-| **Emerald Phosphor** | SVG | [`brand/logo-emerald.svg`](brand/logo-emerald.svg) | Signature green accent (`#10b981`) |
-| **Aurora Gradient** | SVG | [`brand/logo-gradient.svg`](brand/logo-gradient.svg) | Linear / Raycast spectral gradient |
-| **Horizontal Lockup** | SVG | [`brand/logo-lockup.svg`](brand/logo-lockup.svg) | Icon + ARCHETYPE wordmark + tagline |
+| **Master Icon** | SVG | [`brand/logo.svg`](brand/logo.svg) | Clean monochrome vector mark with `currentColor` fill |
+| **Dark Mode** | SVG | [`brand/logo-dark.svg`](brand/logo-dark.svg) | Pure white fill for dark backgrounds |
+| **Light Mode** | SVG | [`brand/logo-light.svg`](brand/logo-light.svg) | Obsidian fill (`#09090b`) for light surfaces |
+| **Emerald Phosphor** | SVG | [`brand/logo-emerald.svg`](brand/logo-emerald.svg) | Signature emerald accent (`#10b981`) |
+| **Aurora Gradient** | SVG | [`brand/logo-gradient.svg`](brand/logo-gradient.svg) | Fluid aurora spectral gradient fill |
+| **Horizontal Lockup** | SVG | [`brand/logo-lockup.svg`](brand/logo-lockup.svg) | Brand mark + ARCHETYPE wordmark + micro-tagline |
 | **Dark Lockup** | SVG | [`brand/logo-lockup-dark.svg`](brand/logo-lockup-dark.svg) | Full lockup for dark surfaces |
 | **Social / OG Card** | SVG | [`brand/og-banner.svg`](brand/og-banner.svg) | 1200×630px social media embed card |
 
