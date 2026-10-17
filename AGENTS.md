@@ -54,7 +54,9 @@ Users can activate any theme with 1 click, or browse by category tags (`high-tec
 
 ```
 archetype/
-├── brand/                     # Official brand vector kit (SVGs, lockups, OG banner)
+├── public/
+│   ├── brand/                 # Official brand vector kit (SVGs, lockups, OG banner)
+│   └── favicon.svg            # Squircle favicon
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx         # Root HTML layout with metadata & brand icons

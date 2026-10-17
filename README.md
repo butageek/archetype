@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="brand/logo-lockup.svg" alt="Archetype Logo" width="380" />
+  <img src="public/brand/logo-lockup.svg" alt="Archetype Logo" width="380" />
 </p>
 
 # ARCHETYPE
@@ -177,14 +177,14 @@ Archetype uses the **Interlocking Brackets** mark — two minimalist angled code
 
 | Asset | Format | Location | Description |
 |---|---|---|---|
-| **Master Icon** | SVG | [`brand/logo.svg`](brand/logo.svg) | Clean monochrome vector mark with `currentColor` fill |
-| **Dark Mode** | SVG | [`brand/logo-dark.svg`](brand/logo-dark.svg) | Pure white fill for dark backgrounds |
-| **Light Mode** | SVG | [`brand/logo-light.svg`](brand/logo-light.svg) | Obsidian fill (`#09090b`) for light surfaces |
-| **Emerald Phosphor** | SVG | [`brand/logo-emerald.svg`](brand/logo-emerald.svg) | Signature emerald accent (`#10b981`) |
-| **Aurora Gradient** | SVG | [`brand/logo-gradient.svg`](brand/logo-gradient.svg) | Fluid aurora spectral gradient fill |
-| **Horizontal Lockup** | SVG | [`brand/logo-lockup.svg`](brand/logo-lockup.svg) | Brand mark + ARCHETYPE wordmark + micro-tagline |
-| **Dark Lockup** | SVG | [`brand/logo-lockup-dark.svg`](brand/logo-lockup-dark.svg) | Full lockup for dark surfaces |
-| **Social / OG Card** | SVG | [`brand/og-banner.svg`](brand/og-banner.svg) | 1200×630px social media embed card |
+| **Master Icon** | SVG | [`public/brand/logo.svg`](public/brand/logo.svg) | Clean monochrome vector mark with `currentColor` fill |
+| **Dark Mode** | SVG | [`public/brand/logo-dark.svg`](public/brand/logo-dark.svg) | Pure white fill for dark backgrounds |
+| **Light Mode** | SVG | [`public/brand/logo-light.svg`](public/brand/logo-light.svg) | Obsidian fill (`#09090b`) for light surfaces |
+| **Emerald Phosphor** | SVG | [`public/brand/logo-emerald.svg`](public/brand/logo-emerald.svg) | Signature emerald accent (`#10b981`) |
+| **Aurora Gradient** | SVG | [`public/brand/logo-gradient.svg`](public/brand/logo-gradient.svg) | Fluid aurora spectral gradient fill |
+| **Horizontal Lockup** | SVG | [`public/brand/logo-lockup.svg`](public/brand/logo-lockup.svg) | Brand mark + ARCHETYPE wordmark + micro-tagline |
+| **Dark Lockup** | SVG | [`public/brand/logo-lockup-dark.svg`](public/brand/logo-lockup-dark.svg) | Full lockup for dark surfaces |
+| **Social / OG Card** | SVG | [`public/brand/og-banner.svg`](public/brand/og-banner.svg) | 1200×630px social media embed card |
 
 ---
 
