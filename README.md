@@ -173,7 +173,7 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🎨 Brand Assets & Logo Kit
 
-Archetype uses the **Monoline Möbius** mark — an unbroken continuous geometric ribbon tracing an uppercase `A` and an infinity loop:
+Archetype uses the **Interlocking Brackets** mark — two minimalist angled code brackets that interlock diagonally to form an uppercase `A`, uniting code syntax with architectural structure:
 
 | Asset | Format | Location | Description |
 |---|---|---|---|

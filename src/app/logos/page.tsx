@@ -24,10 +24,10 @@ const LOGO_OPTIONS: LogoOption[] = ALL_BRAND_LOGOS.map((logo) => ({
 }));
 
 export default function LogosPage() {
-  const [selectedLogoId, setSelectedLogoId] = useState<string>('monoline');
+  const [selectedLogoId, setSelectedLogoId] = useState<string>('brackets');
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const selectedLogo = LOGO_OPTIONS.find((l) => l.id === selectedLogoId) ?? LOGO_OPTIONS[3];
+  const selectedLogo = LOGO_OPTIONS.find((l) => l.id === selectedLogoId) ?? LOGO_OPTIONS[2];
 
   const handleCopySvg = (logo: LogoOption) => {
     navigator.clipboard.writeText(logo.svgCode);
@@ -170,7 +170,7 @@ export default function LogosPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {LOGO_OPTIONS.map((logo) => {
               const isSelected = selectedLogoId === logo.id;
-              const isOfficialActive = logo.id === 'monoline';
+              const isOfficialActive = logo.id === 'brackets';
 
               return (
                 <div
@@ -289,18 +289,18 @@ export default function LogosPage() {
             <a
               href="/brand/minimal-03-brackets.svg"
               download
-              className="p-3 rounded-xl bg-stone-950 border border-stone-800 hover:border-stone-700 text-stone-300 hover:text-white transition-colors text-center block"
+              className="p-3 rounded-xl bg-stone-950 border border-emerald-500/40 text-stone-300 hover:text-white transition-colors text-center block ring-1 ring-emerald-500/20"
             >
-              <div className="font-bold text-white">03 // BRACKETS</div>
-              <div className="text-[10px] text-stone-500 mt-1">minimal-03-brackets.svg</div>
+              <div className="font-bold text-emerald-400">03 // BRACKETS ★</div>
+              <div className="text-[10px] text-stone-500 mt-1">logo.svg (Master)</div>
             </a>
             <a
               href="/brand/minimal-04-monoline.svg"
               download
-              className="p-3 rounded-xl bg-stone-950 border border-emerald-500/40 text-stone-300 hover:text-white transition-colors text-center block ring-1 ring-emerald-500/20"
+              className="p-3 rounded-xl bg-stone-950 border border-stone-800 hover:border-stone-700 text-stone-300 hover:text-white transition-colors text-center block"
             >
-              <div className="font-bold text-emerald-400">04 // MONOLINE ★</div>
-              <div className="text-[10px] text-stone-500 mt-1">logo.svg (Master)</div>
+              <div className="font-bold text-white">04 // MONOLINE</div>
+              <div className="text-[10px] text-stone-500 mt-1">minimal-04-monoline.svg</div>
             </a>
             <a
               href="/brand/minimal-05-stepped.svg"

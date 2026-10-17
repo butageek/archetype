@@ -62,7 +62,7 @@ archetype/
 │   │   ├── icon.svg           # Scalable SVG favicon
 │   │   └── globals.css        # Tailwind v4 import & Google Fonts @import url
 │   ├── components/
-│   │   ├── ArchetypeLogo.tsx       # Official Monoline Möbius brand mark component
+│   │   ├── ArchetypeLogo.tsx       # Official Interlocking Brackets brand mark component
 │   │   ├── DesignPartPicker.tsx    # Right pane: Category tabs, search & visual part cards
 │   │   └── LiveCombinedPreview.tsx # Left pane: Sticky live interactive specimen & prompt viewer
 │   ├── lib/
