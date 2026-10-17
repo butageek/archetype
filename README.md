@@ -30,7 +30,7 @@ Archetype deconstructs UI design into 5 enumerable, modular pillars:
 │                        ARCHETYPE STUDIO WORKSPACE                      │
 ├───────────────────────────────────┬────────────────────────────────────┤
 │   LIVE COMBINED MOCKUP & PROMPT   │       RECOGNIZED PARTS LIBRARY     │
-│   (Pinned in Viewport)            │       (Searchable Categories)      │
+│   (Pinned in Viewport)            │       (Theme Search & Tag Filters) │
 │                                   │                                    │
 │  • Interactive Specimen Preview   │   ✨ Curated Themes (16 Presets)   │
 │  • Checkboxes, Radios, Dropdown   │   01. Palette (33 styles)          │
@@ -151,7 +151,7 @@ To eliminate design guesswork and ensure colors, fonts, shadows, and accents nev
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/archetype.git
+git clone https://github.com/butageek/archetype.git
 cd archetype
 
 # Install dependencies
@@ -168,6 +168,7 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 - `npm run dev`: Launch local Next.js development server on port 3000.
 - `npm run build`: Compile and build optimized production bundle.
 - `npm run lint`: Run ESLint checks.
+- `npm run check:data`: Validate design-catalog data integrity — unique IDs, curated-theme cross-references, hex color tokens, Google Fonts coverage, `AccentType` union sync, and prompt-synthesis smoke tests. Run it after any edit to the catalogs in `src/lib/designPartsData.ts`.
 
 ---
 

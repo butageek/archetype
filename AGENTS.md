@@ -55,8 +55,7 @@ Users can activate any theme with 1 click, or browse by category tags (`high-tec
 ```
 archetype/
 ├── public/
-│   ├── brand/                 # Official brand vector kit (SVGs, lockups, OG banner)
-│   └── favicon.svg            # Squircle favicon
+│   └── brand/                 # Official brand vector kit (SVGs, lockups, OG banner)
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx         # Root HTML layout with metadata & brand icons
@@ -69,9 +68,12 @@ archetype/
 │   │   └── LiveCombinedPreview.tsx # Left pane: Sticky live interactive specimen & prompt viewer
 │   ├── lib/
 │   │   ├── brandLogosData.ts       # Official brand vector paths & metadata
+│   │   ├── clipboard.ts            # Clipboard helper with legacy fallback (non-HTTPS origins)
 │   │   └── designPartsData.ts      # Data catalogs for all 5 pillars & prompt synthesis logic
 │   └── types/
 │       └── designParts.ts          # Core TypeScript contracts and classification enums
+├── scripts/
+│   └── check-data.mjs        # Data-integrity validator (npm run check:data)
 ├── package.json
 └── tsconfig.json
 ```
@@ -113,6 +115,7 @@ archetype/
 - **`src/lib/designPartsData.ts`**:
   - Master data source. Contains `PALETTE_PARTS` (33), `FONT_PARTS` (21), `SURFACE_PARTS` (19), `COMPONENT_PARTS` (18), `ACCENT_PARTS` (19), and `CURATED_THEMES` (16).
   - `generateCombinedMasterPrompt(selection)`: Synthesizes the 5 prompt snippets into an executable plain-text agent prompt with a Tailwind CSS v4 `@theme` block.
+  - `buildThemeBlock(selection)`: Single source of truth for the Tailwind CSS v4 `@theme` token block — embedded in the master prompt and used by the dedicated `⚡ @theme` copy chip.
   - `resolveCuratedTheme(theme)`: Resolves a curated theme preset into a complete 5-pillar `DesignPartsSelection`.
 
 ---
@@ -148,4 +151,5 @@ archetype/
 Before concluding any work, always execute:
 1. `npm run lint` — Must report 0 errors and 0 warnings.
 2. `npm run build` — Must complete Next.js optimized production build with clean TypeScript validation.
-3. Test dev server HTTP status with `curl -sI http://localhost:3000`.
+3. `npm run check:data` — Data-integrity validator must pass (catalog shape, unique IDs, hex colors, curated-theme references, Google Fonts coverage, AccentType sync, prompt synthesis). Always run it after any edit to `designPartsData.ts` or `types/designParts.ts`.
+4. Test dev server HTTP status with `curl -sI http://localhost:3000`.
