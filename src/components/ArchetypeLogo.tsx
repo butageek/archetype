@@ -1,8 +1,5 @@
 import type { SVGProps } from 'react';
-import { LOGO_03_BRACKETS } from '../lib/brandLogosData';
-
-export const ARCHETYPE_LOGO_PATH = LOGO_03_BRACKETS.path;
-export const ARCHETYPE_LOGO_VIEWBOX = LOGO_03_BRACKETS.viewBox;
+import { ARCHETYPE_BRAND_LOGO } from '../lib/brandLogosData';
 
 interface ArchetypeLogoProps extends SVGProps<SVGSVGElement> {
   size?: number | string;
@@ -23,7 +20,7 @@ export function ArchetypeLogo({
     <svg
       width={size}
       height={size}
-      viewBox={ARCHETYPE_LOGO_VIEWBOX}
+      viewBox={ARCHETYPE_BRAND_LOGO.viewBox}
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -32,7 +29,7 @@ export function ArchetypeLogo({
       {...props}
     >
       <path
-        d={ARCHETYPE_LOGO_PATH}
+        d={ARCHETYPE_BRAND_LOGO.path}
         stroke="none"
         fill="currentColor"
         fillRule="evenodd"
