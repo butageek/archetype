@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import {
   Check,
   ChevronDown,
@@ -179,6 +180,14 @@ export default function ArchetypeSynthesizerPage() {
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-100 text-stone-600 font-bold border border-stone-200">
                   Design Terminology & Prompt Synthesizer
                 </span>
+                <Link
+                  href="/logos"
+                  className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold border border-amber-300 transition-colors flex items-center gap-1 cursor-pointer"
+                  title="View 5 proposed brand logo mockups"
+                >
+                  <Sparkles className="w-2.5 h-2.5 text-amber-600" />
+                  <span>5 Logo Mockups</span>
+                </Link>
               </div>
               <p className="text-[11px] text-stone-500 hidden sm:block">
                 Recognized design styles broken down into parts with previews, automatically synthesized into complete agent prompts
