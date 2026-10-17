@@ -175,7 +175,7 @@ export default function ArchetypeSynthesizerPage() {
               className="w-8 h-8 rounded-xl bg-stone-900 flex items-center justify-center text-white shadow-xs hover:bg-stone-800 transition-colors cursor-pointer"
               title="Archetype Official Brand Mark (View Brand Kit)"
             >
-              <ArchetypeLogo size={20} className="text-white" crossbarColor="#10B981" />
+              <ArchetypeLogo size={20} className="text-white" />
             </Link>
             <div>
               <div className="flex items-center gap-2">

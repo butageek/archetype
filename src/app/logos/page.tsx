@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, Check, Copy, ExternalLink, Sparkles } from 'lucide-react';
+import { ARCHETYPE_LOGO_PATH } from '../../components/ArchetypeLogo';
 
 interface LogoOption {
   id: string;
@@ -94,20 +95,16 @@ const LOGO_OPTIONS: LogoOption[] = [
     description:
       'A single continuous, unbroken monoline stroke tracing the A into an infinity loop. Expresses seamless visual synthesis and effortless aesthetic iteration.',
     themeMatch: 'Arc Cosmic, Modern Bento, Nordic Ambient, Frutiger Aero',
-    svgCode: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M14 52L32 12L50 52H38L32 38L26 52H14Z" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="32" cy="27" r="3" fill="#10B981"/>
+    svgCode: `<svg viewBox="0 0 300 296" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="${ARCHETYPE_LOGO_PATH}" fill="currentColor" fill-rule="evenodd"/>
 </svg>`,
     renderMark: (className = 'w-10 h-10') => (
-      <svg className={className} viewBox="0 0 64 64" fill="none">
+      <svg className={className} viewBox="0 0 300 296" fill="none">
         <path
-          d="M14 52L32 12L50 52H38L32 38L26 52H14Z"
-          stroke="currentColor"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d={ARCHETYPE_LOGO_PATH}
+          fill="currentColor"
+          fillRule="evenodd"
         />
-        <circle cx="32" cy="27" r="3" fill="#10B981" />
       </svg>
     ),
   },
