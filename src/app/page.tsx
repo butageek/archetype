@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   Check,
@@ -13,6 +13,7 @@ import {
 import confetti from 'canvas-confetti';
 import {
   ACCENT_PARTS,
+  buildThemeBlock,
   COMPONENT_PARTS,
   CURATED_THEMES,
   DEFAULT_DESIGN_PARTS,
@@ -22,6 +23,7 @@ import {
   resolveCuratedTheme,
   SURFACE_PARTS,
 } from '../lib/designPartsData';
+import { copyToClipboard } from '../lib/clipboard';
 import {
   AccentPart,
   ComponentPart,
@@ -43,10 +45,23 @@ export default function ArchetypeSynthesizerPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copiedCombined, setCopiedCombined] = useState<boolean>(false);
   const [leftTab, setLeftTab] = useState<'mockup' | 'prompt'>('mockup');
+  const toastTimerRef = useRef<number | null>(null);
+  const copiedTimerRef = useRef<number | null>(null);
 
   const showToast = (msg: string) => {
+    // Clear any pending timer so rapid successive toasts don't cut each other short
+    if (toastTimerRef.current !== null) {
+      clearTimeout(toastTimerRef.current);
+    }
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3200);
+    toastTimerRef.current = window.setTimeout(() => setToastMessage(null), 3200);
+  };
+
+  // Copy text and report the outcome via toast; returns whether it succeeded
+  const copyText = async (text: string, successMsg: string) => {
+    const ok = await copyToClipboard(text);
+    showToast(ok ? successMsg : 'Copy failed — clipboard is unavailable in this browser.');
+    return ok;
   };
 
   // Check if current selection matches one of the prebuilt curated themes
@@ -80,8 +95,13 @@ export default function ArchetypeSynthesizerPage() {
   }, [selection]);
 
   // 1-Click Copy Complete Prompt
-  const handleCopyCompletePrompt = () => {
-    navigator.clipboard.writeText(combinedMasterPrompt);
+  const handleCopyCompletePrompt = async () => {
+    const ok = await copyText(
+      combinedMasterPrompt,
+      'Copied Combined AI Agent Master Prompt! Ready to paste into Claude, Cursor, or Antigravity.',
+    );
+    if (!ok) return;
+
     setCopiedCombined(true);
 
     confetti({
@@ -91,8 +111,10 @@ export default function ArchetypeSynthesizerPage() {
       colors: [selection.palette.primary, selection.palette.secondary, '#10B981'],
     });
 
-    showToast('Copied Combined AI Agent Master Prompt! Ready to paste into Claude, Cursor, or Antigravity.');
-    setTimeout(() => setCopiedCombined(false), 2000);
+    if (copiedTimerRef.current !== null) {
+      clearTimeout(copiedTimerRef.current);
+    }
+    copiedTimerRef.current = window.setTimeout(() => setCopiedCombined(false), 2000);
   };
 
   // Randomize a single category while preserving the other 4
@@ -555,10 +577,9 @@ export default function ArchetypeSynthesizerPage() {
                     </span>
                     <button
                       type="button"
-                      onClick={() => {
-                        navigator.clipboard.writeText(selection.palette.promptSnippet);
-                        showToast(`Copied Palette tokens (${selection.palette.name})!`);
-                      }}
+                      onClick={() =>
+                        copyText(selection.palette.promptSnippet, `Copied Palette tokens (${selection.palette.name})!`)
+                      }
                       className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                       title="Copy only color palette tokens"
                     >
@@ -566,10 +587,9 @@ export default function ArchetypeSynthesizerPage() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => {
-                        navigator.clipboard.writeText(selection.font.promptSnippet);
-                        showToast(`Copied Typography rules (${selection.font.name})!`);
-                      }}
+                      onClick={() =>
+                        copyText(selection.font.promptSnippet, `Copied Typography rules (${selection.font.name})!`)
+                      }
                       className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                       title="Copy only typography rules"
                     >
@@ -577,10 +597,9 @@ export default function ArchetypeSynthesizerPage() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => {
-                        navigator.clipboard.writeText(selection.surface.promptSnippet);
-                        showToast(`Copied Surface specifications (${selection.surface.name})!`);
-                      }}
+                      onClick={() =>
+                        copyText(selection.surface.promptSnippet, `Copied Surface specifications (${selection.surface.name})!`)
+                      }
                       className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                       title="Copy only surface and elevation styles"
                     >
@@ -588,10 +607,9 @@ export default function ArchetypeSynthesizerPage() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => {
-                        navigator.clipboard.writeText(selection.components.promptSnippet);
-                        showToast(`Copied UI Controls specification (${selection.components.name})!`);
-                      }}
+                      onClick={() =>
+                        copyText(selection.components.promptSnippet, `Copied UI Controls specification (${selection.components.name})!`)
+                      }
                       className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                       title="Copy only UI component and control styles"
                     >
@@ -599,10 +617,9 @@ export default function ArchetypeSynthesizerPage() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => {
-                        navigator.clipboard.writeText(selection.accent.promptSnippet);
-                        showToast(`Copied Accent style (${selection.accent.name})!`);
-                      }}
+                      onClick={() =>
+                        copyText(selection.accent.promptSnippet, `Copied Accent style (${selection.accent.name})!`)
+                      }
                       className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                       title="Copy only signature graphic accent styles"
                     >
@@ -610,11 +627,7 @@ export default function ArchetypeSynthesizerPage() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => {
-                        const themeBlock = `@theme {\n  --color-primary: ${selection.palette.primary};\n  --color-secondary: ${selection.palette.secondary};\n  --color-accent: ${selection.palette.accent};\n  --color-background: ${selection.palette.background};\n  --color-surface: ${selection.palette.surface};\n  --color-border: ${selection.palette.border};\n  --color-text-primary: ${selection.palette.text};\n  --color-text-muted: ${selection.palette.textMuted};\n  --radius-card: ${selection.surface.radius};\n}`;
-                        navigator.clipboard.writeText(themeBlock);
-                        showToast('Copied Tailwind CSS v4 @theme block!');
-                      }}
+                      onClick={() => copyText(buildThemeBlock(selection), 'Copied Tailwind CSS v4 @theme block!')}
                       className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                       title="Copy only Tailwind CSS v4 @theme block"
                     >

@@ -1866,7 +1866,16 @@ ${accent.promptSnippet}
 
 ### Tailwind CSS v4 Theme Block
 \`\`\`css
-@theme {
+${buildThemeBlock(selection)}
+\`\`\``;
+}
+
+// Shared single source of truth for the Tailwind CSS v4 @theme token block.
+// Used both inside the combined master prompt and by the dedicated @theme copy chip.
+export function buildThemeBlock(selection: DesignPartsSelection): string {
+  const { palette, surface } = selection;
+
+  return `@theme {
   --color-primary: ${palette.primary};
   --color-secondary: ${palette.secondary};
   --color-accent: ${palette.accent};
@@ -1876,8 +1885,7 @@ ${accent.promptSnippet}
   --color-text-primary: ${palette.text};
   --color-text-muted: ${palette.textMuted};
   --radius-card: ${surface.radius};
-}
-\`\`\``;
+}`;
 }
 
 // ============================================================================

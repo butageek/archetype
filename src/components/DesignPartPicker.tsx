@@ -24,6 +24,7 @@ import {
   resolveCuratedTheme,
   SURFACE_PARTS,
 } from '../lib/designPartsData';
+import { copyToClipboard } from '../lib/clipboard';
 import {
   AccentPart,
   ComponentPart,
@@ -403,10 +404,10 @@ export function DesignPartPicker({
     );
   });
 
-  const handleCopyPartPrompt = (e: MouseEvent, prompt: string, name: string) => {
+  const handleCopyPartPrompt = async (e: MouseEvent, prompt: string, name: string) => {
     e.stopPropagation();
-    navigator.clipboard.writeText(prompt);
-    onToast(`Copied standalone prompt for "${name}"!`);
+    const ok = await copyToClipboard(prompt);
+    onToast(ok ? `Copied standalone prompt for "${name}"!` : 'Copy failed — clipboard is unavailable in this browser.');
   };
 
   return (
