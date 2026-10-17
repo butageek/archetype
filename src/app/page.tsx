@@ -34,6 +34,7 @@ import {
 } from '../types/designParts';
 import { LiveCombinedPreview } from '../components/LiveCombinedPreview';
 import { DesignPartPicker } from '../components/DesignPartPicker';
+import { ArchetypeLogo } from '../components/ArchetypeLogo';
 
 export default function ArchetypeSynthesizerPage() {
   const [selection, setSelection] = useState<DesignPartsSelection>(DEFAULT_DESIGN_PARTS);
@@ -169,9 +170,13 @@ export default function ArchetypeSynthesizerPage() {
         <div className="max-w-[1720px] mx-auto flex items-center justify-between gap-4">
           {/* Logo & Brand */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-stone-900 flex items-center justify-center font-black text-xs text-white shadow-xs">
-              ▲
-            </div>
+            <Link
+              href="/logos"
+              className="w-8 h-8 rounded-xl bg-stone-900 flex items-center justify-center text-white shadow-xs hover:bg-stone-800 transition-colors cursor-pointer"
+              title="Archetype Official Brand Mark (View Brand Kit)"
+            >
+              <ArchetypeLogo size={20} className="text-white" crossbarColor="#10B981" />
+            </Link>
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-base tracking-tight text-stone-950 font-mono">

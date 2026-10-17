@@ -1,0 +1,25 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- ARCHETYPE Monoline Brand Mark (04 // MONOLINE) -->
+  <!-- Continuous geometric ribbon forming the letter A and infinite synthesis loop -->
+  <path
+    d="M 50 13
+       C 56 13 80 50 83 67
+       C 86 81 72 87 61 77
+       C 50 66 40 48 50 33
+       C 60 48 50 66 39 77
+       C 28 87 14 81 17 67
+       C 20 50 44 13 50 13 Z"
+    stroke="currentColor"
+    stroke-width="7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Architectural Crossbar Bridge -->
+  <path
+    d="M 23 58
+       C 36 49 64 49 77 58"
+    stroke="currentColor"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+</svg>

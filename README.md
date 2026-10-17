@@ -1,4 +1,8 @@
-# ▲ ARCHETYPE
+<p align="center">
+  <img src="brand/logo-lockup.svg" alt="Archetype Logo" width="380" />
+</p>
+
+# ARCHETYPE
 
 > **Visual Design Terminology & Prompt Synthesizer for AI Coding Agents**
 
@@ -164,6 +168,23 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 - `npm run dev`: Launch local Next.js development server on port 3000.
 - `npm run build`: Compile and build optimized production bundle.
 - `npm run lint`: Run ESLint checks.
+
+---
+
+## 🎨 Brand Assets & Logo Kit
+
+Archetype uses the **Monoline Möbius** mark — an unbroken continuous geometric ribbon tracing an uppercase `A` and an infinity loop:
+
+| Asset | Format | Location | Description |
+|---|---|---|---|
+| **Master Icon** | SVG | [`brand/logo.svg`](brand/logo.svg) | Clean monochrome vector mark with currentColor stroke |
+| **Dark Mode** | SVG | [`brand/logo-dark.svg`](brand/logo-dark.svg) | White stroke for dark backgrounds |
+| **Light Mode** | SVG | [`brand/logo-light.svg`](brand/logo-light.svg) | Obsidian stroke (`#09090b`) for light surfaces |
+| **Emerald Phosphor** | SVG | [`brand/logo-emerald.svg`](brand/logo-emerald.svg) | Signature green accent (`#10b981`) |
+| **Aurora Gradient** | SVG | [`brand/logo-gradient.svg`](brand/logo-gradient.svg) | Linear / Raycast spectral gradient |
+| **Horizontal Lockup** | SVG | [`brand/logo-lockup.svg`](brand/logo-lockup.svg) | Icon + ARCHETYPE wordmark + tagline |
+| **Dark Lockup** | SVG | [`brand/logo-lockup-dark.svg`](brand/logo-lockup-dark.svg) | Full lockup for dark surfaces |
+| **Social / OG Card** | SVG | [`brand/og-banner.svg`](brand/og-banner.svg) | 1200×630px social media embed card |
 
 ---
 

@@ -1,0 +1,39 @@
+<svg viewBox="0 0 420 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- ARCHETYPE Horizontal Wordmark Lockup -->
+  <!-- Monoline Icon (x: 10, y: 10, size: 60) -->
+  <g transform="translate(10, 10) scale(0.6)">
+    <path
+      d="M 50 14
+         C 56 14 82 50 84 68
+         C 86 82 72 86 62 76
+         C 52 66 48 54 50 48
+         C 52 54 48 66 38 76
+         C 28 86 14 82 16 68
+         C 18 50 44 14 50 14 Z"
+      stroke="#09090B"
+      stroke-width="7"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M 50 48
+         C 42 38 42 22 50 22
+         C 58 22 58 38 50 48 Z"
+      stroke="#09090B"
+      stroke-width="7"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M 24 58
+         C 38 48 62 48 76 58"
+      stroke="#10B981"
+      stroke-width="7"
+      stroke-linecap="round"
+    />
+  </g>
+
+  <!-- Typography -->
+  <text x="82" y="44" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" letter-spacing="-0.04em" fill="#09090B">ARCHETYPE</text>
+  <text x="83" y="62" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="9.5" letter-spacing="0.04em" fill="#71717A">DESIGN TERMINOLOGY &amp; PROMPT SYNTHESIZER</text>
+</svg>

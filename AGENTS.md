@@ -54,12 +54,15 @@ Users can activate any theme with 1 click, or browse by category tags (`high-tec
 
 ```
 archetype/
+├── brand/                     # Official brand vector kit (SVGs, lockups, OG banner)
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx         # Root HTML layout with metadata
+│   │   ├── layout.tsx         # Root HTML layout with metadata & brand icons
 │   │   ├── page.tsx           # Main Studio split-screen workspace
+│   │   ├── icon.svg           # Scalable SVG favicon
 │   │   └── globals.css        # Tailwind v4 import & Google Fonts @import url
 │   ├── components/
+│   │   ├── ArchetypeLogo.tsx       # Official Monoline Möbius brand mark component
 │   │   ├── DesignPartPicker.tsx    # Right pane: Category tabs, search & visual part cards
 │   │   └── LiveCombinedPreview.tsx # Left pane: Sticky live interactive specimen & prompt viewer
 │   ├── lib/

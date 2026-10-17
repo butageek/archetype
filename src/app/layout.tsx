@@ -15,6 +15,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Archetype — Visual Design Specimen & Agent Synthesizer",
   description: "Curated design systems, visual tweaker, aesthetic synthesizer, and agent-ready style specification generator for AI coding assistants.",
+  icons: {
+    icon: "/brand/logo.svg",
+    apple: "/brand/logo.svg",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
