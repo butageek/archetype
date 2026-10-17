@@ -1,0 +1,15 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Option 02: The 5 Pillars (5 Converging Precision Geometric Strokes) -->
+  <!-- Pillar 1: Outer Left -->
+  <line x1="12" y1="52" x2="30" y2="12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <!-- Pillar 2: Inner Left -->
+  <line x1="20" y1="52" x2="31" y2="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <!-- Pillar 3: Center Apex -->
+  <line x1="32" y1="10" x2="32" y2="28" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+  <!-- Pillar 4: Inner Right -->
+  <line x1="44" y1="52" x2="33" y2="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <!-- Pillar 5: Outer Right -->
+  <line x1="52" y1="52" x2="34" y2="12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <!-- Modular Crossbar Token -->
+  <rect x="20" y="38" width="24" height="3" rx="1.5" fill="#10B981"/>
+</svg>

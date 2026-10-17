@@ -1,0 +1,9 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Option 05: The Stepped Horizon (Swiss Modernist Architectural Cut) -->
+  <!-- Left Leg with Overhanging Crossbar -->
+  <path d="M32 8L10 52H22L27 42H16V36H30L32 8Z" fill="currentColor"/>
+  <!-- Right Leg with 45° Architectural Chamfer -->
+  <path d="M32 8L54 52H42L35 36H48V42H38L32 8Z" fill="currentColor"/>
+  <!-- Central Precision Accent Square -->
+  <rect x="29.5" y="22" width="5" height="5" fill="#10B981"/>
+</svg>

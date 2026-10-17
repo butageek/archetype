@@ -1,0 +1,9 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Option 03: The Interlocking Brackets (Code & Modular Tokens) -->
+  <!-- Left Angled Bracket Blade -->
+  <path d="M12 52L30 12H34L20 52H12Z" fill="currentColor"/>
+  <!-- Right Angled Bracket Blade -->
+  <path d="M52 52L34 12H30L44 52H52Z" fill="currentColor"/>
+  <!-- Central Synthesizer Pill Crossbar -->
+  <rect x="20" y="34" width="24" height="5" rx="2.5" fill="#10B981"/>
+</svg>

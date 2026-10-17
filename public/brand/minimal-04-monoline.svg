@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Option 04: The Monoline Möbius (Continuous Fluid Synthesis) -->
+  <path
+    d="M14 52L32 12L50 52H38L32 38L26 52H14Z"
+    stroke="currentColor"
+    stroke-width="3.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Inner Synthesis Loop Accent -->
+  <circle cx="32" cy="27" r="3" fill="#10B981"/>
+</svg>

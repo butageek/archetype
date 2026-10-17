@@ -1,0 +1,8 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Option 01: The Origin Vault (Minimalist Roman Arch & Delta) -->
+  <path d="M32 8L54 52H42L36 38C36 34 28 34 28 38L22 52H10L32 8Z" fill="currentColor"/>
+  <!-- Pure Architectural Archway Cutout -->
+  <path d="M26 52V38C26 34.6863 28.6863 32 32 32C35.3137 32 38 34.6863 38 38V52H26Z" fill="#0C0A09"/>
+  <!-- Minimalist Origin Point (Prompt Synthesizer Core) -->
+  <circle cx="32" cy="22" r="2.5" fill="#10B981"/>
+</svg>
