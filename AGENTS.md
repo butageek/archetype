@@ -21,14 +21,14 @@ When building web apps with AI agents (Cursor, Claude, Antigravity, ChatGPT, v0)
 
 ### The Solution
 Archetype decomposes UI design into **5 strictly enumerable, recognizable pillars**:
-1. **01. Palette**: Curated brand/aesthetic color token harmonies (33 styles).
+1. **01. Palette**: Curated brand/aesthetic color token harmonies (37 styles).
 2. **02. Typography**: Iconic font pairings and typographic rules (21 styles).
-3. **03. Surface & Borders**: Corner radii, borders, bevels, chamfers, and shadows (19 styles).
-4. **04. UI Components & Controls**: Button mechanics, inputs, badges, and micro-interactions (18 styles).
-5. **05. Signature Graphic Accents**: Distinctive graphic DNA (scanlines, aurora glow, crosshairs, washi tape, halftone pop art, barcode, waveform, constellation, etc.) (19 styles).
+3. **03. Surface & Borders**: Corner radii, borders, bevels, chamfers, and shadows (20 styles).
+4. **04. UI Components & Controls**: Button mechanics, inputs, badges, and micro-interactions (21 styles).
+5. **05. Signature Graphic Accents**: Distinctive graphic DNA (scanlines, aurora glow, crosshairs, washi tape, halftone pop art, barcode, waveform, constellation, concentric dial rings, etc.) (20 styles).
 
-### Prebuilt Curated Themes (16 Calibrated Harmonies)
-Because random combinations across 5 dimensions can occasionally clash, Archetype provides **16 hand-crafted, mathematically harmonious Prebuilt Themes**:
+### Prebuilt Curated Themes (19 Calibrated Harmonies)
+Because random combinations across 5 dimensions can occasionally clash, Archetype provides **19 hand-crafted, mathematically harmonious Prebuilt Themes**:
 1. *Cyberpunk 2077 Night City* (Sci-Fi HUD)
 2. *Obsidian Velvet (Linear / Raycast)* (Velvet Dark)
 3. *Stripe Fintech Precision* (Fintech SaaS)
@@ -45,6 +45,9 @@ Because random combinations across 5 dimensions can occasionally clash, Archetyp
 14. *Retro 80s Synthwave Arcade* (Neon Arcade)
 15. *Bauhaus Constructivist Primaries* (Constructivist)
 16. *Cosmic Lilac & Floating Dock (Arc Style)* (Holographic Fluid)
+17. *Neumorphic Frost & Soft UI* (Soft UI Neumorphic)
+18. *Milky Frosted Glass (visionOS Opal)* (Opal Milk Glass)
+19. *Claymorphism 3D Marshmallow & Ceramic* (3D Claymorphic)
 
 Users can activate any theme with 1 click, or browse by category tags (`high-tech`, `developer`, `fintech`, `retro`, `editorial`, `minimal`, `industrial`). Once applied, all individual pillars remain freely tweakable.
 
@@ -69,6 +72,7 @@ archetype/
 │   ├── lib/
 │   │   ├── brandLogosData.ts       # Official brand vector paths & metadata
 │   │   ├── clipboard.ts            # Clipboard helper with legacy fallback (non-HTTPS origins)
+│   │   ├── designEngines.ts        # Centralized rendering engines (6 physical paradigms) & component blueprints
 │   │   └── designPartsData.ts      # Data catalogs for all 5 pillars & prompt synthesis logic
 │   └── types/
 │       └── designParts.ts          # Core TypeScript contracts and classification enums
@@ -80,21 +84,35 @@ archetype/
 
 ### Component Roles
 
+- **`src/lib/designEngines.ts`**:
+  - Centralized single source of truth for UI physical paradigms and component implementation.
+  - Houses 6 distinct rendering engines:
+    1. `'frosted-glass'`: Apple visionOS Opal Frosted Milk Glass (specular highlights, internal reflections, double border glow, high-blur glass, high-contrast slate debossed wells).
+    2. `'claymorphism'`: 3D Marshmallow & Ceramic (multi-tier drop shadows + dual inset pillowy bevels, rounded-3xl physics).
+    3. `'win95'`: Windows 95 Classic Desktop UI (asymmetric beveled raised/inset borders, rigid gray relief).
+    4. `'bauhaus'`: Constructivist Primaries & Geometric Outlines (hard-edged solid black outlines, offset un-blurred drop shadows).
+    5. `'neumorphism'`: Soft UI (dual opposing extrusions with light source and dark drop shadows).
+    6. `'modern-saas'`: Universal Digital Precision (Stripe, Linear/Raycast, Cyberpunk, 70s Editorial, Zen Modern, etc.).
+  - Each engine provides:
+    - Runtime CSS/Tailwind styling contracts for `LiveCombinedPreview.tsx` (`card`, `subCard`, `inputOuter`, `inputInner`, `primaryButton`, `secondaryButton`, `toggleTrack`, `toggleThumb`, `selectTrigger`, `selectMenu`, `selectItem`, `checkboxItem`, `checkboxBox`, `radioOption`, `sliderAccentColor`, `tabPill`).
+    - Ready-to-use TypeScript/React component blueprints (`Card`, `Badge`, `Tabs`, `Button` [Primary & Secondary], `Input`, `Select`, `Toggle`, `Checkbox`, `RadioGroup`, `Slider`, and `StatCard`) exported directly via **"⚡ Copy for AI Agent"**.
+
 - **`src/app/page.tsx`**:
   - Implements the Studio split-screen layout with balanced 6/6 desktop columns (`lg:col-span-6 xl:col-span-6`).
-  - Left column: Viewport-optimized studio card housing the live preview specimen (responsive scale) and prompt viewer tabs.
+  - Left column: Viewport-optimized studio card housing the uninterrupted live interactive preview specimen and integrated bottom toolbar.
   - Integrated bottom toolbar: Displays the active curated theme badge (or custom composition indicator) alongside compact inline `🎲` dice buttons to re-roll individual pillars in place.
-  - Right column: Independently scrollable design library housing the Curated Themes gallery (16 presets filterable by tag and search) and all 5 individual pillar category tabs.
-  - Header controls: Split "Surprise Me ▾" dropdown (Surprise All or target individual category) and "Copy Master Prompt".
-  - Dedicated category prompt copy chips (`🎨 Palette`, `🔤 Typography`, `📐 Surface`, `🧩 Controls`, `✨ Accent`, `⚡ @theme`).
+  - Right column: Independently scrollable design library housing the Curated Themes gallery (19 presets filterable by tag and search) and all 5 individual pillar category tabs.
+  - Header controls: Split "Surprise Me ▾" dropdown (Surprise All or target individual category) and "⚡ Copy for AI Agent".
+  - Clean export UX: 1-click header button copies the complete, self-contained Agent Kit (directives + drop-in Tailwind CSS v4 `@theme` block + ready-to-use React component blueprints for all 11 previewed components: `Card`, `Badge`, `Tabs`, `Button` [Primary & Secondary], `Input`, `Select`, `Toggle`, `Checkbox`, `RadioGroup`, `Slider`, and `StatCard`).
 
 - **`src/components/LiveCombinedPreview.tsx`**:
   - Renders a live, highly reactive UI specimen honoring all 5 selected parts.
+  - Consumes `getDesignEngine(selection).getStyles(selection)` to guarantee visual parity with the code exported to AI agents.
   - Interactive elements:
     - Segmented overview/telemetry/controls tabs.
     - Custom styled select dropdown menu with z-index protection.
     - Checkboxes and radio button groups matching target surface/control styles.
-    - Slider (accent color tracks `palette.primary` / `palette.accent`).
+    - Potentiometer slider (accent color tracks `palette.primary` / `palette.accent`).
     - Form inputs with real focus/hover states and editable value.
     - Hoverable buttons with tactile transform/shadow physics.
     - Dynamic status badges.
@@ -113,8 +131,8 @@ archetype/
     - Accents: Specialized `AccentVisualPreview` component rendering visual representation.
 
 - **`src/lib/designPartsData.ts`**:
-  - Master data source. Contains `PALETTE_PARTS` (33), `FONT_PARTS` (21), `SURFACE_PARTS` (19), `COMPONENT_PARTS` (18), `ACCENT_PARTS` (19), and `CURATED_THEMES` (16).
-  - `generateCombinedMasterPrompt(selection)`: Synthesizes the 5 prompt snippets into an executable plain-text agent prompt with a Tailwind CSS v4 `@theme` block.
+  - Master data source. Contains `PALETTE_PARTS` (37), `FONT_PARTS` (21), `SURFACE_PARTS` (20), `COMPONENT_PARTS` (21), `ACCENT_PARTS` (20), and `CURATED_THEMES` (19).
+  - `generateCombinedMasterPrompt(selection)`: Synthesizes the 5 prompt snippets, active engine component blueprints, and Tailwind CSS v4 `@theme` block into an executable AI Agent prompt.
   - `buildThemeBlock(selection)`: Single source of truth for the Tailwind CSS v4 `@theme` token block — embedded in the master prompt and used by the dedicated `⚡ @theme` copy chip.
   - `resolveCuratedTheme(theme)`: Resolves a curated theme preset into a complete 5-pillar `DesignPartsSelection`.
 
@@ -143,6 +161,17 @@ archetype/
 - This repository uses Tailwind CSS v4 (`@import "tailwindcss";` in `globals.css`).
 - Theme configuration uses `@theme` blocks.
 - Do not add legacy `tailwind.config.js` or `tailwind.config.ts`.
+
+### Rule 7: Design Engine Single Source of Truth
+- Both the interactive specimen in `LiveCombinedPreview.tsx` and the exported code in "⚡ Copy for AI Agent" MUST derive from `src/lib/designEngines.ts`.
+- When updating interactive control styles or introducing new physical paradigms, update both the engine's runtime `getStyles()` and its drop-in `getBlueprints()` templates so that user preview and agent replication never drift.
+
+### Rule 8: Standardized Control Ergonomics & 11-Component Parity
+- All 6 design engines must export complete, production-ready blueprints for all 11 previewed components (`Card`, `Badge`, `Tabs`, `Button` [Primary & Secondary], `Input`, `Select`, `Toggle`, `Checkbox`, `RadioGroup`, `Slider`, and `StatCard`).
+- Standard control heights and touch targets must remain uniform across the live preview and exported blueprints:
+  - `h-10` for Text Inputs, Search Bars, Dropdown Select Triggers, and Checkbox tiles.
+  - `h-9` for Action Buttons (`whitespace-nowrap inline-flex items-center justify-center gap-1.5`).
+  - `h-14` for Multi-Option Radio Cards and Stat / Telemetry tiles.
 
 ---
 

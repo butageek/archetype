@@ -7,6 +7,7 @@ import {
   PalettePart,
   SurfacePart,
 } from '../types/designParts';
+import { getDesignEngine } from './designEngines';
 
 // ============================================================================
 // 1. COLOR PALETTES (RECOGNIZED COLOR AESTHETICS & MOODS)
@@ -138,27 +139,27 @@ export const PALETTE_PARTS: PalettePart[] = [
   {
     id: 'bauhaus-primary',
     name: 'Bauhaus Constructivist Primaries',
-    tagline: 'Canary yellow, cobalt blue, cinnabar red, and stark ink black',
-    description: 'Iconic 1920s Walter Gropius Dessau palette celebrating pure primary colors with graphic discipline and stark white/black contrast.',
-    primary: '#FFE600',
+    tagline: 'Cadmium red, cobalt blue, warm canary yellow, and stark black outlines',
+    description: 'Iconic 1920s Walter Gropius Dessau palette celebrating pure primary colors with graphic discipline, bold red primary weight, and high-contrast black borders.',
+    primary: '#D90429',
     secondary: '#0047AB',
-    accent: '#E63946',
-    background: '#FFFFFF',
-    surface: '#F8F9FA',
+    accent: '#FFD000',
+    background: '#F8F9FA',
+    surface: '#FFFFFF',
     border: '#000000',
     text: '#000000',
-    textMuted: '#555555',
+    textMuted: '#444444',
     isDark: false,
     promptSnippet: `### Color Palette Tokens: Bauhaus Constructivist Primaries
-- Mood: Authentic 1920s Bauhaus Dessau constructivism with bold primary color pops and disciplined architectural contrast.
-- Background: #FFFFFF (stark architectural white)
-- Surface / Cards: #F8F9FA (clean light substrate)
-- Borders: #000000 (2px stark solid black)
-- Primary Pop: #FFE600 (canary primary yellow)
-- Secondary Pop: #0047AB (cobalt architectural blue)
-- Accent Pop: #E63946 (cinnabar vermilion red)
-- Text Primary: #000000 (pure black)
-- Text Muted: #555555 (disciplined neutral gray)`,
+- Mood: Authentic 1920s Bauhaus Dessau constructivism with high-contrast primary color blocks and bold graphic discipline.
+- Background: #F8F9FA (clean architectural canvas)
+- Surface / Cards: #FFFFFF (stark white geometric plane)
+- Borders: #000000 (3px crisp solid black outline)
+- Primary Accent: #D90429 (commanding cadmium primary red)
+- Secondary Accent: #0047AB (pure cobalt architectural blue)
+- Graphic Pop: #FFD000 (warm canary yellow - always framed with black borders)
+- Text Primary: #000000 (uncompromising deep black)
+- Text Muted: #444444 (disciplined structural gray)`,
   },
   {
     id: 'art-deco-gold',
@@ -703,26 +704,26 @@ export const PALETTE_PARTS: PalettePart[] = [
     id: 'gameboy-dmg01',
     name: 'Game Boy 1989 DMG-01',
     tagline: 'Iconic 4-shade pea-soup olive monochrome LCD gaming aesthetic',
-    description: 'Nostalgic 1989 handheld gaming palette featuring four strictly quantized shades of warm pea-soup olive and spinach green.',
-    primary: '#8BAC0F',
-    secondary: '#9BBC0F',
-    accent: '#306230',
-    background: '#0F380F',
-    surface: '#1A471A',
-    border: '#8BAC0F',
-    text: '#9BBC0F',
-    textMuted: '#8BAC0F',
-    isDark: true,
+    description: 'Authentic 1989 handheld gaming palette featuring four strictly quantized shades of warm pea-soup olive LCD and deep spinach pixel ink.',
+    primary: '#0F380F',
+    secondary: '#306230',
+    accent: '#8BAC0F',
+    background: '#9BBC0F',
+    surface: '#8BAC0F',
+    border: '#0F380F',
+    text: '#0F380F',
+    textMuted: '#306230',
+    isDark: false,
     promptSnippet: `### Color Palette Tokens: Game Boy 1989 DMG-01
-- Mood: 4-shade quantized retro LCD handheld aesthetic with high-nostalgia olive and spinach green tones.
-- Background: #0F380F (deepest LCD shadow green)
-- Surface / Cards: #1A471A (elevated matrix substrate green)
-- Borders: #8BAC0F (crisp olive LCD border)
-- Primary Accent: #8BAC0F (bright olive active pixel)
-- Secondary Accent: #9BBC0F (illuminated pale LCD lime)
-- Deep Contrast: #306230 (dark spinach shadow)
-- Text Primary: #9BBC0F (high-contrast pale lime)
-- Text Muted: #8BAC0F (medium olive green)`,
+- Mood: Authentic 4-shade quantized retro LCD handheld aesthetic with pea-soup olive matrix background and dark spinach pixel ink.
+- Background: #9BBC0F (reflective pea-soup olive LCD canvas)
+- Surface / Cards: #8BAC0F (quantized mid-tone olive LCD panel)
+- Borders: #0F380F (deep spinach pixel grid border)
+- Primary Pixel Ink: #0F380F (deepest LCD active sprite black-green)
+- Secondary Shade: #306230 (dark spinach shadow pixel)
+- Mid Highlight: #8BAC0F (warm olive midtone)
+- Text Primary: #0F380F (high-contrast dark LCD pixel ink)
+- Text Muted: #306230 (shadowed olive pixel ink)`,
   },
   {
     id: 'monokai-pro',
@@ -823,6 +824,106 @@ export const PALETTE_PARTS: PalettePart[] = [
 - Warm Accent: #C88D48 (warm hinoki cypress timber)
 - Text Primary: #1A2419 (deepest roasted tea leaf)
 - Text Muted: #697566 (steamed green tea moss)`,
+  },
+  {
+    id: 'neumorphic-periwinkle',
+    name: 'Soft UI Neumorphic Lavender',
+    tagline: 'Pale iris substrate, soft periwinkle accents, extruded highlights, and lavender deboss',
+    description: 'The signature Dribbble soft UI neumorphism aesthetic: an ultra-soft cool lilac-white canvas, extruded dual-shadow elements, and gentle periwinkle blue highlights.',
+    primary: '#7B7FDA',
+    secondary: '#AAAEEC',
+    accent: '#5E62D0',
+    background: '#EEEEFA',
+    surface: '#F8F7FD',
+    border: '#E3E3F3',
+    text: '#35374B',
+    textMuted: '#8D90A5',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Soft UI Neumorphic Lavender
+- Mood: Tactile, monochromatic soft UI neumorphism with pale iris-tinted white canvas and gentle periwinkle blue focal points.
+- Background: #EEEEFA (pale lilac-tinted white substrate)
+- Surface / Cards: #F8F7FD (soft molded extruded plastic sheet)
+- Borders: #E3E3F3 (subtle matching tonal seam)
+- Primary Accent: #7B7FDA (soft periwinkle iris blue)
+- Secondary Accent: #AAAEEC (gentle lilac lavender wash)
+- Deep Accent: #5E62D0 (high-contrast active periwinkle spark)
+- Text Primary: #35374B (deep slate purple charcoal)
+- Text Muted: #8D90A5 (calm slate lavender)`,
+  },
+  {
+    id: 'opal-milk-glass',
+    name: 'Opal Milky Glass & Prismatic Aura',
+    tagline: 'Translucent white milk acrylic, sky blue accents, violet tint, and ambient aura',
+    description: 'Dense frosted milk glass substrate with luminous cyan and violet spectral highlights, glowing white specular borders, and soft slate typography.',
+    primary: '#0284C7',
+    secondary: '#8B5CF6',
+    accent: '#10B981',
+    background: '#F1F5F9',
+    surface: '#FFFFFF',
+    border: '#E2E8F0',
+    text: '#0F172A',
+    textMuted: '#64748B',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Opal Milky Glass & Prismatic Aura
+- Mood: Translucent spatial computing light mode with dense white milk glass, luminous sky blue accents, and subtle prismatic violet light refraction.
+- Background: #F1F5F9 (soft atmospheric canvas)
+- Surface / Cards: #FFFFFF (semi-opaque milk glass acrylic at 80% opacity)
+- Borders: #E2E8F0 (specular translucent white border with 1px top highlight)
+- Primary Accent: #0284C7 (luminous sky cerulean)
+- Secondary Accent: #8B5CF6 (soft prismatic violet ray)
+- Success / Delta: #10B981 (vibrant emerald metric delta)
+- Text Primary: #0F172A (deep midnight slate)
+- Text Muted: #64748B (cool atmospheric slate)`,
+  },
+  {
+    id: 'clay-matte-ceramic',
+    name: 'Claymorphism Warm Ceramic & Vanilla',
+    tagline: 'Warm vanilla cream canvas, pure white clay cards, and candy-colored 3D accents',
+    description: 'Plump, friendly tactile palette inspired by smooth sculpted ceramic clay on a warm vanilla cream backdrop with vibrant playful accents.',
+    primary: '#2563EB',
+    secondary: '#10B981',
+    accent: '#F59E0B',
+    background: '#FAF6EF',
+    surface: '#FFFFFF',
+    border: '#EBE3D7',
+    text: '#23211E',
+    textMuted: '#78716C',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Claymorphism Warm Ceramic & Vanilla
+- Mood: Friendly, plump, tactile clay aesthetic pairing pure white molded ceramic cards with a warm vanilla cream canvas and candy-colored accents.
+- Background: #FAF6EF (warm vanilla porcelain cream)
+- Surface / Cards: #FFFFFF (plump matte white ceramic bisque)
+- Borders: #EBE3D7 (soft warm debossed biscuit clay seam)
+- Primary Accent: #2563EB (candy electric cerulean)
+- Secondary Accent: #10B981 (candy emerald mint)
+- Warm Accent: #F59E0B (honey amber highlight)
+- Text Primary: #23211E (warm matte graphite)
+- Text Muted: #78716C (soft clay taupe)`,
+  },
+  {
+    id: 'win95-classic',
+    name: 'Windows 95 Classic System',
+    tagline: 'Iconic desktop teal, 3D system gray, navy blue titlebar, and phosphor green',
+    description: 'Authentic 1990s Microsoft Windows operating system palette featuring the iconic desktop teal background, beveled system gray chassis, and navy titlebars.',
+    primary: '#000080',
+    secondary: '#1084D0',
+    accent: '#008080',
+    background: '#008080',
+    surface: '#C0C0C0',
+    border: '#808080',
+    text: '#000000',
+    textMuted: '#555555',
+    isDark: false,
+    promptSnippet: `### Color Palette Tokens: Windows 95 Classic System
+- Mood: Authentic 1995 desktop operating system nostalgia with iconic teal desktop and beveled system gray.
+- Background: #008080 (iconic Microsoft desktop teal)
+- Surface / Windows: #C0C0C0 (classic 3D system gray chassis)
+- Borders: #808080 (darker bevel shadow gray)
+- Primary Titlebar: #000080 (active window navy blue)
+- Secondary Gradient: #1084D0 (titlebar active gradient blue)
+- System Accent: #008080 (classic Windows teal)
+- Text Primary: #000000 (standard system black)
+- Text Muted: #555555 (disabled window text gray)`,
   },
 ];
 
@@ -1253,14 +1354,14 @@ export const SURFACE_PARTS: SurfacePart[] = [
     name: 'Claymorphism Soft 3D',
     tagline: 'Plump pillowy 3D cards with dual inset highlights and rounded softness',
     description: 'Charming tactile 3D clay aesthetic with dual inset inner highlights, soft rounded bevels, and pillowy depth.',
-    borderWidth: '2px',
+    borderWidth: '1px',
     borderStyle: 'solid',
-    radius: '18px',
-    shadow: '0 10px 24px rgba(0,0,0,0.08), inset -3px -3px 6px rgba(0,0,0,0.1), inset 3px 3px 6px rgba(255,255,255,0.8)',
+    radius: '28px',
+    shadow: '0 25px 50px -12px rgba(180, 155, 130, 0.35), 0 10px 20px -6px rgba(180, 155, 130, 0.2), inset 3px 3px 6px rgba(255, 255, 255, 0.95), inset -3px -3px 6px rgba(160, 135, 110, 0.12)',
     promptSnippet: `### Surface, Borders & Elevation: Claymorphism Soft 3D
-- Boundaries: 2px soft matching border outline with plump 18px rounded corners.
-- Inset Lighting: Dual inner bevel shadows: inset -3px -3px 6px rgba(0,0,0,0.1) and inset 3px 3px 6px rgba(255,255,255,0.8).
-- Shadow Treatment: Buoyant clay drop shadow: 0 10px 24px rgba(0, 0, 0, 0.08).`,
+- Boundaries: 1px soft ceramic boundary with generous 28px pillowy rounded corners.
+- Inset Lighting: Dual inner volume shadows: inset -3px -3px 6px rgba(160, 135, 110, 0.12) combined with specular inset 3px 3px 6px rgba(255, 255, 255, 0.95) to sculpt tactile 3D roundness.
+- Shadow Treatment: Buoyant clay drop shadow: 0 25px 50px -12px rgba(180, 155, 130, 0.35).`,
   },
   {
     id: 'art-deco-double',
@@ -1329,12 +1430,12 @@ export const SURFACE_PARTS: SurfacePart[] = [
     description: 'The famous Dribbble soft UI trend where controls appear molded directly out of the surface sheet.',
     borderWidth: '1px',
     borderStyle: 'solid',
-    radius: '16px',
-    shadow: '6px 6px 14px rgba(0,0,0,0.12), -6px -6px 14px rgba(255,255,255,0.85)',
+    radius: '20px',
+    shadow: '6px 6px 14px rgba(180, 185, 210, 0.45), -6px -6px 14px rgba(255, 255, 255, 0.95)',
     promptSnippet: `### Surface, Borders & Elevation: Soft Neumorphic Emboss
 - Boundaries: Matching tonal 1px border blending into substrate.
-- Corner Radii: 16px organic curved corners.
-- Shadow Treatment: Dual opposing light/dark cast shadows: 6px 6px 14px rgba(0,0,0,0.12) combined with -6px -6px 14px rgba(255,255,255,0.85).
+- Corner Radii: 20px organic curved squircle corners.
+- Shadow Treatment: Dual opposing light/dark cast shadows: 6px 6px 14px rgba(180, 185, 210, 0.45) combined with -6px -6px 14px rgba(255, 255, 255, 0.95).
 - Visual Effect: Appears soft-molded and continuous with background.`,
   },
   {
@@ -1408,6 +1509,23 @@ export const SURFACE_PARTS: SurfacePart[] = [
 - Backdrop Filter: 16px deep frosted glass refraction (\`backdrop-blur-md\`).
 - Chromatic Shadows: Multi-stop dual shadow: 0 8px 32px -4px rgba(56,189,248,0.25), 0 0 16px -2px rgba(244,114,182,0.2).
 - Corner Radii: 20px organic smooth pill radius.`,
+  },
+  {
+    id: 'milky-frosted-glass',
+    name: 'Dense Opal Milk Glass',
+    tagline: 'Semi-opaque white frosted acrylic with specular top rim highlight and diffuse shadow',
+    description: 'Luminous spatial computing card with high-opacity frosted milk blur (backdrop-blur-2xl), 1.5px specular white rim border, and deep diffuse ambient shadow.',
+    borderWidth: '1.5px',
+    borderStyle: 'solid',
+    radius: '28px',
+    shadow: '0 25px 60px -15px rgba(100, 115, 145, 0.22), 0 8px 24px rgba(100, 115, 145, 0.1), inset 0 1.5px 2px rgba(255, 255, 255, 0.95), inset 0 0 1px rgba(255, 255, 255, 1)',
+    backdropBlur: '28px',
+    promptSnippet: `### Surface, Borders & Elevation: Dense Opal Milk Glass
+- Material: Translucent dense white milk acrylic (linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.38) 100%)) with heavy backdrop blur (backdrop-filter: blur(28px) saturate(190%)).
+- Specular Rim Highlight: Crisp 1.5px white glass chamfer border: border: 1.5px solid rgba(255, 255, 255, 0.85); inset 0 1.5px 2px rgba(255, 255, 255, 0.95).
+- Corner Radii: 28px continuous squircle curvature for seamless spatial computing elegance.
+- Ambient Canvas: Rich pastel aura mesh environment (soft coral, sky blue, lavender radial light blooms) allowing glass to scatter ambient spectral color.
+- Shadow Treatment: Deep floating spatial elevation: 0 25px 60px -15px rgba(100, 115, 145, 0.22), 0 8px 24px rgba(100, 115, 145, 0.1).`,
   },
 ];
 
@@ -1632,6 +1750,43 @@ export const COMPONENT_PARTS: ComponentPart[] = [
 - Badges: High-density technical telemetry chips with dot status markers.
 - Micro-Interactions: High-speed brightness flash on hover with instant tactile 1px depression.`,
   },
+  {
+    id: 'neumorphic-soft-controls',
+    name: 'Soft Neumorphic Molded Controls',
+    tagline: 'Extruded pill buttons with dual opposing cast shadows and debossed active depressions',
+    description: 'Tactile soft UI buttons, search bars, and status badges molded seamlessly from the surface canvas with dual light/dark shadows that depress into debossed inset wells when active.',
+    buttonClass: 'px-4 py-2 rounded-2xl bg-[#EEEEFA] text-[#35374B] font-semibold text-xs shadow-[4px_4px_10px_rgba(180,185,210,0.5),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[5px_5px_12px_rgba(180,185,210,0.6),-5px_-5px_12px_rgba(255,255,255,1)] active:shadow-[inset_3px_3px_6px_rgba(180,185,210,0.5),inset_-3px_-3px_6px_rgba(255,255,255,0.95)] active:scale-98 transition-all cursor-pointer flex items-center gap-1.5',
+    badgeClass: 'px-2.5 py-0.5 rounded-full bg-[#EEEEFA] text-[#7B7FDA] font-mono text-[10px] font-bold shadow-[inset_2px_2px_4px_rgba(180,185,210,0.4),inset_-2px_-2px_4px_rgba(255,255,255,0.9)]',
+    promptSnippet: `### UI Component Treatment: Soft Neumorphic Molded Controls
+- Buttons: Extruded pill buttons with dual opposing cast shadows (4px 4px 10px rgba(180, 185, 210, 0.5) and -4px -4px 10px rgba(255, 255, 255, 0.95)).
+- Active States: Reverse shadow polarity on click/press to create an authentic debossed depression well (inset 3px 3px 6px rgba(180, 185, 210, 0.5), inset -3px -3px 6px rgba(255, 255, 255, 0.95)).
+- Inputs: Recessed inset channel wells with debossed inner ambient occlusion and rounded-full silhouettes.
+- Badges: Molded sunken or elevated pill badges with subtle periwinkle telemetry text.`,
+  },
+  {
+    id: 'milky-glass-pills',
+    name: 'Opal Milky Glass Controls',
+    tagline: 'Translucent white frosted pills with specular top rim highlights and diffuse drop shadow',
+    description: 'Dense white frosted acrylic capsule buttons and status tags with specular top edge reflection, subtle light blur, and gentle hover scale.',
+    buttonClass: 'px-4 py-2 rounded-full bg-white/85 backdrop-blur-md text-slate-800 font-semibold text-xs border border-white/80 shadow-[0_4px_16px_rgba(15,23,42,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] hover:bg-white hover:shadow-[0_8px_24px_rgba(15,23,42,0.1),inset_0_1px_0_rgba(255,255,255,1)] active:scale-95 transition-all cursor-pointer flex items-center gap-1.5',
+    badgeClass: 'px-2.5 py-0.5 rounded-full bg-white/70 backdrop-blur-xs text-sky-700 font-medium text-[10px] border border-white/90 shadow-[0_2px_8px_rgba(15,23,42,0.04)]',
+    promptSnippet: `### UI Component Treatment: Opal Milky Glass Controls
+- Buttons: Fully rounded pill capsule (rounded-full) with dense frosted white glass (bg-white/85 backdrop-blur-md), top specular rim highlight, and springy active press response.
+- Badges: Translucent white frosted badges with subtle sky/indigo text.
+- Interaction: Smooth cubic-bezier hover transition with light diffusion and gentle scale lift.`,
+  },
+  {
+    id: 'clay-puffy-buttons',
+    name: 'Claymorphism Puffy 3D Buttons',
+    tagline: 'Plump inflated 3D buttons with dual inner shadows and physical spring depression',
+    description: 'Bubbly 3D clay controls with soft white inner highlights, shaded bottom bevels, and springy active press response that physically depresses into the surface.',
+    buttonClass: 'px-4 py-2 rounded-2xl bg-white text-stone-800 font-bold text-xs shadow-[0_8px_18px_rgba(180,160,140,0.28),inset_2px_2px_4px_rgba(255,255,255,1),inset_-2px_-2px_4px_rgba(160,140,120,0.1)] hover:shadow-[0_12px_24px_rgba(180,160,140,0.35),inset_2px_2px_4px_rgba(255,255,255,1),inset_-2px_-2px_4px_rgba(160,140,120,0.12)] active:shadow-[0_2px_6px_rgba(180,160,140,0.2),inset_2px_2px_4px_rgba(0,0,0,0.08)] active:scale-96 transition-all cursor-pointer flex items-center gap-1.5 border border-amber-100/40',
+    badgeClass: 'px-2.5 py-0.5 rounded-xl bg-white text-blue-600 font-bold text-[10px] shadow-[0_4px_10px_rgba(180,160,140,0.18),inset_1px_1px_2px_rgba(255,255,255,0.95),inset_-1px_-1px_2px_rgba(160,140,120,0.08)] border border-amber-100/30',
+    promptSnippet: `### UI Component Treatment: Claymorphism Puffy 3D Buttons
+- Buttons: Plump 3D clay buttons with dual inner volume lighting (white top-left highlight and soft shaded bottom-right bevel) that depress by 1px on click with springy feedback.
+- Badges: Molded clay pill chips with soft inner bevel and buoyant elevation.
+- Interaction: Tactile physical feedback replicating soft-touch rubberized or clay mechanical buttons.`,
+  },
 ];
 
 // ============================================================================
@@ -1833,6 +1988,17 @@ export const ACCENT_PARTS: AccentPart[] = [
 - Connecting Vectors: 1px whisper-thin coordinate vector lines linking nodes across sub-panels.
 - Topology Status: Technical node count and hexadecimal cluster identifier tags (\`TOPOLOGY MESH // 0x4B\`).`,
   },
+  {
+    id: 'concentric-rings',
+    name: 'Concentric Debossed Dial Rings & Gauge Arcs',
+    tagline: 'Radial debossed dial tracks with glowing periwinkle telemetry arcs and concentric gauge rings',
+    description: 'Signature circular soft UI gauge dial markers with debossed inner tracks and glowing periwinkle progress arcs representing analog potentiometer telemetry.',
+    type: 'concentric-rings',
+    promptSnippet: `### Signature Graphic Accents: Concentric Debossed Dial Rings & Gauge Arcs
+- Gauge Rings: Concentric circular debossed dial tracks molded into cards with dual light/dark bevels.
+- Telemetry Arcs: Radiant periwinkle circular progress arcs (\`stroke: #7B7FDA\`) indicating telemetry percentage and volume modulation.
+- Tactile Dials: Circular concave wells with raised center knobs and micro degree ticks.`,
+  },
 ];
 
 // ============================================================================
@@ -1849,10 +2015,18 @@ export const DEFAULT_DESIGN_PARTS: DesignPartsSelection = {
 // ============================================================================
 // AUTOMATIC MASTER PROMPT SYNTHESIS (COMBINING ALL 5 CHOSEN PARTS)
 // ============================================================================
+function generateComponentBlueprints(selection: DesignPartsSelection): string {
+  const engine = getDesignEngine(selection);
+  return engine.getBlueprints(selection);
+}
+
 export function generateCombinedMasterPrompt(selection: DesignPartsSelection): string {
   const { palette, font, surface, components, accent } = selection;
+  const blueprints = generateComponentBlueprints(selection);
 
-  return `## Aesthetic Archetype: ${palette.name} + ${font.name} + ${surface.name} + ${components.name}
+  return `## ARCHETYPE AGENT DIRECTIVE: ${palette.name} + ${font.name} + ${surface.name}
+You are tasked with building or styling a web application matching this exact design system.
+Follow the visual rules, tokens, and component blueprints below:
 
 ${palette.promptSnippet}
 
@@ -1867,7 +2041,9 @@ ${accent.promptSnippet}
 ### Tailwind CSS v4 Theme Block
 \`\`\`css
 ${buildThemeBlock(selection)}
-\`\`\``;
+\`\`\`
+
+${blueprints}`;
 }
 
 // Shared single source of truth for the Tailwind CSS v4 @theme token block.
@@ -1970,7 +2146,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     badge: 'Retro OS',
     categoryTag: 'retro',
     accentColor: '#008080',
-    paletteId: 'vintage-hifi',
+    paletteId: 'win95-classic',
     fontId: 'crt-terminal-vt323',
     surfaceId: 'win95-classic-bezel',
     componentId: 'win95-beveled-push',
@@ -1999,7 +2175,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     categoryTag: 'minimal',
     accentColor: '#2D5A27',
     paletteId: 'matcha-hinoki',
-    fontId: 'neo-grotesque',
+    fontId: 'editorial-serif',
     surfaceId: 'nordic-soft',
     componentId: 'japanese-zen-hairline',
     accentId: 'noise-grain',
@@ -2115,6 +2291,48 @@ export const CURATED_THEMES: CuratedTheme[] = [
     surfaceId: 'iridescent-holographic',
     componentId: 'floating-dock-capsule',
     accentId: 'node-constellation',
+  },
+  {
+    id: 'neumorphic-soft-frost',
+    name: 'Neumorphic Frost & Soft UI',
+    tagline: 'Dual-cast opposing shadows, extruded debossed controls, and periwinkle telemetry',
+    description: 'The quintessential Dribbble Soft UI (Neumorphism) aesthetic featuring continuous tactile surfaces molded seamlessly from the pale lilac substrate, debossed concave wells, and radiant periwinkle/lavender micro-interactions.',
+    badge: 'Soft UI Neumorphic',
+    categoryTag: 'minimal',
+    accentColor: '#7B7FDA',
+    paletteId: 'neumorphic-periwinkle',
+    fontId: 'modern-saas-humanist',
+    surfaceId: 'neumorphic-soft',
+    componentId: 'neumorphic-soft-controls',
+    accentId: 'concentric-rings',
+  },
+  {
+    id: 'milky-frosted-glass',
+    name: 'Milky Frosted Glass (visionOS Opal)',
+    tagline: 'Dense translucent milk acrylic, specular glowing rims, and diffuse atmospheric aura',
+    description: 'Luminous spatial computing interface featuring dense semi-opaque white milk glass, glowing specular border reflections, deep floating ambient occlusion, and ambient atmospheric light bloom.',
+    badge: 'Opal Milk Glass',
+    categoryTag: 'minimal',
+    accentColor: '#0284C7',
+    paletteId: 'opal-milk-glass',
+    fontId: 'bento-jakarta',
+    surfaceId: 'milky-frosted-glass',
+    componentId: 'milky-glass-pills',
+    accentId: 'aurora-glow',
+  },
+  {
+    id: 'claymorphism-ceramic',
+    name: 'Claymorphism 3D Marshmallow & Ceramic',
+    tagline: 'Warm vanilla cream canvas, pure white 3D inflated cards, and candy-colored marshmallow bars',
+    description: 'Tactile, pillowy 3D clay aesthetic with plump inflated matte white ceramic surfaces, dual inner volume shadows, candy-colored squircle badges, and warm vanilla cream grounding.',
+    badge: '3D Claymorphic',
+    categoryTag: 'minimal',
+    accentColor: '#2563EB',
+    paletteId: 'clay-matte-ceramic',
+    fontId: 'bento-jakarta',
+    surfaceId: 'claymorphism-3d',
+    componentId: 'clay-puffy-buttons',
+    accentId: 'pure-minimal',
   },
 ];
 

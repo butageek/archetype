@@ -100,7 +100,8 @@ export type AccentType =
   | 'crosshair-plus'
   | 'barcode-serial'
   | 'audio-waveform'
-  | 'node-constellation';
+  | 'node-constellation'
+  | 'concentric-rings';
 
 export interface AccentPart {
   id: string;

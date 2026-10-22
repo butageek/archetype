@@ -5,15 +5,12 @@ import Link from 'next/link';
 import {
   Check,
   ChevronDown,
-  Copy,
   Dices,
   Sparkles,
-  Terminal,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import {
   ACCENT_PARTS,
-  buildThemeBlock,
   COMPONENT_PARTS,
   CURATED_THEMES,
   DEFAULT_DESIGN_PARTS,
@@ -40,11 +37,10 @@ import { ArchetypeLogo } from '../components/ArchetypeLogo';
 
 export default function ArchetypeSynthesizerPage() {
   const [selection, setSelection] = useState<DesignPartsSelection>(DEFAULT_DESIGN_PARTS);
-  const [activeCategory, setActiveCategory] = useState<DesignPartCategory>('palette');
+  const [activeCategory, setActiveCategory] = useState<DesignPartCategory>('themes');
   const [surpriseMenuOpen, setSurpriseMenuOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copiedCombined, setCopiedCombined] = useState<boolean>(false);
-  const [leftTab, setLeftTab] = useState<'mockup' | 'prompt'>('mockup');
   const toastTimerRef = useRef<number | null>(null);
   const copiedTimerRef = useRef<number | null>(null);
 
@@ -94,11 +90,11 @@ export default function ArchetypeSynthesizerPage() {
     return generateCombinedMasterPrompt(selection);
   }, [selection]);
 
-  // 1-Click Copy Complete Prompt
+  // 1-Click Copy Complete Prompt / Theme Kit
   const handleCopyCompletePrompt = async () => {
     const ok = await copyText(
       combinedMasterPrompt,
-      'Copied Combined AI Agent Master Prompt! Ready to paste into Claude, Cursor, or Antigravity.',
+      'Copied AI Agent Kit! Directives, @theme CSS & React blueprints ready to paste into Cursor, Claude, or ChatGPT.',
     );
     if (!ok) return;
 
@@ -380,14 +376,14 @@ export default function ArchetypeSynthesizerPage() {
             <button
               onClick={handleCopyCompletePrompt}
               className="px-4 py-1.5 bg-stone-900 hover:bg-black text-white text-xs font-bold rounded-xl cursor-pointer flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
-              title="Copy complete synthesized master prompt"
+              title="Copy complete AI Agent Kit (directives, @theme tokens & React component blueprints)"
             >
               {copiedCombined ? (
                 <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
               ) : (
                 <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               )}
-              <span>{copiedCombined ? 'Copied Prompt!' : 'Copy Master Prompt'}</span>
+              <span>{copiedCombined ? 'Copied for AI Agent!' : '⚡ Copy for AI Agent'}</span>
             </button>
           </div>
         </div>
@@ -406,246 +402,117 @@ export default function ArchetypeSynthesizerPage() {
           >
             {/* The Main Studio Card */}
             <div className="bg-white rounded-2xl border border-stone-200 p-3 sm:p-4 shadow-xs space-y-2.5">
-              {/* Studio Card Header: Title & View Mode / Scale Tabs */}
+              {/* Studio Card Header: Title */}
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 pb-2.5">
                 <div>
                   <div className="flex items-center gap-2">
                     <h2 className="text-sm sm:text-base font-bold text-stone-900">
-                      {leftTab === 'mockup' ? 'Live Combined Design Mockup' : 'Synthesized Agent Master Prompt'}
+                      Live Combined Design Specimen
                     </h2>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold">
-                      Live Synthesis
+                      Interactive Preview
                     </span>
                   </div>
                   <p className="text-xs text-stone-500 mt-0.5 line-clamp-1">
                     <strong>{selection.palette.name}</strong> • <strong>{selection.font.name}</strong> • <strong>{selection.surface.name}</strong>
                   </p>
                 </div>
-
-                {/* View Mode Switcher: Mockup vs Master Prompt */}
-                <div className="flex items-center gap-1 p-1 bg-stone-100 rounded-xl border border-stone-200 text-xs">
-                  <button
-                    type="button"
-                    onClick={() => setLeftTab('mockup')}
-                    className={`px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
-                      leftTab === 'mockup'
-                        ? 'bg-stone-900 text-white shadow-xs font-bold'
-                        : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
-                    }`}
-                  >
-                    <span>👁 Live Mockup</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setLeftTab('prompt')}
-                    className={`px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
-                      leftTab === 'prompt'
-                        ? 'bg-stone-900 text-white shadow-xs font-bold'
-                        : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
-                    }`}
-                  >
-                    <Terminal className="w-3.5 h-3.5" />
-                    <span>⚡ Master Prompt</span>
-                  </button>
-                </div>
               </div>
 
-              {/* TAB 1: LIVE COMBINED MOCKUP VIEWPORT */}
-              {leftTab === 'mockup' && (
-                <div className="space-y-2.5 animate-in fade-in duration-150">
-                  <div className="overflow-hidden rounded-2xl">
-                    <LiveCombinedPreview selection={selection} />
+              {/* LIVE COMBINED SPECIMEN VIEWPORT */}
+              <div className="space-y-2.5">
+                <div className="w-full">
+                  <LiveCombinedPreview selection={selection} />
+                </div>
+
+                {/* Sleek Integrated Toolbar: Active Theme / Archetype & 1-Click Pillar Re-Rolls */}
+                <div className="flex flex-wrap items-center justify-between gap-1.5 pt-1 text-[11px] font-mono border-t border-stone-100">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    {activeCuratedTheme ? (
+                      <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 border border-amber-200 font-semibold truncate">
+                        <Sparkles className="w-3 h-3 text-amber-600 shrink-0" />
+                        <span className="truncate">Theme: <strong>{activeCuratedTheme.name}</strong></span>
+                        <span className="text-[9px] px-1 py-0.2 rounded bg-white text-amber-800 border border-amber-200 font-bold shrink-0">
+                          {activeCuratedTheme.badge}
+                        </span>
+                      </span>
+                    ) : (
+                      <span className="text-stone-500 font-medium px-1 truncate">
+                        Custom Composition • <strong>5 Pillars</strong>
+                      </span>
+                    )}
                   </div>
 
-                  {/* Sleek Integrated Toolbar: Active Theme / Archetype & 1-Click Pillar Re-Rolls */}
-                  <div className="flex flex-wrap items-center justify-between gap-1.5 pt-1 text-[11px] font-mono border-t border-stone-100">
-                    <div className="flex items-center gap-1.5 min-w-0">
-                      {activeCuratedTheme ? (
-                        <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 border border-amber-200 font-semibold truncate">
-                          <Sparkles className="w-3 h-3 text-amber-600 shrink-0" />
-                          <span className="truncate">Theme: <strong>{activeCuratedTheme.name}</strong></span>
-                          <span className="text-[9px] px-1 py-0.2 rounded bg-white text-amber-800 border border-amber-200 font-bold shrink-0">
-                            {activeCuratedTheme.badge}
-                          </span>
-                        </span>
-                      ) : (
-                        <span className="text-stone-500 font-medium px-1 truncate">
-                          Custom Composition • <strong>5 Pillars</strong>
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Compact Inline Dice Buttons to tweak each pillar */}
-                    <div className="flex items-center gap-1 shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleRandomizeCategory('palette');
-                          setActiveCategory('palette');
-                        }}
-                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
-                        title={`Palette: ${selection.palette.name} (Click to randomize)`}
-                      >
-                        <span>🎨</span>
-                        <span className="hidden sm:inline text-[10px] font-bold">Palette</span>
-                        <Dices className="w-2.5 h-2.5 text-stone-500" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleRandomizeCategory('font');
-                          setActiveCategory('font');
-                        }}
-                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
-                        title={`Typography: ${selection.font.name} (Click to randomize)`}
-                      >
-                        <span>🔤</span>
-                        <span className="hidden sm:inline text-[10px] font-bold">Type</span>
-                        <Dices className="w-2.5 h-2.5 text-stone-500" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleRandomizeCategory('surface');
-                          setActiveCategory('surface');
-                        }}
-                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
-                        title={`Surface: ${selection.surface.name} (Click to randomize)`}
-                      >
-                        <span>📐</span>
-                        <span className="hidden sm:inline text-[10px] font-bold">Surface</span>
-                        <Dices className="w-2.5 h-2.5 text-stone-500" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleRandomizeCategory('components');
-                          setActiveCategory('components');
-                        }}
-                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
-                        title={`Controls: ${selection.components.name} (Click to randomize)`}
-                      >
-                        <span>🧩</span>
-                        <span className="hidden sm:inline text-[10px] font-bold">Controls</span>
-                        <Dices className="w-2.5 h-2.5 text-stone-500" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleRandomizeCategory('accents');
-                          setActiveCategory('accents');
-                        }}
-                        className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
-                        title={`Accent: ${selection.accent.name} (Click to randomize)`}
-                      >
-                        <span>✨</span>
-                        <span className="hidden sm:inline text-[10px] font-bold">Accent</span>
-                        <Dices className="w-2.5 h-2.5 text-stone-500" />
-                      </button>
-                    </div>
+                  {/* Compact Inline Dice Buttons to tweak each pillar */}
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleRandomizeCategory('palette');
+                        setActiveCategory('palette');
+                      }}
+                      className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                      title={`Palette: ${selection.palette.name} (Click to randomize)`}
+                    >
+                      <span>🎨</span>
+                      <span className="hidden sm:inline text-[10px] font-bold">Palette</span>
+                      <Dices className="w-2.5 h-2.5 text-stone-500" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleRandomizeCategory('font');
+                        setActiveCategory('font');
+                      }}
+                      className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                      title={`Typography: ${selection.font.name} (Click to randomize)`}
+                    >
+                      <span>🔤</span>
+                      <span className="hidden sm:inline text-[10px] font-bold">Type</span>
+                      <Dices className="w-2.5 h-2.5 text-stone-500" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleRandomizeCategory('surface');
+                        setActiveCategory('surface');
+                      }}
+                      className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                      title={`Surface: ${selection.surface.name} (Click to randomize)`}
+                    >
+                      <span>📐</span>
+                      <span className="hidden sm:inline text-[10px] font-bold">Surface</span>
+                      <Dices className="w-2.5 h-2.5 text-stone-500" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleRandomizeCategory('components');
+                        setActiveCategory('components');
+                      }}
+                      className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                      title={`Controls: ${selection.components.name} (Click to randomize)`}
+                    >
+                      <span>🧩</span>
+                      <span className="hidden sm:inline text-[10px] font-bold">Controls</span>
+                      <Dices className="w-2.5 h-2.5 text-stone-500" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleRandomizeCategory('accents');
+                        setActiveCategory('accents');
+                      }}
+                      className="px-2 py-0.5 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 cursor-pointer transition-colors flex items-center gap-1"
+                      title={`Accent: ${selection.accent.name} (Click to randomize)`}
+                    >
+                      <span>✨</span>
+                      <span className="hidden sm:inline text-[10px] font-bold">Accent</span>
+                      <Dices className="w-2.5 h-2.5 text-stone-500" />
+                    </button>
                   </div>
                 </div>
-              )}
-
-              {/* TAB 2: SYNTHESIZED AGENT MASTER PROMPT VIEW */}
-              {leftTab === 'prompt' && (
-                <div className="space-y-3 animate-in fade-in duration-150">
-                  {/* Row 1: Directives label and Copy Full Prompt button */}
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs text-stone-500 font-medium truncate">
-                      Plain-text design directives + Tailwind CSS v4 @theme block:
-                    </span>
-                    <button
-                      type="button"
-                      onClick={handleCopyCompletePrompt}
-                      className="px-3.5 py-1.5 text-xs font-bold text-stone-900 bg-stone-100 hover:bg-stone-200 border border-stone-300 rounded-xl flex items-center gap-1.5 transition-transform active:scale-95 cursor-pointer shadow-xs flex-shrink-0"
-                      title="Copy the complete synthesized prompt"
-                    >
-                      {copiedCombined ? (
-                        <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[3]" />
-                      ) : (
-                        <Copy className="w-3.5 h-3.5 text-stone-700" />
-                      )}
-                      <span>{copiedCombined ? 'Copied Full Prompt!' : 'Copy Full Prompt'}</span>
-                    </button>
-                  </div>
-
-                  {/* Row 2: Dedicated Category Part Copy Chips */}
-                  <div className="flex items-center gap-1.5 flex-wrap pt-1 border-t border-stone-100">
-                    <span className="text-[10px] font-mono font-bold text-stone-500 uppercase tracking-wider mr-0.5">
-                      Copy Part:
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        copyText(selection.palette.promptSnippet, `Copied Palette tokens (${selection.palette.name})!`)
-                      }
-                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-                      title="Copy only color palette tokens"
-                    >
-                      <span>🎨</span> <span>Palette</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        copyText(selection.font.promptSnippet, `Copied Typography rules (${selection.font.name})!`)
-                      }
-                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-                      title="Copy only typography rules"
-                    >
-                      <span>🔤</span> <span>Typography</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        copyText(selection.surface.promptSnippet, `Copied Surface specifications (${selection.surface.name})!`)
-                      }
-                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-                      title="Copy only surface and elevation styles"
-                    >
-                      <span>📐</span> <span>Surface</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        copyText(selection.components.promptSnippet, `Copied UI Controls specification (${selection.components.name})!`)
-                      }
-                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-                      title="Copy only UI component and control styles"
-                    >
-                      <span>🧩</span> <span>Controls</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        copyText(selection.accent.promptSnippet, `Copied Accent style (${selection.accent.name})!`)
-                      }
-                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-                      title="Copy only signature graphic accent styles"
-                    >
-                      <span>✨</span> <span>Accent</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => copyText(buildThemeBlock(selection), 'Copied Tailwind CSS v4 @theme block!')}
-                      className="px-2.5 py-1 text-[11px] font-mono bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-                      title="Copy only Tailwind CSS v4 @theme block"
-                    >
-                      <span>⚡</span> <span>@theme</span>
-                    </button>
-                  </div>
-
-                  <div className="relative">
-                    <pre className="w-full p-4 bg-stone-900 text-stone-100 rounded-xl font-mono text-xs leading-relaxed border border-stone-800 overflow-auto max-h-[440px] whitespace-pre-wrap shadow-inner scrollbar-thin">
-                      {combinedMasterPrompt}
-                    </pre>
-                  </div>
-
-                  <div className="text-[11px] text-stone-500">
-                    💡 <strong>Tip</strong>: Click any category pill above to copy that specific part&apos;s prompt, or click <strong>Copy Full Prompt</strong> for the entire synthesized directive.
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
           </section>
 
@@ -679,7 +546,6 @@ export default function ArchetypeSynthesizerPage() {
                 onSelectComponent={(comp: ComponentPart) => setSelection((prev) => ({ ...prev, components: comp }))}
                 onSelectAccent={(acc: AccentPart) => setSelection((prev) => ({ ...prev, accent: acc }))}
                 onApplyTheme={handleApplyTheme}
-                onToast={showToast}
                 activeCategory={activeCategory}
                 onCategoryChange={setActiveCategory}
                 onRandomizeCategory={handleRandomizeCategory}

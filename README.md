@@ -29,30 +29,76 @@ Archetype deconstructs UI design into 5 enumerable, modular pillars:
 ┌────────────────────────────────────────────────────────────────────────┐
 │                        ARCHETYPE STUDIO WORKSPACE                      │
 ├───────────────────────────────────┬────────────────────────────────────┤
-│   LIVE COMBINED MOCKUP & PROMPT   │       RECOGNIZED PARTS LIBRARY     │
+│   LIVE COMBINED SPECIMEN & EXPORT │       RECOGNIZED PARTS LIBRARY     │
 │   (Pinned in Viewport)            │       (Theme Search & Tag Filters) │
 │                                   │                                    │
-│  • Interactive Specimen Preview   │   ✨ Curated Themes (16 Presets)   │
-│  • Checkboxes, Radios, Dropdown   │   01. Palette (33 styles)          │
-│  • Inputs, Slider, Hover Physics  │   02. Typography (21 fonts)        │
-│  • Inline 🎲 Dice Re-Roll Toolbar │   03. Surface & Borders (19 styles)│
-│  • Dedicated Category Copy Chips  │   04. UI Controls (18 styles)      │
-│  • Master Plain-Text Prompt Tab   │   05. Graphic Accents (19 styles)  │
-│  • 1-Click Universal Copy         │   • Category-specific Randomizers  │
-│                                   │   • Live Visual Preview Cards      │
+│  • Interactive Specimen Preview   │   ✨ Curated Themes (19 Presets)   │
+│  • Segmented Tabs, Inputs, Sliders│   01. Palette (37 styles)          │
+│  • Checkboxes, Radios, Dropdown   │   02. Typography (21 fonts)        │
+│  • Buttons with Tactile Physics   │   03. Surface & Borders (20 styles)│
+│  • Inline 🎲 Dice Re-Roll Toolbar │   04. UI Controls (21 styles)      │
+│  • 6 Physical Design Engines      │   05. Graphic Accents (20 styles)  │
+│  • 1-Click "⚡ Copy for AI Agent"  │   • Category-specific Randomizers  │
+│    (Directives + Theme + Blueprints) • Live Visual Preview Cards      │
 └───────────────────────────────────┴────────────────────────────────────┘
 ```
 
-1. **1-Click Prebuilt Curated Themes**: Choose from 16 calibrated aesthetic universes where palette, font, surface, controls, and accents have been mathematically harmonized to avoid visual clashes.
+1. **1-Click Prebuilt Curated Themes**: Choose from 19 calibrated aesthetic universes where palette, font, surface, controls, and accents have been mathematically harmonized to avoid visual clashes.
 2. **Modular Customization**: Tweak any of the 5 categories individually via the right-hand library tabs or inline dice badges.
 3. **Interactive Live Specimen**: The pinned left-hand studio canvas immediately updates colors, typography, border geometry, shadows, component physics (inputs, dropdowns, checkboxes, radio groups, buttons), and atmospheric graphic accents in real time.
-4. **1-Click Copy Master Prompt & Parts**: Click **"Copy Master Prompt"** to copy the synthesized prompt with Tailwind CSS v4 `@theme` tokens, or click any dedicated category chip (`🎨 Palette`, `🔤 Typography`, `📐 Surface`, `🧩 Controls`, `✨ Accent`, `⚡ @theme`) to copy individual styles.
+4. **1-Click "⚡ Copy for AI Agent"**: Click the header button to copy the self-contained Agent Kit containing design directives, Tailwind CSS v4 `@theme` tokens, and ready-to-paste React component blueprints for all 11 previewed components (`Card`, `Badge`, `Tabs`, `Button` [Primary & Secondary], `Input`, `Select`, `Toggle`, `Checkbox`, `RadioGroup`, `Slider`, and `StatCard`) matching the active design engine.
 
 ---
 
-## ✨ 16 Prebuilt Curated Themes (Guaranteed Harmonious Combinations)
+## 🔬 The Design Engine Architecture
 
-To eliminate design guesswork and ensure colors, fonts, shadows, and accents never clash, Archetype includes 16 production-tested, cohesive themes:
+Conventional AI design prompt tools output vague text or generic CSS that leaves shadows, lighting models, and component DOM mechanics up to AI hallucination—inevitably producing bland, generic gray software.
+
+Archetype solves this by governing all rendering through **6 physical design engines** ([`src/lib/designEngines.ts`](src/lib/designEngines.ts)). The engine acts as the **single source of truth** powering both the live interactive specimen in the browser and the drop-in React blueprints exported to your AI agent:
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│               19 CURATED THEMES / CUSTOM COMBOS                │
+└────────────────────────────────────────────────────────────────┘
+                                │
+          Does it require non-standard CSS physics?
+          (Refraction, 3D extrusion, 90s bevels, etc.)
+               │                                │
+              YES                              NO
+               │                                │
+      Dedicated Engine                   Universal Engine
+     ───────────────────                ──────────────────
+     • Milky Frosted Glass              • Stripe Fintech Precision
+       └─► frosted-glass                • Obsidian Velvet (Linear)
+     • Claymorphism 3D                  • Wonky 70s Editorial
+       └─► claymorphism                 • Cyberpunk 2077 Night City
+     • Neumorphic Frost                 • Kyoto Zen Modern
+       └─► neumorphism                  • CAD Blueprint
+     • Windows 95 Classic               • Monokai Pro Terminal
+       └─► win95                        • Retro Synthwave Arcade
+     • Bauhaus Primaries                • Art Deco Metropolis
+       └─► bauhaus                      • Game Boy 1989
+                                        • Avant-Garde Klein Blue
+                                        • Cosmic Lilac / Arc Style
+                                        • Frutiger Aero Y2K
+                                          └─► modern-saas (token-driven)
+```
+
+1. **`modern-saas` (Universal Token-Reactive Engine)**: Powers standard modern web paradigms (Stripe, Linear/Raycast, Cyberpunk HUD, 70s Editorial, Zen Modern, CAD Blueprint). Dynamically parameterizes elevation, corner radii, borders, and tactile hover physics from the selected tokens.
+2. **`frosted-glass` (Apple visionOS Opal Milk Glass)**: Multi-layer backdrop blur (`backdrop-blur-2xl`), specular highlight rim lights (`inset 0 1.5px 2px #fff`), double border glow, and high-contrast debossed slate socket wells.
+3. **`claymorphism` (3D Marshmallow & Ceramic)**: Plump inflated volumes, multi-tier drop shadows, dual-tier inner volume highlights (`inset 0 4px 8px ...`), and springy press physics.
+4. **`neumorphism` (Soft UI)**: Dual opposing light/dark cast extrusions seamlessly molded from the pale lilac substrate.
+5. **`win95` (Classic 90s Desktop)**: Rigid dual-tone raised/inset 3D bevels (`inset 1px 1px #fff, inset -1px -1px #808080`), square corners, and classic inverted `:active` states.
+6. **`bauhaus` (Constructivist Geometry)**: Solid geometric black outlines, offset un-blurred drop shadows (`box-shadow: 5px 5px 0px #000`), and raw primary color blocking.
+
+> [!TIP]
+> **Complete 11-Component Agent Kit**: When you click **"⚡ Copy for AI Agent"**, Archetype exports production-ready TypeScript/React blueprints for all 11 previewed UI components (`Card`, `Badge`, `Tabs`, `Button` [Primary & Secondary], `Input`, `Select`, `Toggle`, `Checkbox`, `RadioGroup`, `Slider`, and `StatCard`), perfectly matching the physical rendering engine of the selected theme.
+
+---
+
+## ✨ 19 Prebuilt Curated Themes (Guaranteed Harmonious Combinations)
+
+To eliminate design guesswork and ensure colors, fonts, shadows, and accents never clash, Archetype includes 19 production-tested, cohesive themes:
 
 | # | Theme Name | Badge | Category | Key Components |
 |---|------------|-------|----------|----------------|
@@ -72,14 +118,18 @@ To eliminate design guesswork and ensure colors, fonts, shadows, and accents nev
 | 14 | **Retro 80s Synthwave Arcade** | Neon Arcade | Retro | Synthwave Magenta/Cyan + Righteous Disco + Neon Bloom Wireframe + Laser Shimmer Buttons + Audio Waveform |
 | 15 | **Bauhaus Constructivist Primaries** | Constructivist | Industrial | Bauhaus Primaries + Neo-Grotesque + Hard Offset Shadow + Neo-Brutalist Chunky + Dot Matrix Grid |
 | 16 | **Cosmic Lilac & Floating Dock (Arc Style)** | Holographic Fluid | High-Tech | Cosmic Lilac + Jakarta Sans + Holographic Foil + Floating Dock Capsules + Node Constellation |
+| 17 | **Neumorphic Frost & Soft UI** | Soft UI Neumorphic | Minimal | Soft Periwinkle + Humanist Sans + Neumorphic Soft + Soft Extruded Controls + Concentric Rings |
+| 18 | **Milky Frosted Glass (visionOS Opal)** | Opal Milk Glass | Minimal | Opal Milk Glass + Plus Jakarta Sans + Milky Frosted Glass + Milky Glass Pills + Aurora Glow |
+| 19 | **Claymorphism 3D Marshmallow & Ceramic** | 3D Claymorphic | Minimal | Matte Ceramic + Plus Jakarta Sans + Claymorphism 3D + Clay Puffy Buttons + Pure Minimal |
 
 ---
 
 ## 🎨 The 5 Design Pillars
 
-### 1. Color Palettes (33 Curated Styles)
+### 1. Color Palettes (37 Curated Styles)
 - **Tech Titans & Developer Favorites**: *Stripe Vibrant Fintech Indigo*, *Supabase Dark Emerald Matrix*, *Raycast Obsidian Velvet & Crimson*, *Vercel Stark Monochrome*, *Linear Obsidian Precision*, *Monokai Pro Synth Editor*, *Tokyo Night Cyber Dusk*.
 - **Creative & Expressive**: *Arc Cosmic Neon & Electric Lilac*, *Figma Multiplayer Canvas*, *Warm Ivory AI & Baked Terracotta*, *Notion Warm Editorial Parchment*, *International Klein Blue & Museum White*.
+- **Physical Materials & Glass**: *Apple visionOS Opal Frosted Milk Glass*, *Clay Matte Ceramic*, *Neumorphic Soft Periwinkle*, *Windows 95 Classic Desktop*.
 - **Cyberpunk & Retro**: *Cyberpunk 2077 Night City*, *Cyberpunk Amber Phosphor*, *Retro 80s Synthwave*, *Vaporwave Sunset Gradient*, *Vintage Hi-Fi Warm Ochre*, *Game Boy 1989 DMG-01*.
 - **Minimal & Classic**: *Swiss Graphic Stark Minimal*, *Bauhaus Primary Modernism*, *Nordic Slate & Frosted Pine*, *Warm Editorial Monograph*, *Japanese Wabi-Sabi Zen*, *Kyoto Ceremonial Matcha & Hinoki*.
 - **Subcultures**: *Acid Rave Toxic Techno*, *Art Deco Imperial Gold*, *Solarpunk Sage & Copper*, *Pastel Macaron Soft Play*, *SCADA Heavy Industrial*, *Dracula Gothic Midnight*, *CAD Engineering Blueprint*, *Frutiger Aero Skeuomorphic*, *Coffee & Cream / Warm Latte*.
@@ -96,21 +146,26 @@ To eliminate design guesswork and ensure colors, fonts, shadows, and accents nev
 - **1982 Green Phosphor CRT Terminal / VT323**: Real 80-column monospaced raster font with cathode beam texture for retro mainframe consoles and BBS boards.
 - **Plus**: *Rajdhani HUD*, *Press Start 2P*, *Syne Acid*, *Cinzel Classical Luxury*, *Share Tech Mono CAD*, *Outfit Humanist*, *Caveat Marker*, *Fredoka Cartoon Bubble*, *Playfair Display*, *JetBrains Mono*, *Orbitron Sci-Fi*, *Poiret One*.
 
-### 3. Surface, Borders & Elevation (19 Boundary Treatments)
+### 3. Surface, Borders & Elevation (20 Boundary Treatments)
 - **Modern Bento Grid Spotlight Card**: 20px squircle radius with specular 1px hairline border and ambient radial spotlight glow.
 - **Raycast Obsidian Velvet Glass**: Ultra-dark translucent substrate, 16px radius, micro top-edge specular highlight (`inset 0 1px 0 0 rgba(255,255,255,0.12)`), and deep 24px blur.
+- **Milky Frosted Glass (visionOS Opal)**: Translucent white milk glass with multi-layer blur, specular rim lights, and soft diffuse ambient aura.
+- **Claymorphism 3D Inflated Surface**: Plump inflated 3D marshmallow elevation with dual-tier inner volume highlights and tactile springiness.
 - **Windows 95 Classic 3D Beveled Window**: Authentic 90s dual-tone raised bevels (`inset 1px 1px #fff, inset -1px -1px #808080`) with square `0px` corners.
 - **Double Hairline Drafting Frame**: Architectural double border (`border-style: double; 4px`) inspired by technical blueprints and patent certificates.
 - **Iridescent Holographic Foil Glass**: Frosted translucent backdrop (`backdrop-blur-md`) with multi-spectral chromatic border glow.
 - **Soft Neumorphic Emboss & Deboss**: Dual opposing light/dark cast shadows (`6px 6px 14px` and `-6px -6px 14px`).
 - **Swiss Architectural Split**: Strict 0px right angles with orthogonal hairline grid dividers.
 - **Floating Island Elevated Modal**: 24px rounded corners hovering freely with multi-layered atmospheric diffusion shadow.
-- **Plus**: *Cyberpunk 45° Chamfer Cut*, *Neo-Brutalist Hard Offset Shadow*, *Frutiger Aero Gloss*, *CAD Hairline Grid Seam*, *Frosted Glassmorphism*, *Nordic Soft Rounded*, *Tactile Layered Paper Lift*, *Neon Wireframe Bloom*, *Claymorphism 3D Deboss*, *Art Deco Double Brass Frame*, *Heavy SCADA Industrial Chassis*.
+- **Plus**: *Cyberpunk 45° Chamfer Cut*, *Neo-Brutalist Hard Offset Shadow*, *Frutiger Aero Gloss*, *CAD Hairline Grid Seam*, *Frosted Glassmorphism*, *Nordic Soft Rounded*, *Tactile Layered Paper Lift*, *Neon Wireframe Bloom*, *Art Deco Double Brass Frame*, *Heavy SCADA Industrial Chassis*.
 
-### 4. UI Components & Controls (18 Control Archetypes)
+### 4. UI Components & Controls (21 Control Archetypes)
 - **Bento Micro-Spotlight Glow Buttons**: Rounded 12px pill geometry with translucent specular border, dark substrate fill, micro status LED, and vertical lift.
+- **Milky Frosted Glass Pills**: Translucent milk acrylic buttons and switches with specular rims and high-contrast slate debossed wells.
+- **Clay 3D Puffy Buttons**: Inflated marshmallow push-buttons with pillowy depth, candy badges, and tactile compression physics.
 - **Floating Capsule Dock Controls**: macOS dock-inspired pill capsule buttons (`rounded-full`) with frosted glass blur and springy active press response (`active:scale-95`).
 - **Windows 95 Classic 3D Push-Buttons**: Chunky tactile gray buttons (`bg-[#dfdfdf]`) with light top-left and shadow bottom-right borders that visually invert and depress on `:active`.
+- **Neumorphic Soft Controls**: Tactile extruded buttons and debossed concave socket switches molded seamlessly from the background.
 - **Avionics Guarded Switches & Stencil Tags**: Aerospace cockpit controls with dark recessed switch wells, safety hash-marks, and stenciled amber warning telemetry.
 - **Cyberpunk Segmented Gauge & Notch Buttons**: 45° cut-corner action buttons with integrated LED power bars and high-speed hover brightness.
 - **Tactile 3D Mechanical Push Buttons**: Physical keycap effect with thick bottom border bevel (`border-b-4`) that physically depresses on click.
@@ -118,11 +173,12 @@ To eliminate design guesswork and ensure colors, fonts, shadows, and accents nev
 - **Laser Gradient Shimmer Buttons**: Vivid multi-stop gradient (violet to fuchsia to indigo) with radiant hover bloom (`hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]`).
 - **Plus**: *Cyberpunk HUD Clipped Buttons*, *Neo-Brutalist Chunky Buttons*, *Frutiger Aero Gel Buttons*, *Minimal Rounded SaaS*, *SCADA Industrial Relays*, *Frosted Glass Floating Capsules*, *Terminal Monospace Badges*, *16-Bit Pixel Beveled Buttons*, *Art Deco Stepped Brass Buttons*, *Japanese Zen Hairline Underline*.
 
-### 5. Signature Graphic Accents (19 Graphic DNA Elements)
+### 5. Signature Graphic Accents (20 Graphic DNA Elements)
 - **Technical Inventory Barcode & Serial Checksum**: Variable-width vertical barcode stripes with alphanumeric verification checksums (`REF-ID: [SPEC-7702-X]`).
 - **Realtime Audio Waveform & Oscilloscope Raster**: Live acoustic frequency spectrum track with decibel level readouts (`FREQ 44.1 kHz // -6.2 dB FS`).
 - **Decentralized Constellation Node Graph**: Interconnected glowing network vertices linked by thin coordinate vector lines.
 - **Aurora Atmospheric Mesh Glow**: Diffused multi-point radial mesh gradients floating in corners and behind focal elements.
+- **Concentric Dial Rings & Radar Ticks**: Precision instrument dial rings with radial angular measurement markings.
 - **Perspective Tech Wireframe Grid**: 3D perspective wireframe matrix with subtle coordinate status ribbon.
 - **Halftone Pop Art Dot Matrix**: Retro risograph comic book halftone screenprint dot pattern.
 - **Plus-Grid Alignment Calibration Marks**: Micro `+` crosshair registration marks at structural corner intersections.

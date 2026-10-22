@@ -1,10 +1,9 @@
 'use client';
 
-import type { ElementType, MouseEvent } from 'react';
+import type { ElementType } from 'react';
 import { useState } from 'react';
 import {
   Check,
-  Copy,
   Dices,
   Layers,
   MousePointerClick,
@@ -12,6 +11,7 @@ import {
   Search,
   Sparkles,
   Type,
+  Users,
   Wand2,
 } from 'lucide-react';
 import {
@@ -19,12 +19,9 @@ import {
   COMPONENT_PARTS,
   CURATED_THEMES,
   FONT_PARTS,
-  generateCombinedMasterPrompt,
   PALETTE_PARTS,
-  resolveCuratedTheme,
   SURFACE_PARTS,
 } from '../lib/designPartsData';
-import { copyToClipboard } from '../lib/clipboard';
 import {
   AccentPart,
   ComponentPart,
@@ -331,9 +328,450 @@ function AccentVisualPreview({ type }: { type: AccentPart['type'] }) {
     );
   }
 
+  if (type === 'concentric-rings') {
+    return (
+      <div className="h-10 w-full rounded-xl bg-[#EEEEFA] border border-[#E3E3F3] relative overflow-hidden flex items-center justify-between px-3 shadow-[inset_2px_2px_4px_rgba(180,185,210,0.35),inset_-2px_-2px_4px_rgba(255,255,255,0.9)]">
+        <div className="flex items-center gap-2">
+          <div className="relative w-6 h-6 flex items-center justify-center">
+            <svg className="w-6 h-6 -rotate-90" viewBox="0 0 36 36">
+              <circle
+                cx="18"
+                cy="18"
+                r="13"
+                fill="none"
+                stroke="rgba(180, 185, 210, 0.4)"
+                strokeWidth="3"
+              />
+              <circle
+                cx="18"
+                cy="18"
+                r="13"
+                fill="none"
+                stroke="#7B7FDA"
+                strokeWidth="3"
+                strokeDasharray="81.68"
+                strokeDashoffset="26"
+                strokeLinecap="round"
+              />
+            </svg>
+            <div className="absolute w-2 h-2 rounded-full bg-[#EEEEFA] shadow-[1px_1px_2px_rgba(180,185,210,0.5),-1px_-1px_2px_rgba(255,255,255,0.95)]" />
+          </div>
+          <span className="text-[10px] font-mono font-bold text-[#35374B]">
+            CONCENTRIC DEBOSSED DIAL
+          </span>
+        </div>
+        <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-full bg-[#EEEEFA] text-[#7B7FDA] shadow-[inset_1px_1px_2px_rgba(180,185,210,0.4),inset_-1px_-1px_2px_rgba(255,255,255,0.9)]">
+          DATA 68%
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div className="h-10 w-full rounded-xl bg-stone-50 border border-stone-200 relative overflow-hidden flex items-center justify-center">
       <span className="text-[10px] font-mono text-stone-400 font-semibold">Pure Minimal (No Accents)</span>
+    </div>
+  );
+}
+
+function CuratedThemeMiniSpecimen({ theme }: { theme: CuratedTheme }) {
+  if (theme.id === 'cyberpunk-2077') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-stone-950 border border-yellow-400/80 relative p-2.5 flex items-center justify-between overflow-hidden shadow-[0_0_12px_rgba(252,238,10,0.15)]">
+        <div className="flex flex-col gap-0.5">
+          <div className="flex items-center gap-1.5 text-[11px] font-mono font-black text-yellow-400">
+            <span className="w-1.5 h-1.5 bg-yellow-400 animate-ping" />
+            <span>⊕ [HUD // 0x7FFA]</span>
+          </div>
+          <span className="text-[9px] font-mono text-cyan-400 font-bold">NIGHT_CITY // ARMED</span>
+        </div>
+        <div className="flex items-center gap-1 bg-yellow-400 text-black px-2 py-0.5 text-[10px] font-mono font-black uppercase">
+          LOCK
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'obsidian-velvet') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-[#090A0F] border border-white/10 relative p-2.5 flex items-center justify-between overflow-hidden">
+        <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-rose-500/20 blur-xl pointer-events-none" />
+        <div className="flex flex-col gap-0.5 relative z-10">
+          <div className="text-[11px] font-sans font-bold text-white flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shadow-[0_0_6px_#f43f5e]" />
+            <span>Linear Raycast Velvet</span>
+          </div>
+          <span className="text-[9px] font-mono text-stone-400">+ [X: 42.0, Y: 18.5]</span>
+        </div>
+        <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-white/90 border border-white/20">
+          ⌘K Ready
+        </span>
+      </div>
+    );
+  }
+
+  if (theme.id === 'stripe-fintech') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-white border border-stone-200 relative p-2.5 flex items-center justify-between overflow-hidden shadow-2xs">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[9px] font-mono text-stone-500 uppercase font-bold">MRR Velocity</span>
+          <span className="text-sm font-extrabold text-stone-900 font-mono tracking-tight">$84,230.00</span>
+        </div>
+        <div className="flex flex-col items-end gap-1">
+          <span className="px-1.5 py-0.5 rounded-full text-[9px] font-mono font-bold bg-indigo-50 text-indigo-600 border border-indigo-200">
+            ▲ +28.4%
+          </span>
+          <div className="w-16 h-3 flex items-end gap-0.5">
+            {[20, 35, 50, 40, 65, 80, 95].map((h, i) => (
+              <div key={i} className="flex-1 bg-indigo-500 rounded-xs" style={{ height: `${h}%` }} />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'frutiger-aero') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-gradient-to-r from-sky-400 via-teal-300 to-sky-500 relative p-2.5 flex items-center justify-between overflow-hidden shadow-xs border border-white/80">
+        <div className="absolute inset-x-0 top-0 h-1/2 bg-white/40 pointer-events-none" />
+        <div className="relative z-10 flex flex-col gap-0.5 text-white drop-shadow-sm">
+          <span className="text-xs font-bold tracking-tight">Y2K Aero Glass</span>
+          <span className="text-[9px] font-medium opacity-90">Specular Aqua Glow</span>
+        </div>
+        <div className="relative z-10 px-3 py-1 rounded-full bg-white/80 text-sky-800 text-[10px] font-bold shadow-md border border-white">
+          Glossy Gel
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'wonky-70s-editorial') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-[#FDFBF7] border border-[#E6DEC8] relative p-2.5 flex items-center justify-between overflow-hidden shadow-xs">
+        <div className="absolute -top-2 left-6 px-3 py-0.5 bg-[#D97706] text-white text-[8px] font-mono font-black -rotate-2 shadow-2xs">
+          {'///'} MEMO {'///'}
+        </div>
+        <div className="flex flex-col gap-0.5 pt-1">
+          <span className="font-serif text-xs font-bold text-[#2D2A26] italic">Broadsheet Gazette</span>
+          <span className="text-[9px] font-mono text-[#8C827A]">VOL. LXXIV • SPECIAL ISSUE</span>
+        </div>
+        <span className="px-2 py-0.5 rounded text-[9px] font-mono font-bold border border-[#D97706] text-[#D97706]">
+          PRINT
+        </span>
+      </div>
+    );
+  }
+
+  if (theme.id === 'windows-95-desktop') {
+    return (
+      <div className="h-16 w-full rounded-none bg-[#008080] p-1.5 flex flex-col justify-between select-none">
+        <div className="bg-gradient-to-r from-[#000080] to-[#1084d0] text-white px-1.5 py-0.5 flex items-center justify-between text-[10px] font-mono font-bold">
+          <div className="flex items-center gap-1">
+            <span>🗔</span>
+            <span>Win95 System</span>
+          </div>
+          <span className="w-3 h-3 bg-[#C0C0C0] text-black border border-t-white border-l-white border-b-black border-r-black flex items-center justify-center text-[8px] leading-none">✕</span>
+        </div>
+        <div className="flex items-center justify-between bg-[#C0C0C0] text-black px-1.5 py-0.5 text-[9px] font-mono border border-t-white border-l-white border-b-[#808080] border-r-[#808080]">
+          <span>CPU: 60Hz STEPPED</span>
+          <span className="text-[#008000] font-black">[||||||||  ]</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'scada-industrial') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-stone-900 border-2 border-amber-500/80 relative p-2 flex flex-col justify-between overflow-hidden shadow-xs">
+        <div className="h-1.5 w-full -mt-2 -mx-2 mb-1" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #FFB000, #FFB000 8px, #000000 8px, #000000 16px)' }} />
+        <div className="flex items-center justify-between text-amber-400 font-mono text-[10px] font-bold">
+          <span>CHASSIS_RELAY: ONLINE</span>
+          <span className="text-black bg-amber-400 px-1 text-[8px] font-black">SCADA</span>
+        </div>
+        <div className="text-[9px] font-mono text-stone-400 flex items-center justify-between">
+          <span>PRESSURE: 840 kPa</span>
+          <span className="text-emerald-400 font-bold">NORMAL</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'kyoto-zen') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-[#F7F5F0] border border-[#DDD7CD] relative p-2.5 flex items-center justify-between overflow-hidden">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded-full bg-[#1F1E1D] flex items-center justify-center text-white text-[9px]">●</div>
+          <div className="flex flex-col">
+            <span className="text-xs font-semibold text-[#1F1E1D]">Kyoto Ceremonial</span>
+            <span className="text-[9px] text-[#7D7569] font-mono">Matcha & Hinoki Wood</span>
+          </div>
+        </div>
+        <span className="text-[10px] font-serif text-[#C84B31] border border-[#C84B31]/30 px-1.5 py-0.5 rounded">
+          和寂
+        </span>
+      </div>
+    );
+  }
+
+  if (theme.id === 'art-deco-metropolis') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-[#0E1013] border-2 border-[#D4AF37] relative p-2.5 flex items-center justify-between overflow-hidden shadow-[0_0_12px_rgba(212,175,55,0.2)]">
+        <div className="absolute inset-x-0 top-0 h-full opacity-30 pointer-events-none" style={{ background: 'radial-gradient(ellipse at top, #D4AF37 0%, transparent 70%)' }} />
+        <div className="flex flex-col gap-0.5 relative z-10">
+          <span className="text-xs font-serif font-bold text-[#FAF5EB] tracking-widest uppercase">GATSBY METROPOLIS</span>
+          <span className="text-[9px] font-mono text-[#D4AF37]">☼ SUNBURST OPULENCE ☼</span>
+        </div>
+        <span className="relative z-10 px-2 py-0.5 rounded text-[9px] font-serif uppercase tracking-widest bg-[#D4AF37] text-black font-bold">
+          1920s
+        </span>
+      </div>
+    );
+  }
+
+  if (theme.id === 'gameboy-dmg01') {
+    return (
+      <div className="h-16 w-full rounded-lg bg-[#9BBC0F] border-2 border-[#0F380F] p-2 flex flex-col justify-between font-mono text-[#0F380F] select-none shadow-xs">
+        <div className="flex items-center justify-between text-[10px] font-black">
+          <span>DMG-01 8-BIT LCD</span>
+          <span>BATTERY: OK</span>
+        </div>
+        <div className="flex items-center justify-between text-[9px] bg-[#8BAC0F] px-1.5 py-0.5 border border-[#0F380F]">
+          <span>HP [████████░░]</span>
+          <span className="font-black">LVL 42</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'cad-blueprint') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-[#0B2545] border border-cyan-400 relative p-2.5 flex items-center justify-between overflow-hidden font-mono">
+        <div className="flex flex-col gap-0.5 text-cyan-200">
+          <span className="text-[10px] font-bold">|◄―― 480.00 mm ――►|</span>
+          <span className="text-[9px] opacity-80">⊕ ORIGIN: [0.00, 0.00]</span>
+        </div>
+        <span className="border border-cyan-400 bg-cyan-950/60 px-2 py-0.5 text-[9px] font-bold text-cyan-300">
+          SCALE 1:50
+        </span>
+      </div>
+    );
+  }
+
+  if (theme.id === 'monokai-pro-hacker') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-[#2D2A2E] border border-stone-700 relative p-2.5 flex items-center justify-between overflow-hidden font-mono text-[10px]">
+        <div className="flex flex-col gap-0.5">
+          <div className="flex items-center gap-1.5">
+            <span className="text-[#FF6188]">const</span>
+            <span className="text-[#78DCE8]">theme</span>
+            <span className="text-white">=</span>
+            <span className="text-[#A9DC76]">&apos;synth&apos;</span>;
+          </div>
+          <span className="text-[#727072]">{'// volcanic syntax'}</span>
+        </div>
+        <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#FFD866]/20 text-[#FFD866] border border-[#FFD866]/40 font-bold">
+          MONOKAI
+        </span>
+      </div>
+    );
+  }
+
+  if (theme.id === 'klein-blue-gallery') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-white border border-[#002FA7]/40 relative p-2.5 flex items-center justify-between overflow-hidden">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-8 bg-[#002FA7] rounded-xs shadow-xs" />
+          <div className="flex flex-col">
+            <span className="text-xs font-serif font-bold text-stone-900">Yves Klein Gallery</span>
+            <span className="text-[9px] font-mono text-stone-500">SERIAL: 00-2F-A7</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-0.5 h-4">
+          <div className="w-[1px] h-full bg-black" />
+          <div className="w-[3px] h-full bg-[#002FA7]" />
+          <div className="w-[1px] h-full bg-black" />
+          <div className="w-[2px] h-full bg-black" />
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'retro-synthwave-arcade') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-[#120024] border border-[#FF007F]/60 relative p-2.5 flex items-center justify-between overflow-hidden shadow-[0_0_12px_rgba(255,0,127,0.25)]">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-xs font-bold text-[#FF007F] tracking-wider uppercase font-mono">
+            SYNTHWAVE ARCADE
+          </span>
+          <span className="text-[9px] font-mono text-cyan-400">44.1 kHz OSCILLOSCOPE</span>
+        </div>
+        <div className="flex items-end gap-1 h-5">
+          {[4, 12, 18, 8, 20, 14, 6].map((h, i) => (
+            <div key={i} className="w-1 rounded-full bg-gradient-to-t from-[#FF007F] to-cyan-400" style={{ height: `${h}px` }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'bauhaus-constructivism') {
+    return (
+      <div className="h-16 w-full rounded-none bg-[#F8F9FA] border-[3px] border-black p-2 flex items-center justify-between shadow-[3px_3px_0px_#000000]">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 bg-[#D90429] border-2 border-black shadow-[1px_1px_0px_#000]" />
+          <div className="w-5 h-5 bg-[#0047AB] rounded-full border-2 border-black shadow-[1px_1px_0px_#000]" />
+          <div className="w-5 h-5 bg-[#FFD000] rotate-45 border-2 border-black shadow-[1px_1px_0px_#000]" />
+          <span className="text-xs font-black font-sans text-black uppercase ml-1">BAUHAUS</span>
+        </div>
+        <span className="px-2 py-0.5 bg-[#D90429] text-white text-[9px] font-black uppercase border-2 border-black">
+          1919
+        </span>
+      </div>
+    );
+  }
+
+  if (theme.id === 'arc-cosmic-dock') {
+    return (
+      <div className="h-16 w-full rounded-xl bg-[#130E26] border border-purple-500/40 relative p-2.5 flex items-center justify-between overflow-hidden">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-xs font-bold text-purple-200">Cosmic Lilac Dock</span>
+          <span className="text-[9px] font-mono text-purple-400">Holographic Fluid Mesh</span>
+        </div>
+        <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] text-purple-200 shadow-xs">
+          Capsule Dock
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'neumorphic-soft-frost') {
+    return (
+      <div className="h-16 w-full rounded-2xl bg-[#E8EBF5] p-2.5 flex items-center justify-between shadow-[6px_6px_12px_rgba(180,185,210,0.5),-6px_-6px_12px_rgba(255,255,255,0.95)]">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-full bg-[#E8EBF5] flex items-center justify-center text-[10px] font-bold text-indigo-600 shadow-[3px_3px_6px_rgba(180,185,210,0.5),-3px_-3px_6px_rgba(255,255,255,1)]">
+            82%
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xs font-bold text-slate-700">Neumorphic Soft UI</span>
+            <span className="text-[9px] font-mono text-slate-500">Debossed Dual Shadow</span>
+          </div>
+        </div>
+        <span className="px-2.5 py-1 rounded-full text-[9px] font-bold text-indigo-600 shadow-[inset_2px_2px_4px_rgba(180,185,210,0.5),inset_-2px_-2px_4px_rgba(255,255,255,0.95)]">
+          Potentiometer
+        </span>
+      </div>
+    );
+  }
+
+  if (theme.id === 'milky-frosted-glass') {
+    return (
+      <div className="h-16 w-full rounded-2xl relative p-1.5 overflow-hidden flex items-center justify-between border border-white/90 shadow-[0_12px_28px_rgba(100,115,145,0.18)]"
+        style={{
+          background: 'linear-gradient(135deg, #FFEDD5 0%, #BAE6FD 50%, #DDD6FE 100%)',
+        }}
+      >
+        {/* Ambient atmospheric pastel light blooms */}
+        <div
+          aria-hidden="true"
+          className="absolute -top-6 -left-6 w-24 h-24 rounded-full blur-lg opacity-75 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #FECDD3 0%, transparent 70%)' }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full blur-lg opacity-75 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #BAE6FD 0%, transparent 70%)' }}
+        />
+
+        {/* Specular diamond glint on left rim */}
+        <div className="absolute left-[3px] top-1/2 -translate-y-1/2 w-2 h-2 rotate-45 bg-white shadow-[0_0_6px_#fff,0_0_12px_#fff] z-20 pointer-events-none" />
+
+        {/* Floating frosted opal glass slab */}
+        <div
+          className="w-full h-full rounded-xl bg-white/75 backdrop-blur-xl border border-white/95 p-2 flex items-center justify-between relative z-10 shadow-[0_8px_20px_rgba(100,115,145,0.1),inset_0_1px_1.5px_#FFFFFF]"
+        >
+          <div className="flex items-center gap-2">
+            <div
+              className="w-6 h-6 rounded-full flex items-center justify-center shadow-xs"
+              style={{
+                background: 'radial-gradient(circle at 30% 30%, #FFA585 0%, #FF6584 45%, #6366F1 80%, #38BDF8 100%)',
+              }}
+            />
+            <div className="flex flex-col">
+              <span className="text-xs font-extrabold text-slate-800 tracking-tight">AURA Glass</span>
+              <span className="text-[9px] text-slate-500 font-medium">visionOS Opal Refraction</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <svg className="w-12 h-6" viewBox="0 0 50 20">
+              <path
+                d="M 0,16 Q 12,5 25,12 T 50,4"
+                fill="none"
+                stroke="#0284C7"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+            </svg>
+            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold text-sky-700 bg-white/80 border border-white shadow-xs">
+              $321K
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (theme.id === 'claymorphism-ceramic') {
+    return (
+      <div className="h-16 w-full rounded-2xl bg-[#FAF6EF] relative p-1.5 overflow-hidden flex items-center justify-between border border-[#EBE3D7] shadow-[0_12px_24px_rgba(180,160,140,0.16)]">
+        {/* Ambient diffuse light blooms */}
+        <div
+          aria-hidden="true"
+          className="absolute -top-6 -right-6 w-24 h-24 rounded-full blur-xl opacity-60 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(147, 197, 253, 0.6) 0%, transparent 70%)' }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full blur-xl opacity-50 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(251, 113, 133, 0.6) 0%, transparent 70%)' }}
+        />
+
+        {/* Floating ceramic tablet specimen */}
+        <div
+          className="w-full h-full rounded-xl bg-[#F4EEE5] p-2 flex items-center justify-between relative z-10"
+          style={{
+            boxShadow:
+              '0 8px 18px rgba(180, 160, 140, 0.22), inset 1.5px 1.5px 3px rgba(255, 255, 255, 1), inset -1.5px -1.5px 3px rgba(160, 140, 120, 0.1)',
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <div
+              className="w-7 h-7 rounded-xl bg-blue-500 text-white flex items-center justify-center"
+              style={{
+                boxShadow:
+                  '0 4px 8px rgba(37,99,235,0.35), inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(0,0,0,0.2)',
+              }}
+            >
+              <Users className="w-3.5 h-3.5" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs font-extrabold text-slate-800">3D Clay Ceramic</span>
+              <span className="text-[9px] text-slate-500 font-medium">Marshmallow UI</span>
+            </div>
+          </div>
+          <div className="flex items-end gap-1 h-7 pr-1">
+            <div className="w-2.5 h-4 rounded-full bg-gradient-to-t from-[#38bdf8] to-[#f43f5e] shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.25)]" />
+            <div className="w-2.5 h-7 rounded-full bg-gradient-to-t from-[#fb923c] to-[#ec4899] shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.25)]" />
+            <div className="w-2.5 h-5 rounded-full bg-gradient-to-t from-[#38bdf8] to-[#facc15] shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.25)]" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="h-16 w-full rounded-xl bg-stone-100 border border-stone-200 flex items-center justify-center text-xs font-mono text-stone-500">
+      {theme.name}
     </div>
   );
 }
@@ -346,7 +784,6 @@ interface DesignPartPickerProps {
   onSelectComponent: (comp: ComponentPart) => void;
   onSelectAccent: (acc: AccentPart) => void;
   onApplyTheme?: (theme: CuratedTheme) => void;
-  onToast: (msg: string) => void;
   activeCategory?: DesignPartCategory;
   onCategoryChange?: (category: DesignPartCategory) => void;
   onRandomizeCategory?: (category: DesignPartCategory) => void;
@@ -360,12 +797,11 @@ export function DesignPartPicker({
   onSelectComponent,
   onSelectAccent,
   onApplyTheme,
-  onToast,
   activeCategory: controlledCategory,
   onCategoryChange,
   onRandomizeCategory,
 }: DesignPartPickerProps) {
-  const [internalCategory, setInternalCategory] = useState<DesignPartCategory>('palette');
+  const [internalCategory, setInternalCategory] = useState<DesignPartCategory>('themes');
   const [selectedThemeTag, setSelectedThemeTag] = useState<ThemeTag>('all');
   const [themeSearch, setThemeSearch] = useState<string>('');
   const activeCategory = controlledCategory ?? internalCategory;
@@ -403,12 +839,6 @@ export function DesignPartPicker({
         theme.badge.toLowerCase().includes(q))
     );
   });
-
-  const handleCopyPartPrompt = async (e: MouseEvent, prompt: string, name: string) => {
-    e.stopPropagation();
-    const ok = await copyToClipboard(prompt);
-    onToast(ok ? `Copied standalone prompt for "${name}"!` : 'Copy failed — clipboard is unavailable in this browser.');
-  };
 
   return (
     <div className="w-full space-y-5">
@@ -564,6 +994,9 @@ export function DesignPartPicker({
                     )}
                   </div>
 
+                  {/* High-Fidelity Mini Specimen Preview for Theme */}
+                  <CuratedThemeMiniSpecimen theme={theme} />
+
                   <div>
                     <h4 className="text-sm font-bold text-stone-900 tracking-tight">{theme.name}</h4>
                     <p className="text-xs text-stone-500 mt-0.5 line-clamp-2 leading-relaxed">
@@ -632,20 +1065,9 @@ export function DesignPartPicker({
 
                   {/* Actions Bar */}
                   <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const themeSelection = resolveCuratedTheme(theme);
-                        const prompt = generateCombinedMasterPrompt(themeSelection);
-                        handleCopyPartPrompt(e, prompt, theme.name);
-                      }}
-                      className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
-                      title="Copy full synthesized master prompt for this theme"
-                    >
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Prompt</span>
-                    </button>
+                    <span className="text-[11px] font-mono text-stone-500 truncate max-w-[200px]" title={theme.tagline}>
+                      {theme.tagline}
+                    </span>
 
                     <button
                       type="button"
@@ -786,15 +1208,13 @@ export function DesignPartPicker({
                   </div>
 
                   <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
-                    <span className="text-[11px] text-stone-400 font-mono">{pal.tagline.slice(0, 30)}...</span>
-                    <button
-                      onClick={(e) => handleCopyPartPrompt(e, pal.promptSnippet, pal.name)}
-                      className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
-                      title="Copy standalone prompt for this palette"
-                    >
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Part Prompt</span>
-                    </button>
+                    <span className="text-[11px] text-stone-500 font-mono truncate max-w-[220px]">{pal.tagline}</span>
+                    {isSelected && (
+                      <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+                        <span>Selected</span>
+                      </span>
+                    )}
                   </div>
                 </div>
               );
@@ -870,14 +1290,12 @@ export function DesignPartPicker({
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-stone-100 text-stone-600 font-semibold">
                       {fnt.classification.toUpperCase()}
                     </span>
-                    <button
-                      onClick={(e) => handleCopyPartPrompt(e, fnt.promptSnippet, fnt.name)}
-                      className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
-                      title="Copy standalone prompt for this font"
-                    >
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Part Prompt</span>
-                    </button>
+                    {isSelected && (
+                      <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+                        <span>Selected</span>
+                      </span>
+                    )}
                   </div>
                 </div>
               );
@@ -957,17 +1375,15 @@ export function DesignPartPicker({
                   </div>
 
                   <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
-                    <span className="text-[10px] font-mono text-stone-400 truncate max-w-[150px]">
+                    <span className="text-[10px] font-mono text-stone-500 truncate max-w-[200px]">
                       Shadow: {surf.shadow.split(',')[0]}
                     </span>
-                    <button
-                      onClick={(e) => handleCopyPartPrompt(e, surf.promptSnippet, surf.name)}
-                      className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
-                      title="Copy standalone prompt for this surface"
-                    >
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Part Prompt</span>
-                    </button>
+                    {isSelected && (
+                      <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+                        <span>Selected</span>
+                      </span>
+                    )}
                   </div>
                 </div>
               );
@@ -1046,17 +1462,15 @@ export function DesignPartPicker({
                   </div>
 
                   <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-stone-100 text-stone-600 font-semibold truncate max-w-[150px]">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-stone-100 text-stone-600 font-semibold truncate max-w-[200px]">
                       {comp.tagline}
                     </span>
-                    <button
-                      onClick={(e) => handleCopyPartPrompt(e, comp.promptSnippet, comp.name)}
-                      className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
-                      title="Copy standalone prompt for this component style"
-                    >
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Part Prompt</span>
-                    </button>
+                    {isSelected && (
+                      <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+                        <span>Selected</span>
+                      </span>
+                    )}
                   </div>
                 </div>
               );
@@ -1128,15 +1542,13 @@ export function DesignPartPicker({
                   </div>
 
                   <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
-                    <span className="text-[11px] text-stone-400 font-mono">{acc.tagline.slice(0, 32)}...</span>
-                    <button
-                      onClick={(e) => handleCopyPartPrompt(e, acc.promptSnippet, acc.name)}
-                      className="text-[11px] font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 px-2 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
-                      title="Copy standalone prompt for this accent"
-                    >
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Part Prompt</span>
-                    </button>
+                    <span className="text-[11px] text-stone-500 font-mono truncate max-w-[220px]">{acc.tagline}</span>
+                    {isSelected && (
+                      <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+                        <span>Selected</span>
+                      </span>
+                    )}
                   </div>
                 </div>
               );

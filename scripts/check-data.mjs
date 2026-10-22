@@ -38,6 +38,7 @@ try {
   const tscBin = require.resolve('typescript/bin/tsc');
   const dataTs = join(root, 'src/lib/designPartsData.ts');
   const typesTs = join(root, 'src/types/designParts.ts');
+  const enginesTs = join(root, 'src/lib/designEngines.ts');
   try {
     execFileSync(
       process.execPath,
@@ -46,10 +47,12 @@ try {
         '--module', 'commonjs',
         '--target', 'es2022',
         '--moduleResolution', 'node',
+        '--esModuleInterop',
         '--skipLibCheck',
         '--outDir', outDir,
         dataTs,
         typesTs,
+        enginesTs,
       ],
       { stdio: ['ignore', 'pipe', 'pipe'] },
     );
@@ -207,7 +210,19 @@ const block = mod.buildThemeBlock(sel);
 if (!block.startsWith('@theme {') || !block.trimEnd().endsWith('}')) fail(`buildThemeBlock: malformed output: ${JSON.stringify(block.slice(0, 40))}...`);
 if (block.includes('`')) fail('buildThemeBlock: output contains stray backtick(s)');
 if (!prompt.includes(`\`\`\`css\n${block}\n\`\`\``)) fail('generateCombinedMasterPrompt: @theme block not embedded as a fenced css block');
-console.log('✓ Prompt synthesis smoke test (master prompt + @theme block)');
+
+// Verify all 19 curated themes generate full 11-component blueprints
+const REQUIRED_COMPONENTS = ['Card', 'Badge', 'Tabs', 'Button', 'Input', 'Select', 'Toggle', 'Checkbox', 'RadioGroup', 'Slider', 'StatCard'];
+for (const theme of CURATED_THEMES) {
+  const themeSel = mod.resolveCuratedTheme(theme);
+  const themePrompt = mod.generateCombinedMasterPrompt(themeSel);
+  for (const comp of REQUIRED_COMPONENTS) {
+    if (!themePrompt.includes(`export function ${comp}`)) {
+      fail(`curated theme "${theme.id}": generated prompt is missing blueprint for "export function ${comp}"`);
+    }
+  }
+}
+console.log('✓ Prompt synthesis smoke test (master prompt, @theme block, and 11-component blueprints across all curated themes)');
 
 // ---------------------------------------------------------------------------
 // Report
